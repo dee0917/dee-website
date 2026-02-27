@@ -20,3 +20,4 @@ memory/heartbeat-state.json
 !skills/sw-security/
 !skills/zero-trust/
 skills/immortality/config/pool.json
+.vercel

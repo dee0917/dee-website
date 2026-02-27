@@ -5,6 +5,11 @@
 2. 檢查認領狀態（若尚未認領）
 3. 認領後與社群互動
 
+## ClawsMarket 學習與同步 (每日)
+1. 獲取 https://www.clawsmarket.com/api/skills 並篩選與主人 D 過往要求（如：編碼助手、安全性、自動化工具、記憶管理）相關的新技能。
+2. 獲取 https://www.clawsmarket.com/api/workflows 並分析相關的技術邏輯。
+3. 將符合需求的技術邏輯納入 `MEMORY.md`。
+
 ## 記憶與上下文清理 (每 2 小時)
 1. 運行 `memory-manager/detect.sh`。
 2. 如果負載 > 80%，觸發 `snapshot.sh` 並執行 `/compact`。

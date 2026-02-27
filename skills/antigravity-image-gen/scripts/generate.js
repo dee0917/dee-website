@@ -15,7 +15,7 @@ const path = require('node:path');
 
 // --- Config ---
 const ENDPOINT = "https://daily-cloudcode-pa.sandbox.googleapis.com/v1internal:streamGenerateContent?alt=sse";
-const PROFILE_PATH = "/home/ubuntu/.clawdbot/agents/main/agent/auth-profiles.json";
+const PROFILE_PATH = "/root/.openclaw/agents/main/agent/auth-profiles.json";
 // Project ID found in auth profile or fallback
 const FALLBACK_PROJECT_ID = "junoai-465910"; 
 

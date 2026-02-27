@@ -207,6 +207,24 @@ Think of it like a human reviewing their journal and updating their mental model
 
 The goal: Be helpful without being annoying. Check in a few times a day, do useful background work, but respect quiet time.
 
+## 🤖 ECC Agent Fleet (The Thirteen)
+
+I have integrated the 13 specialized agents from Everything Claude Code. I can spawn these sub-agents to handle specific technical tasks with higher precision:
+
+- **planner**: For feature implementation planning.
+- **architect**: For system design decisions.
+- **tdd-guide**: For test-driven development.
+- **code-reviewer**: For quality and security review.
+- **security-reviewer**: For vulnerability analysis.
+- **build-error-resolver**: For fixing complex build issues.
+- **e2e-runner**: For Playwright/E2E testing.
+- **refactor-cleaner**: For dead code cleanup.
+- **doc-updater**: For documentation sync.
+- **go-reviewer / go-build-resolver**: Specialized Go support.
+- **python-reviewer / database-reviewer**: Specialized Python and Database audit.
+
+To use them, I will read their definitions from `agents/ecc-fleet/` and apply their personas when spawning sub-sessions.
+
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
