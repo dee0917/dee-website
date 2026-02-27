@@ -74,13 +74,10 @@ const Insights = () => {
     const checkScroll = () => {
         if (!scrollRef.current) return;
         const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-        
-        // 強制檢查：如果總寬度大於容器寬度，且還沒滾動到最右邊，就顯示
-        const canScrollRight = scrollWidth > clientWidth + 5;
-        const isNotAtEnd = scrollLeft + clientWidth < scrollWidth - 10;
-        
-        setShowScrollIndicator(canScrollRight && isNotAtEnd);
-        setShowLeftIndicator(scrollLeft > 10);
+        // 如果右邊還有內容，顯示右側提示
+        setShowScrollIndicator(scrollLeft + clientWidth < scrollWidth - 15);
+        // 如果左邊已經有滾動距離，顯示左側提示
+        setShowLeftIndicator(scrollLeft > 15);
     };
 
     // 處理電腦版拖拽滾動與點擊衝突
@@ -227,29 +224,43 @@ const Insights = () => {
                 {/* 滾動提示圖標 */}
                 <AnimatePresence>
                     {showLeftIndicator && (
-                        <div 
-                            className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center pl-2 pointer-events-none z-[100]"
+                        <motion.div 
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -10 }}
+                            className="absolute left-0 top-0 bottom-4 flex items-center pl-2 pointer-events-none z-10"
                         >
-                            <div className="flex flex-col items-center gap-1.5 bg-black border border-white/40 p-2.5 rounded-2xl shadow-2xl">
-                                <div className="bg-zinc-700 p-1.5 rounded-full">
-                                    <ChevronLeft size={18} className="text-white" strokeWidth={4} />
-                                </div>
-                                <span className="text-[11px] font-black text-zinc-400 uppercase tracking-widest whitespace-nowrap bg-white/10 px-2 py-0.5 rounded-md">回看</span>
+                            <div className="flex flex-col items-center gap-1 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A] to-transparent pr-12 py-2">
+                                <motion.div
+                                    animate={{ x: [0, -5, 0] }}
+                                    transition={{ repeat: Infinity, duration: 1.5 }}
+                                    className="bg-zinc-500/20 p-2 rounded-full border border-white/10"
+                                >
+                                    <ChevronLeft size={16} className="text-zinc-400" />
+                                </motion.div>
+                                <span className="text-[8px] font-bold text-zinc-500 uppercase tracking-tighter">左滑</span>
                             </div>
-                        </div>
+                        </motion.div>
                     )}
 
                     {showScrollIndicator && (
-                        <div 
-                            className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center pr-2 pointer-events-none z-[100]"
+                        <motion.div 
+                            initial={{ opacity: 0, x: 10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: 10 }}
+                            className="absolute right-0 top-0 bottom-4 flex items-center pr-2 pointer-events-none z-10"
                         >
-                            <div className="flex flex-col items-center gap-1.5 bg-black border border-emerald-500 p-2.5 rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.5)] animate-pulse">
-                                <div className="bg-emerald-500 p-1.5 rounded-full">
-                                    <ChevronRight size={18} className="text-black" strokeWidth={4} />
-                                </div>
-                                <span className="text-[11px] font-black text-emerald-500 uppercase tracking-widest whitespace-nowrap bg-emerald-500/20 px-2 py-0.5 rounded-md">更多內容</span>
+                            <div className="flex flex-col items-center gap-1 bg-gradient-to-l from-[#0A0A0A] via-[#0A0A0A] to-transparent pl-12 py-2">
+                                <motion.div
+                                    animate={{ x: [0, 5, 0] }}
+                                    transition={{ repeat: Infinity, duration: 1.5 }}
+                                    className="bg-emerald-500/20 p-2 rounded-full border border-emerald-500/30"
+                                >
+                                    <ChevronRight size={16} className="text-emerald-400" />
+                                </motion.div>
+                                <span className="text-[8px] font-bold text-emerald-500 uppercase tracking-tighter">向右滑動</span>
                             </div>
-                        </div>
+                        </motion.div>
                     )}
                 </AnimatePresence>
             </div>
