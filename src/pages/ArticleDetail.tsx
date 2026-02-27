@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Copy, Check, ChevronDown } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Copy, Check, ChevronDown, Lock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { api } from '../lib/supabase';
@@ -30,7 +30,7 @@ const ArticleDetail = () => {
     const getColorClasses = (themeColor: string) => {
         const colors: Record<string, any> = {
             emerald: { text: 'text-emerald-500', lightText: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', gradient: 'from-emerald-500/20 to-teal-500/10', glow: 'shadow-emerald-500/20', solid: 'bg-emerald-500' },
-            yellow: { text: 'text-yellow-500', lightText: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', gradient: 'from-yellow-500/20 to-orange-500/10', glow: 'shadow-yellow-500/20', solid: 'bg-yellow-500' },
+            yellow: { text: 'text-yellow-500', lightText: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', gradient: 'from-yellow-500/10 to-orange-500/10', glow: 'shadow-yellow-500/20', solid: 'bg-yellow-500' },
             amber: { text: 'text-amber-500', lightText: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20', gradient: 'from-amber-500/20 to-yellow-500/10', glow: 'shadow-amber-500/20', solid: 'bg-amber-500' },
             blue: { text: 'text-blue-500', lightText: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-500/20', gradient: 'from-blue-500/20 to-indigo-500/10', glow: 'shadow-blue-500/20', solid: 'bg-blue-500' },
             violet: { text: 'text-violet-500', lightText: 'text-violet-400', bg: 'bg-violet-500/10', border: 'border-violet-500/20', gradient: 'from-violet-500/20 to-purple-500/10', glow: 'shadow-violet-500/20', solid: 'bg-violet-500' },
@@ -64,7 +64,7 @@ const ArticleDetail = () => {
         setQuizSubmitted(false);
         setBadgeEarned(false);
         setCopied(false);
-    }, [article?.id]);
+    }, [article?.id, article?.steps?.length]);
 
     const fetchArticle = async (articleId: number) => {
         setLoading(true);
@@ -87,8 +87,21 @@ const ArticleDetail = () => {
         const updated = [...stepsCompleted];
         updated[idx] = true;
         setStepsCompleted(updated);
+        
         if (idx < (article?.steps?.length || 0) - 1) {
             setCurrentStep(idx + 1);
+        }
+
+        if (updated.every(Boolean)) {
+            setTimeout(() => {
+                treasureRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                confetti({ 
+                    particleCount: 150, 
+                    spread: 70, 
+                    origin: { y: 0.6 },
+                    colors: ['#fbbf24', '#f59e0b', '#34d399'] 
+                });
+            }, 600);
         }
     };
 
@@ -102,6 +115,22 @@ const ArticleDetail = () => {
 
     const handleEarnBadge = () => {
         setBadgeEarned(true);
+        
+        if (article?.id) {
+            const savedCompleted = localStorage.getItem('dee_ai_completed');
+            let completed = savedCompleted ? JSON.parse(savedCompleted) : [];
+            if (!completed.includes(article.id)) {
+                completed.push(article.id);
+                localStorage.setItem('dee_ai_completed', JSON.stringify(completed));
+            }
+            
+            const savedLevel = localStorage.getItem('dee_ai_level');
+            const currentLevel = savedLevel ? parseInt(savedLevel) : 1;
+            if (article.level >= currentLevel) {
+                localStorage.setItem('dee_ai_level', (article.level + 1).toString());
+            }
+        }
+
         confetti({ particleCount: 200, spread: 100, origin: { y: 0.5 }, colors: ['#fbbf24', '#f59e0b', '#d97706'] });
     };
 
@@ -117,14 +146,12 @@ const ArticleDetail = () => {
 
     return (
         <>
-            {/* 進度條 */}
             <motion.div
                 className="fixed top-20 left-0 right-0 h-1 z-50 origin-left"
                 style={{ scaleX: progress, background: 'linear-gradient(90deg, #6b7280, #10b981)' }}
             />
 
-            {/* ═══════════ SECTION 1: THE HOOK ═══════════ */}
-            <section className="min-h-[85vh] flex flex-col justify-center items-center px-6 pt-28 pb-12 relative">
+            <section className="min-h-[85vh] flex flex-col justify-center items-center px-6 pt-28 pb-12 relative text-left">
                 <SEO title={article.title} description={article.summary || article.pain_point || ''} path={`/insights/${article.id}`} />
 
                 <Link to={isNews ? "/news" : "/insights"} className="absolute top-24 left-6 inline-flex items-center gap-2 text-zinc-600 hover:text-white transition-colors text-xs font-medium z-10">
@@ -133,9 +160,7 @@ const ArticleDetail = () => {
 
                 <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center max-w-2xl mx-auto">
                     <span className={`${theme.text} text-[10px] font-bold uppercase tracking-[0.3em] mb-4 block`}>{article.category} · {article.readTime}</span>
-
                     <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-8">{article.title}</h1>
-
                     {article.pain_point && (
                         <motion.p
                             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.6 }}
@@ -157,12 +182,10 @@ const ArticleDetail = () => {
                 </motion.div>
             </section>
 
-            {/* ═══════════ SECTION 2: THE MAGIC ═══════════ */}
             {!isNews && article.example && (
-                <section className="min-h-[60vh] flex items-center px-5 md:px-6 py-16">
+                <section className="min-h-[60vh] flex items-center px-5 md:px-6 py-16 text-left">
                     <motion.div {...fadeUp} className="max-w-3xl mx-auto w-full">
                         <p className="text-[10px] text-zinc-600 uppercase tracking-[0.3em] mb-6 text-center font-bold">以前 vs 現在</p>
-
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <motion.div
                                 initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
@@ -173,7 +196,6 @@ const ArticleDetail = () => {
                                 <p className="text-red-300 font-bold text-sm mb-2">以前的你</p>
                                 <p className="text-zinc-400 text-sm leading-relaxed">{article.example.wrong}</p>
                             </motion.div>
-
                             <motion.div
                                 initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
@@ -188,17 +210,14 @@ const ArticleDetail = () => {
                 </section>
             )}
 
-            {/* ═══════════ SECTION 3: THE QUEST（碎步教學） ═══════════ */}
             {hasSteps && (
-                <section className="py-16 px-5 md:px-6">
+                <section className="py-16 px-5 md:px-6 text-left">
                     <motion.div {...fadeUp} className="max-w-2xl mx-auto">
                         <p className="text-[10px] text-zinc-600 uppercase tracking-[0.3em] mb-8 text-center font-bold">一步一步來</p>
-
                         <div className="space-y-4">
                             {article.steps.map((step: any, idx: number) => {
                                 const isActive = idx <= currentStep;
                                 const isDone = stepsCompleted[idx];
-
                                 return (
                                     <motion.div
                                         key={idx}
@@ -207,32 +226,20 @@ const ArticleDetail = () => {
                                         viewport={{ once: true }}
                                         transition={{ duration: 0.4, delay: idx * 0.1 }}
                                         className={`rounded-2xl border p-5 md:p-6 transition-all duration-300 ${
-                                            isDone
-                                                ? `${theme.bg} ${theme.border} shadow-lg ${theme.glow}`
-                                                : isActive
-                                                ? 'bg-white/5 border-white/15'
-                                                : 'bg-white/[0.02] border-white/5 opacity-40'
+                                            isDone ? `${theme.bg} ${theme.border} shadow-lg ${theme.glow}` : isActive ? 'bg-white/5 border-white/15' : 'bg-white/[0.02] border-white/5 opacity-40'
                                         }`}
                                     >
                                         <div className="flex items-start gap-4">
-                                            <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold ${
-                                                isDone ? `${theme.solid} text-white` : 'bg-white/10 text-zinc-400'
-                                            }`}>
+                                            <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold ${isDone ? `${theme.solid} text-white` : 'bg-white/10 text-zinc-400'}`}>
                                                 {isDone ? '✓' : idx + 1}
                                             </div>
                                             <div className="flex-1">
                                                 <p className="text-white font-bold mb-1">{step.title}</p>
                                                 <p className="text-zinc-400 text-sm leading-relaxed mb-3">{step.body}</p>
-
-                                                {step.dee_tip && (
-                                                    <p className={`text-xs ${theme.lightText} italic mb-3`}>💡 {step.dee_tip}</p>
-                                                )}
-
+                                                {step.dee_tip && <p className={`text-xs ${theme.lightText} italic mb-3`}>💡 {step.dee_tip}</p>}
                                                 {isActive && !isDone && (
                                                     <motion.button
-                                                        initial={{ opacity: 0, scale: 0.9 }}
-                                                        animate={{ opacity: 1, scale: 1 }}
-                                                        whileTap={{ scale: 0.95 }}
+                                                        initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} whileTap={{ scale: 0.95 }}
                                                         onClick={() => handleStepComplete(idx)}
                                                         className={`text-xs font-bold px-4 py-2 rounded-full ${theme.bg} ${theme.lightText} border ${theme.border} hover:brightness-125 transition-all`}
                                                     >
@@ -245,126 +252,92 @@ const ArticleDetail = () => {
                                 );
                             })}
                         </div>
-
-                        {allStepsDone && (
-                            <motion.p
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className={`text-center ${theme.lightText} text-sm font-bold mt-6`}
-                            >
-                                🎉 全部完成！繼續往下看你的實戰包 ↓
-                            </motion.p>
-                        )}
                     </motion.div>
                 </section>
             )}
 
-            {/* 舊版 content HTML fallback（沒有 steps 的文章） */}
-            {!hasSteps && article.content && (
-                <section className="py-16 px-5 md:px-6">
-                    <motion.article
-                        {...fadeUp}
-                        className="article-content prose prose-invert max-w-3xl mx-auto leading-relaxed text-left"
-                        dangerouslySetInnerHTML={{ __html: article.content }}
-                    />
-                </section>
-            )}
-
-            {/* 場景 + 解決方案 */}
-            {!isNews && (article.scenario || article.solution) && (
-                <section className="py-12 px-5 md:px-6">
-                    <motion.div {...fadeUp} className={`max-w-2xl mx-auto bg-gradient-to-br ${theme.gradient} border ${theme.border} rounded-2xl p-6 md:p-8`}>
-                        {article.scenario && (
-                            <p className="text-zinc-300 text-sm md:text-base leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: article.scenario }} />
-                        )}
-                        {article.solution && (
-                            <p className={`${theme.lightText} text-sm font-medium leading-relaxed`} dangerouslySetInnerHTML={{ __html: article.solution }} />
-                        )}
-                    </motion.div>
-                </section>
-            )}
-
-            {/* ═══════════ SECTION 4: THE TREASURE ═══════════ */}
             {!isNews && article.practice_kit && (
-                <section className="py-16 px-5 md:px-6" ref={treasureRef}>
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, type: "spring" }}
-                        className="max-w-2xl mx-auto relative"
-                    >
-                        <p className="text-[10px] text-zinc-600 uppercase tracking-[0.3em] mb-6 text-center font-bold">🎁 寶物掉落</p>
-
-                        <div className={`bg-[#0a0a0a] border-2 ${theme.border} rounded-3xl p-6 md:p-8 relative overflow-hidden shadow-xl ${theme.glow}`}>
-                            <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${theme.gradient} opacity-10 blur-3xl`} />
-
-                            <div className="relative z-10">
-                                <h3 className="text-xl font-bold text-white mb-1">{article.practice_kit.title}</h3>
-                                <p className="text-zinc-400 text-sm mb-5">{article.practice_kit.description}</p>
-
-                                <div className={`bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-5 font-mono text-sm leading-loose ${theme.lightText} whitespace-pre-wrap mb-5`}>
-                                    {article.practice_kit.command}
+                <section className="py-16 px-5 md:px-6 scroll-mt-32 text-left" ref={treasureRef}>
+                    <AnimatePresence>
+                        {allStepsDone ? (
+                            <motion.div
+                                key="treasure-chest"
+                                initial={{ opacity: 0, scale: 0.5, y: 100, rotate: -10 }}
+                                animate={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
+                                exit={{ opacity: 0, scale: 0.5, y: 100 }}
+                                transition={{ type: "spring", stiffness: 260, damping: 20, duration: 0.6 }}
+                                className="max-w-2xl mx-auto relative"
+                            >
+                                <p className="text-[10px] text-zinc-600 uppercase tracking-[0.3em] mb-6 text-center font-bold">🎁 寶物掉落！</p>
+                                <div className={`bg-[#0a0a0a] border-2 ${theme.border} rounded-3xl p-6 md:p-10 relative overflow-hidden shadow-2xl ${theme.glow} border-emerald-500/50`}>
+                                    <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${theme.gradient} opacity-20 blur-3xl`} />
+                                    <div className="relative z-10">
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <motion.div animate={{ rotate: [0, -10, 10, -10, 10, 0] }} transition={{ duration: 0.5, delay: 0.5 }} className="text-4xl">✨</motion.div>
+                                            <div>
+                                                <h3 className="text-2xl font-bold text-white mb-1">{article.practice_kit.title}</h3>
+                                                <p className="text-zinc-400 text-sm">{article.practice_kit.description}</p>
+                                            </div>
+                                        </div>
+                                        <div className={`bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl p-6 font-mono text-sm leading-loose ${theme.lightText} whitespace-pre-wrap mb-8 shadow-inner`}>
+                                            {article.practice_kit.command}
+                                        </div>
+                                        <motion.button
+                                            whileTap={{ scale: 0.95 }}
+                                            onClick={() => handleCopy(article.practice_kit.command)}
+                                            className={`w-full flex items-center justify-center gap-2 py-5 rounded-2xl font-bold text-lg transition-all ${copied ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/40' : `${theme.solid} text-white hover:scale-[1.02] active:scale-95 shadow-lg`}`}
+                                        >
+                                            {copied ? <><Check size={22} /> 指令已就緒！快去試試看吧 🚀</> : <><Copy size={22} /> 一鍵領取指令寶物</>}
+                                        </motion.button>
+                                    </div>
                                 </div>
-
-                                <motion.button
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={() => handleCopy(article.practice_kit.command)}
-                                    className={`w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-base transition-all ${
-                                        copied
-                                        ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30'
-                                        : `${theme.solid} text-white hover:brightness-110`
-                                    }`}
-                                >
-                                    {copied
-                                        ? <><Check size={20} /> 指令已就緒！去試試看 🚀</>
-                                        : <><Copy size={20} /> 一鍵複製指令</>
-                                    }
-                                </motion.button>
+                            </motion.div>
+                        ) : (
+                            <div className="max-w-2xl mx-auto py-12 border-2 border-dashed border-white/5 rounded-3xl flex flex-col items-center justify-center text-zinc-700">
+                                <Lock size={40} className="mb-4 opacity-20" />
+                                <p className="text-sm font-medium uppercase tracking-widest opacity-40">完成所有步驟以解鎖寶物</p>
                             </div>
-                        </div>
+                        )}
+                    </AnimatePresence>
+                </section>
+            )}
+
+            {!hasSteps && article.content && (
+                <section className="py-16 px-5 md:px-6 text-left">
+                    <motion.article {...fadeUp} className="article-content prose prose-invert max-w-3xl mx-auto leading-relaxed text-left" dangerouslySetInnerHTML={{ __html: article.content }} />
+                </section>
+            )}
+
+            {!isNews && (article.scenario || article.solution) && (
+                <section className="py-12 px-5 md:px-6 text-left">
+                    <motion.div {...fadeUp} className={`max-w-2xl mx-auto bg-gradient-to-br ${theme.gradient} border ${theme.border} rounded-2xl p-6 md:p-8`}>
+                        {article.scenario && <p className="text-zinc-300 text-sm md:text-base leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: article.scenario }} />}
+                        {article.solution && <p className={`${theme.lightText} text-sm font-medium leading-relaxed`} dangerouslySetInnerHTML={{ __html: article.solution }} />}
                     </motion.div>
                 </section>
             )}
 
-            {/* 金句 */}
             {article.insight_quote && (
-                <section className="py-12 px-5 md:px-6">
-                    <motion.p {...fadeUp} className="text-lg md:text-xl text-zinc-300 text-center max-w-xl mx-auto leading-relaxed">
-                        「{article.insight_quote}」
-                    </motion.p>
+                <section className="py-12 px-5 md:px-6 text-center">
+                    <motion.p {...fadeUp} className="text-lg md:text-xl text-zinc-300 text-center max-w-xl mx-auto leading-relaxed">「{article.insight_quote}」</motion.p>
                 </section>
             )}
 
-            {/* ═══════════ SECTION 5: THE BOSS BATTLE ═══════════ */}
             {hasQuiz && (
-                <section className="py-16 px-5 md:px-6">
+                <section className="py-16 px-5 md:px-6 text-left">
                     <motion.div {...fadeUp} className="max-w-2xl mx-auto">
-                        <p className="text-[10px] text-zinc-600 uppercase tracking-[0.3em] mb-6 text-center font-bold">⚔️ 小小挑戰</p>
-
-                        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8">
+                        <p className="text-[10px] text-zinc-600 uppercase tracking-[0.3em] mb-6 text-center font-bold">⚔️ 最終挑戰</p>
+                        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 shadow-xl">
                             <p className="text-white font-bold text-lg mb-6">{article.quiz.question}</p>
-
                             <div className="space-y-3 mb-6">
                                 {article.quiz.options.map((opt: string, idx: number) => {
                                     const isSelected = quizAnswer === idx;
                                     const isCorrect = idx === article.quiz.answer;
                                     const showResult = quizSubmitted;
-
                                     return (
                                         <motion.button
-                                            key={idx}
-                                            whileTap={!quizSubmitted ? { scale: 0.98 } : {}}
-                                            onClick={() => !quizSubmitted && setQuizAnswer(idx)}
-                                            className={`w-full text-left p-4 rounded-xl border transition-all text-sm ${
-                                                showResult && isCorrect
-                                                    ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-300'
-                                                    : showResult && isSelected && !isCorrect
-                                                    ? 'bg-red-500/15 border-red-500/30 text-red-300'
-                                                    : isSelected
-                                                    ? `${theme.bg} ${theme.border} text-white`
-                                                    : 'bg-white/[0.02] border-white/5 text-zinc-400 hover:bg-white/5'
-                                            }`}
+                                            key={idx} whileTap={!quizSubmitted ? { scale: 0.98 } : {}} onClick={() => !quizSubmitted && setQuizAnswer(idx)}
+                                            className={`w-full text-left p-4 rounded-xl border transition-all text-sm ${showResult && isCorrect ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-300' : showResult && isSelected && !isCorrect ? 'bg-red-500/15 border-red-500/30 text-red-300' : isSelected ? `${theme.bg} ${theme.border} text-white` : 'bg-white/[0.02] border-white/5 text-zinc-400 hover:bg-white/5'}`}
                                             disabled={quizSubmitted}
                                         >
                                             <span className="font-mono text-xs mr-3 opacity-50">{String.fromCharCode(65 + idx)}</span>
@@ -373,22 +346,17 @@ const ArticleDetail = () => {
                                     );
                                 })}
                             </div>
-
                             {!quizSubmitted ? (
                                 <motion.button
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={handleQuizSubmit}
-                                    disabled={quizAnswer === null}
-                                    className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${
-                                        quizAnswer !== null ? `${theme.solid} text-white` : 'bg-white/5 text-zinc-600 cursor-not-allowed'
-                                    }`}
+                                    whileTap={{ scale: 0.95 }} onClick={handleQuizSubmit} disabled={quizAnswer === null}
+                                    className={`w-full py-4 rounded-xl font-bold text-base transition-all ${quizAnswer !== null ? `${theme.solid} text-white` : 'bg-white/5 text-zinc-600 cursor-not-allowed'}`}
                                 >
                                     送出答案
                                 </motion.button>
                             ) : (
-                                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-4">
+                                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-4 p-4 bg-white/5 rounded-xl border border-white/5">
                                     <p className={`text-sm font-bold mb-2 ${quizAnswer === article.quiz.answer ? 'text-emerald-400' : 'text-amber-400'}`}>
-                                        {quizAnswer === article.quiz.answer ? '🎉 答對了！' : '💡 差一點！'}
+                                        {quizAnswer === article.quiz.answer ? '🎉 答對了！太強了！' : '💡 差一點點！'}
                                     </p>
                                     <p className="text-zinc-400 text-sm leading-relaxed">{article.quiz.explanation}</p>
                                 </motion.div>
@@ -398,42 +366,46 @@ const ArticleDetail = () => {
                 </section>
             )}
 
-            {/* ═══════════ SECTION 6: THE REWARD ═══════════ */}
-            <section className="py-16 px-5 md:px-6">
+            <section className="py-16 px-5 md:px-6 text-center">
                 <motion.div {...fadeUp} className="max-w-md mx-auto text-center">
                     {!badgeEarned ? (
                         <motion.button
-                            whileTap={{ scale: 0.95 }}
-                            onClick={handleEarnBadge}
-                            className={`${theme.solid} text-white font-bold py-4 px-8 rounded-2xl text-lg shadow-lg ${theme.glow} hover:brightness-110 transition-all`}
+                            whileTap={{ scale: 0.95 }} onClick={handleEarnBadge} disabled={!allStepsDone || (hasQuiz && !quizSubmitted)}
+                            className={`${theme.solid} text-white font-bold py-5 px-10 rounded-2xl text-xl shadow-xl ${theme.glow} hover:brightness-110 transition-all disabled:opacity-20 disabled:grayscale`}
                         >
-                            🏆 我學會了！
+                            🏆 領取學習勳章
                         </motion.button>
                     ) : (
-                        <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring" }}>
-                            <div className={`inline-block ${theme.bg} border-2 ${theme.border} rounded-3xl p-8 md:p-10 shadow-xl ${theme.glow}`}>
-                                <p className="text-5xl mb-4">{article.skill_badge?.split(' ')[0] || '🏆'}</p>
-                                <p className="text-white font-bold text-lg mb-1">恭喜你！</p>
-                                <p className={`${theme.lightText} text-sm font-bold mb-1`}>你已掌握</p>
-                                <p className="text-white text-xl font-bold">{article.skill_badge || article.title}</p>
-                                <p className="text-zinc-600 text-[10px] mt-4 uppercase tracking-widest">Dee's AI Life Lab · {article.date}</p>
+                        <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", damping: 15 }}>
+                            <div className={`inline-block ${theme.bg} border-2 ${theme.border} rounded-[2.5rem] p-8 md:p-12 shadow-2xl ${theme.glow}`}>
+                                <motion.p animate={{ scale: [1, 1.2, 1], rotate: [0, -5, 5, 0] }} transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 3 }} className="text-6xl mb-6">{article.skill_badge?.split(' ')[0] || '🏆'}</motion.p>
+                                <p className="text-white font-bold text-lg mb-1 tracking-widest">LEVEL COMPLETE</p>
+                                <p className={`${theme.lightText} text-sm font-bold mb-3`}>你已獲得勳章</p>
+                                <p className="text-white text-2xl font-black">{article.skill_badge || article.title}</p>
+                                <div className="mt-8 pt-8 border-t border-white/10 flex flex-col items-center gap-3">
+                                    <p className="text-zinc-500 text-[10px] uppercase tracking-[0.3em]">Dee's AI Life Lab · {article.date}</p>
+                                    <div className="flex gap-2">
+                                        <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                                        <div className="w-2 h-2 rounded-full bg-amber-500" />
+                                        <div className="w-2 h-2 rounded-full bg-blue-500" />
+                                    </div>
+                                </div>
                             </div>
                         </motion.div>
                     )}
                 </motion.div>
             </section>
 
-            {/* 下一篇 */}
-            <section className="pb-20 px-5 md:px-6">
-                <div className="max-w-2xl mx-auto border-t border-white/5 pt-12">
-                    <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-[0.3em] mb-4">趁熱打鐵 →</p>
-                    <Link to={`/insights/${nextArticle.id}`} className="group block bg-white/5 border border-white/10 hover:border-emerald-500/30 p-6 md:p-8 rounded-2xl transition-all">
+            <section className="pb-24 px-5 md:px-6 text-left">
+                <div className="max-w-2xl mx-auto border-t border-white/5 pt-16">
+                    <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-[0.3em] mb-6">下一關卡預告 →</p>
+                    <Link to={`/insights/${nextArticle.id}`} className="group block bg-white/5 border border-white/10 hover:border-emerald-500/30 p-8 md:p-10 rounded-3xl transition-all shadow-xl hover:shadow-emerald-500/10">
                         <div className="flex items-center justify-between">
                             <div>
-                                <span className="text-[10px] text-zinc-500 uppercase tracking-widest mb-2 block">下一篇</span>
-                                <h3 className="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors">{nextArticle.title}</h3>
+                                <span className="text-[10px] text-zinc-500 uppercase tracking-widest mb-3 block opacity-60">NEXT LEVEL</span>
+                                <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors leading-tight">{nextArticle.title}</h3>
                             </div>
-                            <ArrowRight className="text-zinc-700 group-hover:text-emerald-400 group-hover:translate-x-2 transition-all flex-shrink-0" size={28} />
+                            <ArrowRight className="text-zinc-700 group-hover:text-emerald-400 group-hover:translate-x-3 transition-all flex-shrink-0" size={32} />
                         </div>
                     </Link>
                 </div>
