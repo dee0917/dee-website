@@ -154,10 +154,17 @@ const Insights = () => {
         try {
             const cleanInsights = INSIGHTS.filter(i => i.category !== 'AI 新聞');
             setInsights(cleanInsights);
+            // 改良檢查機制：監聽捲軸容器的變化
+            const observer = new ResizeObserver(() => {
+                checkScroll();
+            });
+            if (scrollRef.current) observer.observe(scrollRef.current);
+
             // 資料加載後檢查多次滾動，確保 DOM 已完全渲染
             setTimeout(checkScroll, 100);
             setTimeout(checkScroll, 500);
             setTimeout(checkScroll, 1000);
+            setTimeout(checkScroll, 2000);
         } catch (e) {
             setInsights(INSIGHTS.filter(i => i.category !== 'AI 新聞'));
         }
@@ -220,43 +227,29 @@ const Insights = () => {
                 {/* 滾動提示圖標 */}
                 <AnimatePresence>
                     {showLeftIndicator && (
-                        <motion.div 
-                            initial={{ opacity: 0, scale: 0.5 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.5 }}
-                            className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center pl-2 pointer-events-none z-50"
+                        <div 
+                            className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center pl-2 pointer-events-none z-[100]"
                         >
-                            <div className="flex flex-col items-center gap-1.5 bg-[#0A0A0A] border border-white/20 p-2.5 rounded-2xl shadow-xl">
-                                <motion.div
-                                    animate={{ x: [0, -4, 0] }}
-                                    transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
-                                    className="bg-zinc-700 p-1.5 rounded-full"
-                                >
-                                    <ChevronLeft size={16} className="text-white" strokeWidth={3} />
-                                </motion.div>
-                                <span className="text-[10px] font-black text-zinc-400 uppercase tracking-widest whitespace-nowrap bg-white/5 px-1.5 py-0.5 rounded-md">回看</span>
+                            <div className="flex flex-col items-center gap-1.5 bg-black border border-white/40 p-2.5 rounded-2xl shadow-2xl">
+                                <div className="bg-zinc-700 p-1.5 rounded-full">
+                                    <ChevronLeft size={18} className="text-white" strokeWidth={4} />
+                                </div>
+                                <span className="text-[11px] font-black text-zinc-400 uppercase tracking-widest whitespace-nowrap bg-white/10 px-2 py-0.5 rounded-md">回看</span>
                             </div>
-                        </motion.div>
+                        </div>
                     )}
 
                     {showScrollIndicator && (
-                        <motion.div 
-                            initial={{ opacity: 0, scale: 0.5 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.5 }}
-                            className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center pr-2 pointer-events-none z-50"
+                        <div 
+                            className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center pr-2 pointer-events-none z-[100]"
                         >
-                            <div className="flex flex-col items-center gap-1.5 bg-[#0A0A0A] border border-emerald-500/50 p-2.5 rounded-2xl shadow-[0_0_20px_rgba(16,185,129,0.3)]">
-                                <motion.div
-                                    animate={{ x: [0, 4, 0] }}
-                                    transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
-                                    className="bg-emerald-500 p-1.5 rounded-full"
-                                >
-                                    <ChevronRight size={16} className="text-black" strokeWidth={3} />
-                                </motion.div>
-                                <span className="text-[10px] font-black text-emerald-500 uppercase tracking-widest whitespace-nowrap bg-emerald-500/10 px-1.5 py-0.5 rounded-md">更多內容</span>
+                            <div className="flex flex-col items-center gap-1.5 bg-black border border-emerald-500 p-2.5 rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.5)] animate-pulse">
+                                <div className="bg-emerald-500 p-1.5 rounded-full">
+                                    <ChevronRight size={18} className="text-black" strokeWidth={4} />
+                                </div>
+                                <span className="text-[11px] font-black text-emerald-500 uppercase tracking-widest whitespace-nowrap bg-emerald-500/20 px-2 py-0.5 rounded-md">更多內容</span>
                             </div>
-                        </motion.div>
+                        </div>
                     )}
                 </AnimatePresence>
             </div>
