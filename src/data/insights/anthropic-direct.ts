@@ -15,6 +15,7 @@ export const insight = {
         wrong: "❌ 做法：你好，真的很感謝你之前的幫忙。現在可以請你幫我總結一下嗎？謝謝。",
         right: "✅ 做法：[投訴內容]：『貼上文字』。任務：請總結 3 個重點。要求：字數 200 內。"
     },
+    insight_quote: "高級 Agent 在產出前會自我檢查，這就是為什麼正確率更高的原因。",
     practice_kit: {
         title: "官方密技：資料隔離指令",
         description: "強迫 AI 專注核心任務的指令包：",
