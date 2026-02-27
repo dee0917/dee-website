@@ -1,62 +1,60 @@
 export const insight = {
     id: 204,
     category: "入門心法",
-    themeColor: "emerald",
+    themeColor: "blue",
     difficulty_level: 2,
-    tags: ["#Anthropic官方", "#直球指令", "#提示詞優化"],
-    title: "Anthropic 官方提示詞教學：為什麼不要對 AI 說「請」？3 個直球指令技巧",
-    summary: "對 AI 太客氣反而會讓它分心。學會官方推薦的「中括號大法」與「直球對決」，讓指令更精準。減少計算噪訊的浪費。",
+    level: 2,
+    tags: ["#Anthropic", "#Claude", "#直球寫作"],
+    title: "別再客套了！學會「直球對決寫作法」，讓 AI 產出更精準",
+    summary: "Anthropic 官方推薦的寫作秘訣：直接告訴 AI 它該做什麼，不該做什麼。省去無謂的寒暄，效率提升 200%。",
     date: "2026.01.20",
-    readTime: "6 分鐘",
-    pain_point: "你習慣在指令前面加上大量客套話，導致 AI 回傳一堆廢話，甚至漏掉重點？這不是禮貌，這是對計算資源的浪費。",
-    scenario: "想像你正在趕機場坐計程車。如果你說『司機大哥您好，真的不好意思，如果您方便的話，能不能載我去機場？』司機會覺得你不趕時間。AI 亦同。",
-    solution: "1. 直球對決：省下客套。 2. 中括號隔離 [ ]：包住資料。 3. 要求先思考：先列步驟。這就是 Anthropic 官方指南的精髓。",
+    readTime: "5 分鐘",
+    pain_point: "你是不是習慣對 AI 說：「請、謝謝、麻煩你幫我...」？雖然很有禮貌，但有時候 AI 會因為你的過度客套而產生誤解，甚至寫出一堆廢話。",
+    scenario: "我以前對 AI 像對長輩一樣客氣，結果它回我的內容也充滿了客套辭令。後來我改用直球對決，它給的建議瞬間變得犀利且實用。",
+    solution: "採用「指令優先」策略。直接把最核心的要求放在最前面，並使用明確的動詞（撰寫、分析、摘要）。讓 AI 明白它不是在陪你聊天，是在幫你完成任務。",
     example: {
-        wrong: "❌ 做法：你好，真的很感謝你之前的幫忙。現在可以請你幫我總結一下嗎？謝謝。",
-        right: "✅ 做法：[投訴內容]：『貼上文字』。任務：請總結 3 個重點。要求：字數 200 內。"
+        wrong: "你好，如果你有空的話，能不能麻煩你幫我看一下這篇文案，給我一點意見呢？謝謝你。",
+        right: "「直接分析以下文案的邏輯漏洞。請用條列式指出 3 個改進點。不要輸出任何多餘的寒暄。」"
     },
-    insight_quote: "最強大的智慧往往隱藏在最簡潔的直球對決中，讓精準成為溝通的唯一語言。",
+    insight_quote: "對 AI 來說，最優雅的禮貌就是清晰的指令。",
+    steps: [
+        {
+            title: "核心指令置頂",
+            body: "把最重要的任務寫在第一句。AI 會優先處理視窗最上方的資訊，這能確保它不會跑題。",
+            dee_tip: "把「請幫我」改成「指令：」，讓 AI 瞬間進入工作狀態。"
+        },
+        {
+            title: "使用強大的動詞",
+            body: "避免使用「幫我看」、「想一下」這種模糊詞彙。改用「批判」、「重構」、「轉譯」。",
+            dee_tip: "我發現用「重塑 (Reshape)」這個詞，AI 給出的架構會比「修改」更具創意。"
+        },
+        {
+            title: "排除多餘回覆",
+            body: "明確告訴 AI 不要輸出什麼。例如：「不要重複我的問題」、「不要解釋你的邏輯」。",
+            dee_tip: "這對長輩很有幫助！長輩最怕看長文，直接叫 AI 刪掉廢話就對了。"
+        }
+    ],
+    quiz: {
+        question: "根據「直球對決寫作法」，以下哪種指令最能讓 AI 快速進入狀況？",
+        options: [
+            "親愛的 AI，今天心情好嗎？我想請你寫個摘要。",
+            "摘要以下文字：[貼入內容]。限制 100 字內，用條列式。",
+            "你可以幫我寫個東西嗎？關於最近的市場趨勢。",
+            "我想跟你討論一下這個專案的未來方向。"
+        ],
+        answer: 1,
+        explanation: "明確的動詞（摘要）＋ 具體的限制（100字、條列式）是直球對決的精髓！"
+    },
+    skill_badge: "🎯 精準擊球員",
     practice_kit: {
-        title: "官方密技：資料隔離指令",
-        description: "強迫 AI 專注核心任務的指令包：",
-        command: `這是一段資料：
-[資料內容開始]
-[貼入內容]
-[資料內容結束]
-
-任務：請從以上資料中提取 3 個核心重點。
-要求：請先深思熟慮，在內心列出執行步驟，再給出最終答案。不需任何客套開場。`
+        title: "直球寫作速成包",
+        description: "下次需要 AI 快速工作時，直接套用這個格式：",
+        command: `[核心任務：如 撰寫/批判/翻譯]
+對象：[填入目標受眾]
+限制：[如 500字內/不要使用術語/3個重點]
+文字內容如下：
+---
+[貼入資料]`
     },
-    content: `
-    <h2 class="text-3xl font-bold text-white mb-6">與其客套，不如直接。</h2>
-    <p class="text-lg text-zinc-300 mb-8 leading-relaxed">
-        社交禮儀對 AI 來說只是「噪訊」。最厲害的指令，應該像專業公文一樣乾淨、明確。這能強迫 AI 的注意力百分之百集中在你的任務上。
-    </p>
-
-    <div class="bg-white/5 p-8 rounded-3xl border border-white/10 mb-12 text-left">
-        <h3 class="text-xl font-bold text-white mb-6">官方精準三部曲</h3>
-        <div class="step-list">
-            <div class="step-item">
-                <span class="step-number text-emerald-500">STEP 01</span>
-                <div>
-                    <p class="text-white font-bold mb-1">移除噪訊</p>
-                    <p>刪除所有「你好、請、謝謝」，直接跳到動詞（總結、分析、改寫）。</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <span class="step-number text-emerald-500">STEP 02</span>
-                <div>
-                    <p class="text-white font-bold mb-1">建立邊界</p>
-                    <p>使用 [ ] 或 --- 標記資料區塊。這能幫 AI 區分「指令」與「被處理資料」。</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <span class="step-number text-emerald-500">STEP 03</span>
-                <div>
-                    <p class="text-white font-bold mb-1">開啟思考</p>
-                    <p>要求 AI 「先列出計畫」，這相當於給了它大腦運作的緩衝區。</p>
-                </div>
-            </div>
-        </div>
-    </div>`
+    content: ``
 };

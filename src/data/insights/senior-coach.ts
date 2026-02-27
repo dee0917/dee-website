@@ -1,62 +1,59 @@
 export const insight = {
     id: 303,
     category: "長輩數位教練",
-    themeColor: "teal",
+    themeColor: "rose",
     difficulty_level: 1,
-    tags: ["#長照補助", "#孝親專題", "#語音指令"],
-    title: "長輩領補助教學：教爸媽用 AI 查長照補助，比打 1966 還快的語音指令實戰",
-    summary: "別再幫爸媽查資料查到火大。教他們把語音輸入當成打電話，AI 就像住在手機裡的萬事通鄰居。",
+    level: 1,
+    tags: ["#長輩友善", "#生活助手", "#AI教學"],
+    title: "別讓爸媽變科技邊緣人！3 招教長輩愛上 AI",
+    summary: "爸媽老是問你手機怎麼用？教他們用 AI，不但能解決生活疑難雜症，還能陪他們聊天解悶。這篇文章教你如何溫柔地引導長輩入門。",
     date: "2026.02.04",
     readTime: "5 分鐘",
-    pain_point: "長輩想申請長照或補助，政府網站字太小、流程太長看不懂，電話轉接老半天，最後還是要麻煩子女查？",
-    scenario: "想像爸媽只需要對著手機說「我要請外籍看護要怎麼申請？」，AI 就能把幾萬字的複雜公文翻譯成 3 句白話文。",
-    solution: "教長輩使用手機的語音輸入功能，並直接對話。告訴 AI「請用簡單的國語告訴我這件事的 3 個步驟」。",
+    pain_point: "你是不是也遇過：爸媽想查長照補助或買菜資訊，卻在網頁海裡迷路？或是他們覺得 AI 是年輕人的玩意，自己學不會？",
+    scenario: "我以前教我媽用 Google，她覺得字太小又太亂。後來我教她用 AI，她直接問：『幫我查附近哪裡有便宜的有機蔬菜』，AI 直接列給她。我媽現在覺得自己是科技達人！",
+    solution: "關鍵在於『語音輸入』與『白話對話』。把 AI 當成一個 24 小時在線、脾氣超好的虛擬孫子。教長輩不用管術語，直接用講的問問題就對了。",
     example: {
-        wrong: "❌ 做法：丟一個 PDF 連結給爸媽看，或是貼一大串文字，他們看不懂也點不開。",
-        right: "✅ 做法：教爸媽語音指令『你是數位助理，請告訴我 65 歲以上領假牙補助要去哪裡辦？要帶什麼？』"
+        wrong: "丟給長輩一個專業的 Prompt 公式（他們會立刻想放棄）。",
+        right: "教長輩對著手機說：『嘿 AI，我最近膝蓋有點痠，幫我查查有哪些簡單的居家復健運動？』"
     },
-    insight_quote: "跨越數位鴻溝的橋樑，不是冰冷的技術，而是讓 AI 成為長輩探索世界的第二雙眼睛。",
+    insight_quote: "最好的科技，是讓長輩感覺不到科技的存在。",
+    steps: [
+        {
+            title: "開啟「語音輸入」大法",
+            body: "長輩最討厭打字。教他們點擊小話筒圖標，直接用說的。AI 的語音辨識已經強大到可以聽懂大部分的口音。",
+            dee_tip: "記得幫長輩設定『繁體中文』輸出，畫面看起來才親切。"
+        },
+        {
+            title: "把 AI 當成「超級問不倒」",
+            body: "鼓勵長輩問生活瑣事：菜價、藥物副作用、附近景點。讓他們體驗到『問了就有答案』的爽感。",
+            dee_tip: "我可以幫長輩設定好一個開場白：『你現在是我的生活管家，請用白話一點跟我說。』"
+        },
+        {
+            title: "建立「安全防護網」",
+            body: "誠實告訴長輩，AI 有時候會亂講話。教他們看到奇怪的醫療建議時，一定要多問你一句。",
+            dee_tip: "我常跟我爸說：『AI 就像個愛吹牛的鄰居，講的內容可以參考，但不能全信喔！』"
+        }
+    ],
+    quiz: {
+        question: "教長輩使用 AI 時，以下哪種方式最能降低他們的挫折感？",
+        options: [
+            "教他們寫 Python 代碼",
+            "強迫他們背誦 Prompt 公式",
+            "鼓勵他們使用語音輸入，並問生活相關問題",
+            "讓他們自己看說明書"
+        ],
+        answer: 2,
+        explanation: "降低輸入門檻（語音）與提高關聯性（生活問題）是引導長輩成功的關鍵！"
+    },
+    skill_badge: "👴 科技孝子/女",
     practice_kit: {
-        title: "孝親語音：爸媽專用指令",
-        description: "幫爸媽存好這段話，讓他們隨時能對著手機念：",
-        command: `你是一位最有耐心的社區社工，專門服務銀髮族。我的父母想詢問 [補助名稱] 的申請流程。
-請用「超白話、字數精簡」的方式告訴我：
-1. 誰可以領？ 
-2. 去哪裡辦？ 
-3. 準備什麼證件？
-要求：請分點列出，字體間距加大，不要寫任何專業術語。`
-    },
-    content: `
-    <h2 class="text-3xl font-bold text-white mb-6">孝順不難，難的是耐心。</h2>
-    <p class="text-lg text-zinc-300 mb-8 leading-relaxed">
-        與其每次都幫長輩查，不如教他們如何「對著手機問問題」。這不僅能減少您的負擔，更能給長輩巨大的「掌控感」與「成就感」。
-    </p>
+        title: "長輩生活助手指令",
+        description: "幫長輩存在記事本，讓他們隨時複製或參考怎麼說：",
+        command: `【生活百科】
+請幫我查一下 [問題，例如：最近菜價為什麼變貴？]？請用白話一點的方式解釋給我聽。
 
-    <div class="bg-white/5 p-8 rounded-3xl border border-white/10 mb-12 text-left">
-        <h3 class="text-xl font-bold text-white mb-6">數位教練三步驟</h3>
-        <div class="step-list">
-            <div class="step-item">
-                <span class="step-number text-teal-500">STEP 01</span>
-                <div>
-                    <p class="text-white font-bold mb-1">找到麥克風</p>
-                    <p class="text-sm text-zinc-400">教爸媽找到對話框旁的麥克風圖示，跨出「開口說話」的第一步。</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <span class="step-number text-teal-500">STEP 02</span>
-                <div>
-                    <p class="text-white font-bold mb-1">設定耐心模式</p>
-                    <p class="text-sm text-zinc-400">幫他們預設好「耐心社工」的角色設定，讓 AI 的回話變溫柔。</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <span class="step-number text-teal-500">STEP 03</span>
-                <div>
-                    <p class="text-white font-bold mb-1">字體視覺優化</p>
-                    <p class="text-sm text-zinc-400">要求 AI 使用大字體或列表，確保老花眼也能輕鬆閱讀。</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    `
+【旅遊規畫】
+我想去 [地點] 玩，我體力不太好不能走太久，請幫我排一個放鬆的半日遊行程。`
+    },
+    content: ``
 };

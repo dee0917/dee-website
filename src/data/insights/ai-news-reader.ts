@@ -1,57 +1,60 @@
 export const insight = {
     id: 401,
-    category: "AI 新聞",
-    themeColor: "zinc",
-    difficulty_level: 1,
-    tags: ["#最新趨勢", "#OpenAI", "#讀心術"],
-    title: "AI 會讀心術了？OpenAI 推出語音進階版，現在它能聽出你是在「生氣」還是「撒嬌」",
-    summary: "不只是冷冰冰的機器人！現在的 AI 能識別你的情緒波動，甚至根據你的語氣換個口吻跟你聊天。小白難度：1 顆星。",
-    date: "2026.02.12",
-    readTime: "3 分鐘",
-    pain_point: "總覺得對著手機說話很尷尬，因為對方聽不出你的情緒，回話總是很死板？想要更有溫度的對話？",
-    scenario: "想像你今天心情很糟跟 AI 抱怨，它不再只會說『我很遺憾』，而是能聽出你的委屈，用更溫柔的聲音安慰你。",
-    solution: "更新到最新版高級語音模式。什麼都不用設定，直接開始對話，它就會自動感知你的語氣、節奏甚至呼吸聲。",
+    category: "工作效率",
+    themeColor: "teal",
+    difficulty_level: 2,
+    level: 3,
+    tags: ["#過濾資訊", "#核心知識", "#高效閱讀"],
+    title: "別再被廢話淹沒！用 AI 打造你的「資訊過濾器」",
+    summary: "每天被新聞、社群媒體轟炸到焦慮？教你用 AI 瞬間提取核心知識，只看重點，不看廢話。",
+    date: "2026.01.25",
+    readTime: "6 分鐘",
+    pain_point: "你是不是也覺得：這篇文章標題很吸睛，但內容看了 10 分鐘還沒講到重點？每天花太多時間在看那些「沒營養」的資訊？",
+    scenario: "我以前訂閱了 20 個電子報，根本看不完。現在我把文章直接丟給 AI，叫它『用 3 個點告訴我這篇在講什麼』。10 秒鐘搞定本來要看 10 分鐘的事。",
+    solution: "將 AI 定位為你的『首席過濾官』。不再閱讀全文，而是閱讀 AI 提煉後的『知識骨幹』。如果對某個點感興趣，再深入追問。",
     example: {
-        wrong: "❌ 做法：用打字的，感受不到任何情緒起伏，像在對牆壁說話。",
-        right: "✅ 做法：按下語音圖示，直接說：『我今天好累喔。』看它如何精準捕捉你的低落並給你回饋。"
+        wrong: "死命看完整篇文章，最後發現 90% 都是廢話。",
+        right: "把文章連結或全文貼給 AI，指令：『請用批判性思維，指出這篇文章最核心的 3 個論點，並列出它有哪些邏輯漏洞。』"
     },
-    insight_quote: "在資訊爆炸的時代，讓聲音成為思想的濾鏡，把世界讀進你的心靈深處。",
+    insight_quote: "在這個資訊過剩的年代，知道「不看什麼」比知道「看什麼」更重要。",
+    steps: [
+        {
+            title: "建立「知識提取」指令",
+            body: "告訴 AI 你的背景，讓它根據你的需求來過濾。例如：『我是一名設計師，請提取這篇文章中與視覺設計相關的重點。』",
+            dee_tip: "我發現加上『請用一句話總結核心價值』，能讓你一眼判斷這篇文章值不值得細讀。"
+        },
+        {
+            title: "執行「水分擠壓」法",
+            body: "對於那些充滿術語的文章，要求 AI：『請把這段話解釋給 5 歲小孩聽』。這能幫你快速理解本質。",
+            dee_tip: "如果文章很長，可以分段讓 AI 摘要，最後再合成一個大心智圖。"
+        },
+        {
+            title: "開啟「批判性閱讀」模式",
+            body: "不只要摘要，還要挑戰。問 AI：『這篇報導可能隱瞞了哪些事實？它的立場偏向哪一方？』",
+            dee_tip: "這招對判斷投資類新聞超有用！AI 能幫你識破那些充滿偏見的廣告文。"
+        }
+    ],
+    quiz: {
+        question: "用 AI 進行高效閱讀時，最主要的目的是？",
+        options: [
+            "把文章背下來",
+            "跳過思考過程",
+            "快速判斷價值，提取核心論點並擠掉多餘資訊",
+            "跟朋友炫耀自己看很快"
+        ],
+        answer: 2,
+        explanation: "AI 的作用是幫你節省處理低品質資訊的時間，讓你專注在高品質的思考與應用上。"
+    },
+    skill_badge: "🧠 資訊過濾師",
     practice_kit: {
-        title: "體驗指令：語音情緒測試",
-        description: "開啟高級語音模式後，試試這段話：",
-        command: `嘿，我現在的心情有點複雜。請根據我的音調和說話節奏，猜猜看我現在的情緒是什麼？並請換個適合這種情緒的口吻陪我聊兩句。`
-    },
-    content: `
-    <h2 class="text-3xl font-bold text-white mb-6">AI 正在變得越來越「像人」。</h2>
-    <p class="text-lg text-zinc-300 mb-8 leading-relaxed">
-        這是一個劃時代的進展：它不再只是讀取你的文字，它現在正在透過音調、節奏，甚至你的呼吸聲，來「聽」你的心聲。
-    </p>
+        title: "核心知識提取包",
+        description: "遇到長篇文章或新聞，直接丟出這個三連問：",
+        command: `這篇文章的連結/內容如下：[內容]
 
-    <div class="bg-white/5 p-8 rounded-3xl border border-white/10 mb-12 text-left">
-        <h3 class="text-xl font-bold text-white mb-6">本日新聞點：小白難度 ⭐</h3>
-        <div class="step-list">
-            <div class="step-item">
-                <span class="step-number text-zinc-400">01</span>
-                <div>
-                    <p class="text-white font-bold mb-1">情緒識別</p>
-                    <p class="text-sm text-zinc-400">AI 能聽出憤怒、悲傷、驚訝與幽默，這讓對話不再是罐頭訊息。</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <span class="step-number text-zinc-400">02</span>
-                <div>
-                    <p class="text-white font-bold mb-1">即時打斷</p>
-                    <p class="text-sm text-zinc-400">你不用等它講完，直接插話，它會像真人一樣停下來聽你說。</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <span class="step-number text-zinc-400">03</span>
-                <div>
-                    <p class="text-white font-bold mb-1">低延遲感</p>
-                    <p class="text-sm text-zinc-400">反應速度縮短到 200 毫秒，幾乎感覺不到是在跟伺服器聊天。</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    `
+請幫我完成以下任務：
+1. 用 3 個 bullet points 總結這篇文章的核心觀點。
+2. 這篇文章有哪些實用的建議是讀完後可以立刻執行的？
+3. 從批判性角度看，這篇文章可能存在哪些偏見或邏輯漏洞？`
+    },
+    content: ``
 };
