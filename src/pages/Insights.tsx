@@ -186,7 +186,7 @@ const Insights = () => {
                     onMouseUp={handleMouseUp}
                     onMouseMove={handleMouseMove}
                     onScroll={checkScroll}
-                    className={`flex items-center gap-3 overflow-x-auto pb-4 no-scrollbar cursor-grab active:cursor-grabbing ${isDragging ? 'scroll-auto select-none' : 'scroll-smooth'}`}
+                    className={`flex items-center gap-3 overflow-x-auto pb-4 no-scrollbar cursor-grab active:cursor-grabbing touch-pan-x ${isDragging ? 'scroll-auto select-none' : 'scroll-smooth'}`}
                 >
                     <button 
                         onClick={(e) => handleCategoryClick(null, e)} 
