@@ -136,7 +136,7 @@ const ArticleDetail = () => {
 
             {/* 💡 靈感金句/深度洞察區塊 (新增) */}
             {article.insight_quotes && article.insight_quotes.length > 0 && (
-                <div className="grid grid-cols-1 gap-6 mb-20">
+                <div className="flex flex-col items-center gap-12 mb-20">
                     {article.insight_quotes.map((quote: any, idx: number) => (
                         <motion.div 
                             key={idx}
@@ -144,19 +144,17 @@ const ArticleDetail = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
-                            className="bg-white/5 border border-white/10 rounded-3xl p-8 relative overflow-hidden group"
+                            className="max-w-2xl w-full text-center"
                         >
-                            <div className="flex items-center justify-center text-center px-4">
-                                <p className="text-zinc-300 italic leading-relaxed text-xl md:text-2xl font-serif">
-                                    「{quote.content}」
-                                </p>
-                            </div>
-                            {/* 裝飾背光 */}
-                            <div className={`absolute inset-0 bg-gradient-to-br ${theme.gradient} opacity-0 group-hover:opacity-5 transition-opacity`} />
+                            <p className="text-zinc-300 italic leading-relaxed text-lg md:text-xl font-medium tracking-wide">
+                                「{quote.content}」
+                            </p>
                         </motion.div>
                     ))}
                 </div>
             )}
+
+            {/* 融合後的【終極生活實戰包】 */}
 
             {/* 融合後的【終極生活實戰包】 */}
             {!isNews && article.practice_kit && (
