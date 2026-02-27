@@ -1,7 +1,21 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Star } from 'lucide-react';
+import { 
+    ArrowRight, 
+    Star, 
+    LayoutGrid, 
+    Zap, 
+    Wrench, 
+    Baby, 
+    MessageCircle, 
+    Heart, 
+    Camera, 
+    Home as HomeIcon, 
+    Briefcase, 
+    TrendingUp, 
+    Rocket 
+} from 'lucide-react';
 import { api } from '../lib/supabase';
 import { INSIGHTS } from '../data/mock';
 
@@ -25,6 +39,22 @@ const Insights = () => {
         return colors[themeColor] || colors.emerald;
     };
 
+    const getCategoryIcon = (categoryName: string) => {
+        const icons: Record<string, any> = {
+            '入門心法': Zap,
+            '工具指南': Wrench,
+            '神隊友育兒': Baby,
+            '社交救星': MessageCircle,
+            '長輩數位教練': Heart,
+            '自媒體實踐': Camera,
+            '生活應用': HomeIcon,
+            '工作效率': Briefcase,
+            '投資人 AI 攻略': TrendingUp,
+            '進階實踐': Rocket
+        };
+        return icons[categoryName] || Zap;
+    };
+
     const getCategoryTheme = (categoryName: string) => {
         const article = insights.find(i => i.category === categoryName);
         return article?.themeColor || article?.theme_color || 'emerald';
@@ -37,7 +67,6 @@ const Insights = () => {
     const fetchInsights = async () => {
         setLoading(true);
         try {
-            // 強制過濾新聞類別，教學頁面不應該出現新聞
             const cleanInsights = INSIGHTS.filter(i => i.category !== 'AI 新聞');
             setInsights(cleanInsights);
         } catch (e) {
@@ -54,35 +83,54 @@ const Insights = () => {
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-6xl mx-auto min-h-screen text-left">
             <div className="text-left mb-12">
-                <span className="text-emerald-500 font-bold tracking-widest text-xs uppercase mb-4 block">KNOWLEDGE LADDER</span>
+                <span className="text-emerald-500 font-bold tracking-widest text-[10px] uppercase mb-4 block">KNOWLEDGE LADDER</span>
                 <h1 className="text-4xl md:text-5xl font-bold font-serif text-white mb-6">免費 AI 實用教學</h1>
-                <p className="text-zinc-400 text-xl max-w-2xl leading-relaxed">
+                <p className="text-zinc-400 text-lg max-w-2xl leading-relaxed">
                     我們已經移除了新聞雜訊。這裡只有高品質、帶領你進化的 AI 實踐指南。
                 </p>
             </div>
 
-            <div className="flex flex-wrap justify-start gap-3 mb-16 px-4">
-                <button onClick={() => setSelectedCategory(null)} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedCategory === null ? 'bg-emerald-500 text-black' : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-white'}`}>
-                    全部內容
-                </button>
-                {categories.map(category => {
-                    const theme = getColorClasses(getCategoryTheme(category));
-                    return (
-                        <button key={category} onClick={() => setSelectedCategory(category)} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedCategory === category ? theme.active : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-white'}`}>
-                            {category}
-                        </button>
-                    );
-                })}
+            {/* 優化後的滾動分類列 */}
+            <div className="relative mb-16">
+                <div className="flex items-center gap-3 overflow-x-auto pb-4 no-scrollbar scroll-smooth">
+                    <button 
+                        onClick={() => setSelectedCategory(null)} 
+                        className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold transition-all border ${selectedCategory === null 
+                            ? 'bg-emerald-500 border-emerald-500 text-black shadow-lg shadow-emerald-500/20' 
+                            : 'bg-white/5 border-white/5 text-zinc-400 hover:bg-white/10 hover:border-white/10'}`}
+                    >
+                        <LayoutGrid size={14} /> 全部內容
+                    </button>
+                    {categories.map(category => {
+                        const theme = getColorClasses(getCategoryTheme(category));
+                        const Icon = getCategoryIcon(category);
+                        const isSelected = selectedCategory === category;
+                        return (
+                            <button 
+                                key={category} 
+                                onClick={() => setSelectedCategory(category)} 
+                                className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold transition-all border ${isSelected 
+                                    ? `${theme.active} border-transparent shadow-lg` 
+                                    : 'bg-white/5 border-white/5 text-zinc-400 hover:bg-white/10 hover:border-white/10'}`}
+                                style={isSelected ? { boxShadow: `0 10px 15px -3px ${theme.text.replace('text-', 'rgba(')}, 0 4px 6px -4px ${theme.text.replace('text-', 'rgba(')}` } : {}}
+                            >
+                                <Icon size={14} /> {category}
+                            </button>
+                        );
+                    })}
+                </div>
+                {/* 漸變遮罩提示可滾動 */}
+                <div className="absolute right-0 top-0 bottom-4 w-12 bg-gradient-to-l from-[#0A0A0A] to-transparent pointer-events-none" />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {filteredInsights.map((insight, i) => {
                     const theme = getColorClasses(insight.themeColor || 'emerald');
                     return (
                         <Link to={`/insights/${insight.id}`} key={insight.id} className="group block">
-                            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} viewport={{ once: true }} className={`bg-[#111] border border-white/5 ${theme.border} p-6 rounded-xl transition-all hover:-translate-y-1 h-full flex flex-col text-left`}>
-                                <div className="flex items-center justify-between mb-3">
-                                    <span className={`text-[10px] font-bold px-2 py-1 rounded ${theme.tag}`}>{insight.category}</span>
+                            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} viewport={{ once: true }} className={`bg-[#111] border border-white/5 ${theme.border} p-8 rounded-3xl transition-all hover:-translate-y-1 h-full flex flex-col text-left`}>
+                                <div className="flex items-center justify-between mb-4">
+                                    <span className={`text-[10px] font-bold px-2.5 py-1 rounded-lg ${theme.tag}`}>{insight.category}</span>
                                     <div className="flex gap-0.5">
                                         {[...Array(5)].map((_, idx) => {
                                             const starsCount = Math.min(5, Math.max(0, insight.difficulty_level || 1));
@@ -93,15 +141,17 @@ const Insights = () => {
                                     </div>
                                 </div>
 
-                                <h4 className={`text-lg font-bold text-white mb-3 group-hover:${theme.text.split(' ')[0]} transition-colors line-clamp-2 text-left`}>
+                                <h4 className={`text-xl font-bold text-white mb-4 group-hover:${theme.text.split(' ')[0]} transition-colors line-clamp-2 text-left leading-snug`}>
                                     {insight.title}
                                 </h4>
 
-                                <p className="text-zinc-400 text-sm line-clamp-3 mb-6 flex-grow text-left">{insight.summary}</p>
+                                <p className="text-zinc-500 text-sm line-clamp-3 mb-8 flex-grow text-left leading-relaxed">{insight.summary}</p>
 
-                                <div className="flex items-center justify-between pt-4 border-t border-white/5">
-                                    <span className="text-xs text-zinc-500">{insight.readTime || insight.read_time}</span>
-                                    <ArrowRight size={16} className={`text-zinc-600 ${theme.arrow} group-hover:translate-x-1 transition-all`} />
+                                <div className="flex items-center justify-between pt-6 border-t border-white/5">
+                                    <span className="text-xs font-mono text-zinc-600">{insight.readTime || insight.read_time}</span>
+                                    <div className={`w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all group-hover:${theme.bg}`}>
+                                        <ArrowRight size={14} className={`text-zinc-600 ${theme.arrow} transition-all`} />
+                                    </div>
                                 </div>
                             </motion.div>
                         </Link>

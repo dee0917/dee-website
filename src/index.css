@@ -33,6 +33,15 @@ body {
   /* Hover 時變 Google 藍 */
 }
 
+/* 隱藏捲軸但保持滾動功能 */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* 網格背景 */
 .grid-bg {
   background-size: 50px 50px;
