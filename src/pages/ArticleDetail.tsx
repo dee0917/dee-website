@@ -32,7 +32,6 @@ const ArticleDetail = () => {
     const treasureRef = useRef<HTMLDivElement>(null);
     const quizRef = useRef<HTMLDivElement>(null);
     const rewardRef = useRef<HTMLDivElement>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
 
     const getColorClasses = (themeColor: string) => {
         const colors: Record<string, any> = {
@@ -41,7 +40,7 @@ const ArticleDetail = () => {
             amber: { text: 'text-amber-500', lightText: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20', gradient: 'from-amber-500/20 to-yellow-500/10', glow: 'shadow-amber-500/20', solid: 'bg-amber-500' },
             blue: { text: 'text-blue-500', lightText: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-500/20', gradient: 'from-blue-500/20 to-indigo-500/10', glow: 'shadow-blue-500/20', solid: 'bg-blue-500' },
             violet: { text: 'text-violet-500', lightText: 'text-violet-400', bg: 'bg-violet-500/10', border: 'border-violet-500/20', gradient: 'from-violet-500/20 to-purple-500/10', glow: 'shadow-violet-500/20', solid: 'bg-violet-500' },
-            rose: { text: 'text-rose-500', lightText: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/20', gradient: 'from-rose-500/10 to-pink-500/10', glow: 'shadow-rose-500/20', solid: 'bg-rose-500' },
+            rose: { text: 'text-rose-500', lightText: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/20', gradient: 'from-rose-500/20 to-pink-500/10', glow: 'shadow-rose-500/20', solid: 'bg-rose-500' },
             teal: { text: 'text-teal-500', lightText: 'text-teal-400', bg: 'bg-teal-500/10', border: 'border-teal-500/20', gradient: 'from-teal-500/20 to-cyan-500/10', glow: 'shadow-teal-500/20', solid: 'bg-teal-500' },
             zinc: { text: 'text-zinc-300', lightText: 'text-zinc-200', bg: 'bg-white/5', border: 'border-white/10', gradient: 'from-white/5 to-zinc-900', glow: 'shadow-white/10', solid: 'bg-zinc-500' }
         };
@@ -100,19 +99,16 @@ const ArticleDetail = () => {
         if (idx < (article?.steps?.length || 0) - 1) {
             const nextIdx = idx + 1;
             setCurrentStep(nextIdx);
-            // 立即強制至中下一個步驟
             setTimeout(() => {
                 const element = stepRefs.current[nextIdx];
                 if (element) {
-                    const yOffset = -100; // 稍微往上偏一點點，確保標題可見
+                    const yOffset = -100;
                     const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
                     window.scrollTo({ top: y, behavior: 'smooth' });
                 }
             }, 50);
         } else {
-            // 所有步驟完成
             setIsTreasureUnlocking(true);
-            // 快速跳轉到寶物
             setTimeout(() => {
                 const element = treasureRef.current;
                 if (element) {
@@ -161,8 +157,8 @@ const ArticleDetail = () => {
         confetti({ particleCount: 200, spread: 100, origin: { y: 0.5 }, colors: ['#fbbf24', '#f59e0b', '#d97706'] });
     };
 
-    if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-sm tracking-widest animate-pulse">INIT_EVOLUTION_CORE...</div>;
-    if (!article) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-bold">404: MISSING_CONTENT</div>;
+    if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-sm tracking-widest animate-pulse">INIT_HYBRID_SYSTEM...</div>;
+    if (!article) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-bold">404: CONTENT_NOT_FOUND</div>;
 
     const theme = getColorClasses(article.themeColor || article.theme_color || 'emerald');
     const isNews = article.category === 'AI 新聞';
@@ -176,7 +172,6 @@ const ArticleDetail = () => {
             animate={isTreasureUnlocking && !allStepsDone ? { x: [-4, 4, -4, 4, 0], y: [-2, 2, -2, 2, 0] } : {}}
             transition={{ duration: 0.1, repeat: 12 }}
             className="overflow-x-hidden"
-            ref={containerRef}
         >
             <motion.div
                 className="fixed top-20 left-0 right-0 h-2 z-50 origin-left shadow-[0_0_15px_rgba(16,185,129,0.3)]"
@@ -202,7 +197,7 @@ const ArticleDetail = () => {
                     )}
                 </motion.div>
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} className="absolute bottom-10 flex flex-col items-center gap-4 text-zinc-700">
-                    <span className="text-xs font-black uppercase tracking-[0.4em]">開始進化</span>
+                    <span className="text-xs font-black uppercase tracking-[0.4em]">自由探索或點擊開始</span>
                     <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 2 }}><ChevronDown size={40} strokeWidth={3} /></motion.div>
                 </motion.div>
             </section>
@@ -240,24 +235,17 @@ const ArticleDetail = () => {
                     </div>
                     <div className="space-y-12 relative">
                         {article.steps.map((step: any, idx: number) => {
-                            const isPast = idx < currentStep;
-                            const isActive = idx === currentStep;
-                            const isFuture = idx > currentStep;
                             const isDone = stepsCompleted[idx];
+                            const isCurrentTask = idx === currentStep && !isDone;
 
                             return (
                                 <motion.div
                                     key={idx} ref={el => stepRefs.current[idx] = el}
-                                    initial={{ opacity: 0, scale: 0.95 }} 
-                                    animate={{ 
-                                        opacity: isFuture ? 0.05 : 1,
-                                        scale: isActive ? 1 : 0.98,
-                                        filter: isFuture ? 'blur(10px)' : 'blur(0px)'
-                                    }}
-                                    className={`relative rounded-[3rem] border-2 p-10 md:p-16 transition-all duration-700 ${isDone ? 'bg-white/[0.02] border-emerald-500/40' : isActive ? 'bg-white/5 border-white/20 shadow-2xl scale-100' : 'border-white/5 opacity-10 pointer-events-none'}`}
+                                    initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                                    className={`relative rounded-[3rem] border-2 p-10 md:p-16 transition-all duration-700 ${isDone ? 'bg-white/[0.03] border-emerald-500/40 shadow-[0_0_60px_rgba(16,185,129,0.1)]' : 'bg-white/5 border-white/10 shadow-xl'}`}
                                 >
                                     <div className="flex flex-col md:flex-row items-start gap-10">
-                                        <div className={`w-20 h-20 rounded-3xl flex items-center justify-center flex-shrink-0 text-3xl font-black transition-all duration-500 ${isDone ? 'bg-emerald-500 text-black' : isActive ? 'bg-white text-black' : 'bg-white/5 text-zinc-700'}`}>
+                                        <div className={`w-20 h-20 rounded-3xl flex items-center justify-center flex-shrink-0 text-3xl font-black transition-all duration-500 ${isDone ? 'bg-emerald-500 text-black' : 'bg-white text-black'}`}>
                                             {isDone ? '✓' : idx + 1}
                                         </div>
                                         <div className="flex-1">
@@ -268,7 +256,7 @@ const ArticleDetail = () => {
                                                     <p className="text-emerald-400 text-lg md:text-2xl italic font-bold leading-relaxed">💡 Dee's Tip: {step.dee_tip}</p>
                                                 </div>
                                             )}
-                                            {isActive && !isDone && (
+                                            {!isDone && (
                                                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-start gap-6">
                                                     <motion.button
                                                         whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
@@ -281,19 +269,12 @@ const ArticleDetail = () => {
                                                         <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity" />
                                                     </motion.button>
                                                     <div className="flex items-center gap-2 text-emerald-500/80 font-black uppercase tracking-[0.3em] text-sm ml-4">
-                                                        <Sparkles size={16} /> 此章節為必修，完成後方可前行
+                                                        <Sparkles size={16} /> 點擊按鈕或手動滑動閱讀，完成所有步驟以解鎖寶物
                                                     </div>
                                                 </motion.div>
                                             )}
                                         </div>
                                     </div>
-                                    
-                                    {/* Scroll Lock Overlay for Future Steps */}
-                                    {isFuture && (
-                                        <div className="absolute inset-0 z-10 bg-black/40 backdrop-blur-[2px] rounded-[3rem] flex items-center justify-center">
-                                            <Lock size={48} className="text-white/10" />
-                                        </div>
-                                    )}
                                 </motion.div>
                             );
                         })}
@@ -437,7 +418,7 @@ const ArticleDetail = () => {
                     <Link to={`/insights/${nextArticle.id}`} className="group block bg-white/[0.04] border-4 border-white/5 hover:border-emerald-500/40 p-16 md:p-24 rounded-[4.5rem] transition-all shadow-3xl hover:shadow-[0_40px_100px_rgba(16,185,129,0.2)] hover:-translate-y-4">
                         <div className="flex items-center justify-between gap-16">
                             <div>
-                                <span className="text-emerald-500/60 font-black text-sm md:text-lg uppercase tracking-[0.5em] mb-8 block">Next Evolution Path</span>
+                                <span className="text-emerald-500/60 font-black text-sm md:text-lg uppercase tracking-[0.5em] mb-8 block">Next Level Evolution</span>
                                 <h3 className="text-4xl md:text-7xl font-black text-white group-hover:text-emerald-400 transition-colors leading-[1.1] tracking-tighter">{nextArticle.title}</h3>
                             </div>
                             <ArrowRight className="text-zinc-900 group-hover:text-emerald-400 group-hover:translate-x-10 transition-all flex-shrink-0" size={100} strokeWidth={6} />
