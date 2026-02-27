@@ -66,6 +66,7 @@ const ArticleDetail = () => {
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-4xl mx-auto min-h-screen text-left">
+            <SEO title={article.title} description={article.summary || article.pain_point} path={`/insights/${article.id}`} />
             <Link to={isNews ? "/news" : "/insights"} className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-12 text-sm font-medium">
                 <ArrowLeft size={16} /> 返回{isNews ? "新聞" : "教學"}列表
             </Link>

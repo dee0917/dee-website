@@ -118,6 +118,7 @@ const Home = () => {
 
     return (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <SEO path="/" />
             <SEO />
             {/* ========== 1. Hero - 純粹的使命宣言，不含訂閱表單 ========== */}
             <section className="pt-32 pb-24 px-6 max-w-5xl mx-auto">

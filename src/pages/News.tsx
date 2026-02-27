@@ -9,7 +9,7 @@ const News = () => {
     const newsArticles = INSIGHTS_LIST.filter(a => a.category === 'AI 新聞');
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-6xl mx-auto min-h-screen"><SEO title="AI 新聞" description="追蹤最新 AI 動態，用最白話的方式帶你了解科技趨勢。" path="/news" />
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-6xl mx-auto min-h-screen"><SEO title="AI 新聞" description="追蹤最新 AI 動態，用白話文帶你了解科技趨勢。" path="/news" /><SEO title="AI 新聞" description="追蹤最新 AI 動態，用最白話的方式帶你了解科技趨勢。" path="/news" />
             <div className="text-center mb-16">
                 <span className="text-zinc-400 font-bold tracking-widest text-xs uppercase mb-4 block">AI NEWS</span>
                 <h1 className="text-4xl md:text-5xl font-bold font-serif text-white mb-6">AI 新聞</h1>
