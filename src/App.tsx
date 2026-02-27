@@ -14,7 +14,8 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-[#0A0A0A] flex flex-col">
+      <div className="min-h-screen bg-[#0A0A0A] flex flex-col relative">
+        <div className="grid-bg" />
         <Navbar />
         <main className="flex-grow">
           <Routes>
