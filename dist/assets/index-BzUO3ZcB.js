@@ -328,120 +328,165 @@ var Pd=Object.defineProperty;var Ld=(n,e,t)=>e in n?Pd(n,e,{enumerable:!0,config
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
- */const ys=C("Zap",[["polygon",{points:"13 2 3 14 12 14 11 22 21 10 12 10 13 2",key:"45s27k"}]]),nu=()=>{const n=$d(),[e,t]=M.useState(!1),s=i=>n.pathname===i||n.pathname.startsWith(i+"/"),r=i=>`hover:text-white transition-colors flex items-center gap-1.5 ${s(i)?"text-white font-bold":""}`;return c.jsxs("nav",{className:"fixed top-0 w-full z-50 border-b border-white/5 bg-[#0A0A0A]/90 backdrop-blur-md",children:[c.jsxs("div",{className:"max-w-5xl mx-auto px-6 h-20 flex items-center justify-between",children:[c.jsxs(W,{to:"/",className:"flex items-center gap-2 md:gap-3 cursor-pointer group",children:[c.jsx("span",{className:"font-signature text-2xl md:text-3xl text-white group-hover:text-google-blue transition-colors",children:"Dee."}),c.jsx("span",{className:"h-4 w-[1px] bg-zinc-800"}),c.jsx("span",{className:"text-[10px] md:text-xs uppercase tracking-widest text-zinc-500",children:"AI 生活實驗室"})]}),c.jsxs("div",{className:"hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400",children:[c.jsxs(W,{to:"/insights",className:r("/insights"),children:[c.jsx(an,{size:14})," 免費教學"]}),c.jsxs(W,{to:"/news",className:r("/news"),children:[c.jsx(Wo,{size:14})," AI 新聞"]}),c.jsxs(W,{to:"/lab",className:r("/lab"),children:[c.jsx(Vo,{size:14})," AI 實驗室"]}),c.jsxs(W,{to:"/solutions",className:r("/solutions"),children:[c.jsx(mi,{size:14})," 學習資源"]}),c.jsxs(W,{to:"/about",className:r("/about"),children:[c.jsx(Ko,{size:14})," 關於 Dee"]}),c.jsx(W,{to:"/insights",className:"bg-white text-black px-4 py-2 rounded-full hover:bg-zinc-200 transition-colors font-semibold text-xs tracking-wide",children:"開始學習"})]}),c.jsx("button",{className:"md:hidden text-white",onClick:()=>t(!e),children:e?c.jsx(Xi,{}):c.jsx(Jh,{})})]}),e&&c.jsxs("div",{className:"md:hidden absolute top-20 left-0 w-full bg-[#0A0A0A] border-b border-white/10 p-6 flex flex-col gap-6 animate-fade-in shadow-2xl",children:[c.jsxs(W,{to:"/insights",onClick:()=>t(!1),className:"text-lg text-zinc-300 flex items-center gap-2",children:[c.jsx(an,{size:18})," 免費教學"]}),c.jsxs(W,{to:"/news",onClick:()=>t(!1),className:"text-lg text-zinc-300 flex items-center gap-2",children:[c.jsx(Wo,{size:18})," AI 新聞"]}),c.jsxs(W,{to:"/lab",onClick:()=>t(!1),className:"text-lg text-zinc-300 flex items-center gap-2",children:[c.jsx(Vo,{size:18})," AI 實驗室"]}),c.jsxs(W,{to:"/solutions",onClick:()=>t(!1),className:"text-lg text-zinc-300 flex items-center gap-2",children:[c.jsx(mi,{size:18})," 學習資源"]}),c.jsxs(W,{to:"/about",onClick:()=>t(!1),className:"text-lg text-zinc-300 flex items-center gap-2",children:[c.jsx(Ko,{size:18})," 關於 Dee"]})]})]})},su=()=>c.jsxs("footer",{className:"py-12 border-t border-white/5 text-center bg-[#050505] mt-auto",children:[c.jsx("div",{className:"font-signature text-3xl text-zinc-600 mb-6",children:"Dee."}),c.jsxs("div",{className:"flex justify-center gap-8 text-sm text-zinc-500 mb-8 font-medium",children:[c.jsx("a",{href:"https://www.instagram.com/deedeeboy_xoxo",target:"_blank",rel:"noopener noreferrer",className:"hover:text-white transition-colors",children:"Instagram"}),c.jsx("a",{href:"https://www.threads.net/@deedeeboy_xoxo",target:"_blank",rel:"noopener noreferrer",className:"hover:text-white transition-colors",children:"Threads"})]}),c.jsx("p",{className:"text-xs text-zinc-700",children:"© 2026 Dee. All rights reserved."})]}),ru=({texts:n,speed:e=150,delay:t=2e3})=>{const[s,r]=M.useState(0),[i,o]=M.useState(""),[l,a]=M.useState(!1);return M.useEffect(()=>{const h=setTimeout(()=>{const u=n[s];o(l?u.substring(0,i.length-1):u.substring(0,i.length+1)),!l&&i===u?setTimeout(()=>a(!0),t):l&&i===""&&(a(!1),r(f=>(f+1)%n.length))},l?e/2:e);return()=>clearTimeout(h)},[i,l,n,s,e,t]),c.jsxs("span",{className:"text-google-blue inline-flex items-center",children:[i,c.jsx("span",{className:"animate-blink ml-1",children:"|"})]})},iu="https://fnymjffskndfgcpcydsh.supabase.co",ou="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZueW1qZmZza25kZmdjcGN5ZHNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzgzNjEsImV4cCI6MjA4NDQxNDM2MX0.O36D4E23UyfJd8HeT7NuIRyEgiPHudywqz5b6VU9L18",H=qd(iu,ou),lu={async getSiteSettings(){const{data:n,error:e}=await H.from("site_settings").select("*").eq("id","main").single();return e&&console.error("Error fetching site settings:",e),n},async getInsights(){const{data:n,error:e}=await H.from("insights").select("*").order("published_at",{ascending:!1});return e&&console.error("Error fetching insights:",e),n||[]},async getInsightById(n){const{data:e,error:t}=await H.from("insights").select("*").eq("id",n).single();return t&&console.error("Error fetching insight:",t),e},async getSolutions(){const{data:n,error:e}=await H.from("solutions").select("*").order("sort_order",{ascending:!0});return e&&console.error("Error fetching solutions:",e),n||[]},async getTestimonials(){const{data:n,error:e}=await H.from("testimonials").select("*").order("sort_order",{ascending:!0});return e&&console.error("Error fetching testimonials:",e),n||[]},async getProcessSteps(){const{data:n,error:e}=await H.from("process_steps").select("*").order("sort_order",{ascending:!0});return e&&console.error("Error fetching process steps:",e),n||[]}},au=({className:n="",variant:e="default"})=>{const[t,s]=M.useState(""),[r,i]=M.useState("idle"),[o,l]=M.useState(""),a=async d=>{if(d.preventDefault(),!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(t)){i("error"),l("請輸入有效的 Email 地址");return}i("loading");try{const{error:u}=await H.from("subscribers").insert([{email:t,source:"website"}]);if(u)if(u.code==="23505")i("success"),l("你已經是訂閱者囉！我們會持續寄送精彩內容給你 ✨");else throw u;else{try{await fetch("https://fnymjffskndfgcpcydsh.supabase.co/functions/v1/send-welcome",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:t})})}catch(p){console.error("Welcome email error:",p)}i("success"),l("訂閱成功！感謝你的支持 🎉"),s("")}}catch(u){console.error("Subscription error:",u),i("error"),l("訂閱時發生錯誤，請稍後再試")}};return r==="success"&&setTimeout(()=>{i("idle"),l("")},5e3),e==="compact"?c.jsxs("div",{className:n,children:[c.jsxs("form",{onSubmit:a,className:"flex gap-2",children:[c.jsx("div",{className:"relative flex-1",children:c.jsx("input",{type:"email",value:t,onChange:d=>s(d.target.value),placeholder:"你的 Email",disabled:r==="loading"||r==="success",className:"w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white placeholder:text-zinc-500 focus:outline-none focus:border-google-blue transition-colors disabled:opacity-50"})}),c.jsxs("button",{type:"submit",disabled:r==="loading"||r==="success",className:`px-6 rounded font-medium whitespace-nowrap transition-all flex items-center gap-2 ${r==="success"?"bg-green-500 text-white":"bg-google-blue text-white hover:bg-[#3367D6]"} disabled:opacity-70`,children:[r==="loading"&&c.jsx(qo,{size:16,className:"animate-spin"}),r==="success"&&c.jsx(fs,{size:16}),r==="idle"&&"訂閱週報",r==="loading"&&"處理中...",r==="success"&&"已訂閱",r==="error"&&"重試"]})]}),r==="success"&&c.jsxs("div",{className:"mt-3 p-3 bg-green-500/10 border border-green-500/30 rounded-lg flex items-center gap-2 text-green-400 text-sm",children:[c.jsx(fs,{size:16}),o]}),r==="error"&&c.jsxs("div",{className:"mt-3 text-xs text-red-400 flex items-center gap-1",children:[c.jsx(hi,{size:12})," ",o]})]}):c.jsxs("div",{className:`bg-gradient-to-br from-google-blue/10 to-transparent border border-google-blue/20 rounded-2xl p-8 ${n}`,children:[c.jsxs("div",{className:"flex items-center gap-3 mb-4",children:[c.jsx("div",{className:"w-10 h-10 rounded-full bg-google-blue/20 flex items-center justify-center",children:c.jsx(xi,{size:18,className:"text-google-blue"})}),c.jsxs("div",{children:[c.jsx("h3",{className:"text-lg font-bold text-white",children:"訂閱 AI 週報"}),c.jsx("p",{className:"text-sm text-zinc-400",children:"每週一篇，讓你輕鬆跟上 AI 新知"})]})]}),r==="success"?c.jsxs("div",{className:"bg-green-500/10 border border-green-500/30 rounded-lg p-4 flex items-center gap-3",children:[c.jsx(fs,{className:"text-green-400",size:20}),c.jsx("p",{className:"text-green-400",children:o})]}):c.jsxs("form",{onSubmit:a,className:"space-y-4",children:[c.jsxs("div",{children:[c.jsx("input",{type:"email",value:t,onChange:d=>s(d.target.value),placeholder:"輸入你的 Email",disabled:r==="loading",className:"w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-zinc-500 focus:outline-none focus:border-google-blue transition-colors"}),r==="error"&&c.jsxs("p",{className:"text-red-400 text-sm mt-2 flex items-center gap-1",children:[c.jsx(hi,{size:14})," ",o]})]}),c.jsx("button",{type:"submit",disabled:r==="loading",className:"w-full bg-google-blue text-white py-3 rounded-lg font-medium hover:bg-[#3367D6] transition-colors flex items-center justify-center gap-2 disabled:opacity-70",children:r==="loading"?c.jsxs(c.Fragment,{children:[c.jsx(qo,{size:16,className:"animate-spin"})," 處理中..."]}):c.jsxs(c.Fragment,{children:[c.jsx(xi,{size:16})," 訂閱週報"]})}),c.jsx("p",{className:"text-xs text-zinc-500 text-center",children:"我不會發垃圾郵件，隨時可以取消訂閱"})]})]})},Er="Dee's AI Life Lab",cu="https://dee-website.vercel.app",du="不教你 1000 個工具，只幫你找到最適合你的那一個。用最白話的方式學 AI，小孩到長輩都能懂。",Le=({title:n,description:e,path:t=""})=>{const s=n?`${n} | ${Er}`:Er,r=e||du,i=`${cu}${t}`;return c.jsxs(yh,{children:[c.jsx("title",{children:s}),c.jsx("meta",{name:"description",content:r}),c.jsx("meta",{property:"og:title",content:s}),c.jsx("meta",{property:"og:description",content:r}),c.jsx("meta",{property:"og:url",content:i}),c.jsx("meta",{property:"og:type",content:"website"}),c.jsx("meta",{property:"og:site_name",content:Er}),c.jsx("meta",{name:"twitter:card",content:"summary_large_image"}),c.jsx("meta",{name:"twitter:title",content:s}),c.jsx("meta",{name:"twitter:description",content:r}),c.jsx("link",{rel:"canonical",href:i})]})},hu=()=>{const n=[{id:"01",icon:c.jsx(Aa,{size:32}),title:"告訴我你的困擾",desc:"不管是工作瑣事、生活雜務，或是任何你想讓 AI 幫忙的事，先說給我聽。"},{id:"02",icon:c.jsx(Ca,{size:32}),title:"找到最簡單的方法",desc:"我會用白話文告訴你怎麼做，不需要寫程式，不需要懂技術，人人都學得會。"},{id:"03",icon:c.jsx(Yi,{size:32}),title:"讓 AI 開始幫你做事",desc:"跟著步驟實際操作，從此把時間省下來，好好過你想要的生活。"}];return c.jsxs("section",{className:"py-24 px-6 max-w-5xl mx-auto border-t border-white/5",children:[c.jsxs("div",{className:"text-center mb-20",children:[c.jsx("span",{className:"text-google-blue font-bold tracking-widest text-xs uppercase mb-4 block",children:"How It Works"}),c.jsx("h2",{className:"text-3xl md:text-4xl font-bold font-serif text-white",children:"從混亂到有序，只需三步"})]}),c.jsxs("div",{className:"relative grid grid-cols-1 md:grid-cols-3 gap-12",children:[c.jsx("div",{className:"hidden md:block absolute top-12 left-[16%] right-[16%] h-[1px] border-t border-dashed border-zinc-700 z-0"}),n.map((e,t)=>c.jsxs("div",{className:"relative z-10 flex flex-col items-center text-center group cursor-default",children:[c.jsxs("div",{className:"w-24 h-24 rounded-full bg-[#111] border border-zinc-800 flex items-center justify-center mb-8 group-hover:border-google-blue group-hover:shadow-[0_0_20px_rgba(66,133,244,0.15)] transition-all duration-500 text-zinc-400 group-hover:text-google-blue",children:[e.icon,c.jsx("div",{className:"absolute -top-2 -right-2 w-8 h-8 rounded-full bg-[#222] border border-zinc-700 flex items-center justify-center text-xs font-bold text-white group-hover:bg-google-blue group-hover:border-google-blue transition-all",children:e.id})]}),c.jsx("h3",{className:"text-xl font-bold text-white mb-4",children:e.title}),c.jsx("p",{className:"text-sm text-zinc-400 leading-relaxed max-w-xs",children:e.desc})]},t))]})]})},uu=()=>{const[n,e]=M.useState(5),[t,s]=M.useState(500),r=n*t*52;return c.jsx("section",{className:"py-20 px-6 max-w-4xl mx-auto",children:c.jsxs("div",{className:"bg-[#111] border border-white/10 rounded-2xl p-8 md:p-12 relative overflow-hidden",children:[c.jsx("div",{className:"absolute top-0 right-0 p-32 bg-google-blue/10 rounded-full blur-3xl -mr-16 -mt-16"}),c.jsxs("div",{className:"relative z-10 flex flex-col md:flex-row gap-12 items-center",children:[c.jsxs("div",{className:"flex-1",children:[c.jsxs("div",{className:"flex items-center gap-2 mb-4 text-google-blue",children:[c.jsx(Th,{size:20}),c.jsx("span",{className:"text-xs font-bold uppercase tracking-widest",children:"時間價值計算機"})]}),c.jsx("h2",{className:"text-3xl font-bold text-white mb-4",children:"如果你每週能省下..."}),c.jsx("p",{className:"text-zinc-400 mb-8",children:"拖動滑桿，看看自動化能為你創造多少價值。"}),c.jsxs("div",{className:"space-y-6",children:[c.jsxs("div",{children:[c.jsxs("div",{className:"flex justify-between text-sm mb-2 text-zinc-300",children:[c.jsx("span",{children:"每週省下時數"}),c.jsxs("span",{className:"font-mono text-google-blue",children:[n," 小時"]})]}),c.jsx("input",{type:"range",min:"1",max:"20",value:n,onChange:i=>e(Number(i.target.value)),className:"w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-google-blue"})]}),c.jsxs("div",{children:[c.jsxs("div",{className:"flex justify-between text-sm mb-2 text-zinc-300",children:[c.jsx("span",{children:"你的時薪 (TWD)"}),c.jsxs("span",{className:"font-mono text-google-blue",children:["$",t]})]}),c.jsx("input",{type:"range",min:"100",max:"2000",step:"50",value:t,onChange:i=>s(Number(i.target.value)),className:"w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-google-blue"})]})]})]}),c.jsxs("div",{className:"flex-1 bg-white/5 rounded-xl p-8 text-center border border-white/5 backdrop-blur-sm w-full",children:[c.jsx("p",{className:"text-zinc-400 text-sm mb-2",children:"每年潛在收益"}),c.jsxs("div",{className:"text-4xl md:text-5xl font-bold text-white font-serif mb-4",children:["NT$ ",r.toLocaleString()]}),c.jsx("p",{className:"text-xs text-zinc-500 mb-6",children:"更別提你省下的心力與焦慮。"}),c.jsx("button",{className:"bg-google-blue text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-[#3367D6] transition-colors",children:"開始打造你的系統"})]})]})]})})},fu={id:201,category:"入門心法",themeColor:"emerald",difficulty_level:1,tags:["#AI代理人","#Agent","#指令入門"],title:"ChatGPT 指令怎麼寫？把 AI 當成你的「全能數位代理人 (Agent)」，3 步學會高級對話技巧",summary:"別再把 AI 當成搜尋引擎了！它不是用來「查資料」的，而是用來「執行任務」的 Agent。學會代理人思維，讓它變神助攻。",date:"2026.01.06",readTime:"8 分鐘",pain_point:"你覺得 AI 笨笨的，回答總是「牛頭不對馬嘴」？你還在像用 Google 一樣問它問題嗎？這就是為什麼你總是得不到想要的結果。",scenario:"想像你請了一位全能的數位代理人 (Agent)。如果你只說「去做個報告」，他會不知道你的公司背景、目標和標準。你要的是一個能代表你、替你解決問題的夥伴。",solution:"把 AI 當成你的「全能數位代理人」。耐心教導他：你是誰（身份）、目前面臨的挑戰（背景）、你期望的具體結果（產出）。這就是從「對話」升級到「代理」的關鍵。",example:{wrong:"❌ 做法：幫我寫個報告 (當成搜尋引擎用)。",right:"✅ 做法：指令『你現在是我的全能代理人。我要你替我撰寫競爭分析，參考這份資料...目標是說服主管...。』"},insight_quote:"指令的本質不在於問答，而在於如何將你的意圖，封裝成具備靈魂的數位代理人。",practice_kit:{title:"代理人合約：專業任務交辦公式",description:"複製這套公式，與你的第一個 AI Agent 簽約：",command:`你現在是我的全能數位代理人 (Agent)，具備 [填入領域，如：行銷/財務] 的頂級專長。
-我現在授權你幫我執行 [任務名稱]。
-背景：[提供 2-3 句目前的情況]。
-目標：[你最終想達成的效果]。
-規則：1. 請先列出你的執行計畫。 2. 如果資訊不足，請立刻向我提問。`},content:`
-    <h2 class="text-3xl font-bold text-white mb-6">從「實習生」進化到「代理人 (Agent)」</h2>
-    <p class="text-lg text-zinc-300 mb-8 leading-relaxed">
-        2026 年最核心的 AI 觀念只有一個：<span class="text-emerald-400 font-bold">Agent 時代正式降臨</span>。AI 不再只是被動回答問題的機器，而是能主動代表你執行複雜流程的「全能代理人」。
+ */const ys=C("Zap",[["polygon",{points:"13 2 3 14 12 14 11 22 21 10 12 10 13 2",key:"45s27k"}]]),nu=()=>{const n=$d(),[e,t]=M.useState(!1),s=i=>n.pathname===i||n.pathname.startsWith(i+"/"),r=i=>`hover:text-white transition-colors flex items-center gap-1.5 ${s(i)?"text-white font-bold":""}`;return c.jsxs("nav",{className:"fixed top-0 w-full z-50 border-b border-white/5 bg-[#0A0A0A]/90 backdrop-blur-md",children:[c.jsxs("div",{className:"max-w-5xl mx-auto px-6 h-20 flex items-center justify-between",children:[c.jsxs(W,{to:"/",className:"flex items-center gap-2 md:gap-3 cursor-pointer group",children:[c.jsx("span",{className:"font-signature text-2xl md:text-3xl text-white group-hover:text-google-blue transition-colors",children:"Dee."}),c.jsx("span",{className:"h-4 w-[1px] bg-zinc-800"}),c.jsx("span",{className:"text-[10px] md:text-xs uppercase tracking-widest text-zinc-500",children:"AI 生活實驗室"})]}),c.jsxs("div",{className:"hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400",children:[c.jsxs(W,{to:"/insights",className:r("/insights"),children:[c.jsx(an,{size:14})," 免費教學"]}),c.jsxs(W,{to:"/news",className:r("/news"),children:[c.jsx(Wo,{size:14})," AI 新聞"]}),c.jsxs(W,{to:"/lab",className:r("/lab"),children:[c.jsx(Vo,{size:14})," AI 實驗室"]}),c.jsxs(W,{to:"/solutions",className:r("/solutions"),children:[c.jsx(mi,{size:14})," 學習資源"]}),c.jsxs(W,{to:"/about",className:r("/about"),children:[c.jsx(Ko,{size:14})," 關於 Dee"]}),c.jsx(W,{to:"/insights",className:"bg-white text-black px-4 py-2 rounded-full hover:bg-zinc-200 transition-colors font-semibold text-xs tracking-wide",children:"開始學習"})]}),c.jsx("button",{className:"md:hidden text-white",onClick:()=>t(!e),children:e?c.jsx(Xi,{}):c.jsx(Jh,{})})]}),e&&c.jsxs("div",{className:"md:hidden absolute top-20 left-0 w-full bg-[#0A0A0A] border-b border-white/10 p-6 flex flex-col gap-6 animate-fade-in shadow-2xl",children:[c.jsxs(W,{to:"/insights",onClick:()=>t(!1),className:"text-lg text-zinc-300 flex items-center gap-2",children:[c.jsx(an,{size:18})," 免費教學"]}),c.jsxs(W,{to:"/news",onClick:()=>t(!1),className:"text-lg text-zinc-300 flex items-center gap-2",children:[c.jsx(Wo,{size:18})," AI 新聞"]}),c.jsxs(W,{to:"/lab",onClick:()=>t(!1),className:"text-lg text-zinc-300 flex items-center gap-2",children:[c.jsx(Vo,{size:18})," AI 實驗室"]}),c.jsxs(W,{to:"/solutions",onClick:()=>t(!1),className:"text-lg text-zinc-300 flex items-center gap-2",children:[c.jsx(mi,{size:18})," 學習資源"]}),c.jsxs(W,{to:"/about",onClick:()=>t(!1),className:"text-lg text-zinc-300 flex items-center gap-2",children:[c.jsx(Ko,{size:18})," 關於 Dee"]})]})]})},su=()=>c.jsxs("footer",{className:"py-12 border-t border-white/5 text-center bg-[#050505] mt-auto",children:[c.jsx("div",{className:"font-signature text-3xl text-zinc-600 mb-6",children:"Dee."}),c.jsxs("div",{className:"flex justify-center gap-8 text-sm text-zinc-500 mb-8 font-medium",children:[c.jsx("a",{href:"https://www.instagram.com/deedeeboy_xoxo",target:"_blank",rel:"noopener noreferrer",className:"hover:text-white transition-colors",children:"Instagram"}),c.jsx("a",{href:"https://www.threads.net/@deedeeboy_xoxo",target:"_blank",rel:"noopener noreferrer",className:"hover:text-white transition-colors",children:"Threads"})]}),c.jsx("p",{className:"text-xs text-zinc-700",children:"© 2026 Dee. All rights reserved."})]}),ru=({texts:n,speed:e=150,delay:t=2e3})=>{const[s,r]=M.useState(0),[i,o]=M.useState(""),[l,a]=M.useState(!1);return M.useEffect(()=>{const h=setTimeout(()=>{const u=n[s];o(l?u.substring(0,i.length-1):u.substring(0,i.length+1)),!l&&i===u?setTimeout(()=>a(!0),t):l&&i===""&&(a(!1),r(f=>(f+1)%n.length))},l?e/2:e);return()=>clearTimeout(h)},[i,l,n,s,e,t]),c.jsxs("span",{className:"text-google-blue inline-flex items-center",children:[i,c.jsx("span",{className:"animate-blink ml-1",children:"|"})]})},iu="https://fnymjffskndfgcpcydsh.supabase.co",ou="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZueW1qZmZza25kZmdjcGN5ZHNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4MzgzNjEsImV4cCI6MjA4NDQxNDM2MX0.O36D4E23UyfJd8HeT7NuIRyEgiPHudywqz5b6VU9L18",H=qd(iu,ou),lu={async getSiteSettings(){const{data:n,error:e}=await H.from("site_settings").select("*").eq("id","main").single();return e&&console.error("Error fetching site settings:",e),n},async getInsights(){const{data:n,error:e}=await H.from("insights").select("*").order("published_at",{ascending:!1});return e&&console.error("Error fetching insights:",e),n||[]},async getInsightById(n){const{data:e,error:t}=await H.from("insights").select("*").eq("id",n).single();return t&&console.error("Error fetching insight:",t),e},async getSolutions(){const{data:n,error:e}=await H.from("solutions").select("*").order("sort_order",{ascending:!0});return e&&console.error("Error fetching solutions:",e),n||[]},async getTestimonials(){const{data:n,error:e}=await H.from("testimonials").select("*").order("sort_order",{ascending:!0});return e&&console.error("Error fetching testimonials:",e),n||[]},async getProcessSteps(){const{data:n,error:e}=await H.from("process_steps").select("*").order("sort_order",{ascending:!0});return e&&console.error("Error fetching process steps:",e),n||[]}},au=({className:n="",variant:e="default"})=>{const[t,s]=M.useState(""),[r,i]=M.useState("idle"),[o,l]=M.useState(""),a=async d=>{if(d.preventDefault(),!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(t)){i("error"),l("請輸入有效的 Email 地址");return}i("loading");try{const{error:u}=await H.from("subscribers").insert([{email:t,source:"website"}]);if(u)if(u.code==="23505")i("success"),l("你已經是訂閱者囉！我們會持續寄送精彩內容給你 ✨");else throw u;else{try{await fetch("https://fnymjffskndfgcpcydsh.supabase.co/functions/v1/send-welcome",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:t})})}catch(p){console.error("Welcome email error:",p)}i("success"),l("訂閱成功！感謝你的支持 🎉"),s("")}}catch(u){console.error("Subscription error:",u),i("error"),l("訂閱時發生錯誤，請稍後再試")}};return r==="success"&&setTimeout(()=>{i("idle"),l("")},5e3),e==="compact"?c.jsxs("div",{className:n,children:[c.jsxs("form",{onSubmit:a,className:"flex gap-2",children:[c.jsx("div",{className:"relative flex-1",children:c.jsx("input",{type:"email",value:t,onChange:d=>s(d.target.value),placeholder:"你的 Email",disabled:r==="loading"||r==="success",className:"w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white placeholder:text-zinc-500 focus:outline-none focus:border-google-blue transition-colors disabled:opacity-50"})}),c.jsxs("button",{type:"submit",disabled:r==="loading"||r==="success",className:`px-6 rounded font-medium whitespace-nowrap transition-all flex items-center gap-2 ${r==="success"?"bg-green-500 text-white":"bg-google-blue text-white hover:bg-[#3367D6]"} disabled:opacity-70`,children:[r==="loading"&&c.jsx(qo,{size:16,className:"animate-spin"}),r==="success"&&c.jsx(fs,{size:16}),r==="idle"&&"訂閱週報",r==="loading"&&"處理中...",r==="success"&&"已訂閱",r==="error"&&"重試"]})]}),r==="success"&&c.jsxs("div",{className:"mt-3 p-3 bg-green-500/10 border border-green-500/30 rounded-lg flex items-center gap-2 text-green-400 text-sm",children:[c.jsx(fs,{size:16}),o]}),r==="error"&&c.jsxs("div",{className:"mt-3 text-xs text-red-400 flex items-center gap-1",children:[c.jsx(hi,{size:12})," ",o]})]}):c.jsxs("div",{className:`bg-gradient-to-br from-google-blue/10 to-transparent border border-google-blue/20 rounded-2xl p-8 ${n}`,children:[c.jsxs("div",{className:"flex items-center gap-3 mb-4",children:[c.jsx("div",{className:"w-10 h-10 rounded-full bg-google-blue/20 flex items-center justify-center",children:c.jsx(xi,{size:18,className:"text-google-blue"})}),c.jsxs("div",{children:[c.jsx("h3",{className:"text-lg font-bold text-white",children:"訂閱 AI 週報"}),c.jsx("p",{className:"text-sm text-zinc-400",children:"每週一篇，讓你輕鬆跟上 AI 新知"})]})]}),r==="success"?c.jsxs("div",{className:"bg-green-500/10 border border-green-500/30 rounded-lg p-4 flex items-center gap-3",children:[c.jsx(fs,{className:"text-green-400",size:20}),c.jsx("p",{className:"text-green-400",children:o})]}):c.jsxs("form",{onSubmit:a,className:"space-y-4",children:[c.jsxs("div",{children:[c.jsx("input",{type:"email",value:t,onChange:d=>s(d.target.value),placeholder:"輸入你的 Email",disabled:r==="loading",className:"w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-zinc-500 focus:outline-none focus:border-google-blue transition-colors"}),r==="error"&&c.jsxs("p",{className:"text-red-400 text-sm mt-2 flex items-center gap-1",children:[c.jsx(hi,{size:14})," ",o]})]}),c.jsx("button",{type:"submit",disabled:r==="loading",className:"w-full bg-google-blue text-white py-3 rounded-lg font-medium hover:bg-[#3367D6] transition-colors flex items-center justify-center gap-2 disabled:opacity-70",children:r==="loading"?c.jsxs(c.Fragment,{children:[c.jsx(qo,{size:16,className:"animate-spin"})," 處理中..."]}):c.jsxs(c.Fragment,{children:[c.jsx(xi,{size:16})," 訂閱週報"]})}),c.jsx("p",{className:"text-xs text-zinc-500 text-center",children:"我不會發垃圾郵件，隨時可以取消訂閱"})]})]})},Er="Dee's AI Life Lab",cu="https://dee-website.vercel.app",du="不教你 1000 個工具，只幫你找到最適合你的那一個。用最白話的方式學 AI，小孩到長輩都能懂。",Le=({title:n,description:e,path:t=""})=>{const s=n?`${n} | ${Er}`:Er,r=e||du,i=`${cu}${t}`;return c.jsxs(yh,{children:[c.jsx("title",{children:s}),c.jsx("meta",{name:"description",content:r}),c.jsx("meta",{property:"og:title",content:s}),c.jsx("meta",{property:"og:description",content:r}),c.jsx("meta",{property:"og:url",content:i}),c.jsx("meta",{property:"og:type",content:"website"}),c.jsx("meta",{property:"og:site_name",content:Er}),c.jsx("meta",{name:"twitter:card",content:"summary_large_image"}),c.jsx("meta",{name:"twitter:title",content:s}),c.jsx("meta",{name:"twitter:description",content:r}),c.jsx("link",{rel:"canonical",href:i})]})},hu=()=>{const n=[{id:"01",icon:c.jsx(Aa,{size:32}),title:"告訴我你的困擾",desc:"不管是工作瑣事、生活雜務，或是任何你想讓 AI 幫忙的事，先說給我聽。"},{id:"02",icon:c.jsx(Ca,{size:32}),title:"找到最簡單的方法",desc:"我會用白話文告訴你怎麼做，不需要寫程式，不需要懂技術，人人都學得會。"},{id:"03",icon:c.jsx(Yi,{size:32}),title:"讓 AI 開始幫你做事",desc:"跟著步驟實際操作，從此把時間省下來，好好過你想要的生活。"}];return c.jsxs("section",{className:"py-24 px-6 max-w-5xl mx-auto border-t border-white/5",children:[c.jsxs("div",{className:"text-center mb-20",children:[c.jsx("span",{className:"text-google-blue font-bold tracking-widest text-xs uppercase mb-4 block",children:"How It Works"}),c.jsx("h2",{className:"text-3xl md:text-4xl font-bold font-serif text-white",children:"從混亂到有序，只需三步"})]}),c.jsxs("div",{className:"relative grid grid-cols-1 md:grid-cols-3 gap-12",children:[c.jsx("div",{className:"hidden md:block absolute top-12 left-[16%] right-[16%] h-[1px] border-t border-dashed border-zinc-700 z-0"}),n.map((e,t)=>c.jsxs("div",{className:"relative z-10 flex flex-col items-center text-center group cursor-default",children:[c.jsxs("div",{className:"w-24 h-24 rounded-full bg-[#111] border border-zinc-800 flex items-center justify-center mb-8 group-hover:border-google-blue group-hover:shadow-[0_0_20px_rgba(66,133,244,0.15)] transition-all duration-500 text-zinc-400 group-hover:text-google-blue",children:[e.icon,c.jsx("div",{className:"absolute -top-2 -right-2 w-8 h-8 rounded-full bg-[#222] border border-zinc-700 flex items-center justify-center text-xs font-bold text-white group-hover:bg-google-blue group-hover:border-google-blue transition-all",children:e.id})]}),c.jsx("h3",{className:"text-xl font-bold text-white mb-4",children:e.title}),c.jsx("p",{className:"text-sm text-zinc-400 leading-relaxed max-w-xs",children:e.desc})]},t))]})]})},uu=()=>{const[n,e]=M.useState(5),[t,s]=M.useState(500),r=n*t*52;return c.jsx("section",{className:"py-20 px-6 max-w-4xl mx-auto",children:c.jsxs("div",{className:"bg-[#111] border border-white/10 rounded-2xl p-8 md:p-12 relative overflow-hidden",children:[c.jsx("div",{className:"absolute top-0 right-0 p-32 bg-google-blue/10 rounded-full blur-3xl -mr-16 -mt-16"}),c.jsxs("div",{className:"relative z-10 flex flex-col md:flex-row gap-12 items-center",children:[c.jsxs("div",{className:"flex-1",children:[c.jsxs("div",{className:"flex items-center gap-2 mb-4 text-google-blue",children:[c.jsx(Th,{size:20}),c.jsx("span",{className:"text-xs font-bold uppercase tracking-widest",children:"時間價值計算機"})]}),c.jsx("h2",{className:"text-3xl font-bold text-white mb-4",children:"如果你每週能省下..."}),c.jsx("p",{className:"text-zinc-400 mb-8",children:"拖動滑桿，看看自動化能為你創造多少價值。"}),c.jsxs("div",{className:"space-y-6",children:[c.jsxs("div",{children:[c.jsxs("div",{className:"flex justify-between text-sm mb-2 text-zinc-300",children:[c.jsx("span",{children:"每週省下時數"}),c.jsxs("span",{className:"font-mono text-google-blue",children:[n," 小時"]})]}),c.jsx("input",{type:"range",min:"1",max:"20",value:n,onChange:i=>e(Number(i.target.value)),className:"w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-google-blue"})]}),c.jsxs("div",{children:[c.jsxs("div",{className:"flex justify-between text-sm mb-2 text-zinc-300",children:[c.jsx("span",{children:"你的時薪 (TWD)"}),c.jsxs("span",{className:"font-mono text-google-blue",children:["$",t]})]}),c.jsx("input",{type:"range",min:"100",max:"2000",step:"50",value:t,onChange:i=>s(Number(i.target.value)),className:"w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-google-blue"})]})]})]}),c.jsxs("div",{className:"flex-1 bg-white/5 rounded-xl p-8 text-center border border-white/5 backdrop-blur-sm w-full",children:[c.jsx("p",{className:"text-zinc-400 text-sm mb-2",children:"每年潛在收益"}),c.jsxs("div",{className:"text-4xl md:text-5xl font-bold text-white font-serif mb-4",children:["NT$ ",r.toLocaleString()]}),c.jsx("p",{className:"text-xs text-zinc-500 mb-6",children:"更別提你省下的心力與焦慮。"}),c.jsx("button",{className:"bg-google-blue text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-[#3367D6] transition-colors",children:"開始打造你的系統"})]})]})]})})},fu={id:201,category:"入門心法",themeColor:"emerald",difficulty_level:1,tags:["#提示詞技巧","#新手必看","#對話邏輯"],title:"別再把 AI 當 Google 用！3 招讓它變成你的超強分身",summary:"為什麼你問 AI 問題總是被敷衍？因為你把它當搜尋引擎，而不是可以交辦任務的夥伴。換個說法，效率直接翻倍。",date:"2026.01.06",readTime:"5 分鐘",pain_point:"你是不是也遇過：請 ChatGPT 寫封信，結果它寫出一堆「親愛的、誠摯地」這種機器人罐頭文，最後你還是得自己重寫？",scenario:"以前的我總是用「關鍵字」問 AI，就像在餵 Google，結果拿到的都是沒靈魂的官方回答，根本不能直接用。",solution:"現在我都把 AI 當成「剛到職的聰明實習生」。我不只下指令，我還會給他身份、給他範例，並告訴他我最終要拿這份資料做什麼。",example:{wrong:"❌ 做法：「幫我寫一封跟老闆請假的 email。」結果 AI 給了一封像公文的東西，你看完比自己寫還累。",right:"✅ 做法：「你現在是我的私人助理，我明天要去日本玩想請假。請用我的口吻（輕鬆但有禮貌）寫一封信給老闆，記得提到我已經把工作交接給小明了。」"},insight_quote:"AI 不是答案機，而是你的數位分身。你給的細節越多，它就越像另一個你。",practice_kit:{title:"實習生交辦模板",description:"下次請 AI 幫忙時，試著把這三個空填滿，保證效果完全不同：",command:`你現在是我的 [角色，例如：私人助理 / 行銷文案手 / 英文老師]。
+
+我要請你幫我 [具體任務，例如：寫一封請假信 / 整理會議重點 / 翻譯這段文字]。
+
+這份成果是要給 [對象，例如：老闆 / 客戶 / 我自己] 看的。
+
+風格請保持 [風格描述，例如：輕鬆有禮 / 專業簡潔 / 幽默口語]。
+
+如果資訊不夠，請直接問我，不要自己猜。`},content:`
+    <h2 class="text-2xl md:text-3xl font-bold text-white mb-6">你跟 AI 說話的方式，決定了它有多聰明。</h2>
+    <p class="text-base md:text-lg text-zinc-300 mb-6 leading-relaxed">
+        我第一次用 ChatGPT 的時候，問它：「幫我寫個自我介紹。」
+    </p>
+    <p class="text-base md:text-lg text-zinc-300 mb-6 leading-relaxed">
+        它給了我一段像維基百科的東西。我心想：<span class="text-emerald-400 font-bold">「這什麼鬼？AI 根本沒用嘛。」</span>
+    </p>
+    <p class="text-base md:text-lg text-zinc-300 mb-8 leading-relaxed">
+        後來我才發現，問題不在 AI，而在我。我把它當成 Google，但它其實更像一個「剛報到的聰明實習生」——你不告訴它你是誰、要給誰看、什麼風格，它當然只能給你最安全、最無聊的答案。
     </p>
 
-    <div class="bg-white/5 p-8 rounded-3xl border border-white/10 mb-12">
-        <h3 class="text-xl font-bold text-white mb-6">為什麼 Agent 比工具更強大？</h3>
-        <div class="step-list">
-            <div class="step-item">
-                <span class="step-number text-emerald-500">01</span>
-                <div>
-                    <p class="text-white font-bold mb-1">主動執行權</p>
-                    <p class="text-sm text-zinc-400">工具需要你一步步操作，Agent 只需要你定義目標。</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <span class="step-number text-emerald-500">02</span>
-                <div>
-                    <p class="text-white font-bold mb-1">多維度理解</p>
-                    <p class="text-sm text-zinc-400">Agent 能理解你的「偏好」與「隱含需求」，而不僅僅是字面意思。</p>
-                </div>
-            </div>
-            <div class="step-item">
-                <span class="step-number text-emerald-500">03</span>
-                <div>
-                    <p class="text-white font-bold mb-1">自我糾錯</p>
-                    <p class="text-sm text-zinc-400">高級 Agent 在產出前會自我檢查，這就是為什麼正確率更高的原因。</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <p class="text-xl text-zinc-300 font-serif italic text-center py-10 border-y border-white/5 my-10">
-        「別再教 AI 怎麼做事，要教它怎麼代表你做事。這就是 Agent 思維。」
-    </p>
-    `},pu={id:202,category:"入門心法",themeColor:"emerald",difficulty_level:1,tags:["#打桌球對話","#迭代優化","#入門心法"],title:"AI 回答不滿意怎麼辦？學會「打桌球互動法」，讓 60 分回答變 100 分",summary:"AI 不是投幣機，而是你的聊天隊象。學會「打桌球互動法」，透過追問與修正，讓 60 分的答案進化成 100 分。",date:"2026.01.10",readTime:"4 分鐘",pain_point:"試了一次就覺得 AI 回答很爛，所以關掉視窗說「AI 沒用」？你期待丟一顆球就結束比賽，結果總是失望而歸？",scenario:"想像和朋友聊天，第一次說的話可能不精確，需要反覆確認、補充。打桌球也不是發一球就結束，你要接球、殺球，來回幾次才能打出精彩的比賽。AI 對話亦然。",solution:"把 AI 當成對話對象而非投幣機。第一回答通常只有 60 分，透過『接球（回饋）』與『殺球（指令）』，你可以慢慢把答案修飾到滿意。AI 不會累，也不會因為你要求多而生氣。",example:{wrong:"❌ 做法：一次到位。寫一個產品文案。(AI 給了一個普通版本，然後就放棄)。",right:"✅ 做法：逐步改進。第一次指令：寫一個文案。AI 回覆後，追加：『語氣太正式了，改年輕一點』，再追加：『第二段太長，縮短一半』。"},insight_quote:"當思維擁有了結構，混亂的資訊便能淬煉成精準的執行邏輯。",practice_kit:{title:"指令夾：迭代優化公式",description:"當 AI 回答不完美時，直接貼上這段話進行『接球』：",command:`這是我目前的想法或你剛才的回答：[貼入內容]。
-我覺得目前的版本 [填入缺點，如：太過死板/重點不明確]。
-請幫我執行以下優化：
-1. 保留 [優點部分]。
-2. 針對 [缺點] 進行重新調整。
-3. 請換一種更像 [特定角色，如：脫口秀演員] 的口氣再試一次。`},content:`
-    <h2 class="text-3xl font-bold text-white mb-6">第一次回答通常只有 60 分。</h2>
-    <p class="text-lg text-zinc-300 mb-8 leading-relaxed">
-        很多人看到不滿意的回答就關掉視窗，這太可惜了！最精彩的內容，通常在第三、第四次對話才出現。
-    </p>
-
-    <div class="bg-white/5 p-8 rounded-3xl border border-white/10 mb-12 text-left">
-        <h3 class="text-xl font-bold text-white mb-6">打桌球互動術</h3>
+    <div class="bg-white/5 p-6 md:p-8 rounded-2xl border border-white/10 mb-10">
+        <h3 class="text-lg md:text-xl font-bold text-white mb-6">讓 AI 從「工讀生」變「分身」的 3 招</h3>
         <div class="step-list">
             <div class="step-item">
                 <span class="step-number text-emerald-500">STEP 01</span>
                 <div>
-                    <p class="text-white font-bold mb-1">發球：初步指令</p>
-                    <p class="text-sm text-zinc-400">先給出基礎指令，看看 AI 的原始理解。這一步不需要太完美。</p>
+                    <p class="text-white font-bold mb-1">賦予身份：別讓它盲猜</p>
+                    <p class="text-sm text-zinc-400">告訴 AI 它現在是誰——行銷高手？挑剔的總編？溫柔的客服？身份決定了它說話的深度和語氣。</p>
                 </div>
             </div>
             <div class="step-item">
                 <span class="step-number text-emerald-500">STEP 02</span>
                 <div>
-                    <p class="text-white font-bold mb-1">接球：回饋修正</p>
-                    <p class="text-sm text-zinc-400">明確指出哪裡好、哪裡不好。給予「負向回饋」對 AI 來說非常重要。</p>
+                    <p class="text-white font-bold mb-1">給出情境：這封信要給誰看？</p>
+                    <p class="text-sm text-zinc-400">寫給老闆跟寫給同事，語氣差超多。加一句「這是要給誰看的」，AI 就不會亂寫。</p>
                 </div>
             </div>
             <div class="step-item">
                 <span class="step-number text-emerald-500">STEP 03</span>
                 <div>
-                    <p class="text-white font-bold mb-1">殺球：收網完成</p>
-                    <p class="text-sm text-zinc-400">當細節都調整到位，最後要求 AI 進行全篇潤飾與排版，收割成果。</p>
+                    <p class="text-white font-bold mb-1">明確限制：不要什麼？要多長？</p>
+                    <p class="text-sm text-zinc-400">我常說「不要用太浮誇的成語」或「控制在 200 字內」。給它框架，它才不會寫出長篇大論。</p>
                 </div>
             </div>
         </div>
     </div>
-    `},mu={id:203,category:"入門心法",themeColor:"emerald",difficulty_level:1,tags:["#背景設定","#懶人包","#品牌風格"],title:"AI 記性差老是失憶？教你建立專屬「背景設定懶人包」，讓 AI 永遠記得你",summary:"每次開新視窗 AI 都會「失憶」。教你建立專屬「懶人包」，讓 AI 永遠記得你的品牌與風格。省下無數重複解釋的時間。",date:"2026.01.15",readTime:"5 分鐘",pain_point:"昨天聊得好好的，今天它就忘記你是誰？每次都要重新解釋你的品牌定位、目標受眾？覺得 AI 像得了失智症？",scenario:"想像新員工進來沒有交接，每次你都要重頭教起。AI 每開一個新視窗就是一張白紙。你需要一份「員工手冊」隨時貼給他看。",solution:"建立「背景設定檔」。將您的身份、品牌風格、受眾與成功範例存在一個記事本中。每次工作前先「餵」給 AI，讓它瞬間進入角色。",example:{wrong:"❌ 做法：第一天說『風格要活潑』，第二天卻不說，結果 AI 給了你一篇死板的公文。",right:"✅ 做法：存好一段話『我是小編。品牌風格是幽默、年輕。之前成功的範例有：[內容]。請遵循這些設定。』"},insight_quote:"為 AI 搭建一座舞台，讓情境的深度，決定答案的高度。",practice_kit:{title:"指令夾：品牌背景範本",description:"將這段設定存好，每次開新對話先貼上：",command:`請記住以下「前情提要」：
-1. 品牌名稱與調性：[填入，如：Dee 生活實驗室 / 親切白話]。
-2. 核心受眾：[描述，如：對 AI 感到恐懼的初學者]。
-3. 禁忌事項：[如：不要使用過多專業術語、不要太過浮誇]。
-4. 優秀參考：[貼入一段你滿意的舊文案]。
-接下來的所有產出，請務必嚴格遵循以上設定。`},content:`
-    <h2 class="text-3xl font-bold text-white mb-6">每開一個新視窗，AI 就重生一次。</h2>
-    <p class="text-lg text-zinc-300 mb-8 leading-relaxed">
-        不要期待 AI 會「慢慢認識你」。主動建立「懶人包」是維持品牌連貫性的唯一秘訣。<span class="text-emerald-400 font-bold">這不是在教 AI，是在幫你省時間。</span>
+
+    <div class="bg-emerald-500/5 border border-emerald-500/10 rounded-2xl p-5 mb-8">
+        <p class="text-emerald-400 font-bold text-sm mb-2">💡 Dee 的真心話</p>
+        <p class="text-zinc-400 text-sm leading-relaxed">
+            我現在每次用 AI 前，都會花 10 秒想一下：「我要它扮演誰？給誰看？什麼風格？」光是這 10 秒，就能省下後面 10 分鐘的來回修改。
+        </p>
+    </div>
+    `},pu={id:202,category:"入門心法",themeColor:"emerald",difficulty_level:1,tags:["#優化對話","#迭代技巧","#實戰案例"],title:"AI 回答太爛？試試「打桌球互動法」，60 分瞬間變 100 分",summary:"別期待 AI 能一次到位。好答案是「聊」出來的，不是下指令下出來的。學會這招，你會發現 AI 其實超聽話。",date:"2026.01.10",readTime:"5 分鐘",pain_point:"你是不是也試了一次，發現 AI 答非所問，就心灰意冷地關掉視窗，覺得「AI 根本沒傳說中那麼神」？",scenario:"我之前請 AI 幫我寫週報，第一版超像公文。我沒放棄，我回它：「太嚴肅了，加點口語，並強調這週我的專案超標 10%」。第二版就完全是我要的東西。",solution:"把對話當成打桌球。它打過來一個普通的答案，你加點旋球（回饋）打回去。來回三回合，答案就會精準到讓你驚訝。重點是——AI 不會累、不會生氣、更不會覺得你煩。",example:{wrong:"❌ 做法：回答不滿意就直接放棄，或是一直重複貼上一模一樣的指令祈禱奇蹟。",right:"✅ 做法：「剛剛這段不錯，但第二點太長了，幫我縮減成一句話。另外口吻改幽默一點，像跟朋友聊天那樣。」"},insight_quote:"AI 不會累、不會生氣、更不會覺得你煩。盡情地壓榨它，直到你滿意為止。",practice_kit:{title:"打桌球修正指令",description:"當 AI 給出 60 分的答案時，直接貼上這句來調整：",command:`你剛才的回答已經完成了大概 60%。
+
+請針對以下部分進行修改：
+1. [指出哪裡不好，例如：第二段太囉唆，請縮短一半]
+2. [指出風格問題，例如：語氣太正式，改成像朋友聊天]
+3. [指出缺少什麼，例如：請多加一個生活化的例子]
+
+保留目前好的部分，只改需要調整的地方。`},content:`
+    <h2 class="text-2xl md:text-3xl font-bold text-white mb-6">第一次回答只有 60 分，很正常。</h2>
+    <p class="text-base md:text-lg text-zinc-300 mb-6 leading-relaxed">
+        很多人看到不滿意的回答就關掉視窗。拜託不要！
+    </p>
+    <p class="text-base md:text-lg text-zinc-300 mb-8 leading-relaxed">
+        最精彩的內容，通常在<span class="text-emerald-400 font-bold">第三、第四次對話</span>才出現。就像打桌球——發球只是開始，來回接殺才是精彩的部分。
     </p>
 
-    <div class="bg-white/5 p-8 rounded-3xl border border-white/10 mb-12 text-left">
-        <h3 class="text-xl font-bold text-white mb-6">懶人包必備三要素</h3>
+    <div class="bg-white/5 p-6 md:p-8 rounded-2xl border border-white/10 mb-10">
+        <h3 class="text-lg md:text-xl font-bold text-white mb-6">打桌球三步驟</h3>
         <div class="step-list">
             <div class="step-item">
                 <span class="step-number text-emerald-500">STEP 01</span>
                 <div>
-                    <p class="text-white font-bold mb-1">我是誰</p>
-                    <p class="text-sm text-zinc-400">定義品牌的人格化特質。你是專家、保姆、還是嚴師？</p>
+                    <p class="text-white font-bold mb-1">發球：先求有，再求好</p>
+                    <p class="text-sm text-zinc-400">第一球通常是試探。先看 AI 懂不懂你的大方向。不滿意很正常，這只是暖身。</p>
                 </div>
             </div>
             <div class="step-item">
                 <span class="step-number text-emerald-500">STEP 02</span>
                 <div>
-                    <p class="text-white font-bold mb-1">誰在看</p>
-                    <p class="text-sm text-zinc-400">描述目標受眾。他們擔心什麼？他們喜歡什麼樣的口吻？</p>
+                    <p class="text-white font-bold mb-1">接球：精準吐槽，哪裡不好直接說</p>
+                    <p class="text-sm text-zinc-400">「這段太囉唆」、「語氣太正式」、「這點不符合我的情況」。你回饋越具體，AI 進化就越快。</p>
                 </div>
             </div>
             <div class="step-item">
                 <span class="step-number text-emerald-500">STEP 03</span>
                 <div>
-                    <p class="text-white font-bold mb-1">像什麼</p>
-                    <p class="text-sm text-zinc-400">提供 1-2 個你滿意的舊案例。這比任何形容詞都更能讓 AI 明白你的標準。</p>
+                    <p class="text-white font-bold mb-1">殺球：要求多版本，二選一最快</p>
+                    <p class="text-sm text-zinc-400">我常說「給我三種不同的標題」或「給我一個正式版和一個口語版」。從中挑最好的來改，省時又省力。</p>
                 </div>
             </div>
         </div>
-    </div>`},xu={id:204,category:"入門心法",themeColor:"emerald",difficulty_level:2,tags:["#Anthropic官方","#直球指令","#提示詞優化"],title:"Anthropic 官方提示詞教學：為什麼不要對 AI 說「請」？3 個直球指令技巧",summary:"對 AI 太客氣反而會讓它分心。學會官方推薦的「中括號大法」與「直球對決」，讓指令更精準。減少計算噪訊的浪費。",date:"2026.01.20",readTime:"6 分鐘",pain_point:"你習慣在指令前面加上大量客套話，導致 AI 回傳一堆廢話，甚至漏掉重點？這不是禮貌，這是對計算資源的浪費。",scenario:"想像你正在趕機場坐計程車。如果你說『司機大哥您好，真的不好意思，如果您方便的話，能不能載我去機場？』司機會覺得你不趕時間。AI 亦同。",solution:"1. 直球對決：省下客套。 2. 中括號隔離 [ ]：包住資料。 3. 要求先思考：先列步驟。這就是 Anthropic 官方指南的精髓。",example:{wrong:"❌ 做法：你好，真的很感謝你之前的幫忙。現在可以請你幫我總結一下嗎？謝謝。",right:"✅ 做法：[投訴內容]：『貼上文字』。任務：請總結 3 個重點。要求：字數 200 內。"},insight_quote:"最強大的智慧往往隱藏在最簡潔的直球對決中，讓精準成為溝通的唯一語言。",practice_kit:{title:"官方密技：資料隔離指令",description:"強迫 AI 專注核心任務的指令包：",command:`這是一段資料：
+    </div>
+
+    <div class="bg-emerald-500/5 border border-emerald-500/10 rounded-2xl p-5 mb-8">
+        <p class="text-emerald-400 font-bold text-sm mb-2">📌 真實案例：週報改造記</p>
+        <p class="text-zinc-400 text-sm leading-relaxed">
+            第一版：AI 給了一份像政府公文的週報。❌<br/>
+            我回它：「太嚴肅了，用口語，並強調專案超標 10%。」<br/>
+            第二版：語氣好多了，但忘了加數據。<br/>
+            我再說：「請把超標 10% 的具體數字放在第一段。」<br/>
+            第三版：✅ 完美！直接交給主管。<br/><br/>
+            整個過程不到 3 分鐘。
+        </p>
+    </div>
+    `},mu={id:203,category:"入門心法",themeColor:"emerald",difficulty_level:1,tags:["#個人化設定","#效率提升","#長期記憶"],title:"別讓 AI 每次都像陌生人！一招解決它的「失憶症」",summary:"每次開新視窗都要重教一次你是誰？太累了！2026 年雖然有內建記憶功能，但學會寫「背景懶人包」才是真正的效率王。",date:"2026.01.15",readTime:"5 分鐘",pain_point:"你是不是也覺得煩：每次開新對話，都要重新解釋「我是做電商的、我不喜歡贅字、我的受眾是大學生」？好不容易教會它，結果一開新視窗又全忘了。",scenario:"雖然 ChatGPT 現在有 Memory 功能，但老實說它有時候會記錯、會混亂，甚至把上次的專案跟這次的搞混。我現在手頭都準備一份「個人設定檔」，新視窗一開直接丟進去，3 秒搞定。",solution:"建立一份專屬的「背景懶人包」。內容包含你的職稱、工作內容、偏好的語氣、討厭的用詞。這就像給 AI 一張你的名片加使用說明書，它一秒就能進入狀況。",example:{wrong:"❌ 做法：每次都從頭解釋：「你好，我是一個在賣健身餐的，我想寫廣告文案，風格要活潑一點...」重複 100 次。",right:"✅ 做法：直接貼上懶人包：「這是我的背景設定。我是健身餐品牌創辦人，風格是科學、簡約、不推銷。接下來的所有回答請遵循此設定。」3 秒搞定。"},insight_quote:"讓 AI 記住你的風格，是從「每次重來」變成「默契十足」的第一步。",practice_kit:{title:"Dee 的背景懶人包範例",description:"你可以參考我這份，改成你的版本存在手機備忘錄。每次開新對話直接貼上：",command:`【我的背景設定檔】
+
+1. 我是誰：科技生活部落客，品牌名叫「Dee 生活實驗室」
+2. 寫作風格：白話文、幽默但不油、愛用條列式、適度加 emoji
+3. 受眾：對 AI 好奇但完全不懂技術的一般人（25-45 歲）
+4. 語言地雷：不要用「總之」「綜上所述」「一言以蔽之」這種結語
+5. 禁止事項：不要用小紅書風格的誇張語氣，不要稱呼讀者為「親」
+6. 常用工具：ChatGPT、Claude、Notion、Canva
+
+接下來的所有產出，請務必遵循以上設定。如果我沒特別說，預設都用這個風格。`},content:`
+    <h2 class="text-2xl md:text-3xl font-bold text-white mb-6">每開一個新視窗，AI 就重生一次。</h2>
+    <p class="text-base md:text-lg text-zinc-300 mb-6 leading-relaxed">
+        你花了 20 分鐘教 AI 你的品牌風格，結果隔天開新視窗——它全忘了。
+    </p>
+    <p class="text-base md:text-lg text-zinc-300 mb-8 leading-relaxed">
+        <span class="text-emerald-400 font-bold">這不是 AI 的問題，是你還沒學會「懶人包」這招。</span>
+    </p>
+
+    <div class="bg-white/5 p-6 md:p-8 rounded-2xl border border-white/10 mb-10">
+        <h3 class="text-lg md:text-xl font-bold text-white mb-6">懶人包三要素</h3>
+        <div class="step-list">
+            <div class="step-item">
+                <span class="step-number text-emerald-500">STEP 01</span>
+                <div>
+                    <p class="text-white font-bold mb-1">定義你的「基本盤」</p>
+                    <p class="text-sm text-zinc-400">你的職業、習慣用的工具、常溝通的對象。這些不變的資訊，就是懶人包的核心。</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <span class="step-number text-emerald-500">STEP 02</span>
+                <div>
+                    <p class="text-white font-bold mb-1">設定「語言地雷」</p>
+                    <p class="text-sm text-zinc-400">有些詞你看了就討厭？直接寫在設定裡。例如我寫了「不要用小紅書風格的誇張語氣」，效果立竿見影。</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <span class="step-number text-emerald-500">STEP 03</span>
+                <div>
+                    <p class="text-white font-bold mb-1">手動補強 > 依賴內建記憶</p>
+                    <p class="text-sm text-zinc-400">ChatGPT 的 Memory 功能很方便，但它有時會記錯或混亂。重要專案我一定會手動貼上懶人包，雙重保險。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-amber-500/5 border border-amber-500/10 rounded-2xl p-5 mb-8">
+        <p class="text-amber-400 font-bold text-sm mb-2">⚠️ 誠實提醒</p>
+        <p class="text-zinc-400 text-sm leading-relaxed">
+            2026 年的 ChatGPT 和 Claude 都有內建記憶功能，但它們的記憶並不完美——有時候會把不同專案的設定搞混，或是忘記你上個月說過的偏好。所以「手動懶人包」依然是最穩定的做法，尤其是在處理重要工作時。
+        </p>
+    </div>
+    `},xu={id:204,category:"入門心法",themeColor:"emerald",difficulty_level:2,tags:["#Anthropic官方","#直球指令","#提示詞優化"],title:"Anthropic 官方提示詞教學：為什麼不要對 AI 說「請」？3 個直球指令技巧",summary:"對 AI 太客氣反而會讓它分心。學會官方推薦的「中括號大法」與「直球對決」，讓指令更精準。減少計算噪訊的浪費。",date:"2026.01.20",readTime:"6 分鐘",pain_point:"你習慣在指令前面加上大量客套話，導致 AI 回傳一堆廢話，甚至漏掉重點？這不是禮貌，這是對計算資源的浪費。",scenario:"想像你正在趕機場坐計程車。如果你說『司機大哥您好，真的不好意思，如果您方便的話，能不能載我去機場？』司機會覺得你不趕時間。AI 亦同。",solution:"1. 直球對決：省下客套。 2. 中括號隔離 [ ]：包住資料。 3. 要求先思考：先列步驟。這就是 Anthropic 官方指南的精髓。",example:{wrong:"❌ 做法：你好，真的很感謝你之前的幫忙。現在可以請你幫我總結一下嗎？謝謝。",right:"✅ 做法：[投訴內容]：『貼上文字』。任務：請總結 3 個重點。要求：字數 200 內。"},insight_quote:"最強大的智慧往往隱藏在最簡潔的直球對決中，讓精準成為溝通的唯一語言。",practice_kit:{title:"官方密技：資料隔離指令",description:"強迫 AI 專注核心任務的指令包：",command:`這是一段資料：
 [資料內容開始]
 [貼入內容]
 [資料內容結束]
