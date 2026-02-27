@@ -74,10 +74,11 @@ const Insights = () => {
     const checkScroll = () => {
         if (!scrollRef.current) return;
         const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+        console.log('Scroll Check:', { scrollLeft, scrollWidth, clientWidth });
         // 如果右邊還有內容，顯示右側提示
-        setShowScrollIndicator(scrollLeft + clientWidth < scrollWidth - 15);
+        setShowScrollIndicator(scrollLeft + clientWidth < scrollWidth - 5);
         // 如果左邊已經有滾動距離，顯示左側提示
-        setShowLeftIndicator(scrollLeft > 15);
+        setShowLeftIndicator(scrollLeft > 5);
     };
 
     // 處理電腦版拖拽滾動與點擊衝突
@@ -101,12 +102,19 @@ const Insights = () => {
         if (!isDragging || !scrollRef.current) return;
         e.preventDefault();
         const x = e.pageX - scrollRef.current.offsetLeft;
-        const walk = (x - startX) * 2; // 滾動速度倍率
+        const walk = (x - startX) * 2; // 增加滾動靈敏度
+        
+        // 使用 requestAnimationFrame 優化效能
+        requestAnimationFrame(() => {
+            if (scrollRef.current) {
+                scrollRef.current.scrollLeft = scrollLeft - walk;
+                checkScroll();
+            }
+        });
+
         if (Math.abs(x - startX) > 5) {
             setHasMoved(true);
         }
-        scrollRef.current.scrollLeft = scrollLeft - walk;
-        checkScroll();
     };
 
     // 點擊分類置中邏輯
@@ -135,6 +143,8 @@ const Insights = () => {
 
     useEffect(() => {
         fetchInsights();
+        window.addEventListener('resize', checkScroll);
+        return () => window.removeEventListener('resize', checkScroll);
     }, []);
 
     const fetchInsights = async () => {
@@ -142,8 +152,10 @@ const Insights = () => {
         try {
             const cleanInsights = INSIGHTS.filter(i => i.category !== 'AI 新聞');
             setInsights(cleanInsights);
-            // 資料加載後檢查一次滾動
+            // 資料加載後檢查多次滾動，確保 DOM 已完全渲染
             setTimeout(checkScroll, 100);
+            setTimeout(checkScroll, 500);
+            setTimeout(checkScroll, 1000);
         } catch (e) {
             setInsights(INSIGHTS.filter(i => i.category !== 'AI 新聞'));
         }
@@ -210,17 +222,17 @@ const Insights = () => {
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -10 }}
-                            className="absolute left-0 top-0 bottom-4 flex items-center pl-2 pointer-events-none z-10"
+                            className="absolute left-0 top-0 bottom-4 flex items-center pl-1 pointer-events-none z-20"
                         >
-                            <div className="flex flex-col items-center gap-1 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A] to-transparent pr-12 py-2">
+                            <div className="flex flex-col items-center gap-1 bg-gradient-to-r from-[#0A0A0A] from-60% to-transparent pr-10 py-2">
                                 <motion.div
                                     animate={{ x: [0, -5, 0] }}
                                     transition={{ repeat: Infinity, duration: 1.5 }}
-                                    className="bg-zinc-500/20 p-2 rounded-full border border-white/10"
+                                    className="bg-zinc-700 p-2 rounded-full border border-white/20 shadow-lg"
                                 >
-                                    <ChevronLeft size={16} className="text-zinc-400" />
+                                    <ChevronLeft size={14} className="text-white" />
                                 </motion.div>
-                                <span className="text-[8px] font-bold text-zinc-500 uppercase tracking-tighter">左滑</span>
+                                <span className="text-[9px] font-black text-zinc-400 uppercase tracking-tighter drop-shadow-md">回看</span>
                             </div>
                         </motion.div>
                     )}
@@ -230,17 +242,17 @@ const Insights = () => {
                             initial={{ opacity: 0, x: 10 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: 10 }}
-                            className="absolute right-0 top-0 bottom-4 flex items-center pr-2 pointer-events-none z-10"
+                            className="absolute right-0 top-0 bottom-4 flex items-center pr-1 pointer-events-none z-20"
                         >
-                            <div className="flex flex-col items-center gap-1 bg-gradient-to-l from-[#0A0A0A] via-[#0A0A0A] to-transparent pl-12 py-2">
+                            <div className="flex flex-col items-center gap-1 bg-gradient-to-l from-[#0A0A0A] from-60% to-transparent pl-10 py-2">
                                 <motion.div
                                     animate={{ x: [0, 5, 0] }}
                                     transition={{ repeat: Infinity, duration: 1.5 }}
-                                    className="bg-emerald-500/20 p-2 rounded-full border border-emerald-500/30"
+                                    className="bg-emerald-500 p-2 rounded-full shadow-lg shadow-emerald-500/20 border border-emerald-400/50"
                                 >
-                                    <ChevronRight size={16} className="text-emerald-400" />
+                                    <ChevronRight size={14} className="text-black" />
                                 </motion.div>
-                                <span className="text-[8px] font-bold text-emerald-500 uppercase tracking-tighter">向右滑動</span>
+                                <span className="text-[9px] font-black text-emerald-500 uppercase tracking-tighter drop-shadow-md">更多選項</span>
                             </div>
                         </motion.div>
                     )}
