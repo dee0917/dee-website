@@ -74,11 +74,13 @@ const Insights = () => {
     const checkScroll = () => {
         if (!scrollRef.current) return;
         const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-        console.log('Scroll Check:', { scrollLeft, scrollWidth, clientWidth });
-        // 如果右邊還有內容，顯示右側提示
-        setShowScrollIndicator(scrollLeft + clientWidth < scrollWidth - 5);
-        // 如果左邊已經有滾動距離，顯示左側提示
-        setShowLeftIndicator(scrollLeft > 5);
+        
+        // 強制檢查：如果總寬度大於容器寬度，且還沒滾動到最右邊，就顯示
+        const canScrollRight = scrollWidth > clientWidth + 5;
+        const isNotAtEnd = scrollLeft + clientWidth < scrollWidth - 10;
+        
+        setShowScrollIndicator(canScrollRight && isNotAtEnd);
+        setShowLeftIndicator(scrollLeft > 10);
     };
 
     // 處理電腦版拖拽滾動與點擊衝突
@@ -219,40 +221,40 @@ const Insights = () => {
                 <AnimatePresence>
                     {showLeftIndicator && (
                         <motion.div 
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -10 }}
-                            className="absolute left-0 top-0 bottom-4 flex items-center pl-1 pointer-events-none z-20"
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.5 }}
+                            className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center pl-2 pointer-events-none z-50"
                         >
-                            <div className="flex flex-col items-center gap-1 bg-gradient-to-r from-[#0A0A0A] from-60% to-transparent pr-10 py-2">
+                            <div className="flex flex-col items-center gap-1.5 bg-[#0A0A0A] border border-white/20 p-2.5 rounded-2xl shadow-xl">
                                 <motion.div
-                                    animate={{ x: [0, -5, 0] }}
-                                    transition={{ repeat: Infinity, duration: 1.5 }}
-                                    className="bg-zinc-700 p-2 rounded-full border border-white/20 shadow-lg"
+                                    animate={{ x: [0, -4, 0] }}
+                                    transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
+                                    className="bg-zinc-700 p-1.5 rounded-full"
                                 >
-                                    <ChevronLeft size={14} className="text-white" />
+                                    <ChevronLeft size={16} className="text-white" strokeWidth={3} />
                                 </motion.div>
-                                <span className="text-[9px] font-black text-zinc-400 uppercase tracking-tighter drop-shadow-md">回看</span>
+                                <span className="text-[10px] font-black text-zinc-400 uppercase tracking-widest whitespace-nowrap bg-white/5 px-1.5 py-0.5 rounded-md">回看</span>
                             </div>
                         </motion.div>
                     )}
 
                     {showScrollIndicator && (
                         <motion.div 
-                            initial={{ opacity: 0, x: 10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: 10 }}
-                            className="absolute right-0 top-0 bottom-4 flex items-center pr-1 pointer-events-none z-20"
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.5 }}
+                            className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center pr-2 pointer-events-none z-50"
                         >
-                            <div className="flex flex-col items-center gap-1 bg-gradient-to-l from-[#0A0A0A] from-60% to-transparent pl-10 py-2">
+                            <div className="flex flex-col items-center gap-1.5 bg-[#0A0A0A] border border-emerald-500/50 p-2.5 rounded-2xl shadow-[0_0_20px_rgba(16,185,129,0.3)]">
                                 <motion.div
-                                    animate={{ x: [0, 5, 0] }}
-                                    transition={{ repeat: Infinity, duration: 1.5 }}
-                                    className="bg-emerald-500 p-2 rounded-full shadow-lg shadow-emerald-500/20 border border-emerald-400/50"
+                                    animate={{ x: [0, 4, 0] }}
+                                    transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
+                                    className="bg-emerald-500 p-1.5 rounded-full"
                                 >
-                                    <ChevronRight size={14} className="text-black" />
+                                    <ChevronRight size={16} className="text-black" strokeWidth={3} />
                                 </motion.div>
-                                <span className="text-[9px] font-black text-emerald-500 uppercase tracking-tighter drop-shadow-md">更多選項</span>
+                                <span className="text-[10px] font-black text-emerald-500 uppercase tracking-widest whitespace-nowrap bg-emerald-500/10 px-1.5 py-0.5 rounded-md">更多內容</span>
                             </div>
                         </motion.div>
                     )}
