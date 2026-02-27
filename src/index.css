@@ -9,31 +9,22 @@
 body {
   @apply antialiased;
   background-color: #0A0A0A;
-  /* 讓字體在 Mac/Windows 上看起來更清晰 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 自訂捲軸樣式 (Chrome, Safari, Edge) */
+/* 自訂捲軸樣式 */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
-
 ::-webkit-scrollbar-track {
   background: #0A0A0A;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
+  background: #222;
+  border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #4285F4;
-  /* Hover 時變 Google 藍 */
-}
-
-/* 隱藏捲軸但保持滾動功能 */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -56,65 +47,70 @@ body {
   pointer-events: none;
 }
 
-/* 玻璃擬態卡片通用樣式 */
+/* 玻璃擬態 */
 .glass-panel {
   @apply bg-zinc-900/60 backdrop-blur-md border border-white/10 transition-all duration-300;
 }
 
-.glass-panel:hover {
-  @apply border-google-blue/30 bg-google-blue/5 -translate-y-1;
-  box-shadow: 0 10px 30px -10px rgba(66, 133, 244, 0.1);
-}
-
-/* 文章內容樣式優化 */
-.article-content {
-  @apply max-w-none;
+/* 革命版字體與排版 */
+.article-content p {
+  @apply font-sans mb-8 leading-relaxed text-zinc-200 text-xl md:text-2xl font-normal;
 }
 
 .article-content h2 {
-  @apply font-sans text-2xl md:text-3xl font-bold mt-12 mb-6 text-white flex items-center gap-3;
+  @apply font-sans text-3xl md:text-4xl font-black mt-16 mb-8 text-white flex items-center gap-4;
 }
 
-/* 給 H2標題前加一個小藍條裝飾 */
 .article-content h2::before {
   content: '';
   display: block;
-  width: 4px;
-  height: 24px;
-  background-color: #4285F4;
-  border-radius: 2px;
+  width: 6px;
+  height: 32px;
+  background-color: #10b981;
+  border-radius: 4px;
 }
 
-/* 教學步驟清單樣式 */
+/* 教學步驟清單樣式 - 更加顯眼 */
 .step-list {
-  @apply list-none pl-0 space-y-5 md:space-y-6;
+  @apply list-none pl-0 space-y-8;
 }
 
 .step-item {
-  @apply flex flex-col md:flex-row md:items-start gap-3 md:gap-4 p-5 md:p-6 rounded-2xl bg-white/5 border border-white/5 transition-colors hover:bg-white/10;
+  @apply flex flex-col md:flex-row md:items-start gap-5 p-8 rounded-[2rem] bg-white/5 border-2 border-white/5 transition-all duration-500;
+}
+
+.step-item.active-step {
+  @apply border-emerald-500/30 bg-emerald-500/5 shadow-[0_0_40px_rgba(16,185,129,0.1)];
 }
 
 .step-number {
-  @apply font-mono text-xs font-black px-2.5 py-1 rounded-lg bg-white/10 whitespace-nowrap self-start;
+  @apply font-mono text-base font-black px-4 py-1.5 rounded-xl bg-white/10 text-white whitespace-nowrap self-start;
 }
 
-.article-content p {
-  @apply font-sans mb-6 leading-8 text-zinc-300 text-base md:text-lg font-light;
+/* 銜接標籤樣式 */
+.transition-label {
+  @apply inline-block text-xs font-black tracking-[0.4em] uppercase py-2 px-6 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-8 animate-pulse;
 }
 
 .article-content ul {
-  @apply list-none pl-0 mb-8 space-y-3;
+  @apply list-none pl-0 mb-10 space-y-4;
 }
 
 .article-content li {
-  @apply relative pl-6 text-zinc-300 text-lg;
+  @apply relative pl-8 text-zinc-300 text-xl md:text-2xl font-light;
 }
 
 .article-content li::before {
-  content: '•';
-  @apply absolute left-0 text-google-blue font-bold;
+  content: '→';
+  @apply absolute left-0 text-emerald-500 font-black;
 }
 
-.article-content blockquote {
-  @apply border-l-4 border-google-blue/50 bg-white/5 pl-6 py-4 my-10 italic text-zinc-300;
+/* 閃爍發光 */
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(16,185,129,0.2); }
+  50% { box-shadow: 0 0 25px rgba(16,185,129,0.6); }
+}
+
+.btn-glow {
+  animation: glow 2s infinite ease-in-out;
 }
