@@ -31,19 +31,14 @@ const ArticleDetail = () => {
 
     const fetchArticle = async (articleId: number) => {
         setLoading(true);
-        try {
-            const data = await api.getInsightById(articleId);
-            if (data) setArticle(data);
-            else setArticle(INSIGHTS.find(i => i.id === articleId) || null);
-        } catch (e) {
-            setArticle(INSIGHTS.find(i => i.id === articleId) || null);
-        }
+        const data = await api.getInsightById(articleId);
+        if (data) setArticle(data);
+        else setArticle(INSIGHTS.find(i => i.id === articleId) || null);
         setLoading(false);
     };
 
     const handleCopy = (text: string) => {
-        const cleanText = text.replace(/<[^>]*>?/gm, '');
-        navigator.clipboard.writeText(cleanText);
+        navigator.clipboard.writeText(text);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
@@ -54,13 +49,6 @@ const ArticleDetail = () => {
     const theme = getColorClasses(article.themeColor || article.theme_color || 'emerald');
     const isNews = article.category === 'AI 新聞';
     const nextArticle = INSIGHTS.find(i => i.difficulty_level === (Math.min(5, Math.max(0, article.difficulty_level || 1))) + 1) || INSIGHTS[0];
-
-    const extractCommand = (content: string) => {
-        const match = content.match(/<code[^>]*>([\s\S]*?)<\/code>/);
-        return match ? match[1] : "";
-    };
-    const practiceCommand = extractCommand(article.content || "");
-    const cleanedContent = article.content?.replace(/<code[^>]*>[\s\S]*?<\/code>/g, '') || "";
 
     const stars = Math.min(5, Math.max(0, article.difficulty_level || 1));
 
@@ -100,7 +88,7 @@ const ArticleDetail = () => {
                                 <AlertTriangle size={24} className="text-red-400 flex-shrink-0" />
                                 <div>
                                     <h2 className="text-xl font-bold text-white mb-2">生活痛點</h2>
-                                    <p className="text-zinc-300 leading-relaxed text-left">{article.pain_point}</p>
+                                    <p className="text-zinc-300 leading-relaxed text-left" dangerouslySetInnerHTML={{ __html: article.pain_point || "" }} />
                                 </div>
                             </div>
                         </div>
@@ -111,7 +99,7 @@ const ArticleDetail = () => {
                                 <MapPin size={24} className="text-amber-400 flex-shrink-0" />
                                 <div>
                                     <h2 className="text-xl font-bold text-white mb-2">應用場景</h2>
-                                    <p className="text-zinc-300 leading-relaxed text-left">{article.scenario}</p>
+                                    <p className="text-zinc-300 leading-relaxed text-left" dangerouslySetInnerHTML={{ __html: article.scenario || "" }} />
                                 </div>
                             </div>
                         </div>
@@ -122,7 +110,7 @@ const ArticleDetail = () => {
                                 <Lightbulb size={24} className={theme.lightText} flex-shrink-0 />
                                 <div>
                                     <h2 className="text-xl font-bold text-white mb-2">AI 解決方案</h2>
-                                    <p className="text-zinc-300 leading-relaxed text-left">{article.solution}</p>
+                                    <p className="text-zinc-300 leading-relaxed text-left" dangerouslySetInnerHTML={{ __html: article.solution || "" }} />
                                 </div>
                             </div>
                         </div>
@@ -132,28 +120,68 @@ const ArticleDetail = () => {
 
             <motion.article 
                 className="article-content prose prose-invert prose-lg max-w-none leading-relaxed mb-16 text-left"
-                dangerouslySetInnerHTML={{ __html: cleanedContent || '' }}
+                dangerouslySetInnerHTML={{ __html: article.content || '' }}
             />
 
-            {!isNews && practiceCommand && (
-                <div className={`bg-gradient-to-br ${theme.gradient} border ${theme.border} rounded-3xl p-8 mb-20 relative overflow-hidden text-left`}>
-                    <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center gap-3">
-                            <div className={`w-10 h-10 rounded-xl ${theme.bg} flex items-center justify-center`}>
-                                <Code size={20} className={theme.lightText} />
+            {/* 融合後的【終極生活實戰包】 */}
+            {!isNews && article.practice_kit && (
+                <div className={`bg-[#0a0a0a] border ${theme.border} rounded-[2rem] p-10 mb-20 relative overflow-hidden`}>
+                    {/* 裝飾背光 */}
+                    <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${theme.gradient} opacity-5 blur-3xl`} />
+                    
+                    <div className="relative z-10">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+                            <div className="flex items-center gap-4">
+                                <div className={`w-12 h-12 rounded-2xl ${theme.bg} flex items-center justify-center`}>
+                                    <Code size={24} className={theme.lightText} />
+                                </div>
+                                <div>
+                                    <h3 className="text-2xl font-bold text-white mb-1">生活實戰包</h3>
+                                    <p className={`${theme.lightText} text-sm font-medium`}>{article.practice_kit.title}</p>
+                                </div>
                             </div>
-                            <h3 className="text-xl font-bold text-white">生活實戰包</h3>
+                            <button 
+                                onClick={() => handleCopy(article.practice_kit.command)}
+                                className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${copied ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : `${theme.bg} ${theme.lightText} hover:brightness-125 border ${theme.border}`}`}
+                            >
+                                {copied ? <><Check size={18} /> 已複製到剪貼簿</> : <><Copy size={18} /> 一鍵複製指令</>}
+                            </button>
                         </div>
-                        <button 
-                            onClick={() => handleCopy(practiceCommand)}
-                            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all ${copied ? 'bg-emerald-500 text-white' : `${theme.bg} ${theme.lightText} hover:brightness-125`}`}
-                        >
-                            {copied ? <><Check size={16} /> 已複製</> : <><Copy size={16} /> 一鍵複製指令</>}
-                        </button>
+
+                        <p className="text-zinc-400 mb-6 leading-relaxed">
+                            {article.practice_kit.description}
+                        </p>
+
+                        <div className="relative group">
+                            <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-2xl pointer-events-none" />
+                            <div className={`bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-8 font-mono text-base leading-loose ${theme.lightText} whitespace-pre-wrap text-left shadow-2xl`}>
+                                {article.practice_kit.command}
+                            </div>
+                        </div>
+                        
+                        <p className="mt-6 text-[10px] text-zinc-600 text-center uppercase tracking-widest">
+                            — Copy and paste into your favorite AI assistant —
+                        </p>
                     </div>
-                    <div className={`bg-black/40 backdrop-blur-sm border border-white/5 rounded-xl p-6 font-mono text-sm leading-relaxed ${theme.lightText} whitespace-pre-wrap text-left`}>
-                        {practiceCommand.replace(/<[^>]*>?/gm, '')}
-                    </div>
+                </div>
+            )}
+
+            {!isNews && article.example && (
+                <div className="bg-[#111] border border-white/5 rounded-2xl p-8 mb-20">
+                     <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                        <CheckCircle size={20} className="text-emerald-400" />
+                        簡單實例對比
+                     </h2>
+                     <div className="grid md:grid-cols-2 gap-6">
+                        <div className="bg-red-500/5 border border-red-500/10 rounded-xl p-6">
+                            <span className="text-red-400 font-bold text-xs block mb-3 uppercase tracking-tighter">❌ 糟糕做法</span>
+                            <p className="text-zinc-500 text-sm">{article.example.wrong}</p>
+                        </div>
+                        <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-xl p-6">
+                            <span className="text-emerald-400 font-bold text-xs block mb-3 uppercase tracking-tighter">✅ 正確用法</span>
+                            <p className="text-zinc-300 text-sm whitespace-pre-line">{article.example.right}</p>
+                        </div>
+                     </div>
                 </div>
             )}
 

@@ -76,6 +76,19 @@ body {
   border-radius: 2px;
 }
 
+/* 教學步驟清單樣式 */
+.step-list {
+  @apply list-none pl-0 space-y-6;
+}
+
+.step-item {
+  @apply flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5 transition-colors hover:bg-white/10;
+}
+
+.step-number {
+  @apply font-mono text-sm font-black px-2 py-1 rounded bg-white/10 whitespace-nowrap;
+}
+
 .article-content p {
   @apply font-sans mb-6 leading-8 text-zinc-300 text-lg md:text-xl font-light;
 }

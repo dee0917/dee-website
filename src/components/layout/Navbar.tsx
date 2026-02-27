@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Newspaper } from 'lucide-react';
+import { Menu, X, Newspaper, BookOpen, FlaskConical, Package, User } from 'lucide-react';
 
 const Navbar = () => {
     const location = useLocation();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
-    const linkClass = (path: string) => `hover:text-white transition-colors ${isActive(path) ? 'text-white font-bold' : ''}`;
+    const linkClass = (path: string) => `hover:text-white transition-colors flex items-center gap-1.5 ${isActive(path) ? 'text-white font-bold' : ''}`;
 
     return (
         <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-[#0A0A0A]/90 backdrop-blur-md">
@@ -20,13 +20,21 @@ const Navbar = () => {
 
                 {/* 桌面版導航 */}
                 <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-                    <Link to="/insights" className={linkClass('/insights')}>免費教學</Link>
-                    <Link to="/news" className={`flex items-center gap-1.5 ${linkClass('/news')}`}>
+                    <Link to="/insights" className={linkClass('/insights')}>
+                        <BookOpen size={14} /> 免費教學
+                    </Link>
+                    <Link to="/news" className={linkClass('/news')}>
                         <Newspaper size={14} /> AI 新聞
                     </Link>
-                    <Link to="/lab" className={linkClass('/lab')}>AI 實驗室</Link>
-                    <Link to="/solutions" className={linkClass('/solutions')}>學習資源</Link>
-                    <Link to="/about" className={linkClass('/about')}>關於 Dee</Link>
+                    <Link to="/lab" className={linkClass('/lab')}>
+                        <FlaskConical size={14} /> AI 實驗室
+                    </Link>
+                    <Link to="/solutions" className={linkClass('/solutions')}>
+                        <Package size={14} /> 學習資源
+                    </Link>
+                    <Link to="/about" className={linkClass('/about')}>
+                        <User size={14} /> 關於 Dee
+                    </Link>
                     <Link to="/insights" className="bg-white text-black px-4 py-2 rounded-full hover:bg-zinc-200 transition-colors font-semibold text-xs tracking-wide">
                         開始學習
                     </Link>
@@ -40,13 +48,21 @@ const Navbar = () => {
             {/* 手機版選單 */}
             {mobileMenuOpen && (
                 <div className="md:hidden absolute top-20 left-0 w-full bg-[#0A0A0A] border-b border-white/10 p-6 flex flex-col gap-6 animate-fade-in shadow-2xl">
-                    <Link to="/insights" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300">免費教學</Link>
+                    <Link to="/insights" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300 flex items-center gap-2">
+                        <BookOpen size={18} /> 免費教學
+                    </Link>
                     <Link to="/news" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300 flex items-center gap-2">
                         <Newspaper size={18} /> AI 新聞
                     </Link>
-                    <Link to="/lab" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300">AI 實驗室</Link>
-                    <Link to="/solutions" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300">學習資源</Link>
-                    <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300">關於 Dee</Link>
+                    <Link to="/lab" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300 flex items-center gap-2">
+                        <FlaskConical size={18} /> AI 實驗室
+                    </Link>
+                    <Link to="/solutions" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300 flex items-center gap-2">
+                        <Package size={18} /> 學習資源
+                    </Link>
+                    <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300 flex items-center gap-2">
+                        <User size={18} /> 關於 Dee
+                    </Link>
                 </div>
             )}
         </nav>
