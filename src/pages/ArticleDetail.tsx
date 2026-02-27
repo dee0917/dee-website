@@ -31,9 +31,20 @@ const ArticleDetail = () => {
 
     const fetchArticle = async (articleId: number) => {
         setLoading(true);
-        const data = await api.getInsightById(articleId);
-        if (data) setArticle(data);
-        else setArticle(INSIGHTS.find(i => i.id === articleId) || null);
+        // 優先從本地 mock 資料讀取，確保「深度洞察」等硬編碼內容能正確顯示
+        const localArticle = INSIGHTS.find(i => i.id === articleId);
+        
+        // 嘗試從資料庫讀取
+        const dbData = await api.getInsightById(articleId);
+        
+        if (localArticle) {
+            // 合併本地與資料庫數據，以本地（程式碼）為準，因為我們正在頻繁迭代 UI 結構
+            setArticle({ ...localArticle, ...dbData });
+        } else if (dbData) {
+            setArticle(dbData);
+        } else {
+            setArticle(null);
+        }
         setLoading(false);
     };
 
