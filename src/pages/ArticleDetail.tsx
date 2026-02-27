@@ -146,21 +146,13 @@ const ArticleDetail = () => {
                             transition={{ delay: idx * 0.1 }}
                             className="bg-white/5 border border-white/10 rounded-3xl p-8 relative overflow-hidden group"
                         >
-                            <div className="flex items-start gap-6">
-                                <span className={`${theme.bg} ${theme.text} px-3 py-1 rounded-lg text-sm font-black font-mono flex-shrink-0`}>
-                                    {quote.number || `0${idx + 1}`}
-                                </span>
-                                <div>
-                                    <h4 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">
-                                        {quote.title}
-                                    </h4>
-                                    <p className="text-zinc-400 leading-relaxed text-lg">
-                                        {quote.content}
-                                    </p>
-                                </div>
+                            <div className="flex items-center justify-center text-center px-4">
+                                <p className="text-zinc-300 italic leading-relaxed text-xl md:text-2xl font-serif">
+                                    「{quote.content}」
+                                </p>
                             </div>
                             {/* 裝飾背光 */}
-                            <div className={`absolute -right-4 -bottom-4 w-24 h-24 bg-gradient-to-br ${theme.gradient} opacity-0 group-hover:opacity-10 blur-2xl transition-opacity`} />
+                            <div className={`absolute inset-0 bg-gradient-to-br ${theme.gradient} opacity-0 group-hover:opacity-5 transition-opacity`} />
                         </motion.div>
                     ))}
                 </div>
