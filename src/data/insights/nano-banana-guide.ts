@@ -6,7 +6,7 @@ export const insight = {
     tags: ["#NanoBanana", "#入門教學", "#視覺創造"],
     title: "Nano Banana 小白全攻略：不會畫畫也能當設計師，從註冊到產出第一張視覺大片",
     summary: "拋棄複雜參數！Nano Banana 是專為追求美感的小白設計的。三分鐘帶你完成第一張大師級作品。",
-    date: "2024.07.13",
+    date: "2026.02.16",
     readTime: "5 分鐘",
     pain_point: "看到別人的 AI 繪圖很美，自己動手卻像災難？被 Midjourney 或 Stable Diffusion 複雜的介面嚇跑？不想學程式碼只想出圖？",
     scenario: "想像你只需要輸入『一隻穿著西裝的可愛香蕉』，就能得到一張電影質感的 3D 插畫，這就是 Nano Banana 的威力。",

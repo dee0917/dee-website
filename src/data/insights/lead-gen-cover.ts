@@ -6,7 +6,7 @@ export const insight = {
     tags: ["#視覺吸引力", "#NanoBanana", "#引流神器"],
     title: "一張圖勝過千言萬語：如何用 Nano Banana 在 1 分鐘內做出「視覺吸睛」的引流封面？",
     summary: "明明內容很好，卻沒人點擊？這篇文章教你用 Nano Banana 的視覺心法，做出讓人忍不住想滑進去的封面圖。",
-    date: "2024.07.12",
+    date: "2026.02.14",
     readTime: "8 分鐘",
     pain_point: "下班後想做副業，卻卡在不會設計、不會修圖？看到別人的視覺圖瘋狂吸粉，你卻只能發乾巴巴的文字，點閱率慘淡？",
     scenario: "想像你要發一篇關於『夏日冷泡茶』的推薦。請使用 <a href='/insights/601' class='text-indigo-400 underline font-bold'>Nano Banana</a> 畫出一張『充滿清新水滴感、日系通透視覺』的主圖，質感瞬間拉高。",
