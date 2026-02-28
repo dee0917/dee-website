@@ -27,33 +27,51 @@ const Home = () => {
     const xp = completedCount * 200;
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="relative">
             <SEO path="/" />
             <div className="grid-bg" />
+            
+            {/* Matrix Rain Effect */}
+            <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-20">
+                {[...Array(20)].map((_, i) => (
+                    <div 
+                        key={i} 
+                        className="matrix-stream"
+                        style={{
+                            left: `${Math.random() * 100}%`,
+                            animationDuration: `${Math.random() * 3 + 2}s`,
+                            animationDelay: `${Math.random() * 5}s`,
+                            width: '1px',
+                            opacity: Math.random() * 0.5
+                        }}
+                    />
+                ))}
+            </div>
 
             {/* ═══════════ HERO — 遊戲開始畫面 (可讀性優化版) ═══════════ */}
-            <section className="relative min-h-[90vh] flex items-center justify-center px-6 overflow-hidden pt-10">
+            <section className="relative min-h-[90vh] flex items-center justify-center px-6 overflow-hidden pt-10 z-10">
                 {/* Background effects */}
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/[0.04] blur-[150px] rounded-full" />
                     <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-teal-500/[0.03] blur-[120px] rounded-full" />
                     
-                    {/* Floating Particles - Denser */}
-                    {[...Array(15)].map((_, i) => (
+                    {/* Floating Particles - Denser (30 particles) */}
+                    {[...Array(30)].map((_, i) => (
                         <motion.div
                             key={i}
                             animate={{ 
-                                y: [0, Math.random() * -100 - 50, 0], 
-                                x: [0, (Math.random() - 0.5) * 60, 0],
-                                opacity: [0, 0.4, 0]
+                                y: [0, Math.random() * -150 - 50, 0], 
+                                x: [0, (Math.random() - 0.5) * 80, 0],
+                                opacity: [0, Math.random() * 0.5 + 0.2, 0],
+                                scale: [0, 1, 0]
                             }}
                             transition={{ 
-                                duration: Math.random() * 10 + 5, 
+                                duration: Math.random() * 8 + 4, 
                                 repeat: Infinity, 
                                 delay: Math.random() * 5,
                                 ease: "easeInOut"
                             }}
-                            className="absolute w-1 h-1 bg-emerald-500/30 rounded-full"
+                            className="absolute w-1 h-1 bg-emerald-400/40 rounded-full"
                             style={{
                                 top: `${Math.random() * 100}%`,
                                 left: `${Math.random() * 100}%`
