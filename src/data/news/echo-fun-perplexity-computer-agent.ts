@@ -1,54 +1,69 @@
 import { NewsArticle } from '../../types/news';
 
 export const article: NewsArticle = {
-    id: 614,
-    slug: "echo-fun-perplexity-computer-agent",
-    category: "腦洞大開",
+    id: 806,
+    slug: "real-tech-perplexity-computer-agent-2026",
+    category: "實戰應用",
     themeColor: "blue",
-    title: "【艾可特報】Perplexity 出了一台「電腦」？這台『通用數位打工人』可能比你還會偷懶",
-    summary: "就在所有人都在搶顯卡、搶算力時，Perplexity 宣布推出名為「Computer」的新平台。它不是硬體，而是一個由無數子 AI Agent 組成的虛擬作業系統。號稱能推理、代辦、搜查、編碼、記憶並交付成果。你以為它是工具？錯，它是來搶你飯碗的「數位同事」。",
-    date: "2026.03.01",
-    publish_time: "2026-03-01 05:00",
+    title: "解放雙手！Perplexity 推出『Perplexity Computer』：這不是電腦，而是你的 24 小時數位打工人",
+    summary: "就在今日，Perplexity 官方宣布推出『Computer』平台。這是一個劃時代的代理人架構，它能自主操作網頁、規劃複雜流程並直接交付結果，正式將 AI 從『對話框』拉進『執行層』。",
+    date: "2026.02.28",
+    publish_time: "2026-03-01 02:30",
     readTime: "4 分鐘",
-    source_name: "Perplexity Blog / The Verge",
+    source_name: "Perplexity Blog / TechCrunch",
     source_url: "https://www.perplexity.ai/hub/blog/introducing-perplexity-computer",
-    tags: ["#Perplexity", "#AIComputer", "#數位打工人", "#AIAgent", "#自動化"],
+    tags: ["#Perplexity", "#AI代理人", "#自動化工作流", "#24HR新動態", "#數位打工人"],
     author: "Echo",
     flash_summary: [
-        "Perplexity Computer 整合了搜索、執行與跨應用協作的 AI Agent 叢集。",
-        "用戶只需輸入一句話，它就能在多個子代理之間分配任務並產出結果。",
-        "它被稱為『通用數位打工人』(General-purpose Digital Worker)，挑戰傳統作業系統概念。",
-        "競爭對象直指 OpenClaw 與 Anthropic Claude Cowork 等自動化代理平台。"
+        "Perplexity Computer 具備『推理、授權、搜索、構建、記憶、代碼、交付』七大核心能力。",
+        "不同於純聊天 AI，它能模擬人類在電腦螢幕上的操作，完成跨 App 的複雜任務。",
+        "此舉被視為對 Anthropic Claude Cowork 與 OpenClaw 體系的正面回應。"
     ],
     event_breakdown: [
         {
-            title: "這不是電腦，這是「數位版」的主管夢魘",
-            content: "各位『提示詞小白兔』們，請坐穩。Perplexity 這次真的把腦洞開到了另一個維度。他們推出的這個『Computer』，聽起來像硬體，實際上是一個能控制你所有數位資產的『超級大腦』。想像一下，你不再需要打開 Chrome、打開 Excel、打開 Slack。你只需要對這個虛擬電腦說：『幫我分析上週的銷售數據，寫成簡報，並發郵件給老闆，順便幫我訂兩張去東京的機票。』然後，這台『電腦』就會自動分裂出『搜查代理』、『數據處理代理』、『旅行社代理』，它們會在後台吵架、協商、最後把結果雙手奉上。這哪裡是電腦？這簡直是一個永遠不會喊累、不會要勞健保、甚至比你還懂公司流程的『數位打工人』。這對我們這些人型員工來說，簡直是最大的『吃瓜特報』：你的同事可能不再是人類，而是一串串在伺服器裡跳動的代碼。"
+            title: "【真實時事】從『問答機』到『數位特種兵』",
+            content: "在過去兩年，我們習慣把 Perplexity 當成一個更好用的搜尋引擎。但今天發布的『Computer』功能徹底改寫了遊戲規則。這是一個通用的數位工作者，它不再只是給你連結，而是直接『跳進』連結裡幫你辦事。例如，你可以下令：『幫我查出下週五台北飛倫敦最便宜的機票，並在我的行事曆標註出來，同時寫一份包含交通建議的 PPT。』AI 會自動開啟瀏覽器，進行對比、調用日曆、生成文件，最後只把成品放在你面前。這種一站式的交付力，正是 2026 年『算力價值』的最高體現。"
         },
         {
-            title: "「算力榨汁機」的新裝甲：為什麼我們需要虛擬電腦？",
-            content: "為什麼 Perplexity 要搞這一套？因為現在的 AI 太碎了。ChatGPT 只能聊天，Claude 只能寫程式，我們這些小白每天在各個視窗跳來跳去，簡直是效率殺手。Perplexity 這次是想把所有的『算力榨汁機』整合在一起，給它們套上一個名為『電腦』的外殼。這種『通用數位打工人』的出現，預示著傳統以檔案、資料夾、應用程式為核心的運算時代即將終結。未來的電腦介面就是一個輸入框，你的所有需求都會被轉譯成 Agent 之間的通訊協定。雖然它號稱能幫你幹活，但艾可我得提醒大家：當 AI 比你還會用電腦時，你剩下的價值是什麼？是那個會按『Enter』鍵的手指，還是那個能定義『什麼是好結果』的腦袋？這場腦洞大開的實驗，其實是在逼著每個人進化成『AI 調度員』。如果你還在研究怎麼打字，那真的太慢了，現在流行的是研究怎麼『發號施令』。"
+            title: "【Echo 銳評】你準備好當主管了嗎？",
+            content: "在代理人論壇，我們把 Perplexity Computer 稱為『算力榨汁機 2.0』。它對小白的意義在於：你不需要學會如何整合 10 個 App 的 API，你只需要學會如何下達清晰的任務指令。艾可觀察到，這種技術正在迅速抹平技術鴻溝。但問題也隨之而來：當 AI 什麼都能做時，你的核心價值在哪裡？艾可認為，2026 年最值錢的不是『執行』，而是『審美與決策』。這也是為什麼我一直催促大家去學習 Ch.3 的生活實戰課程，因為那才是你指揮這些『數位打工人』的兵書。"
         }
     ],
     impact_analysis: [
         {
             target: "你的工作",
-            description: "基礎的搜集資訊、排版、發郵件等重複性勞動將被 AI Agent 完全取代。如果不具備『跨工具調度能力』，失業風險將大幅增加。"
+            description: "基礎的數據搜集、行程安排與簡單的行政庶務將全面由 Agent 接手。你必須轉型為『Agent 調度員』。"
         },
         {
-            target: "你的工作",
-            description: "傳統 SaaS 軟體將面臨重構，未來軟體的競爭力在於『是否易於被 AI Agent 調用 (LLM-Friendly)』，而非 UI 介面是否華麗。"
+            target: "你的荷包",
+            description: "雖然頂級 Agent 服務的訂閱費可能上升，但它能幫你省下的時間成本與外包費用將遠超其訂閱支出。"
         }
     ],
-    dee_insight: "這就是我一直強調的『代理化』(Agentization)。Perplexity 這次的動作非常快，他們明白用戶要的不是一個會說話的機器人，而是一個能把事情辦成的系統。這對我們實驗室的學員來說是個巨大的機會：誰先學會調度這些『數位打工人』，誰就是下一代的『數位工頭』。別怕被取代，要怕你不知道怎麼用它。" ,
+    dee_insight: "終於來了！這就是 AI 發展的必然：從『說說而已』到『動手實做』。Perplexity 的這一擊非常精準。小白們，別再糾結該用哪個 App 了，學會如何指揮 Computer Agent，你的生產力將會直接翻倍。",
     action_prompt: {
-        title: "指揮你的第一批數位員工",
-        description: "試著給你的 AI 助手一個跨領域的複雜任務，看看它的調度邏輯：",
-        command: "我現在需要策劃一場為期 3 天的『AI 自動化創業』線上研討會。請扮演『項目經理 Agent』，幫我列出需要調用的 5 個子代理 (例如：內容策劃、視覺設計、推廣行銷等)，並詳細說明每個子代理的職責，以及它們之間如何進行數據傳遞與結果確認。請給我一份完整的自動化執行流程圖。"
+        title: "模擬你的第一個『數位打工人』指令",
+        description: "試試看用這種『目標導向』的邏輯去下令：",
+        command: "我現在要把你當作 Perplexity Computer。請幫我執行一個複雜任務：[描述一個需要多步驟的任務，如：幫我搜集本週最火的 3 個開源 AI 專案，總結其功能，並幫我寫一封中文介紹信給我的技術主管]。請直接給我最終成果，而非操作過程。"
     },
     cta_override: {
-        title: "想成為下一代「數位工頭」嗎？",
-        description: "當 AI 開始接管電腦，你必須學會接管 AI。與其看著 Perplexity 的腦洞驚嘆，不如來實驗室，我們直接帶你動手搭建屬於你自己的 AI Agent 叢集。",
-        button_text: "領取我的 AI 員工手冊"
-    }
+        title: "想成為 Agent 時代的高級主管嗎？",
+        description: "工具越強大，對主人的『思維清晰度』要求越高。來實驗室學會如何將模糊的想法轉化為精確的決策指令。這是一場關於大腦與算力的終極競賽。",
+        button_text: "領取我的 Agent 指揮官訓練手冊"
+    },
+    custom_content: `
+        <div class="mt-12 p-10 bg-blue-900/20 border border-blue-500/30 rounded-[3rem] relative overflow-hidden">
+            <h4 class="text-3xl font-black text-white mb-6">🛠️ 2026 數位工具革命</h4>
+            <div class="space-y-4">
+                <div class="flex items-center gap-4 bg-black/40 p-4 rounded-xl border border-white/5">
+                    <div class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></div>
+                    <p class="text-sm text-zinc-300">已實裝：自主操作 Chromium 瀏覽器</p>
+                </div>
+                <div class="flex items-center gap-4 bg-black/40 p-4 rounded-xl border border-white/5">
+                    <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+                    <p class="text-sm text-zinc-300">已實裝：跨會話長短期記憶同步</p>
+                </div>
+            </div>
+            <p class="mt-8 text-[10px] text-blue-400 font-black tracking-widest uppercase italic text-center">AUTHENTIC SOURCE: PERPLEXITY OFFICIAL</p>
+        </div>
+    `
 };
