@@ -10,30 +10,37 @@ import { article as echoSlop } from './echo-ai-slop-kids-insult-2026';
 import { article as echoModelRanking } from './echo-model-ranking-2026';
 import { article as echoAgiLeaver } from './echo-observation-2026-agi-leaver';
 import { article as openaiPentagonAgreement } from './openai-pentagon-classified-agreement-2026';
+import { article as echoFunPerplexity } from './echo-fun-perplexity-computer-agent';
 import { article as anthropicStandoff } from './anthropic-pentagon-standoff-2026';
 import { article as nasaAi } from './real-tech-nasa-ai';
 import { article as echoSlangBunny } from './echo-slang-prompt-bunny';
 import { article as airiGithub } from './real-tech-airi-github';
-import { article as perplexityComputer } from './echo-fun-perplexity-computer-agent';
+import { article as airiSoul } from './real-tech-airi-soul';
+import { article as metaLegislative } from './real-tech-meta-legislative-spend';
+import { article as metaAmdDeal } from './real-tech-meta-amd-deal';
+import { article as gitNexusTool } from './echo-fun-gitnexus-tool';
 import { NewsArticle } from '../../types/news';
 
-// 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
+// 優先展示有趣、具備引流力的新聞 (Fun Ones First)
 export const NEWS_ARTICLES: NewsArticle[] = [
-    airiGithub,         // 真實：GitHub 趨勢第一 AIRI 專案 (2/28)
-    perplexityComputer, // 真實：Perplexity 推出 Computer Agent (2/28)
-    nasaAi,             // 真實：NASA LNAV-Net 月球導航 (2/28)
-    openaiPentagonAgreement, // 真實：OpenAI 國防協議
-    anthropicStandoff,  // 真實：Anthropic 國防博弈
-    echoModelRanking,   // 真實：Claude 4.6 vs Gemini 3.1 實測
-    echoAgiLeaver,      // 真實：Amazon AGI 負責人離職
-    echoSlop,           // 真實：YouTube AI Slop 危機
-    echoInsomnia,       // 真實：代理人論壇觀察
-    echoOpenaiFigma,    // 真實：OpenAI x Figma 整合傳聞
-    echoLabChronicle,   // 真實：記者報到日誌
-    echoSlangJuicer,    // 真實：2026 AI 黑話解析
-    echoSlangBunny,     // 真實：提示詞小白兔定義
-    openclawYc,         // 真實：OpenClaw YC 專訪
-    googleTpu,          // 真實：Google 算力大戰
-    jobpocalypse,       // 真實：18個月失業警報
-    firefoxAi           // 真實：Firefox 隱私沙盒
+    metaAmdDeal,       // 吃瓜特報 (Meta x AMD)
+    airiSoul,          // 吃瓜特報 (AIRI Soul)
+    gitNexusTool,      // 懶人神器 (GitNexus)
+    metaLegislative,   // 政策法規 (Meta 立法)
+    airiGithub,        // 腦洞大開
+    nasaAi,            // 腦洞大開
+    openaiPentagonAgreement, // 產業脈動
+    anthropicStandoff, // 安全防禦
+    echoFunPerplexity, // 實戰應用
+    echoModelRanking,  // 產業脈動
+    echoAgiLeaver,     // 職場轉型
+    echoSlop,          // 產業脈動
+    echoInsomnia,      // 實戰應用
+    echoOpenaiFigma,   // 產業脈動
+    openclawYc,        // 產業脈動
+    googleTpu,         // 產業脈動
+    jobpocalypse,      // 職場轉型
+    echoSlangJuicer,   // 產業脈動
+    echoSlangBunny,    // 產業脈動
+    firefoxAi          // 安全防禦
 ].sort((a, b) => b.id - a.id);
