@@ -4,7 +4,7 @@ export const insight = {
     themeColor: "blue",
     difficulty_level: 2,
     level: 3,
-    tags: ["#自我介紹", "#求職面試", "#社交場合"],
+    tags: ["#自我介紹", "#吸引人開場", "#破冰文案", "#社交技巧", "#個人品牌", "#交友軟體"],
     title: "30 秒讓人記住你！用 AI 打造「殺手級自我介紹」",
     summary: "面試、社交場合、LinkedIn 都需要自我介紹。但大多數人的版本都像在念戶口名簿。教你用 AI 產出讓人印象深刻的個人品牌文案。",
     date: "2026.02.12",

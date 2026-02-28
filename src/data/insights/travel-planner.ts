@@ -4,7 +4,7 @@ export const insight = {
     themeColor: "amber",
     difficulty_level: 2,
     level: 2,
-    tags: ["#旅遊規劃", "#自助旅行", "#ChatGPT實測"],
+    tags: ["#排行程", "#懶人旅遊", "#自由行規劃", "#當地美食推薦", "#預算規劃", "#出國旅遊"],
     title: "別讓排行程毀了出國興致：AI 旅行規劃術",
     summary: "比起排行程，我更喜歡旅行本身。這篇分享我如何用 AI 把 5 天日本行程，從熬夜三天縮短到 10 分鐘搞定。",
     date: "2026.02.07",

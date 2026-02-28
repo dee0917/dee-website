@@ -4,7 +4,7 @@ export const insight = {
     themeColor: "teal",
     difficulty_level: 2,
     level: 3,
-    tags: ["#數位整理", "#Email管理", "#效率系統"],
+    tags: ["#新聞摘要", "#快速吸收", "#防資訊焦慮", "#重點抓取", "#閱讀助手", "#效率閱讀"],
     title: "數位生活亂成一團？用 AI 打造你的「自動整理系統」",
     summary: "Email 爆炸、筆記散落、訂閱太多看不完？教你用 AI 建立一套「數位生活整理術」，從收件匣到筆記本，全部自動歸位。",
     date: "2026.01.25",

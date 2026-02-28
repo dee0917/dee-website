@@ -3,7 +3,7 @@ export const insight = {
     category: "入門心法",
     themeColor: "emerald",
     difficulty_level: 1,
-    tags: ["#提示詞技巧", "#新手必看", "#對話邏輯"],
+    tags: ["#不是Google", "#實習生對話法", "#給予身份", "#任務交辦", "#寫信技巧", "#提示詞技巧", "#新手必看", "#對話邏輯"],
     title: "別再把 AI 當 Google 用！3 招讓它變成你的超強分身",
     summary: "為什麼你問 AI 問題總是被敷衍？因為你把它當搜尋引擎，而不是可以交辦任務的夥伴。換個說法，效率直接翻倍。",
     date: "2026.01.06",

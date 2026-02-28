@@ -4,7 +4,7 @@ export const insight = {
     themeColor: "emerald",
     difficulty_level: 1,
     level: 1,
-    tags: ["#個人化設定", "#效率提升", "#長期記憶"],
+    tags: ["#背景懶人包", "#省去重複說明", "#個人偏好設定", "#懂你的AI", "#自動化溝通", "#記憶功能"],
     title: "別讓 AI 每次都像陌生人！一招解決它的「失憶症」",
     summary: "每次開新視窗都要重教一次你是誰？太累了！學會寫「背景懶人包」，讓 AI 一秒變熟人。",
     date: "2026.01.15",

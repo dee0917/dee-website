@@ -367,7 +367,11 @@ const Insights = () => {
                 i.category,
                 ...(i.tags || []),
                 i.pain_point,
-                i.scenario
+                i.scenario,
+                i.solution,
+                ...(i.steps || []).map((s: any) => `${s.title} ${s.body}`),
+                i.practice_kit?.title,
+                i.practice_kit?.description
             ].filter(Boolean).join(' ').toLowerCase();
             
             return searchableText.includes(query);

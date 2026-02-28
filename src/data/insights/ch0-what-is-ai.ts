@@ -4,7 +4,7 @@ export const insight = {
     themeColor: "teal",
     difficulty_level: 1,
     level: 0,
-    tags: ["#ChatGPT", "#Claude", "#Gemini"],
+    tags: ["#什麼是AI", "#註冊教學", "#常用工具比較", "#新手懶人包", "#零基礎入門", "#ChatGPT", "#Claude", "#Gemini"],
     title: "ChatGPT、Claude、Gemini 是什麼？3 分鐘搞懂三大聊天 AI",
     summary: "聽大家都在說 AI，但到底該用哪一個？這篇用最白話的方式，帶你認識目前最熱門的三個聊天 AI，找到最適合你的那一個。",
     date: "2026.01.01",
