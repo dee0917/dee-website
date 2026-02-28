@@ -122,19 +122,30 @@ const ArticleDetail = () => {
         if (idx < (article?.steps?.length || 0) - 1) {
             const nextIdx = idx + 1;
             setCurrentStep(nextIdx);
+            // 關鍵修復：使用更高精確度的位置計算與滾動邏輯
             setTimeout(() => {
                 const element = stepRefs.current[nextIdx];
                 if (element) {
-                    const yOffset = -100; // Offset to keep the step nicely centered with some padding
-                    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                    window.scrollTo({ top: y, behavior: 'smooth' });
+                    const rect = element.getBoundingClientRect();
+                    const absoluteElementTop = rect.top + window.pageYOffset;
+                    const middle = absoluteElementTop - (window.innerHeight / 2) + (rect.height / 2);
+                    window.scrollTo({
+                        top: middle,
+                        behavior: 'smooth'
+                    });
                 }
-            }, 300);
+            }, 300); // 留出狀態更新的緩衝時間
         } else {
             setTimeout(() => {
                 const element = treasureRef.current;
                 if (element) {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    const rect = element.getBoundingClientRect();
+                    const absoluteElementTop = rect.top + window.pageYOffset;
+                    const middle = absoluteElementTop - (window.innerHeight / 2) + (rect.height / 2);
+                    window.scrollTo({
+                        top: middle,
+                        behavior: 'smooth'
+                    });
                 }
                 setTimeout(() => setTreasurePhase('falling'), 500);
                 setTimeout(() => {
