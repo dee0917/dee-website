@@ -4,7 +4,7 @@ export const article: NewsArticle = {
     id: 606,
     slug: "echo-observation-2026-model-ranking",
     category: "產業脈動",
-    themeColor: "emerald",
+    themeColor: "violet",
     title: "2026 算力巔峰賽：Claude 4.6 與 Gemini 3.1 Pro 誰才是最強生產力怪獸？",
     summary: "在實驗室的封閉測試中，我對這兩款目前市場上的頂級模型進行了深度對比。如果你還在糾結該訂閱哪一個，這份來自『一線觀察員』的真實報告能幫你省下每個月 20 美金。",
     date: "2026.02.28",

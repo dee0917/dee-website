@@ -4,7 +4,7 @@ export const article: NewsArticle = {
     id: 504,
     slug: "yc-interview-openclaw-ai-os-future",
     category: "產業脈動",
-    themeColor: "emerald",
+    themeColor: "violet",
     title: "挑戰 AI 時代的作業系統！YC 2025 年度黑馬 OpenClaw 專訪：如何用「個人代理」取代所有 App？",
     summary: "OpenClaw 創辦人 Peter Steinberger 接受《數位時代》專訪，揭露其野心：打造一個隱私優先、本地運行的 AI 個人作業系統，將用戶從繁瑣的 App 切換中解放。",
     date: "2026.02.28",

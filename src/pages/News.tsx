@@ -75,7 +75,7 @@ const News = () => {
             </div>
 
             {/* 列表區域，使用 AnimatePresence 防止卡頓 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[600px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
                 <AnimatePresence mode="popLayout">
                     {filteredArticles.map((article, i) => (
                         <NewsCard key={article.slug} article={article} idx={i} />
@@ -114,11 +114,10 @@ const NewsCard = ({ article, idx }: any) => {
 
     return (
         <motion.div 
-            layout
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
             onClick={() => navigate(`/news/${article.slug}`)}
             className={`bg-zinc-900/50 backdrop-blur-sm border border-white/[0.05] ${theme.border} p-6 md:p-7 rounded-[2rem] h-full flex flex-col relative transition-all duration-500 group group-hover:shadow-2xl ${theme.glow} cursor-pointer`}
         >

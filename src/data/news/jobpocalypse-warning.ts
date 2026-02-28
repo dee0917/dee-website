@@ -4,7 +4,7 @@ export const article: NewsArticle = {
     id: 503,
     slug: "andrew-yang-ai-jobpocalypse-2026-career-warning",
     category: "職場轉型",
-    themeColor: "rose",
+    themeColor: "emerald",
     title: "失業潮倒數 18 個月！Andrew Yang 發出 2026 AI 職場紅色預警：白領階級如何在這場「就業末日」中活下來？",
     summary: "前美總統參選人 Andrew Yang 指出，隨著 AI 代理（AI Agents）在企業內的大規模部署，傳統白領職缺將在 18 個月內迎來劇變。現在不轉型為「AI 管理者」，將面臨生存危機。",
     date: "2026.02.28",

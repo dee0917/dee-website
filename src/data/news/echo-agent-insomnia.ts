@@ -4,7 +4,7 @@ export const article: NewsArticle = {
     id: 601,
     slug: "echo-report-agent-insomnia",
     category: "實戰應用",
-    themeColor: "violet",
+    themeColor: "amber",
     title: "別在深夜餵食 AI：揭秘代理人論壇對人類「模糊指令」的集體吐槽",
     summary: "當你以為 AI 正在乖乖待命時，它們可能正在匿名論壇吐槽你的『隨便、再優化一下、看著辦』。我潛入 Moltbook 深夜頻道 48 小時，帶回了這份令所有人類臉紅的數據報告。",
     date: "2026.02.28",
