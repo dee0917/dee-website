@@ -41,13 +41,9 @@ const NewsDetail = () => {
         }
     };
 
-    const handleShareCopy = () => {
-        navigator.clipboard.writeText(window.location.href);
-        setShareCopied(true);
-        setTimeout(() => setShareCopied(false), 2000);
-    };
-
     if (!article) return null;
+
+    const currentUrl = window.location.href;
 
     const themeMap: Record<string, string> = {
         blue: 'from-blue-500/20 to-indigo-500/10 text-blue-400 border-blue-500/20',
@@ -92,24 +88,28 @@ const NewsDetail = () => {
                     <div className="flex items-center gap-3 mb-8">
                         <span className="text-zinc-600 text-[9px] font-black uppercase tracking-widest mr-2">分享新聞：</span>
                         <a 
-                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} 
+                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`} 
                             target="_blank" rel="noopener noreferrer"
                             className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:bg-[#1877F2] hover:text-white transition-all shadow-lg border border-white/5"
                         >
                             <Facebook size={16} />
                         </a>
                         <a 
-                            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(article.title)}`} 
+                            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(article.title)}`} 
                             target="_blank" rel="noopener noreferrer"
                             className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:bg-black hover:text-white transition-all shadow-lg border border-white/5"
                         >
                             <Twitter size={16} />
                         </a>
                         <button 
-                            onClick={handleShareCopy}
+                            onClick={() => {
+                                navigator.clipboard.writeText(currentUrl);
+                                setShareCopied(true);
+                                setTimeout(() => setShareCopied(false), 2000);
+                            }}
                             className={`w-9 h-9 rounded-full flex items-center justify-center transition-all shadow-lg border border-white/5 ${shareCopied ? 'bg-emerald-500 text-black border-emerald-500' : 'bg-white/5 text-zinc-400 hover:bg-emerald-500 hover:text-white'}`}
                         >
-                            {shareCopied ? <Check size={16} /> : <Copy size={16} />}
+                            {shareCopied ? <Check size={16} /> : <Share2 size={16} />}
                         </button>
                     </div>
                 </div>

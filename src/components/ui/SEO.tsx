@@ -15,7 +15,10 @@ const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.svg`;
 const SEO = ({ title, description, path = '', image }: SEOProps) => {
     const pageTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
     const pageDesc = description || DEFAULT_DESC;
-    const url = `${BASE_URL}${path}`;
+    
+    // 🚀 動態獲取當前網域，避免預覽版與正式版 URL 衝突
+    const currentOrigin = typeof window !== 'undefined' ? window.location.origin : BASE_URL;
+    const url = `${currentOrigin}${path}`;
     const ogImage = image || DEFAULT_OG_IMAGE;
 
     return (
