@@ -1,4 +1,4 @@
-import{j as e,m as l,A as $}from"./vendor-motion-aCq-fmil.js";import{e as M,f as z,r as o,L as p}from"./vendor-react-CUP2xbH8.js";import{N as h,T as R}from"./index-gGGmNLR4.js";import{c as x,a as P,Z as U,b as G,R as y,A as b,X as D}from"./index-CScJhBd-.js";import{C as F,a as V,G as q}from"./AILogos-BdciYaeD.js";import{A as H,S as J}from"./smartphone-BMlN0ZZ2.js";import{C as _}from"./clock-D_PvRHMl.js";import{C as k}from"./check-B5lzOZhe.js";import{C as Z}from"./copy-CfCYQIDW.js";import{E as B}from"./external-link-BlEiaLyP.js";/**
+import{j as e,m as l,A as $}from"./vendor-motion-aCq-fmil.js";import{e as M,f as z,r as o,L as p}from"./vendor-react-CUP2xbH8.js";import{N as h,T as R}from"./index-CxKUD_SA.js";import{c as x,a as P,Z as U,b as G,R as y,A as b,X as D}from"./index-BvfPGjgf.js";import{C as F,a as V,G as q}from"./AILogos-BdciYaeD.js";import{A as H,S as J}from"./smartphone-C19iRV7w.js";import{C as _}from"./clock-BI0e6rmd.js";import{C as k}from"./check-Ck4ZZTcK.js";import{C as Z}from"./copy-BVmyQ_Gm.js";import{E as B}from"./external-link-BbP5bCE8.js";/**
  * @license lucide-react v0.344.0 - ISC
  *
  * This source code is licensed under the ISC license.
