@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Gamepad2, MessageSquare, Zap, Sparkles, Coffee, Rocket } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SEO from '../components/ui/SEO';
-import Typewriter from '../components/ui/Typewriter';
 import { CHAPTERS, MAIN_QUEST_ORDER, SIDE_QUEST_IDS } from '../data/insights';
 import { useEffect, useState } from 'react';
 
@@ -22,69 +21,40 @@ const Home = () => {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <SEO path="/" />
 
-            {/* ═══════════ HERO — 經典質感版 ═══════════ */}
-            <section className="relative min-h-[90vh] flex items-center justify-center px-6 overflow-hidden pt-20">
+            {/* ═══════════ HERO — 遊戲開始畫面 ═══════════ */}
+            <section className="relative min-h-[85vh] flex items-center justify-center px-6 overflow-hidden">
                 {/* Background effects */}
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/[0.04] blur-[150px] rounded-full" />
                     <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-teal-500/[0.03] blur-[120px] rounded-full" />
                     <motion.div animate={{ y: [0, -15, 0], x: [0, 8, 0] }} transition={{ duration: 10, repeat: Infinity }} className="absolute top-1/3 left-[15%] w-2 h-2 bg-emerald-500/20 rounded-full" />
                     <motion.div animate={{ y: [0, 12, 0], x: [0, -5, 0] }} transition={{ duration: 8, repeat: Infinity, delay: 2 }} className="absolute top-1/2 right-[20%] w-1.5 h-1.5 bg-teal-400/25 rounded-full" />
+                    <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 12, repeat: Infinity, delay: 4 }} className="absolute bottom-1/3 left-[60%] w-1 h-1 bg-emerald-400/30 rounded-full" />
+                    <motion.div animate={{ y: [0, 10, 0], x: [0, -6, 0] }} transition={{ duration: 9, repeat: Infinity, delay: 1 }} className="absolute top-[20%] right-[40%] w-1.5 h-1.5 bg-emerald-300/15 rounded-full" />
                 </div>
 
                 <div className="relative z-10 text-center max-w-5xl mx-auto">
-                    <div className="flex flex-col items-center">
-                        <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
-                            className="inline-flex items-center gap-2 border border-emerald-500/30 bg-emerald-500/10 text-emerald-500 px-4 py-1.5 rounded-full text-xs mb-10 font-medium relative group">
-                            <Rocket size={14} /> 讓 AI 成為你的好夥伴
-                            <span className="absolute -top-2 -right-12 px-2 py-0.5 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-[10px] font-black rounded-lg shadow-lg shadow-orange-500/20 animate-pulse uppercase tracking-tighter">Beta</span>
-                        </motion.div>
-                    </div>
-
                     <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-                        className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-[1.1] tracking-tight">
+                        className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-12 leading-[1.1] tracking-tight">
                         將繁瑣交給 AI，<br />
-                        <span className="font-serif italic font-normal text-zinc-400 text-4xl md:text-6xl lg:text-7xl">
-                            把時間留給 <Typewriter texts={['思考', '生活', '家人', '創意']} />
+                        <span className="font-serif italic font-normal text-zinc-500 text-4xl md:text-6xl lg:text-7xl">
+                            把時間留給 <span className="text-[#4285F4] not-italic font-black">家人</span>
                         </span>
                     </motion.h1>
 
-                    <motion.p initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
-                        className="text-xl md:text-2xl text-zinc-300 max-w-3xl mx-auto leading-relaxed mb-8">
-                        不教你 1000 個工具，<span className="text-white font-medium">只幫你找到最適合你的那一個。</span>
-                    </motion.p>
-
-                    <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.45 }}
-                        className="text-base text-zinc-500 max-w-xl mx-auto leading-relaxed mb-12">
-                        我是 Dee，專門把複雜的 AI 知識變成小孩到長輩都能懂的實用技能。<br />
-                        這裡沒有術語、沒有付費牆，只有你能立刻用上的方法。
-                    </motion.p>
-
-                    <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}
+                    <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
                         className="flex flex-col sm:flex-row gap-5 justify-center items-center">
                         <Link to="/insights"
-                            className="group inline-flex items-center gap-3 bg-emerald-500 text-black px-12 py-5 rounded-2xl font-black text-lg hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 hover:-translate-y-0.5">
-                            開始免費學習
-                            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                        </Link>
-                        <Link to="/about"
-                            className="inline-flex items-center gap-2 bg-white/5 text-white px-8 py-5 rounded-2xl font-bold text-lg border border-white/10 hover:bg-white/10 transition-all">
-                            認識 Dee
+                            className="group inline-flex items-center gap-3 bg-emerald-500 text-black px-12 py-6 rounded-2xl font-black text-xl hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 hover:-translate-y-0.5">
+                            開始冒險
+                            <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </motion.div>
-
-                    {completedCount > 0 && (
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
-                            className="mt-12 text-zinc-600 text-xs font-mono">
-                            你已完成 {completedCount}/{totalArticles} 篇 ·{' '}
-                            <Link to="/insights" className="text-emerald-500 hover:underline">繼續學習 →</Link>
-                        </motion.div>
-                    )}
                 </div>
             </section>
 
             {/* ═══════════ 旅程預覽 — 章節時間線 ═══════════ */}
-            <section id="journey" className="py-20 px-6 border-t border-white/5 bg-black/20">
+            <section id="journey" className="py-20 px-6 border-t border-white/5">
                 <div className="max-w-5xl mx-auto">
                     <motion.div {...fadeUp} className="text-center mb-14">
                         <span className="text-emerald-500 font-bold tracking-[0.3em] text-[10px] uppercase mb-4 block">LEARNING JOURNEY</span>
@@ -92,6 +62,7 @@ const Home = () => {
                         <p className="text-zinc-500 max-w-lg mx-auto">從「AI 是什麼？」到「用 AI 搞定生活大小事」，每篇都有互動練習和小測驗。</p>
                     </motion.div>
 
+                    {/* Chapter timeline — horizontal scroll on mobile */}
                     <div className="overflow-x-auto pb-4 -mx-6 px-6 scrollbar-hide">
                         <div className="flex gap-4 min-w-max md:min-w-0 md:grid md:grid-cols-5">
                             {CHAPTERS.map((chapter, i) => (
@@ -111,6 +82,7 @@ const Home = () => {
                         </div>
                     </div>
 
+                    {/* Side quests mention */}
                     <motion.div {...fadeUp} className="text-center mt-8">
                         <span className="text-zinc-700 text-xs">+ 🎲 {SIDE_QUEST_IDS.length} 篇支線任務（育兒、寵物、投資⋯⋯）隨時可以探索</span>
                     </motion.div>
@@ -159,7 +131,7 @@ const Home = () => {
             </section>
 
             {/* ═══════════ Before / After ═══════════ */}
-            <section className="py-20 px-6 border-t border-white/5 bg-black/10">
+            <section className="py-20 px-6 border-t border-white/5">
                 <div className="max-w-4xl mx-auto">
                     <motion.div {...fadeUp} className="text-center mb-14">
                         <span className="text-emerald-500 font-bold tracking-[0.3em] text-[10px] uppercase mb-4 block">REAL RESULTS</span>
