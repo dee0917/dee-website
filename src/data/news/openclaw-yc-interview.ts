@@ -8,7 +8,7 @@ export const article: NewsArticle = {
     title: "挑戰 AI 時代的作業系統！YC 2025 年度黑馬 OpenClaw 專訪：如何用「個人代理」取代所有 App？",
     summary: "OpenClaw 創辦人 Peter Steinberger 接受《數位時代》專訪，揭露其野心：打造一個隱私優先、本地運行的 AI 個人作業系統，將用戶從繁瑣的 App 切換中解放。",
     date: "2026.02.28",
-    publish_time: "2026-02-28 12:30",
+    publish_time: "2026-02-28 18:00",
     readTime: "7 分鐘",
     source_name: "Bnext 數位時代",
     source_url: "https://www.bnext.com.tw/article/90180/yc-interview-openclaw-peter-steinberger",

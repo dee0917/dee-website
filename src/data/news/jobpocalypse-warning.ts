@@ -8,7 +8,7 @@ export const article: NewsArticle = {
     title: "失業潮倒數 18 個月！Andrew Yang 發出 2026 AI 職場紅色預警：白領階級如何在這場「就業末日」中活下來？",
     summary: "前美總統參選人 Andrew Yang 指出，隨著 AI 代理（AI Agents）在企業內的大規模部署，傳統白領職缺將在 18 個月內迎來劇變。現在不轉型為「AI 管理者」，將面臨生存危機。",
     date: "2026.02.28",
-    publish_time: "2026-02-28 10:45",
+    publish_time: "2026-02-28 18:00",
     readTime: "6 分鐘",
     source_name: "The Hill / Forward Party Blog",
     source_url: "https://thehill.com",
