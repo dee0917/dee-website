@@ -11,6 +11,14 @@ const News = () => {
     const activeCategory = searchParams.get('cat') || '全部';
 
     const categories = ['全部', '趨勢情報', '職場發展', '安全隱私'];
+    
+    // 與學習頁面一致的配色
+    const CATEGORY_THEMES: Record<string, string> = {
+        '趨勢情報': 'violet',
+        '職場發展': 'rose',
+        '安全隱私': 'blue',
+        '全部': 'emerald'
+    };
 
     const filteredArticles = useMemo(() => {
         if (activeCategory === '全部') return NEWS_ARTICLES;
@@ -22,6 +30,7 @@ const News = () => {
         rose: 'border-rose-500/20 hover:border-rose-500/40 shadow-rose-500/5',
         amber: 'border-amber-500/20 hover:border-amber-500/40 shadow-amber-500/5',
         emerald: 'border-emerald-500/20 hover:border-emerald-500/40 shadow-emerald-500/5',
+        violet: 'border-violet-500/20 hover:border-violet-500/40 shadow-violet-500/5'
     };
 
     const textThemeMap: Record<string, string> = {
@@ -29,6 +38,7 @@ const News = () => {
         rose: 'text-rose-400',
         amber: 'text-amber-400',
         emerald: 'text-emerald-400',
+        violet: 'text-violet-400'
     };
 
     return (
@@ -41,27 +51,28 @@ const News = () => {
                     <Zap size={12} /> Live Intelligence
                 </motion.div>
                 <h1 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">AI 新聞情報站</h1>
-                <p className="text-zinc-400 text-xl max-w-2xl mx-auto mb-12">
+                <p className="text-zinc-400 text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
                     不只是搬運，更是深度轉譯。<br />
                     我們將艱澀的新聞，轉化為對你有用的 <span className="text-white">情報</span> 與 <span className="text-white">指令</span>。
                 </p>
 
-                {/* 大分類過濾器 */}
-                <div className="flex items-center justify-center gap-2 overflow-x-auto pb-4 scrollbar-hide">
-                    <Filter size={14} className="text-zinc-700 mr-2" />
-                    {categories.map(cat => (
-                        <button 
-                            key={cat}
-                            onClick={() => setSearchParams({ cat })}
-                            className={`px-6 py-2.5 rounded-xl text-xs font-black transition-all border ${
-                                activeCategory === cat 
-                                ? 'bg-white text-black border-white shadow-xl scale-105' 
-                                : 'bg-white/[0.03] border-white/5 text-zinc-500 hover:text-white'
-                            }`}
-                        >
-                            {cat}
-                        </button>
-                    ))}
+                {/* 與學習頁面一致的過濾標籤 UI */}
+                <div className="flex items-center justify-center gap-4 overflow-x-auto pb-8 scrollbar-hide">
+                    <div className="flex-shrink-0 text-zinc-700 mr-1"><Filter size={16} /></div>
+                    {categories.map(tag => {
+                        const themeColor = CATEGORY_THEMES[tag] || 'emerald';
+                        const isActive = activeCategory === tag;
+                        
+                        return (
+                            <button key={tag} onClick={() => setSearchParams({ cat: tag })}
+                                className={`flex-shrink-0 px-6 py-2.5 rounded-full text-xs font-black transition-all duration-300 ${isActive
+                                    ? `bg-${themeColor}-500 text-black shadow-lg shadow-${themeColor}-500/30 scale-105`
+                                    : 'bg-white/[0.03] border border-white/[0.06] text-zinc-500 hover:text-white hover:border-white/20'
+                                }`}>
+                                {tag}
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
 
@@ -97,7 +108,7 @@ const News = () => {
                                 <span className="w-1 h-1 rounded-full bg-zinc-800" />
                                 <span className="flex items-center gap-1.5 text-[10px] font-bold text-zinc-500 italic">{article.source_name.split(' / ')[0]}</span>
                             </div>
-                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+                            <div className={`w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all`}>
                                 <ArrowRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
                             </div>
                         </div>
