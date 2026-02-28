@@ -272,10 +272,6 @@ const Insights = () => {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [expandedChapters, setExpandedChapters] = useState<Set<number>>(new Set());
 
-    const allInsights = INSIGHTS.filter(i => i.category !== 'AI 新聞');
-    const mainQuests = allInsights.filter(i => MAIN_QUEST_ORDER.includes(i.id));
-    const sideQuests = allInsights.filter(i => SIDE_QUEST_IDS.includes(i.id));
-
     useEffect(() => {
         const done = localStorage.getItem('dee_onboarding_done');
         const saved = localStorage.getItem('dee_ai_level');
@@ -287,9 +283,19 @@ const Insights = () => {
             if (saved) setUnlockedChapter(parseInt(saved));
             if (mode === 'free') setViewMode('free');
         }
-        if (comp) setCompletedIds(JSON.parse(comp));
+        if (comp) {
+            try {
+                setCompletedIds(JSON.parse(comp));
+            } catch(e) {
+                setCompletedIds([]);
+            }
+        }
         setLoading(false);
     }, []);
+
+    const allInsights = useMemo(() => INSIGHTS.filter(i => i.category !== 'AI 新聞'), []);
+    const mainQuests = useMemo(() => allInsights.filter(i => MAIN_QUEST_ORDER.includes(i.id)), [allInsights]);
+    const sideQuests = useMemo(() => allInsights.filter(i => SIDE_QUEST_IDS.includes(i.id)), [allInsights]);
 
     // Auto-expand current chapter in adventure mode
     useEffect(() => {
@@ -334,20 +340,6 @@ const Insights = () => {
         });
     };
 
-    if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse">SYNCING...</div>;
-
-    const totalMain = MAIN_QUEST_ORDER.length;
-    const completedMain = completedIds.filter(id => MAIN_QUEST_ORDER.includes(id)).length;
-    const totalAll = allInsights.length;
-    const xp = completedIds.length * 200;
-    const playerLevel = Math.floor(completedIds.length / 1.5) + 1;
-    const progressPct = viewMode === 'adventure' ? (completedMain / totalMain) || 0 : (completedIds.length / totalAll) || 0;
-
-    // Smart recommendation for free mode
-    const nextRecommended = allInsights.find(i =>
-        !completedIds.includes(i.id) && MAIN_QUEST_ORDER.includes(i.id)
-    );
-
     // Free mode filter & search
     const filterTags = ['全部', '入門', '技巧', '實戰', '進階', '支線', '已完成', '未完成'];
     
@@ -366,15 +358,38 @@ const Insights = () => {
             if (!tagMatch) return false;
 
             // Filter by Search Query
-            if (searchQuery.trim() === '') return true;
+            if (!searchQuery || searchQuery.trim() === '') return true;
+            
             const query = searchQuery.toLowerCase();
-            const searchableText = `${i.title} ${i.summary} ${i.category} ${i.tags?.join(' ')} ${i.pain_point} ${i.scenario}`.toLowerCase();
+            const searchableText = [
+                i.title,
+                i.summary,
+                i.category,
+                ...(i.tags || []),
+                i.pain_point,
+                i.scenario
+            ].filter(Boolean).join(' ').toLowerCase();
+            
             return searchableText.includes(query);
         });
     }, [allInsights, freeFilter, searchQuery, completedIds]);
 
+    if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse">SYNCING...</div>;
+
+    const totalMain = MAIN_QUEST_ORDER.length;
+    const completedMain = completedIds.filter(id => MAIN_QUEST_ORDER.includes(id)).length;
+    const totalAll = allInsights.length;
+    const progressPct = (viewMode === 'adventure' ? (completedMain / totalMain) : (completedIds.length / totalAll)) || 0;
+    const playerLevel = Math.floor(completedIds.length / 1.5) + 1;
+    const xp = completedIds.length * 200;
+
+    // Smart recommendation for free mode
+    const nextRecommended = allInsights.find(i =>
+        !completedIds.includes(i.id) && MAIN_QUEST_ORDER.includes(i.id)
+    );
+
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-24 pb-20 min-h-screen text-left">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-24 pb-20 min-h-screen text-left relative z-0">
             <SEO title="免費 AI 實用教學" description="從新手到高手的 AI 學習旅程，20 篇免費教學" path="/insights" />
 
             <AnimatePresence>{showOnboarding && <OnboardingScreen onComplete={handleOnboardingComplete} />}</AnimatePresence>
@@ -391,7 +406,7 @@ const Insights = () => {
                         <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-teal-500/10 blur-[100px] rounded-full" />
                     </div>
 
-                    {/* Top row: Mode switcher (Redesigned for better comfort) */}
+                    {/* Top row: Mode switcher */}
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-10 relative z-10">
                         <div className="flex items-center gap-4">
                             <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shadow-lg shadow-emerald-500/5">
@@ -445,8 +460,8 @@ const Insights = () => {
                 </motion.div>
             </div>
 
-            {/* ═══════════ CONTENT AREA ═══════════ */}
-            <div className="px-6 max-w-5xl mx-auto">
+            {/* ═══════════ CONTENT AREA ═══════════ */ }
+            <div className="px-6 max-w-5xl mx-auto relative z-10">
                 {viewMode === 'adventure' ? (
                     <div className="space-y-4 relative">
                         <div className="absolute left-[23px] top-6 bottom-6 w-px bg-gradient-to-b from-emerald-500/30 via-zinc-800/50 to-zinc-800/20 hidden md:block" />
@@ -494,9 +509,9 @@ const Insights = () => {
                         </div>
                     </div>
                 ) : (
-                    /* ═══════════ FREE MODE: SEARCH + FILTER + GRID ═══════════ */
+                    /* ═══════════ FREE MODE ═══════════ */
                     <div>
-                        {/* Search Bar Section (Fun & Intuitive) */}
+                        {/* Search Bar Section */}
                         <div className="mb-14 relative max-w-2xl mx-auto group">
                             <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none text-zinc-500 group-focus-within:text-emerald-400 transition-colors">
                                 <Search size={22} />
