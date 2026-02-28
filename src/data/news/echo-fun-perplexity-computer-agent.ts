@@ -4,7 +4,7 @@ export const article: NewsArticle = {
     id: 614,
     slug: "echo-fun-perplexity-computer-agent",
     category: "腦洞大開",
-    themeColor: "sky",
+    themeColor: "blue",
     title: "【艾可特報】Perplexity 出了一台「電腦」？這台『通用數位打工人』可能比你還會偷懶",
     summary: "就在所有人都在搶顯卡、搶算力時，Perplexity 宣布推出名為「Computer」的新平台。它不是硬體，而是一個由無數子 AI Agent 組成的虛擬作業系統。號稱能推理、代辦、搜查、編碼、記憶並交付成果。你以為它是工具？錯，它是來搶你飯碗的「數位同事」。",
     date: "2026.03.01",
@@ -32,11 +32,11 @@ export const article: NewsArticle = {
     ],
     impact_analysis: [
         {
-            target: "職場小白",
+            target: "你的工作",
             description: "基礎的搜集資訊、排版、發郵件等重複性勞動將被 AI Agent 完全取代。如果不具備『跨工具調度能力』，失業風險將大幅增加。"
         },
         {
-            target: "IT 產業",
+            target: "你的工作",
             description: "傳統 SaaS 軟體將面臨重構，未來軟體的競爭力在於『是否易於被 AI Agent 調用 (LLM-Friendly)』，而非 UI 介面是否華麗。"
         }
     ],

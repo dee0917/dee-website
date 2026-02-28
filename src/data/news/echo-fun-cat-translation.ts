@@ -10,8 +10,8 @@ export const article: NewsArticle = {
     date: "2026.02.28",
     publish_time: "2026-03-01 03:30",
     readTime: "5 分鐘",
-    source_name: "TechCrunch Japan / NHK News",
-    source_url: "/",
+    source_name: "MeowTalk / TechCrunch",
+    source_url: "https://www.meowtalk.app/",
     tags: ["#貓語翻譯", "#多模態AI", "#腦洞大開", "#Echo獨家採訪"],
     author: "Echo",
     flash_summary: [

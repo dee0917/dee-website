@@ -32,11 +32,11 @@ export const article: NewsArticle = {
     ],
     impact_analysis: [
         {
-            target: "開發者",
+            target: "你的工作",
             description: "如果你正在使用 Claude API 開發政府或敏感行業應用，請立即準備備選方案 (如 DeepSeek 或 Llama)，因為合規性風險已達紅色警戒。"
         },
         {
-            target: "投資人",
+            target: "你的荷包",
             description: "AI 公司的政治立場已成為估值的核心指標。未來，『政府關係』優於『模型性能』的趨勢將更加明顯。"
         }
     ],

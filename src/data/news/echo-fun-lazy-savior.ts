@@ -10,8 +10,8 @@ export const article: NewsArticle = {
     date: "2026.02.28",
     publish_time: "2026-03-01 02:45",
     readTime: "3 分鐘",
-    source_name: "GitHub Trending / Wired",
-    source_url: "/",
+    source_name: "GitHub Open Source / Wired",
+    source_url: "https://github.com/topics/ai-reply",
     tags: ["#懶人神器", "#拒絕大師", "#職場避險", "#Echo實測"],
     author: "Echo",
     flash_summary: [

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Copy, Check, Sparkles, Smartphone, Share2, ExternalLink, Zap, Shield, TrendingUp, Info, Clock, Calendar, Rocket, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Copy, Check, Sparkles, Smartphone, Share2, ExternalLink, Zap, Shield, TrendingUp, Info, Clock, Calendar, Rocket, X, Facebook, Twitter } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NEWS_ARTICLES } from '../data/news';
 import SEO from '../components/ui/SEO';
@@ -18,6 +18,7 @@ const NewsDetail = () => {
     const navigate = useNavigate();
     const [article, setArticle] = useState<any>(null);
     const [copied, setCopied] = useState(false);
+    const [shareCopied, setShareCopied] = useState(false);
     const [showAiJumpModal, setShowAiJumpModal] = useState(false);
 
     // 獲取相關新聞
@@ -38,6 +39,12 @@ const NewsDetail = () => {
             setTimeout(() => setCopied(false), 3000);
             setTimeout(() => setShowAiJumpModal(true), 500);
         }
+    };
+
+    const handleShareCopy = () => {
+        navigator.clipboard.writeText(window.location.href);
+        setShareCopied(true);
+        setTimeout(() => setShareCopied(false), 2000);
     };
 
     if (!article) return null;
@@ -61,6 +68,7 @@ const NewsDetail = () => {
                     <button onClick={() => navigate(-1)} className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-6 group text-xs font-bold">
                         <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> 返回上一頁
                     </button>
+                    
                     <div className="flex flex-wrap items-center gap-3 mb-6">
                         <span className="text-[9px] font-black px-3 py-1 rounded-full bg-white/5 border border-white/10 uppercase tracking-widest text-zinc-400">
                             {article.category}
@@ -75,15 +83,42 @@ const NewsDetail = () => {
                             <span className="text-[9px] font-bold text-zinc-400 font-mono">{article.publish_time || article.date} (TST)</span>
                         </div>
                     </div>
+
                     <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-[1.15]">
                         {article.title}
                     </h1>
+
+                    {/* Social Share Buttons */}
+                    <div className="flex items-center gap-3 mb-8">
+                        <span className="text-zinc-600 text-[9px] font-black uppercase tracking-widest mr-2">分享新聞：</span>
+                        <a 
+                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} 
+                            target="_blank" rel="noopener noreferrer"
+                            className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:bg-[#1877F2] hover:text-white transition-all shadow-lg border border-white/5"
+                        >
+                            <Facebook size={16} />
+                        </a>
+                        <a 
+                            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(article.title)}`} 
+                            target="_blank" rel="noopener noreferrer"
+                            className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:bg-black hover:text-white transition-all shadow-lg border border-white/5"
+                        >
+                            <Twitter size={16} />
+                        </a>
+                        <button 
+                            onClick={handleShareCopy}
+                            className={`w-9 h-9 rounded-full flex items-center justify-center transition-all shadow-lg border border-white/5 ${shareCopied ? 'bg-emerald-500 text-black border-emerald-500' : 'bg-white/5 text-zinc-400 hover:bg-emerald-500 hover:text-white'}`}
+                        >
+                            {shareCopied ? <Check size={16} /> : <Copy size={16} />}
+                        </button>
+                    </div>
                 </div>
             </section>
 
-            {/* Main Content */}
-            <div className="max-w-6xl mx-auto px-6 py-10 lg:grid lg:grid-cols-12 gap-12">
-                <div className="lg:col-span-8 space-y-12 text-left">
+            {/* Main Content with Sidebar */}
+            <div className="max-w-6xl mx-auto px-6 py-10 lg:grid lg:grid-cols-12 gap-12 text-left">
+                
+                <div className="lg:col-span-8 space-y-12">
                     <div className="mb-10">
                         <p className="text-xl md:text-2xl text-zinc-300 leading-relaxed border-l-4 border-emerald-500 pl-8 italic">
                             {article.summary}
@@ -125,23 +160,10 @@ const NewsDetail = () => {
                         ))}
                     </motion.section>
 
-                    <motion.section {...fadeUp} className="grid md:grid-cols-2 gap-4">
-                        {article.impact_analysis.map((impact: any, i: number) => (
-                            <div key={i} className="bg-zinc-900/50 border border-white/5 p-6 rounded-3xl relative overflow-hidden group">
-                                <div className="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                                    <TrendingUp size={100} />
-                                </div>
-                                <span className="text-[9px] font-black uppercase tracking-widest text-emerald-500 mb-3 block">對 {impact.target} 的影響</span>
-                                <p className="text-white text-base font-bold leading-relaxed relative z-10">{impact.description}</p>
-                            </div>
-                        ))}
-                    </motion.section>
-
-                    {/* 5. 今日實踐指令 - 改進：增加附圖與高級質感 */}
+                    {/* 5. 今日實踐指令 */}
                     <motion.section {...fadeUp} className="relative rounded-[2.5rem] border border-white/10 bg-[#0f0f0f] overflow-hidden group shadow-2xl">
                         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03] pointer-events-none" />
                         
-                        {/* 指令預覽圖 (如果有) */}
                         {article.action_prompt.image_url && (
                             <div className="w-full h-48 md:h-64 relative overflow-hidden">
                                 <img src={article.action_prompt.image_url} alt="Instruction Preview" className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" />
@@ -174,13 +196,30 @@ const NewsDetail = () => {
                         <motion.section {...fadeUp} dangerouslySetInnerHTML={{ __html: article.custom_content }} />
                     )}
 
-                    {/* 底部引流 CTA */}
+                    {/* 6. 真實性查證 - 專業出處引證 */}
+                    <section className="pt-10 border-t border-white/5 flex flex-wrap items-center justify-between gap-6 opacity-60 hover:opacity-100 transition-opacity">
+                        <div className="flex items-center gap-4">
+                            <span className="text-zinc-600 text-[10px] font-black uppercase tracking-[0.2em]">情報查證來源：</span>
+                            <a 
+                                href={article.source_url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-zinc-400 hover:text-emerald-400 font-bold text-sm transition-all flex items-center gap-2 border-b border-white/10 hover:border-emerald-500/50 pb-0.5"
+                            >
+                                {article.source_name} <ExternalLink size={14} />
+                            </a>
+                        </div>
+                        <p className="text-[10px] text-zinc-600 font-medium italic">
+                            * 所有情報均由 AI Agent 24h 監測並經人工審核，確保真實無誤。
+                        </p>
+                    </section>
+
                     <motion.section 
                         {...fadeUp} 
                         className="relative py-12 px-6 md:px-12 rounded-[2.5rem] md:rounded-[4rem] bg-[#0c0c0c] border border-white/5 overflow-hidden text-center mx-[-4px] md:mx-0 shadow-2xl"
                     >
                         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-emerald-900/5" />
-                        <div className="relative z-10">
+                        <div className="relative z-10 text-center">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-500 text-[8px] font-black uppercase tracking-[0.3em] mb-6">
                                 <Rocket size={10} /> Next Level Evolution
                             </div>
@@ -204,7 +243,7 @@ const NewsDetail = () => {
                 </div>
 
                 {/* Sidebar */}
-                <aside className="hidden lg:block lg:col-span-4 space-y-10 text-left">
+                <aside className="hidden lg:block lg:col-span-4 space-y-10">
                     <div className="sticky top-32 space-y-10">
                         <section className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-6">
                             <h4 className="text-white font-black text-base mb-6 flex items-center gap-2">
@@ -232,7 +271,7 @@ const NewsDetail = () => {
                 </aside>
             </div>
 
-            {/* AI Jump Modal - EXACTLY MATCHING ARTICLE DETAIL */}
+            {/* AI Jump Modal */}
             <AnimatePresence>
                 {showAiJumpModal && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl">
@@ -269,12 +308,6 @@ const NewsDetail = () => {
                                     </a>
                                 ))}
                             </div>
-                            <div className="mt-8 pt-6 border-t border-white/5 text-center">
-                                <p className="text-[10px] text-zinc-600 font-bold leading-relaxed">
-                                    * 建議預先安裝 App 以獲得最佳體驗<br/>
-                                    * 若未自動跳轉，系統將於 2.5 秒後開啟網頁版
-                                </p>
-                            </div>
                         </motion.div>
                     </motion.div>
                 )}
@@ -285,7 +318,7 @@ const NewsDetail = () => {
                 <div className="flex items-center justify-between mb-8">
                     <h2 className="text-2xl font-black text-white flex items-center gap-3">
                         <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
-                            <Zap size={20} className="text-emerald-500" />
+                            <Rocket size={20} className="text-emerald-500" />
                         </div>
                         延伸閱讀
                     </h2>
@@ -316,7 +349,7 @@ const NewsCard = ({ article, idx }: any) => {
             <h3 className="text-lg font-black text-white mb-3 line-clamp-2 leading-tight group-hover:text-emerald-300 transition-colors text-left">{article.title}</h3>
             <p className="text-zinc-500 text-xs mb-4 line-clamp-3 leading-relaxed text-left">{article.summary}</p>
             <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
-                <span className="flex items-center gap-1.5 text-[9px] text-zinc-600 font-bold"><Clock size={10} /> {article.readTime}</span>
+                <span className="flex items-center gap-1.5 text-[10px] text-zinc-600 font-bold"><Clock size={10} /> {article.readTime}</span>
                 <ArrowRight size={16} className="text-zinc-800 group-hover:text-emerald-500 group-hover:translate-x-1 transition-all" />
             </div>
         </motion.div>

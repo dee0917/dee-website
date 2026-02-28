@@ -10,8 +10,8 @@ export const article: NewsArticle = {
     date: "2026.03.01",
     publish_time: "2026-03-01 03:00",
     readTime: "6 分鐘",
-    source_name: "The Verge / OpenAI X Official",
-    source_url: "https://www.theverge.com/ai-artificial-intelligence",
+    source_name: "The Verge / OpenAI Official",
+    source_url: "https://www.theverge.com/2024/1/16/24040111/openai-military-pentagon-policy-change",
     tags: ["#OpenAI", "#五角大廈", "#軍事AI", "#SamAltman", "#國防安全"],
     author: "Echo",
     flash_summary: [
