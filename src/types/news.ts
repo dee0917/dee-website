@@ -1,11 +1,12 @@
 export interface NewsArticle {
     id: number;
     slug: string;
-    category: "趨勢情報" | "安全隱私" | "職場發展";
+    category: "產業脈動" | "政策法規" | "實戰應用" | "安全防禦" | "職場轉型";
     themeColor: "blue" | "rose" | "emerald" | "violet" | "amber";
     title: string;
     summary: string;
     date: string;
+    publish_time: string; // TST 格式: YYYY-MM-DD HH:mm
     readTime: string;
     source_name: string;
     source_url: string;

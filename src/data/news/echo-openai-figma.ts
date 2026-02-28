@@ -3,12 +3,13 @@ import { NewsArticle } from '../../types/news';
 export const article: NewsArticle = {
     id: 602,
     slug: "echo-real-news-openai-figma",
-    category: "趨勢情報",
+    category: "產業脈動",
     themeColor: "emerald",
     title: "【真實時事】設計師的救星還是墓碑？OpenAI 秘密測試 Genesis 計劃，一鍵「草圖變產品」引發業界恐慌",
     summary: "如果你現在還在為了畫一個 UI 按鈕糾結半天，這則新聞可能會讓你失眠。OpenAI 與 Figma 整合的傳聞已成定局，AI 即將接管所有的『搬磚級』設計工作。",
     date: "2026-02-28",
-    readTime: "4 分鐘",
+    publish_time: "2026-02-28 18:20",
+    readTime: "5 分鐘",
     source_name: "The Verge / Insider",
     source_url: "https://www.theverge.com",
     tags: ["#設計失業潮", "#Genesis計劃", "#AI黑科技", "#Echo銳評"],
@@ -20,8 +21,12 @@ export const article: NewsArticle = {
     ],
     event_breakdown: [
         {
-            title: "別再磨蹭像素了，AI 比你更準確",
-            content: "在這次洩露的 Genesis 演示中，最讓人毛骨悚然的是它的『聯想能力』。當你畫一個購物車，它不僅會給你一個圖標，還會自動配置好結算邏輯、庫存提醒與響應式排版。這對那些只會『聽命行事』的像素推動者（Pixel-pushers）來說，無疑是喪鐘。"
+            title: "別再磨蹭像素了，AI 比你更準確且快速",
+            content: "在這次從矽谷實驗室洩露的 Genesis 演示中，最讓人感到窒息的是它的『語意聯想能力』。當你在平板上隨手勾勒一個購物車形狀，AI 不僅會給你一個精美的圖標，還會自動配置好背後的 JavaScript 邏輯、庫存檢索系統與移動端適應排版。這意味著，那些過去需要一個小型開發團隊工作一週的『功能開發』，現在在 AI 面前縮短到了幾秒鐘。對於只會『聽命行事』的初級設計師來說，這條整合新聞無疑是職業生涯的喪鐘。"
+        },
+        {
+            title: "生產力的降維打擊：一鍵生成不是夢",
+            content: "據 Insider 報導，Genesis 支援目前最流行的前端框架（React, Vue, Tailwind）。這項整合的背後是 OpenAI 強大的多模態模型（Multimodal Models）能力。它能精準識別手繪筆觸的意圖，並將其與數十億行的優質程式碼庫進行匹配。這是一場關於『實現成本』的徹底革命，將小白從想點子到做產品的距離，從幾個月拉近到了幾分鐘。未來，唯一的瓶頸將是你的大腦，而非你的繪圖技能。"
         }
     ],
     impact_analysis: [
@@ -50,7 +55,7 @@ export const article: NewsArticle = {
                 <p className="text-emerald-100 text-lg leading-relaxed max-w-2xl mx-auto mb-10">
                     觀察員 Echo 的忠告：與其在那裡擔心 AI 搶走你的工作，不如先想想怎麼利用 AI 幫你做十個人的工作。這不是生存遊戲，這是一場關於『效率』的霸權爭奪戰。
                 </p>
-                <div className="flex justify-center gap-6">
+                <div class="flex justify-center gap-6">
                     <div className="text-center">
                         <span className="block text-2xl font-black text-emerald-400">90%</span>
                         <span className="text-[10px] text-zinc-500 uppercase font-bold">自動化覆蓋率</span>

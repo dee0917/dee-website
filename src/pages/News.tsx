@@ -1,15 +1,17 @@
 import SEO from '../components/ui/SEO';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Zap, Clock, Shield, TrendingUp, Filter, Star } from 'lucide-react';
+import { ArrowRight, Zap, Clock, Shield, TrendingUp, Filter, Star, Info } from 'lucide-react';
 import { NEWS_ARTICLES } from '../data/news';
 import { useMemo } from 'react';
 
-// 與 Insights.tsx 保持 100% 一致的配色與設定
+// 與全站 UI 規範一致的專業大分類
 const CATEGORY_THEMES: Record<string, string> = {
-    '趨勢情報': 'violet',
-    '職場發展': 'rose',
-    '安全隱私': 'blue',
+    '產業脈動': 'violet',
+    '政策法規': 'rose',
+    '實戰應用': 'amber',
+    '安全防禦': 'blue',
+    '職場轉型': 'emerald',
     '全部': 'emerald'
 };
 
@@ -26,7 +28,7 @@ const News = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const activeCategory = searchParams.get('cat') || '全部';
 
-    const categories = ['全部', '趨勢情報', '職場發展', '安全隱私'];
+    const categories = ['全部', '產業脈動', '政策法規', '實戰應用', '安全防禦', '職場轉型'];
 
     const filteredArticles = useMemo(() => {
         if (activeCategory === '全部') return NEWS_ARTICLES;
@@ -35,7 +37,7 @@ const News = () => {
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-6xl mx-auto min-h-screen text-left relative z-0">
-            <SEO title="AI 新聞情報站 - 2026 最新趨勢解析" description="由 Dee 主理的 AI 新聞板塊，為你翻譯艱澀的科技時事，轉化為具備 SEO 與 AEO 優化的白話情報與實戰指令。" path="/news" />
+            <SEO title="AI 新聞情報站 - 2026 最新趨勢解析" description="由 Dee 主理的 AI 新聞板塊，透過頂尖 AI Agent 系統進行精準轉譯，助您在 3 分鐘內掌握全球 AI 核心脈動。" path="/news" />
             
             <div className="mb-16">
                 <div className="flex items-center gap-4 mb-6">
@@ -44,7 +46,7 @@ const News = () => {
                     </div>
                     <div>
                         <h1 className="text-2xl md:text-3xl font-black text-white tracking-tight">AI 新聞情報站</h1>
-                        <span className="text-emerald-500/60 font-mono text-[9px] tracking-[0.4em] uppercase block mt-1">Intelligence Hub</span>
+                        <span className="text-emerald-500/60 font-mono text-[9px] tracking-[0.4em] uppercase block mt-1">Intelligence Intelligence Hub</span>
                     </div>
                 </div>
                 
@@ -53,9 +55,9 @@ const News = () => {
                     我們將艱澀的新聞，轉化為對你有用的 <span className="text-white">情報</span> 與 <span className="text-white">指令</span>。
                 </p>
 
-                {/* 與學習頁面一致的過濾標籤 UI */}
+                {/* 專業大分類過濾器 */}
                 <div className="flex items-center gap-4 mb-10 overflow-x-auto pb-4 scrollbar-hide">
-                    <div className="flex-shrink-0 text-zinc-700"><Filter size={16} /></div>
+                    <div className="flex-shrink-0 text-zinc-700 mr-1"><Filter size={16} /></div>
                     {categories.map(tag => {
                         const themeColor = CATEGORY_THEMES[tag] || 'emerald';
                         const isActive = activeCategory === tag;
@@ -103,9 +105,6 @@ const News = () => {
     );
 };
 
-/* ═══════════════════════════════════════════
-   NEWS CARD — 確保與 InsightCard 結構完全一致
-   ═══════════════════════════════════════════ */
 const NewsCard = ({ article, idx }: any) => {
     const navigate = useNavigate();
     const themeColor = CATEGORY_THEMES[article.category] || article.themeColor || 'emerald';
@@ -116,20 +115,11 @@ const NewsCard = ({ article, idx }: any) => {
             onClick={() => navigate(`/news/${article.slug}`)}
             className={`bg-zinc-900/50 backdrop-blur-sm border border-white/[0.05] ${theme.border} p-6 md:p-7 rounded-[2rem] h-full flex flex-col relative transition-all duration-500 group group-hover:shadow-2xl ${theme.glow} cursor-pointer`}>
             
-            <div className="flex flex-wrap items-center gap-2 mb-5">
-                <button 
-                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
-                    className={`text-[9px] font-black px-3 py-1.5 rounded-lg tracking-[0.1em] uppercase transition-all hover:brightness-125 ${theme.tag}`}
-                >
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-5">
+                <span className={`text-[9px] font-black px-3 py-1.5 rounded-lg tracking-[0.1em] uppercase transition-all hover:brightness-125 ${theme.tag}`}>
                     {article.category}
-                </button>
-                {article.tags?.slice(0, 2).map((tag: string, ti: number) => (
-                    <span key={ti}
-                        className={`text-[9px] font-bold text-zinc-500 bg-white/[0.02] px-3 py-1.5 rounded-lg border border-white/[0.04]`}
-                    >
-                        {tag}
-                    </span>
-                ))}
+                </span>
+                <span className="text-zinc-700 text-[10px] font-bold font-mono">{article.publish_time || article.date}</span>
             </div>
 
             <h4 className="text-xl font-black text-white mb-3 line-clamp-2 leading-tight group-hover:text-emerald-100 transition-colors text-left">{article.title}</h4>
@@ -138,14 +128,14 @@ const NewsCard = ({ article, idx }: any) => {
             <div className="mt-auto">
                 <div className="flex items-center justify-between mb-5">
                     <div className="flex gap-0.5">{[...Array(5)].map((_, i) => <Star key={i} size={8} className={i < 1 ? theme.text : 'text-zinc-800'} fill="currentColor" />)}</div>
-                    <span className="text-zinc-600 text-[10px] font-black tracking-widest uppercase font-mono">{article.date}</span>
+                    <span className="text-zinc-600 text-[9px] font-black tracking-widest uppercase font-mono italic">{article.author === "Echo" ? 'Echo Reporting' : 'AI Verified'}</span>
                 </div>
                 <div className="pt-5 border-t border-white/[0.05] flex items-center justify-between group-hover:border-white/[0.12] transition-colors">
                     <span className="text-zinc-700 text-[10px] font-mono flex items-center gap-1.5">
-                        <Zap size={10} className="text-amber-500/50" /> {article.readTime}
+                        <Clock size={10} className="text-zinc-500" /> {article.readTime}
                     </span>
                     <div className={`flex items-center gap-1.5 text-${themeColor}-500/50 group-hover:text-${themeColor}-400 transition-all`}>
-                        <span className="text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all">Read</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all">Read Intelligence</span>
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </div>
                 </div>
