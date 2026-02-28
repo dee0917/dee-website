@@ -1,12 +1,15 @@
 import SEO from '../components/ui/SEO';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Zap, Clock, Shield, TrendingUp, Filter, Star } from 'lucide-react';
+import { ArrowRight, Zap, Clock, Shield, TrendingUp, Filter, Star, Info, MessageCircle, Sparkles, Coffee } from 'lucide-react';
 import { NEWS_ARTICLES } from '../data/news';
 import { useMemo } from 'react';
 
-// 與全站 UI 規範一致的專業大分類
+// 與全站 UI 規範一致的專業大分類 (新增有趣分類)
 const CATEGORY_THEMES: Record<string, string> = {
+    '吃瓜特報': 'orange',
+    '腦洞大開': 'teal',
+    '懶人神器': 'indigo',
     '產業脈動': 'violet',
     '政策法規': 'rose',
     '實戰應用': 'amber',
@@ -21,6 +24,9 @@ const THEME_CONFIG: Record<string, any> = {
     violet: { text: 'text-violet-500', lightText: 'text-violet-400', tag: 'bg-violet-500/10 text-violet-500', border: 'hover:border-violet-500/20', glow: 'group-hover:shadow-violet-500/10' },
     rose: { text: 'text-rose-500', lightText: 'text-rose-400', tag: 'bg-rose-500/10 text-rose-500', border: 'hover:border-rose-500/20', glow: 'group-hover:shadow-rose-500/10' },
     amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-400', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
+    orange: { text: 'text-orange-500', lightText: 'text-orange-400', tag: 'bg-orange-500/10 text-orange-500', border: 'hover:border-orange-500/20', glow: 'group-hover:shadow-orange-500/10' },
+    teal: { text: 'text-teal-500', lightText: 'text-teal-400', tag: 'bg-teal-500/10 text-teal-500', border: 'hover:border-teal-500/20', glow: 'group-hover:shadow-teal-500/10' },
+    indigo: { text: 'text-indigo-500', lightText: 'text-indigo-400', tag: 'bg-indigo-500/10 text-indigo-500', border: 'hover:border-indigo-500/20', glow: 'group-hover:shadow-indigo-500/10' },
 };
 
 const News = () => {
@@ -28,7 +34,7 @@ const News = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const activeCategory = searchParams.get('cat') || '全部';
 
-    const categories = ['全部', '產業脈動', '政策法規', '實戰應用', '安全防禦', '職場轉型'];
+    const categories = ['全部', '吃瓜特報', '腦洞大開', '懶人神器', '產業脈動', '政策法規', '實戰應用', '安全防禦', '職場轉型'];
 
     const filteredArticles = useMemo(() => {
         if (activeCategory === '全部') return NEWS_ARTICLES;
@@ -46,7 +52,7 @@ const News = () => {
                     </div>
                     <div>
                         <h1 className="text-2xl md:text-3xl font-black text-white tracking-tight">AI 新聞情報站</h1>
-                        <span className="text-emerald-500/60 font-mono text-[9px] tracking-[0.4em] uppercase block mt-1">Intelligence Hub</span>
+                        <span className="text-emerald-500/60 font-mono text-[9px] tracking-[0.4em] uppercase block mt-1">Intelligence Intelligence Hub</span>
                     </div>
                 </div>
                 
@@ -55,6 +61,7 @@ const News = () => {
                     我們將艱澀的新聞，轉化為對你有用的 <span className="text-white">情報</span> 與 <span className="text-white">指令</span>。
                 </p>
 
+                {/* 專業大分類過濾器 */}
                 <div className="flex items-center gap-4 mb-10 overflow-x-auto pb-4 scrollbar-hide">
                     <div className="flex-shrink-0 text-zinc-700 mr-1"><Filter size={16} /></div>
                     {categories.map(tag => {
@@ -74,8 +81,7 @@ const News = () => {
                 </div>
             </div>
 
-            {/* 列表區域，使用 AnimatePresence 防止卡頓 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <AnimatePresence mode="popLayout">
                     {filteredArticles.map((article, i) => (
                         <NewsCard key={article.slug} article={article} idx={i} />
@@ -141,7 +147,7 @@ const NewsCard = ({ article, idx }: any) => {
                         <Clock size={10} className="text-zinc-500" /> {article.readTime}
                     </span>
                     <div className={`flex items-center gap-1.5 text-${themeColor}-500/50 group-hover:text-${themeColor}-400 transition-all`}>
-                        <span className="text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all">Read</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all">Read Intelligence</span>
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </div>
                 </div>

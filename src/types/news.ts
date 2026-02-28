@@ -1,8 +1,8 @@
 export interface NewsArticle {
     id: number;
     slug: string;
-    category: "產業脈動" | "政策法規" | "實戰應用" | "安全防禦" | "職場轉型";
-    themeColor: "blue" | "rose" | "emerald" | "violet" | "amber";
+    category: "吃瓜特報" | "腦洞大開" | "懶人神器" | "產業脈動" | "政策法規" | "實戰應用" | "安全防禦" | "職場轉型";
+    themeColor: "blue" | "rose" | "emerald" | "violet" | "amber" | "indigo" | "teal" | "orange";
     title: string;
     summary: string;
     date: string;
