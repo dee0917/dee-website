@@ -125,9 +125,11 @@ const ArticleDetail = () => {
             setTimeout(() => {
                 const element = stepRefs.current[nextIdx];
                 if (element) {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    const yOffset = -100; // Offset to keep the step nicely centered with some padding
+                    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
                 }
-            }, 100);
+            }, 300);
         } else {
             setTimeout(() => {
                 const element = treasureRef.current;
@@ -319,8 +321,11 @@ const ArticleDetail = () => {
                                         </div>
                                     </div>
                                     {isFuture && (
-                                        <div className="absolute inset-0 z-10 bg-black/40 backdrop-blur-[4px] flex items-center justify-center pointer-events-none">
-                                            <Lock size={48} className="text-white/10" />
+                                        <div className="absolute inset-0 z-10 bg-black/60 backdrop-blur-[12px] flex items-center justify-center pointer-events-none transition-all duration-700">
+                                            <div className="flex flex-col items-center gap-4">
+                                                <Lock size={48} className="text-emerald-500/20" />
+                                                <span className="text-emerald-500/20 font-black text-xs tracking-[0.4em] uppercase">Locked Step</span>
+                                            </div>
                                         </div>
                                     )}
                                 </motion.div>

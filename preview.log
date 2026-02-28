@@ -2,7 +2,8 @@
 > dee-productivity-lab@0.0.8 preview
 > vite preview --port 4173 --host 0.0.0.0
 
-  ➜  Local:   http://localhost:4173/
-  ➜  Network: http://72.62.66.230:4173/
-  ➜  Network: http://172.17.0.1:4173/
-  ➜  Network: http://172.19.0.1:4173/
+Port 4173 is in use, trying another one...
+  ➜  Local:   http://localhost:4174/
+  ➜  Network: http://72.62.66.230:4174/
+  ➜  Network: http://172.17.0.1:4174/
+  ➜  Network: http://172.19.0.1:4174/
