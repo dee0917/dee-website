@@ -172,10 +172,10 @@ const NewsDetail = () => {
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    className="relative py-20 px-8 rounded-[3.5rem] bg-[#0f0f0f] border border-emerald-500/20 overflow-hidden group"
+                    className="relative py-16 md:py-24 px-5 md:px-12 rounded-[2.5rem] md:rounded-[4rem] bg-[#0f0f0f] border border-emerald-500/20 overflow-hidden group mx-[-4px] md:mx-0"
                 >
                     <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-transparent to-teal-500/5 opacity-50" />
-                    <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/10 blur-[100px] rounded-full group-hover:bg-emerald-500/20 transition-all duration-700" />
+                    <div className="absolute -top-24 -right-24 w-80 h-80 bg-emerald-500/10 blur-[100px] rounded-full group-hover:bg-emerald-500/20 transition-all duration-700" />
                     
                     <div className="relative z-10 text-center">
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
@@ -184,29 +184,31 @@ const NewsDetail = () => {
                         <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">
                             覺得 AI 很難懂嗎？
                         </h2>
-                        <p className="text-zinc-400 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-                            看新聞只是「知道」，動手做才是「學會」。<br />
+                        <p className="text-zinc-400 text-base md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed font-medium px-2">
+                            看新聞只是「知道」，動手做才是「學會」。<br className="hidden md:block" />
                             我在實驗室準備了 <span className="text-white">20 篇免費互動教學</span>，帶你從零變高手。
                         </p>
                         
-                        <Link to="/insights" className="relative inline-flex items-center justify-center group/btn">
-                            <div className="absolute -inset-4 bg-emerald-500/20 blur-xl rounded-full opacity-0 group-hover/btn:opacity-100 transition-all duration-500 animate-pulse" />
-                            <motion.div 
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="relative bg-emerald-500 text-black px-12 py-6 rounded-2xl font-black text-2xl flex items-center gap-4 shadow-2xl"
-                            >
-                                想學習 AI？點我！
-                                <ArrowRight size={28} className="group-hover/btn:translate-x-1 transition-transform" />
-                            </motion.div>
-                        </Link>
+                        <div className="flex justify-center">
+                            <Link to="/insights" className="relative w-full max-w-[320px] md:w-auto group/btn">
+                                <div className="absolute -inset-4 bg-emerald-500/20 blur-xl rounded-full opacity-0 group-hover/btn:opacity-100 transition-all duration-500 animate-pulse" />
+                                <motion.div 
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="relative bg-emerald-500 text-black py-5 md:py-6 px-8 md:px-12 rounded-2xl font-black text-xl md:text-2xl flex items-center justify-center gap-3 shadow-2xl"
+                                >
+                                    <span className="whitespace-nowrap">想學習 AI？點我！</span>
+                                    <ArrowRight size={24} className="group-hover/btn:translate-x-1 transition-transform flex-shrink-0" />
+                                </motion.div>
+                            </Link>
+                        </div>
                         
-                        <div className="mt-12 flex items-center justify-center gap-8 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
-                            <span className="text-[10px] font-black text-zinc-500 tracking-widest uppercase">闖關式學習</span>
-                            <div className="w-1 h-1 rounded-full bg-zinc-800" />
-                            <span className="text-[10px] font-black text-zinc-500 tracking-widest uppercase">領取修行勳章</span>
-                            <div className="w-1 h-1 rounded-full bg-zinc-800" />
-                            <span className="text-[10px] font-black text-zinc-500 tracking-widest uppercase">100% 免費</span>
+                        <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
+                            <span className="text-[9px] md:text-[10px] font-black text-zinc-500 tracking-widest uppercase">闖關式學習</span>
+                            <div className="w-1 h-1 rounded-full bg-zinc-800 hidden sm:block" />
+                            <span className="text-[9px] md:text-[10px] font-black text-zinc-500 tracking-widest uppercase">領取修行勳章</span>
+                            <div className="w-1 h-1 rounded-full bg-zinc-800 hidden sm:block" />
+                            <span className="text-[9px] md:text-[10px] font-black text-zinc-500 tracking-widest uppercase">100% 免費</span>
                         </div>
                     </div>
                 </motion.section>
