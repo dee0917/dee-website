@@ -264,16 +264,11 @@ const Home = () => {
                                     </p>
                                 </div>
 
-                                <div className="flex flex-col gap-4 w-full md:w-auto">
+                                <div className="w-full md:w-auto">
                                     <a href="https://p.ecpay.com.tw/XXXXXX" target="_blank" rel="noopener noreferrer"
-                                        className="flex items-center justify-center gap-3 bg-[#00a650] text-white px-10 py-5 rounded-2xl font-black text-lg hover:opacity-90 transition-all shadow-xl shadow-[#00a650]/10">
-                                        <span className="text-xs border border-white/30 px-2 py-0.5 rounded-md">TW</span>
-                                        綠界贊助 (ECPay)
-                                    </a>
-                                    <a href="https://buymeacoffee.com/deedeeboy" target="_blank" rel="noopener noreferrer"
-                                        className="flex items-center justify-center gap-3 bg-[#FFDD00] text-black px-10 py-5 rounded-2xl font-black text-lg hover:opacity-90 transition-all shadow-xl shadow-[#FFDD00]/10">
-                                        <Coffee size={20} />
-                                        請喝咖啡
+                                        className="flex items-center justify-center gap-3 bg-amber-500 text-black px-12 py-5 rounded-2xl font-black text-xl hover:bg-amber-400 transition-all shadow-xl shadow-amber-500/20 hover:-translate-y-0.5">
+                                        <Coffee size={24} />
+                                        請 Dee 喝杯咖啡
                                     </a>
                                 </div>
                             </div>
