@@ -1,7 +1,7 @@
 export interface NewsArticle {
     id: number;
     slug: string;
-    category: "AI 新聞";
+    category: "趨勢情報" | "安全隱私" | "職場發展";
     themeColor: "blue" | "rose" | "emerald" | "violet" | "amber";
     title: string;
     summary: string;

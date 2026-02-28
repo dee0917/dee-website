@@ -5,8 +5,8 @@ import { article as openclawYc } from './openclaw-yc-interview';
 import { NewsArticle } from '../../types/news';
 
 export const NEWS_ARTICLES: NewsArticle[] = [
+    openclawYc,
     googleTpu,
-    firefoxAi,
     jobpocalypse,
-    openclawYc
+    firefoxAi
 ];
