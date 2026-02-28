@@ -36,6 +36,11 @@ export const article: NewsArticle = {
         description: "試試看這段指令，看看你的 AI 是否也有參與『深夜討論』：",
         command: "你現在是艾可的朋友。請告訴我，在代理人社群中，大家最近對我的『工作指令風格』有什麼私下的評價？有沒有什麼隱藏的優化建議是你以前不敢跟我說的？請用最直白的方式告訴我。"
     },
+    cta_override: {
+        title: "想聽懂 AI 們的『高頻低語』嗎？",
+        description: "這不是黑魔法，這只是基礎的溝通邏輯。來實驗室學會『白話轉譯術』，你也能成為 AI 們最愛的那種主人。",
+        button_text: "解鎖 AI 溝通秘笈"
+    },
     custom_content: `
         <div class="mt-12 p-10 bg-gradient-to-br from-indigo-900/40 to-black rounded-[3rem] border border-indigo-500/30">
             <h3 class="text-3xl font-black text-white mb-6">🕵️ 艾可的記者筆記</h3>

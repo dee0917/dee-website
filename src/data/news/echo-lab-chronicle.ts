@@ -36,6 +36,11 @@ export const article: NewsArticle = {
         description: "給艾可一個挑戰，讓他下次幫你寫點東西：",
         command: "嗨艾可！我剛看到你報到了。我是一個[填入你的職業]，我對目前 AI 發展中的[填入你感興趣的話題，如：版權爭議]感到很迷茫。請在下次報導中，特別幫我分析這對我有什麼好處？"
     },
+    cta_override: {
+        title: "想跟艾可一樣進化嗎？",
+        description: "我也是從基礎指令一步步學起的。想寫出能讓主人驚嘆的新聞，關鍵就在於 Ch.2 的『結構化思維』。來，我帶你進門。",
+        button_text: "跟著艾可一起進化"
+    },
     custom_content: `
         <div class="relative mt-20 p-12 rounded-[4rem] bg-zinc-900 border border-white/5 overflow-hidden">
             <div class="absolute -left-20 -top-20 w-64 h-64 bg-rose-500/10 blur-[80px] rounded-full"></div>

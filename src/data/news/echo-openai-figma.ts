@@ -36,6 +36,11 @@ export const article: NewsArticle = {
         description: "雖然 Genesis 還沒完全開放，但你可以用這段指令在 GPT-4o 模擬這種工作流：",
         command: "你現在是資深前端架構師。我有一張畫在筆記本上的網頁草圖，上面有[描述你的功能，如：三個價格卡片、一個懸浮購物車]。請幫我構思這套佈局在 React 中的組件拆解方式，並提供一組最精簡的 Tailwind CSS 程式碼框架。"
     },
+    cta_override: {
+        title: "當 AI 幫你寫 code，你要學什麼？",
+        description: "技術會過期，但『產品邏輯』不會。來實驗室學會如何定義任務，讓 AI 成為你最強的產品執行官。",
+        button_text: "成為 AI 指揮官"
+    },
     custom_content: `
         <div class="my-16 flex flex-col items-center">
             <div class="w-full h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent mb-12"></div>
