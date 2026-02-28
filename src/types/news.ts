@@ -35,4 +35,11 @@ export interface NewsArticle {
         description: string;
         command: string;
     };
+
+    // 🚀 因地制宜的引流 CTA (New)
+    cta_override?: {
+        title: string;
+        description: string;
+        button_text: string;
+    };
 }

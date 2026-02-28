@@ -47,5 +47,10 @@ export const article: NewsArticle = {
         title: "檢查你的瀏覽器隱私漏洞",
         description: "問你的 AI 目前有哪些隱私死角：",
         command: "我正在使用 [填入你的瀏覽器名稱]。請以隱私專家的身份，分析該瀏覽器目前的 AI 功能（如：內建助手、搜尋建議）會收集我哪些數據？我該如何設定才能確保我的網銀交易內容不被餵給 AI 模型？請給我步驟清單。"
+    },
+    cta_override: {
+        title: "學會駕馭 AI，而不是被它看透",
+        description: "隱私保護只是第一步，真正的數據主權來自於你對 AI 的深度理解。來實驗室學會正確的指令，讓 AI 乖乖聽你的話。",
+        button_text: "掌握 AI 駕馭術"
     }
 };

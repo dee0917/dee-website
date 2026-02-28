@@ -182,11 +182,13 @@ const NewsDetail = () => {
                             <Rocket size={12} /> Take the next step
                         </div>
                         <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">
-                            覺得 AI 很難懂嗎？
+                            {article.cta_override?.title || '覺得 AI 很難懂嗎？'}
                         </h2>
                         <p className="text-zinc-400 text-base md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed font-medium px-2">
-                            看新聞只是「知道」，動手做才是「學會」。<br className="hidden md:block" />
-                            我在實驗室準備了 <span className="text-white">20 篇免費互動教學</span>，帶你從零變高手。
+                            {article.cta_override?.description || (
+                                <>看新聞只是「知道」，動手做才是「學會」。<br className="hidden md:block" />
+                                我在實驗室準備了 <span className="text-white">20 篇免費互動教學</span>，帶你從零變高手。</>
+                            )}
                         </p>
                         
                         <div className="flex justify-center">
@@ -197,7 +199,7 @@ const NewsDetail = () => {
                                     whileTap={{ scale: 0.95 }}
                                     className="relative bg-emerald-500 text-black py-5 md:py-6 px-8 md:px-12 rounded-2xl font-black text-xl md:text-2xl flex items-center justify-center gap-3 shadow-2xl"
                                 >
-                                    <span className="whitespace-nowrap">想學習 AI？點我！</span>
+                                    <span className="whitespace-nowrap">{article.cta_override?.button_text || '想學習 AI？點我！'}</span>
                                     <ArrowRight size={24} className="group-hover/btn:translate-x-1 transition-transform flex-shrink-0" />
                                 </motion.div>
                             </Link>
