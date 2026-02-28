@@ -18,9 +18,6 @@ import { insight as antiProcrastination } from './anti-procrastination';
 import { insight as petTranslator } from './pet-translator';
 import { insight as ch0WhatIsAi } from './ch0-what-is-ai';
 import { insight as ch0FirstMessage } from './ch0-first-message';
-import { insight as newsGoogleTpu } from './news-google-tpu';
-import { insight as newsFirefoxAi } from './news-firefox-ai';
-import { insight as newsJobpocalypse } from './news-jobpocalypse';
 
 // ═══════════════════════════════════════════
 // Chapter 定義 — 主線任務的學習順序
@@ -53,7 +50,7 @@ export const MAIN_QUEST_ORDER: number[] = CHAPTERS.flatMap(c => c.articleIds);
 // [201, 202, 203, 204, 301, 302, 308, 310, 305, 306, 403, 401]
 
 // 支線任務 IDs
-export const SIDE_QUEST_IDS: number[] = [304, 303, 309, 307, 402, 404, 501, 502, 503];
+export const SIDE_QUEST_IDS: number[] = [304, 303, 309, 307, 402, 404];
 
 // ═══════════════════════════════════════════
 // 文章列表 — 主線 + 支線
@@ -90,9 +87,6 @@ const sideQuests = [
     { ...leadGenCover, level: -1 },
     { ...stockAudit, level: -1 },
     { ...stockTrends, level: -1 },
-    { ...newsGoogleTpu, level: -1 },
-    { ...newsFirefoxAi, level: -1 },
-    { ...newsJobpocalypse, level: -1 },
 ];
 
 // 全部文章（主線在前，支線在後）

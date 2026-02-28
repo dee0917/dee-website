@@ -19,6 +19,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
 const TemplateLab = lazy(() => import('./pages/TemplateLab'));
+const NewsDetail = lazy(() => import('./pages/NewsDetail'));
 
 const PageLoader = () => (
   <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
@@ -44,6 +45,7 @@ function App() {
               <Route path="/insights" element={<Insights />} />
               <Route path="/insights/:id" element={<ArticleDetail />} />
               <Route path="/news" element={<News />} />
+              <Route path="/news/:slug" element={<NewsDetail />} />
               <Route path="/lab" element={<Lab />} />
               <Route path="/solutions" element={<Solutions />} />
               <Route path="/about" element={<About />} />
