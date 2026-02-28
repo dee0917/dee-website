@@ -43,7 +43,8 @@ export const article: NewsArticle = {
     action_prompt: {
         title: "規劃你的個人 AI 基礎架構",
         description: "問問 AI 如果你現在要建立『個人 OS』，該從哪裡開始：",
-        command: "你是個人 AI 自動化架構師。參考『OpenClaw 本地運行』的概念，請針對我的日常數位生活：[例如：大量回信、整理筆記、追蹤訂單]，給我一個『隱私優先』的 AI 工具部署建議。請特別說明哪些任務應該放在本地電腦處理，哪些可以交給雲端，以達成最高效率與隱私平衡？"
+        command: "你是個人 AI 自動化架構師。參考『OpenClaw 本地運行』的概念，請針對我的日常數位生活：[例如：大量回信、整理筆記、追蹤訂單]，給我一個『隱私優先』的 AI 工具部署建議。請特別說明哪些任務應該放在本地電腦處理，哪些可以交給雲端，以達成最高效率與隱私平衡？",
+        image_url: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop"
     },
     cta_override: {
         title: "想擁有自己的『個人 AI 化身』嗎？",

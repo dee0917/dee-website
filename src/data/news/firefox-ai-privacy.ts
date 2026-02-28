@@ -43,7 +43,8 @@ export const article: NewsArticle = {
     action_prompt: {
         title: "檢查你的瀏覽器隱私漏洞",
         description: "問你的 AI 目前有哪些隱私死角：",
-        command: "我正在使用 [填入你的瀏覽器名稱]。請以隱私專家的身份，分析該瀏覽器目前的 AI 功能（如：內建助手、搜尋建議）會收集我哪些數據？我該如何設定才能確保我的網銀交易內容不被餵給 AI 模型？請給我步驟清單。"
+        command: "我正在使用 [填入你的瀏覽器名稱]。請以隱私專家的身份，分析該瀏覽器目前的 AI 功能（如：內建助手、搜尋建議）會收集我哪些數據？我該如何設定才能確保我的網銀交易內容不被餵給 AI 模型？請給我步驟清單。",
+        image_url: "https://images.unsplash.com/photo-1633265486064-086b219458ec?q=80&w=1000&auto=format&fit=crop"
     },
     cta_override: {
         title: "學會駕馭 AI，而不是被它看透",

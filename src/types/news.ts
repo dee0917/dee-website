@@ -30,11 +30,12 @@ export interface NewsArticle {
     // Dee 的點評
     dee_insight: string;
     
-    // 實踐指令
+    // 🚀 實踐指令
     action_prompt: {
         title: string;
         description: string;
         command: string;
+        image_url?: string; // 🚀 新增：指令預覽圖 (New)
     };
 
     // 🚀 因地制宜的引流 CTA

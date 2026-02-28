@@ -43,7 +43,8 @@ export const article: NewsArticle = {
     action_prompt: {
         title: "分析算力成本對你的影響",
         description: "用這段指令問 AI，了解你目前使用的工具是否可能降價或升級：",
-        command: "你是資深科技分析師。請針對『Google TPU 產能擴張』這則新聞，幫我分析我目前常用的 AI 工具是否有切換算力平台的可能性？這對我的長期使用成本或反應速度會有什麼潛在影響？請給我三個觀察指標。"
+        command: "你是資深科技分析師。請針對『Google TPU 產能擴張』這則新聞，幫我分析我目前常用的 AI 工具是否有切換算力平台的可能性？這對我的長期使用成本或反應速度會有什麼潛在影響？請給我三個觀察指標。",
+        image_url: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop"
     },
     cta_override: {
         title: "想在 AI 降價潮中領先一步嗎？",

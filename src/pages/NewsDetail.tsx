@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Copy, Check, Sparkles, Smartphone, Share2, ExternalLink, Zap, Shield, TrendingUp, Info, Clock, Calendar, Rocket } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Copy, Check, Sparkles, Smartphone, Share2, ExternalLink, Zap, Shield, TrendingUp, Info, Clock, Calendar, Rocket, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NEWS_ARTICLES } from '../data/news';
 import SEO from '../components/ui/SEO';
@@ -20,9 +20,9 @@ const NewsDetail = () => {
     const [copied, setCopied] = useState(false);
     const [showAiJumpModal, setShowAiJumpModal] = useState(false);
 
-    // 獲取相關新聞（排除當前文章，取最近 3 篇）
+    // 獲取相關新聞
     const moreNews = NEWS_ARTICLES.filter(a => a.slug !== slug).slice(0, 3);
-    // 獲取熱門側欄新聞（取 5 篇）
+    // 獲取熱門側欄新聞
     const trendingNews = NEWS_ARTICLES.slice(0, 5);
 
     useEffect(() => {
@@ -54,14 +54,13 @@ const NewsDetail = () => {
         <div className="min-h-screen bg-[#0a0a0a] text-zinc-300 pb-20">
             <SEO title={article.title} description={article.summary} path={`/news/${article.slug}`} />
 
-            {/* Header / Hero - More Compact */}
-            <section className="relative pt-24 pb-8 px-6 overflow-hidden border-b border-white/5">
+            {/* Header / Hero */}
+            <section className="relative pt-24 pb-8 px-6 overflow-hidden border-b border-white/5 text-left">
                 <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b ${themeMap[article.themeColor]} opacity-20 pointer-events-none`} />
                 <div className="max-w-6xl mx-auto relative z-10">
                     <button onClick={() => navigate(-1)} className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-6 group text-xs font-bold">
                         <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> 返回上一頁
                     </button>
-                    
                     <div className="flex flex-wrap items-center gap-3 mb-6">
                         <span className="text-[9px] font-black px-3 py-1 rounded-full bg-white/5 border border-white/10 uppercase tracking-widest text-zinc-400">
                             {article.category}
@@ -76,26 +75,21 @@ const NewsDetail = () => {
                             <span className="text-[9px] font-bold text-zinc-400 font-mono">{article.publish_time || article.date} (TST)</span>
                         </div>
                     </div>
-
                     <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-[1.15]">
                         {article.title}
                     </h1>
                 </div>
             </section>
 
-            {/* Main Content with Sidebar - Tighter spacing */}
+            {/* Main Content */}
             <div className="max-w-6xl mx-auto px-6 py-10 lg:grid lg:grid-cols-12 gap-12">
-                
-                {/* Left Column: News Body */}
                 <div className="lg:col-span-8 space-y-12 text-left">
-                    
                     <div className="mb-10">
                         <p className="text-xl md:text-2xl text-zinc-300 leading-relaxed border-l-4 border-emerald-500 pl-8 italic">
                             {article.summary}
                         </p>
                     </div>
 
-                    {/* 1. 關鍵情報 */}
                     <motion.section {...fadeUp} className="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-6 md:p-10">
                         <div className="flex items-center gap-3 mb-6">
                             <Zap size={18} className="text-amber-400" />
@@ -111,7 +105,6 @@ const NewsDetail = () => {
                         </ul>
                     </motion.section>
 
-                    {/* 2. 事件解析 - segment content into tighter paragraphs */}
                     <motion.section {...fadeUp} className="space-y-10">
                         <div className="flex items-center gap-3">
                             <Info size={20} className="text-emerald-500" />
@@ -132,7 +125,6 @@ const NewsDetail = () => {
                         ))}
                     </motion.section>
 
-                    {/* 3. 利益相關透視 */}
                     <motion.section {...fadeUp} className="grid md:grid-cols-2 gap-4">
                         {article.impact_analysis.map((impact: any, i: number) => (
                             <div key={i} className="bg-zinc-900/50 border border-white/5 p-6 rounded-3xl relative overflow-hidden group">
@@ -145,43 +137,49 @@ const NewsDetail = () => {
                         ))}
                     </motion.section>
 
-                    {/* 4. Dee 的評語 */}
-                    <motion.section {...fadeUp} className="bg-emerald-500/5 p-8 rounded-[2.5rem] border border-emerald-500/10 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 blur-3xl rounded-full" />
-                        <div className="flex items-center gap-3 mb-4">
-                            <span className="text-3xl">🧪</span>
-                            <h2 className="text-xl font-black text-white">Dee's 實驗室碎碎念</h2>
+                    {/* 5. 今日實踐指令 - 改進：增加附圖與高級質感 */}
+                    <motion.section {...fadeUp} className="relative rounded-[2.5rem] border border-white/10 bg-[#0f0f0f] overflow-hidden group shadow-2xl">
+                        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03] pointer-events-none" />
+                        
+                        {/* 指令預覽圖 (如果有) */}
+                        {article.action_prompt.image_url && (
+                            <div className="w-full h-48 md:h-64 relative overflow-hidden">
+                                <img src={article.action_prompt.image_url} alt="Instruction Preview" className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f0f] to-transparent" />
+                                <div className="absolute top-6 left-6 px-4 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+                                    <Sparkles size={12} className="text-amber-400" /> Live Prototype
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="p-8 md:p-12 text-center relative z-10">
+                            <h2 className="text-2xl md:text-3xl font-black text-white mb-3">{article.action_prompt.title}</h2>
+                            <p className="text-zinc-400 text-sm md:text-base mb-8 max-w-lg mx-auto">{article.action_prompt.description}</p>
+                            
+                            <div className="bg-black border border-white/5 rounded-2xl p-6 md:p-8 mb-8 text-left relative overflow-hidden group/box">
+                                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                                <pre className="text-violet-200 whitespace-pre-wrap font-mono text-sm leading-relaxed relative z-10">{article.action_prompt.command}</pre>
+                            </div>
+
+                            <button onClick={handleCopy} className="group/btn relative bg-white text-black px-10 py-4 rounded-2xl font-black text-lg hover:bg-emerald-500 hover:text-white transition-all shadow-xl flex items-center gap-3 mx-auto">
+                                <div className="absolute -inset-2 bg-emerald-500/20 blur-xl rounded-full opacity-0 group-hover/btn:opacity-100 transition-all" />
+                                <span className="relative z-10 flex items-center gap-3">
+                                    {copied ? <Check size={20} /> : <Copy size={20} />} {copied ? '指令已複製' : '領取指令寶箱'}
+                                </span>
+                            </button>
                         </div>
-                        <p className="text-lg text-zinc-300 leading-relaxed font-medium">「 {article.dee_insight} 」</p>
                     </motion.section>
 
-                    {/* 5. 今日實踐指令 */}
-                    <motion.section {...fadeUp} className="bg-gradient-to-br from-violet-900/20 to-black border border-violet-500/30 rounded-[2.5rem] p-8 md:p-12 text-center shadow-2xl">
-                        <Sparkles size={28} className="text-violet-400 mx-auto mb-4" />
-                        <h2 className="text-2xl font-black text-white mb-3">{article.action_prompt.title}</h2>
-                        <p className="text-zinc-400 text-base mb-8">{article.action_prompt.description}</p>
-                        <div className="bg-black/60 border border-white/5 rounded-2xl p-6 md:p-8 mb-8 text-left">
-                            <pre className="text-violet-200 whitespace-pre-wrap font-mono text-sm leading-relaxed">{article.action_prompt.command}</pre>
-                        </div>
-                        <button onClick={handleCopy} className="bg-white text-black px-8 py-4 rounded-2xl font-black text-lg hover:bg-violet-500 hover:text-white transition-all shadow-xl flex items-center gap-3 mx-auto">
-                            {copied ? <Check size={20} /> : <Copy size={20} />} {copied ? '指令已複製' : '複製實踐指令'}
-                        </button>
-                    </motion.section>
-
-                    {/* 艾可自由內容 */}
                     {article.custom_content && (
                         <motion.section {...fadeUp} dangerouslySetInnerHTML={{ __html: article.custom_content }} />
                     )}
 
-                    {/* 底部引流 CTA - Ultra Compact */}
+                    {/* 底部引流 CTA */}
                     <motion.section 
                         {...fadeUp} 
                         className="relative py-12 px-6 md:px-12 rounded-[2.5rem] md:rounded-[4rem] bg-[#0c0c0c] border border-white/5 overflow-hidden text-center mx-[-4px] md:mx-0 shadow-2xl"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-emerald-900/5 pointer-events-none" />
-                        <div className="absolute -top-24 -left-24 w-64 h-64 bg-emerald-500/5 blur-[100px] rounded-full" />
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.02] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
-                        
+                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-emerald-900/5" />
                         <div className="relative z-10">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-500 text-[8px] font-black uppercase tracking-[0.3em] mb-6">
                                 <Rocket size={10} /> Next Level Evolution
@@ -201,26 +199,13 @@ const NewsDetail = () => {
                                     </div>
                                 </Link>
                             </div>
-                            <div className="pt-6 border-t border-white/5 flex items-center justify-center gap-6 grayscale opacity-20">
-                                <div className="flex items-center gap-2">
-                                    <Shield size={12} className="text-zinc-500" />
-                                    <span className="text-[7px] font-black text-zinc-500 tracking-widest uppercase">Verified</span>
-                                </div>
-                                <div className="w-px h-3 bg-white/10" />
-                                <div className="flex items-center gap-2">
-                                    <TrendingUp size={12} className="text-zinc-500" />
-                                    <span className="text-[7px] font-black text-zinc-500 tracking-widest uppercase">Growth</span>
-                                </div>
-                            </div>
                         </div>
                     </motion.section>
-
                 </div>
 
-                {/* Right Column: Sidebar - more compact */}
+                {/* Sidebar */}
                 <aside className="hidden lg:block lg:col-span-4 space-y-10 text-left">
                     <div className="sticky top-32 space-y-10">
-                        {/* Trending Section */}
                         <section className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-6">
                             <h4 className="text-white font-black text-base mb-6 flex items-center gap-2">
                                 <TrendingUp size={16} className="text-emerald-500" /> 熱門情報
@@ -243,24 +228,59 @@ const NewsDetail = () => {
                                 ))}
                             </div>
                         </section>
-
-                        {/* Lab Info Card */}
-                        <section className="bg-gradient-to-br from-emerald-500 to-teal-600 text-black rounded-[2rem] p-8 relative overflow-hidden shadow-2xl">
-                            <div className="relative z-10">
-                                <h4 className="text-xl font-black mb-3 leading-tight">掌握 AI 核心領魂，<br/>拒絕數位焦慮。</h4>
-                                <p className="text-[12px] font-bold opacity-80 mb-6 leading-relaxed">我們已為你整理 20 篇高質量 AI 教學，從完全不會到熟練指揮。</p>
-                                <Link to="/insights" className="bg-black text-white px-6 py-3 rounded-xl text-[10px] font-black inline-flex items-center gap-2 hover:bg-zinc-900 transition-all shadow-lg">
-                                    免費加入學習 <ArrowRight size={12} />
-                                </Link>
-                            </div>
-                            <Sparkles className="absolute -right-4 -bottom-4 opacity-10" size={100} />
-                        </section>
                     </div>
                 </aside>
-
             </div>
 
-            {/* 🔗 延伸閱讀: 其他新聞 (Bottom Section) - Tighter */}
+            {/* AI Jump Modal - EXACTLY MATCHING ARTICLE DETAIL */}
+            <AnimatePresence>
+                {showAiJumpModal && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl">
+                        <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-zinc-900 border border-white/10 p-8 md:p-10 rounded-[2rem] max-w-sm w-full shadow-2xl relative overflow-hidden">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-blue-500" />
+                            <button onClick={() => setShowAiJumpModal(false)} className="absolute top-6 right-6 text-zinc-500 hover:text-white transition-colors">
+                                <X size={24} />
+                            </button>
+                            
+                            <div className="text-center mb-8">
+                                <div className="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                    <Smartphone className="text-emerald-400" size={28} />
+                                </div>
+                                <h3 className="text-xl md:text-2xl font-black text-white mb-2 tracking-tight">指令已複製！</h3>
+                                <p className="text-zinc-500 text-sm font-medium">選一個工具直接貼上</p>
+                            </div>
+
+                            <div className="flex justify-center gap-4">
+                                {[
+                                    { name: 'GPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com', color: 'hover:bg-[#10a37f]/10' },
+                                    { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai', color: 'hover:bg-[#D97757]/10' },
+                                    { name: 'Gemini', logo: GeminiLogo, app: 'googlegemini://', web: 'https://gemini.google.com', color: 'hover:bg-[#1C7DEB]/10' }
+                                ].map((ai, i) => (
+                                    <a key={i} href={ai.web} target="_blank" rel="noopener noreferrer" onClick={(e) => {
+                                        e.preventDefault();
+                                        window.location.href = ai.app;
+                                        setTimeout(() => {
+                                            window.open(ai.web, '_blank');
+                                            setShowAiJumpModal(false);
+                                        }, 2500);
+                                    }} className={`flex flex-col items-center gap-2 p-3 rounded-2xl bg-white/[0.03] border border-white/5 transition-all group flex-1 ${ai.color}`}>
+                                        <ai.logo size={28} />
+                                        <span className="text-white font-black text-[10px] uppercase tracking-tighter">{ai.name}</span>
+                                    </a>
+                                ))}
+                            </div>
+                            <div className="mt-8 pt-6 border-t border-white/5 text-center">
+                                <p className="text-[10px] text-zinc-600 font-bold leading-relaxed">
+                                    * 建議預先安裝 App 以獲得最佳體驗<br/>
+                                    * 若未自動跳轉，系統將於 2.5 秒後開啟網頁版
+                                </p>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* 延伸閱讀 */}
             <section className="max-w-6xl mx-auto px-6 mt-12 pt-10 border-t border-white/5 text-left">
                 <div className="flex items-center justify-between mb-8">
                     <h2 className="text-2xl font-black text-white flex items-center gap-3">
@@ -275,7 +295,7 @@ const NewsDetail = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {moreNews.map((article, i) => (
-                        <NewsCard key={article.id} article={article} idx={i} />
+                        <NewsCard key={article.slug} article={article} idx={i} />
                     ))}
                 </div>
             </section>
