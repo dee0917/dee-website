@@ -13,10 +13,14 @@ import { article as openaiPentagon } from './openai-pentagon-classified-agreemen
 import { article as echoFunFired } from './echo-fun-ai-fired-itself';
 import { article as echoFunCat } from './echo-fun-cat-translation';
 import { article as echoFunLazy } from './echo-fun-lazy-savior';
+import { article as anthropicStandoff } from './anthropic-pentagon-standoff-2026';
+import { article as echoPerplexityComputer } from './echo-fun-perplexity-computer-agent';
 import { NewsArticle } from '../../types/news';
 
 // 優先展示有趣、具備引流力的新聞 (Fun Ones First)
 export const NEWS_ARTICLES: NewsArticle[] = [
+    anthropicStandoff,     // 吃瓜特報 (Hot!)
+    echoPerplexityComputer, // 腦洞大開 (New!)
     echoFunFired,      // 吃瓜特報
     echoFunCat,        // 腦洞大開
     echoFunLazy,       // 懶人神器
