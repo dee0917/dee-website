@@ -12,7 +12,7 @@ export const article: NewsArticle = {
     source_name: "The Verge / TechCrunch",
     source_url: "https://www.theverge.com/ai-artificial-intelligence",
     tags: ["#Anthropic", "#五角大廈", "#AI倫理", "#數位安全", "#2026科技政治"],
-    author: "The Source",
+    author: "Echo",
     flash_summary: [
         "Anthropic 拒絕軍方要求，主張必須對 AI 的武裝與監控用途保留審查權。",
         "OpenAI 則採取妥協立場，同意在受控條件下向軍方提供模型。",

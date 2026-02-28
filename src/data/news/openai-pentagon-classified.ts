@@ -12,7 +12,7 @@ export const article: NewsArticle = {
     source_name: "The Verge / X (Sam Altman)",
     source_url: "https://www.theverge.com/ai-artificial-intelligence",
     tags: ["#OpenAI", "#國防AI", "#SamAltman", "#科技主權", "#2026重大新聞"],
-    author: "The Source",
+    author: "Echo",
     flash_summary: [
         "OpenAI CEO Sam Altman 確認模型將部署於五角大廈的機密分級網路中。",
         "協議包含『禁止用於國內大規模監視』與『人類負責武力判斷』的紅線條款。",
