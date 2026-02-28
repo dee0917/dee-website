@@ -177,43 +177,43 @@ const NewsDetail = () => {
                     {/* 底部引流 CTA */}
                     <motion.section 
                         {...fadeUp} 
-                        className="relative py-16 px-6 md:px-12 rounded-[3rem] md:rounded-[4rem] bg-[#0c0c0c] border border-white/5 overflow-hidden text-center mx-[-8px] md:mx-0 shadow-2xl"
+                        className="relative py-12 px-6 md:px-12 rounded-[2.5rem] md:rounded-[4rem] bg-[#0c0c0c] border border-white/5 overflow-hidden text-center mx-[-4px] md:mx-0 shadow-2xl"
                     >
                         {/* 專業背景裝飾 */}
                         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-emerald-900/5 pointer-events-none" />
                         <div className="absolute -top-24 -left-24 w-64 h-64 bg-emerald-500/5 blur-[100px] rounded-full" />
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.02] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
                         
                         <div className="relative z-10">
-                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 text-[9px] font-black uppercase tracking-[0.3em] mb-8">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-500 text-[8px] font-black uppercase tracking-[0.3em] mb-6">
                                 <Rocket size={10} /> Next Level Evolution
                             </div>
-                            <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight leading-tight max-w-xl mx-auto">
+                            <h2 className="text-2xl md:text-5xl font-black text-white mb-4 tracking-tight leading-tight max-w-xl mx-auto">
                                 {article.cta_override?.title || '想學習 AI？'}
                             </h2>
-                            <p className="text-zinc-400 text-base md:text-lg mb-12 max-w-lg mx-auto leading-relaxed">
+                            <p className="text-zinc-400 text-sm md:text-lg mb-8 max-w-lg mx-auto leading-relaxed">
                                 {article.cta_override?.description}
                             </p>
                             
-                            <div className="flex justify-center">
+                            <div className="flex justify-center mb-10">
                                 <Link to="/insights" className="group/btn relative inline-flex items-center justify-center">
                                     <div className="absolute -inset-4 bg-emerald-500/20 blur-2xl rounded-full opacity-0 group-hover/btn:opacity-100 transition-all duration-700 animate-pulse" />
-                                    <div className="relative bg-emerald-500 text-black px-10 py-5 rounded-2xl font-black text-xl flex items-center gap-3 shadow-xl hover:bg-emerald-400 transition-all">
+                                    <div className="relative bg-emerald-500 text-black px-8 py-4 rounded-xl font-black text-lg flex items-center gap-3 shadow-xl hover:bg-emerald-400 transition-all">
                                         <span className="whitespace-nowrap">{article.cta_override?.button_text || '立即開始學習'}</span>
-                                        <ArrowRight size={22} className="group-hover/btn:translate-x-1 transition-transform" />
+                                        <ArrowRight size={20} className="group-hover/btn:translate-x-1 transition-transform" />
                                     </div>
                                 </Link>
                             </div>
 
-                            <div className="mt-14 pt-8 border-t border-white/5 flex items-center justify-center gap-8 grayscale opacity-30">
-                                <div className="flex flex-col items-center gap-1">
-                                    <span className="text-[8px] font-black text-zinc-500 tracking-widest uppercase">Verified</span>
-                                    <Shield size={14} className="text-zinc-500" />
+                            <div className="pt-6 border-t border-white/5 flex items-center justify-center gap-6 grayscale opacity-20">
+                                <div className="flex items-center gap-2">
+                                    <Shield size={12} className="text-zinc-500" />
+                                    <span className="text-[7px] font-black text-zinc-500 tracking-widest uppercase">Verified</span>
                                 </div>
-                                <div className="w-px h-6 bg-white/5" />
-                                <div className="flex flex-col items-center gap-1">
-                                    <span className="text-[8px] font-black text-zinc-500 tracking-widest uppercase">Growth</span>
-                                    <TrendingUp size={14} className="text-zinc-500" />
+                                <div className="w-px h-3 bg-white/10" />
+                                <div className="flex items-center gap-2">
+                                    <TrendingUp size={12} className="text-zinc-500" />
+                                    <span className="text-[7px] font-black text-zinc-500 tracking-widest uppercase">Growth</span>
                                 </div>
                             </div>
                         </div>
