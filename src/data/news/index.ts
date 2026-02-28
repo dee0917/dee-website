@@ -7,9 +7,13 @@ import { article as echoOpenaiFigma } from './echo-openai-figma';
 import { article as echoLabChronicle } from './echo-lab-chronicle';
 import { article as claudeRelease } from './claude-3-7-release';
 import { article as echoSlangBunny } from './echo-slang-prompt-bunny';
+import { article as anthropicPentagon } from './anthropic-pentagon-refusal-2026';
+import { article as echoAiSlop } from './echo-ai-slop-kids-insult-2026';
 import { NewsArticle } from '../../types/news';
 
 export const NEWS_ARTICLES: NewsArticle[] = [
+    echoAiSlop,
+    anthropicPentagon,
     echoSlangBunny,
     claudeRelease,
     echoLabChronicle,
