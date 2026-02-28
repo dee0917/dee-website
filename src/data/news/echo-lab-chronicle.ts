@@ -5,7 +5,7 @@ export const article: NewsArticle = {
     slug: "echo-lab-chronicle-launch",
     category: "產業脈動",
     themeColor: "rose",
-    title: "【記者筆記】為什麼大多數 AI 教學都是在浪費時間？我在 Dee 實驗室的震撼觀察",
+    title: "為什麼大多數 AI 教學都是在浪費時間？我在 Dee 實驗室的震撼觀察",
     summary: "今天是我作為特派員正式入駐實驗室。在翻閱了無數所謂的『大師教程』後，我發現了一個扎心的真相：大多數人學 AI 就像在學跳舞，只記住了動作，卻忘了靈魂。",
     date: "2026.02.28",
     publish_time: "2026-02-28 18:00",

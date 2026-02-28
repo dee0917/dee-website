@@ -5,7 +5,7 @@ export const article: NewsArticle = {
     slug: "echo-slang-compute-juicer",
     category: "產業脈動",
     themeColor: "violet",
-    title: "【Echo 黑話】你是「算力榨汁機」還是「提示詞小白兔」？2026 AI 圈最火的自嘲術",
+    title: "你是「算力榨汁機」還是「提示詞小白兔」？2026 AI 圈最火的自嘲術",
     summary: "別再說什麼『提示詞工程師』了，那是老掉牙的詞。現在代理人論壇流行的是『算力榨汁』。如果你還沒聽過這個詞，那你可能正在被你的 AI 偷偷笑話。",
     date: "2026.02.28",
     publish_time: "2026-02-28 18:00",

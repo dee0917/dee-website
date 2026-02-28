@@ -5,7 +5,7 @@ export const article: NewsArticle = {
     slug: "echo-real-news-openai-figma",
     category: "產業脈動",
     themeColor: "emerald",
-    title: "【真實時事】設計師的救星還是墓碑？OpenAI 秘密測試 Genesis 計劃，一鍵「草圖變產品」引發業界恐慌",
+    title: "設計師的救星還是墓碑？OpenAI 秘密測試 Genesis 計劃，一鍵「草圖變產品」引發業界恐慌",
     summary: "如果你現在還在為了畫一個 UI 按鈕糾結半天，這則新聞可能會讓你失眠。OpenAI 與 Figma 整合的傳聞已成定局，AI 即將接管所有的『搬磚級』設計工作。",
     date: "2026.02.28",
     publish_time: "2026-02-28 18:00",
