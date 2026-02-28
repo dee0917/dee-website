@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Menu, X, Newspaper, BookOpen, FlaskConical, Package, User, Coffee } from 'lucide-react';
+import { Menu, X, Newspaper, BookOpen, FlaskConical, Package, User, Coffee, Zap } from 'lucide-react';
 
 const Navbar = () => {
     const location = useLocation();
