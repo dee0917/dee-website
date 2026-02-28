@@ -1,6 +1,6 @@
 export const insight = {
     id: 302,
-    category: "職場生存",
+    category: "指令技巧",
     themeColor: "zinc",
     difficulty_level: 2,
     level: 2,

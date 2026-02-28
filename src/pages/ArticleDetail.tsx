@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { api } from '../lib/supabase';
 import { INSIGHTS } from '../data/mock';
+import { MAIN_QUEST_ORDER, CHAPTERS, SIDE_QUEST_IDS } from '../data/insights';
 import SEO from '../components/ui/SEO';
 
 const fadeUp = {
@@ -175,10 +176,19 @@ const ArticleDetail = () => {
                 completed.push(article.id);
                 localStorage.setItem('dee_ai_completed', JSON.stringify(completed));
             }
-            const savedLevel = localStorage.getItem('dee_ai_level');
-            const currentLevel = savedLevel ? parseInt(savedLevel) : 1;
-            if (article.level >= currentLevel) {
-                localStorage.setItem('dee_ai_level', (article.level + 1).toString());
+            // Check if completing this article unlocks the next chapter
+            const currentChapter = CHAPTERS.find(c => c.articleIds.includes(article.id));
+            if (currentChapter) {
+                const chapterArticles = currentChapter.articleIds;
+                const allChapterDone = chapterArticles.every((id: number) => completed.includes(id));
+                if (allChapterDone) {
+                    const nextChapterId = currentChapter.id + 1;
+                    const savedLevel = localStorage.getItem('dee_ai_level');
+                    const currentLevel = savedLevel ? parseInt(savedLevel) : 1;
+                    if (nextChapterId > currentLevel) {
+                        localStorage.setItem('dee_ai_level', nextChapterId.toString());
+                    }
+                }
             }
         }
         confetti({ particleCount: 200, spread: 100, origin: { y: 0.5 }, colors: ['#fbbf24', '#f59e0b', '#d97706'] });
@@ -189,7 +199,31 @@ const ArticleDetail = () => {
 
     const theme = getColorClasses(article.themeColor || article.theme_color || 'emerald');
     const isNews = article.category === 'AI 新聞';
-    const nextArticle = INSIGHTS.find(i => i.id !== article.id && i.difficulty_level >= (article.difficulty_level || 1)) || INSIGHTS[0];
+    
+    // Sequential "next article" logic
+    const mainIndex = MAIN_QUEST_ORDER.indexOf(article.id);
+    const isSideQuest = SIDE_QUEST_IDS.includes(article.id);
+    const isMainQuest = mainIndex !== -1;
+    
+    let nextArticle: any = null;
+    let nextLabel = '';
+    let isFinale = false;
+
+    if (isMainQuest && mainIndex < MAIN_QUEST_ORDER.length - 1) {
+        const nextId = MAIN_QUEST_ORDER[mainIndex + 1];
+        nextArticle = INSIGHTS.find(i => i.id === nextId) || null;
+        const currentChapter = CHAPTERS.find(c => c.articleIds.includes(article.id));
+        const nextChapter = CHAPTERS.find(c => c.articleIds.includes(nextId));
+        if (currentChapter?.id === nextChapter?.id) {
+            nextLabel = `${nextChapter?.emoji} 繼續：`;
+        } else {
+            nextLabel = `🎉 進入新章節：${nextChapter?.emoji} ${nextChapter?.title}`;
+        }
+    } else if (isMainQuest && mainIndex === MAIN_QUEST_ORDER.length - 1) {
+        isFinale = true;
+    } else if (isSideQuest) {
+        nextLabel = '🗺️ 回到冒險地圖';
+    }
     const hasSteps = article.steps && article.steps.length > 0;
     const hasQuiz = article.quiz;
     const allStepsDone = stepsCompleted.length > 0 && stepsCompleted.every(Boolean);
@@ -568,19 +602,43 @@ const ArticleDetail = () => {
                 </motion.div>
             </section>
 
-            {/* 下一篇 */}
+            {/* 下一篇 — 根據主線順序 */}
             <section className="pb-40 px-5 md:px-6 text-left">
                 <div className="max-w-4xl mx-auto border-t border-white/5 pt-24">
-                    <p className="text-zinc-700 text-[10px] font-black uppercase tracking-[0.5em] mb-12">下一場進化挑戰 →</p>
-                    <Link to={`/insights/${nextArticle.id}`} className="group block bg-white/[0.03] border border-white/5 hover:border-emerald-500/40 p-10 md:p-16 rounded-[3rem] transition-all shadow-xl hover:shadow-emerald-500/10 hover:-translate-y-2">
-                        <div className="flex items-center justify-between gap-10">
-                            <div>
-                                <span className="text-emerald-500/60 font-black text-[10px] uppercase tracking-[0.4em] mb-6 block">Next Level</span>
-                                <h3 className="text-2xl md:text-4xl font-black text-white group-hover:text-emerald-400 transition-colors leading-tight tracking-tight">{nextArticle.title}</h3>
-                            </div>
-                            <ArrowRight className="text-zinc-800 group-hover:text-emerald-400 group-hover:translate-x-6 transition-all flex-shrink-0" size={60} strokeWidth={4} />
+                    {isFinale ? (
+                        /* 主線通關 */
+                        <motion.div {...fadeUp} className="text-center py-16">
+                            <div className="text-7xl mb-8">🎓</div>
+                            <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">恭喜通關！</h2>
+                            <p className="text-zinc-400 text-lg md:text-xl mb-12 max-w-lg mx-auto leading-relaxed">你已經完成了所有 12 篇主線任務。從今天起，AI 就是你最強的生活夥伴。</p>
+                            <Link to="/insights" className="inline-flex items-center gap-3 bg-emerald-500 text-black font-black py-5 px-10 rounded-2xl text-xl hover:bg-emerald-400 transition-all shadow-lg">
+                                🗺️ 探索支線任務
+                            </Link>
+                        </motion.div>
+                    ) : nextArticle ? (
+                        /* 下一關 */
+                        <>
+                            <p className="text-zinc-700 text-[10px] font-black uppercase tracking-[0.5em] mb-4">{nextLabel}</p>
+                            <Link to={`/insights/${nextArticle.id}`} className="group block bg-white/[0.03] border border-white/5 hover:border-emerald-500/40 p-10 md:p-16 rounded-[3rem] transition-all shadow-xl hover:shadow-emerald-500/10 hover:-translate-y-2">
+                                <div className="flex items-center justify-between gap-10">
+                                    <div>
+                                        <span className="text-emerald-500/60 font-black text-[10px] uppercase tracking-[0.4em] mb-6 block">
+                                            {isMainQuest ? `QUEST ${mainIndex + 2} / ${MAIN_QUEST_ORDER.length}` : 'NEXT'}
+                                        </span>
+                                        <h3 className="text-2xl md:text-4xl font-black text-white group-hover:text-emerald-400 transition-colors leading-tight tracking-tight">{nextArticle.title}</h3>
+                                    </div>
+                                    <ArrowRight className="text-zinc-800 group-hover:text-emerald-400 group-hover:translate-x-6 transition-all flex-shrink-0" size={60} strokeWidth={4} />
+                                </div>
+                            </Link>
+                        </>
+                    ) : (
+                        /* 支線任務 — 回到地圖 */
+                        <div className="text-center py-12">
+                            <Link to="/insights" className="inline-flex items-center gap-3 bg-white/5 border border-white/10 text-white font-bold py-4 px-8 rounded-2xl text-lg hover:bg-white/10 transition-all">
+                                🗺️ 回到冒險地圖 <ArrowRight size={20} />
+                            </Link>
                         </div>
-                    </Link>
+                    )}
                 </div>
             </section>
         </motion.div>

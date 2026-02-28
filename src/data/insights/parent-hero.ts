@@ -1,6 +1,6 @@
 export const insight = {
     id: 304,
-    category: "神隊友育兒",
+    category: "支線任務",
     themeColor: "rose",
     difficulty_level: 2,
     level: 1,

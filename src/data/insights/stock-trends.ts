@@ -1,6 +1,6 @@
 export const insight = {
     id: 404,
-    category: "投資人 AI 攻略",
+    category: "支線任務",
     themeColor: "emerald",
     difficulty_level: 3,
     level: 3,

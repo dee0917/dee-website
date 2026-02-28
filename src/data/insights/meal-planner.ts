@@ -1,6 +1,6 @@
 export const insight = {
     id: 308,
-    category: "生活應用",
+    category: "生活實戰",
     themeColor: "amber",
     difficulty_level: 1,
     level: 2,
