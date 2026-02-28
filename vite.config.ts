@@ -8,7 +8,7 @@ export default defineConfig({
     allowedHosts: 'all'
   },
   preview: {
-    allowedHosts: 'all'
+    allowedHosts: true
   },
   resolve: {
     alias: {

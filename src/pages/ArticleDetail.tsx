@@ -511,8 +511,8 @@ const ArticleDetail = () => {
                             <div className="flex justify-center gap-4">
                                 {[
                                     { name: 'GPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com', color: 'hover:bg-[#10a37f]/10' },
-                                    { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai', color: 'hover:bg-[#D97757]/10' },
-                                    { name: 'Gemini', logo: GeminiLogo, app: 'googleapp://', web: 'https://gemini.google.com', color: 'hover:bg-[#1C7DEB]/10' }
+                                    { name: 'Claude', logo: ClaudeLogo, app: 'anthropic://', web: 'https://claude.ai', color: 'hover:bg-[#D97757]/10' },
+                                    { name: 'Gemini', logo: GeminiLogo, app: 'googlegemini://', web: 'https://gemini.google.com', color: 'hover:bg-[#1C7DEB]/10' }
                                 ].map((ai, i) => (
                                     <a key={i} href={ai.web} target="_blank" rel="noopener noreferrer" onClick={(e) => {
                                         e.preventDefault();
