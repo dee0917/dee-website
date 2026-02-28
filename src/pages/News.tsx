@@ -1,21 +1,43 @@
 import SEO from '../components/ui/SEO';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Zap, Clock, Shield, TrendingUp, Filter, Star, Info, MessageCircle, Sparkles, Coffee } from 'lucide-react';
+import { ArrowRight, Zap, Clock, Shield, TrendingUp, Filter, Star, Info, MessageCircle, Sparkles, Coffee, AlertTriangle } from 'lucide-react';
 import { NEWS_ARTICLES } from '../data/news';
 import { useMemo } from 'react';
 
-// 與全站 UI 規範一致的專業大分類 (新增有趣分類)
+// 確保字串完全匹配，杜絕空格或編碼問題
+const CAT_GOSSIP = "吃瓜特報";
+const CAT_BRAIN = "腦洞大開";
+const CAT_LAZY = "懶人神器";
+const CAT_INDUSTRY = "產業脈動";
+const CAT_POLICY = "政策法規";
+const CAT_APP = "實戰應用";
+const CAT_SECURITY = "安全防禦";
+const CAT_CAREER = "職場轉型";
+const CAT_ALL = "全部";
+
 const CATEGORY_THEMES: Record<string, string> = {
-    '吃瓜特報': 'orange',
-    '腦洞大開': 'teal',
-    '懶人神器': 'indigo',
-    '產業脈動': 'violet',
-    '政策法規': 'rose',
-    '實戰應用': 'amber',
-    '安全防禦': 'blue',
-    '職場轉型': 'emerald',
-    '全部': 'emerald'
+    [CAT_GOSSIP]: 'orange',
+    [CAT_BRAIN]: 'teal',
+    [CAT_LAZY]: 'indigo',
+    [CAT_INDUSTRY]: 'violet',
+    [CAT_POLICY]: 'rose',
+    [CAT_APP]: 'amber',
+    [CAT_SECURITY]: 'blue',
+    [CAT_CAREER]: 'emerald',
+    [CAT_ALL]: 'emerald'
+};
+
+// 避免 Tailwind JIT 沒抓到動態類別，改用靜態對照表
+const BUTTON_THEMES: Record<string, string> = {
+    orange: 'bg-orange-500 text-black border-orange-500 shadow-orange-500/20',
+    teal: 'bg-teal-500 text-black border-teal-500 shadow-teal-500/20',
+    indigo: 'bg-indigo-500 text-black border-indigo-500 shadow-indigo-500/20',
+    violet: 'bg-violet-500 text-black border-violet-500 shadow-violet-500/20',
+    rose: 'bg-rose-500 text-black border-rose-500 shadow-rose-500/20',
+    amber: 'bg-amber-500 text-black border-amber-500 shadow-amber-500/20',
+    blue: 'bg-blue-500 text-black border-blue-500 shadow-blue-500/20',
+    emerald: 'bg-emerald-500 text-black border-emerald-500 shadow-emerald-500/20',
 };
 
 const THEME_CONFIG: Record<string, any> = {
@@ -23,7 +45,7 @@ const THEME_CONFIG: Record<string, any> = {
     blue: { text: 'text-blue-500', lightText: 'text-blue-400', tag: 'bg-blue-500/10 text-blue-500', border: 'hover:border-blue-500/20', glow: 'group-hover:shadow-blue-500/10' },
     violet: { text: 'text-violet-500', lightText: 'text-violet-400', tag: 'bg-violet-500/10 text-violet-500', border: 'hover:border-violet-500/20', glow: 'group-hover:shadow-violet-500/10' },
     rose: { text: 'text-rose-500', lightText: 'text-rose-400', tag: 'bg-rose-500/10 text-rose-500', border: 'hover:border-rose-500/20', glow: 'group-hover:shadow-rose-500/10' },
-    amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-400', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
+    amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-500', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
     orange: { text: 'text-orange-500', lightText: 'text-orange-400', tag: 'bg-orange-500/10 text-orange-500', border: 'hover:border-orange-500/20', glow: 'group-hover:shadow-orange-500/10' },
     teal: { text: 'text-teal-500', lightText: 'text-teal-400', tag: 'bg-teal-500/10 text-teal-500', border: 'hover:border-teal-500/20', glow: 'group-hover:shadow-teal-500/10' },
     indigo: { text: 'text-indigo-500', lightText: 'text-indigo-400', tag: 'bg-indigo-500/10 text-indigo-500', border: 'hover:border-indigo-500/20', glow: 'group-hover:shadow-indigo-500/10' },
@@ -32,18 +54,19 @@ const THEME_CONFIG: Record<string, any> = {
 const News = () => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
-    const activeCategory = searchParams.get('cat') || '全部';
+    const activeCategory = searchParams.get('cat') || CAT_ALL;
 
-    const categories = ['全部', '吃瓜特報', '腦洞大開', '懶人神器', '產業脈動', '政策法規', '實戰應用', '安全防禦', '職場轉型'];
+    const categories = [CAT_ALL, CAT_GOSSIP, CAT_BRAIN, CAT_LAZY, CAT_INDUSTRY, CAT_POLICY, CAT_APP, CAT_SECURITY, CAT_CAREER];
 
     const filteredArticles = useMemo(() => {
-        if (activeCategory === '全部') return NEWS_ARTICLES;
-        return NEWS_ARTICLES.filter(a => a.category === activeCategory);
+        if (activeCategory === CAT_ALL) return NEWS_ARTICLES;
+        // 使用 trim 與 包含 邏輯，增加匹配容錯率
+        return NEWS_ARTICLES.filter(a => a.category.trim() === activeCategory.trim());
     }, [activeCategory]);
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-6xl mx-auto min-h-screen text-left relative z-0">
-            <SEO title="AI 新聞情報站 - 2026 最新趨勢解析" description="由 Dee 主理的 AI 新聞板塊，透過頂尖 AI Agent 系統進行精準轉譯，助您在 3 分鐘內掌握全球 AI 核心脈動。" path="/news" />
+            <SEO title="AI 新聞情報站 - 2026 最新趨勢解析" description="由 Dee 主理的 AI 新聞板塊，透過頂尖 AI Agent 系統進行精確轉譯，助您快速掌握全球 AI 核心脈動。" path="/news" />
             
             <div className="mb-16">
                 <div className="flex items-center gap-4 mb-6">
@@ -65,14 +88,15 @@ const News = () => {
                 <div className="flex items-center gap-4 mb-10 overflow-x-auto pb-4 scrollbar-hide">
                     <div className="flex-shrink-0 text-zinc-700 mr-1"><Filter size={16} /></div>
                     {categories.map(tag => {
-                        const themeColor = CATEGORY_THEMES[tag] || 'emerald';
+                        const colorName = CATEGORY_THEMES[tag] || 'emerald';
                         const isActive = activeCategory === tag;
+                        const themeClasses = BUTTON_THEMES[colorName];
                         
                         return (
                             <button key={tag} onClick={() => setSearchParams({ cat: tag })}
-                                className={`flex-shrink-0 px-6 py-2.5 rounded-full text-xs font-black transition-all duration-300 ${isActive
-                                    ? `bg-${themeColor}-500 text-black shadow-lg shadow-${themeColor}-500/30 scale-105`
-                                    : 'bg-white/[0.03] border border-white/[0.06] text-zinc-500 hover:text-white hover:border-white/20'
+                                className={`flex-shrink-0 px-6 py-2.5 rounded-full text-xs font-black transition-all duration-300 border ${isActive
+                                    ? `${themeClasses} shadow-lg scale-105`
+                                    : 'bg-white/[0.03] border border-white/[0.06] text-zinc-500 hover:text-white hover:border-white/10'
                                 }`}>
                                 {tag}
                             </button>
@@ -81,12 +105,20 @@ const News = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start min-h-[500px]">
                 <AnimatePresence mode="popLayout">
                     {filteredArticles.map((article, i) => (
                         <NewsCard key={article.slug} article={article} idx={i} />
                     ))}
                 </AnimatePresence>
+                
+                {filteredArticles.length === 0 && (
+                    <div className="col-span-full py-40 text-center bg-white/[0.02] rounded-[3rem] border border-white/5 animate-fade-in">
+                        <div className="text-5xl mb-6 grayscale opacity-20">🕳️</div>
+                        <p className="text-zinc-500 text-lg font-bold">目前「{activeCategory}」分類暫無最新情報</p>
+                        <button onClick={() => setSearchParams({ cat: CAT_ALL })} className="mt-4 text-emerald-400 font-black text-sm uppercase tracking-widest hover:underline">返回全部新聞</button>
+                    </div>
+                )}
             </div>
 
             <section className="mt-40 text-center py-20 border-t border-white/5">
@@ -94,7 +126,7 @@ const News = () => {
                     <div className="space-y-6 text-left">
                         <h4 className="text-white font-black text-2xl">情報轉譯準則</h4>
                         <p className="text-zinc-500 leading-relaxed font-medium">
-                            由 Dee 親自審核每一則進入情報站的新聞，透過頂尖「AI Agent」系統進行高頻掃描與精準轉譯。我們致力於將複雜的科技動態轉化為易懂的白話重點，助您在 3 分鐘內掌握全球 AI 核心脈動，直接轉換為您的數位生產力。
+                            由 Dee 親自審核每一則進入情報站的新聞，透過頂尖「AI Agent」系統進行高頻掃描與精準轉譯。我們致力於將複雜的科技動態轉化為易懂的白話重點。
                         </p>
                     </div>
                     <div className="grid grid-cols-2 gap-8">
@@ -147,7 +179,7 @@ const NewsCard = ({ article, idx }: any) => {
                         <Clock size={10} className="text-zinc-500" /> {article.readTime}
                     </span>
                     <div className={`flex items-center gap-1.5 text-${themeColor}-500/50 group-hover:text-${themeColor}-400 transition-all`}>
-                        <span className="text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all">Read Intelligence</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all">Read</span>
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </div>
                 </div>
