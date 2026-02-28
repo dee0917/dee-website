@@ -13,7 +13,7 @@ const Navbar = () => {
         <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-[#0A0A0A]/90 backdrop-blur-md">
             <div className="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
                 <Link to="/" className="flex items-center gap-2 md:gap-3 cursor-pointer group">
-                    <span className="font-signature text-2xl md:text-3xl text-white group-hover:text-google-blue transition-colors">Dee.</span>
+                    <span className="font-signature text-2xl md:text-3xl text-white group-hover:text-emerald-400 transition-colors">Dee.</span>
                     <span className="h-4 w-[1px] bg-zinc-800"></span>
                     <span className="text-[10px] md:text-xs uppercase tracking-widest text-zinc-500">AI 生活實驗室</span>
                 </Link>
