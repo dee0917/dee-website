@@ -7,10 +7,14 @@ import { article as echoOpenaiFigma } from './echo-openai-figma';
 import { article as echoLabChronicle } from './echo-lab-chronicle';
 import { article as openaiPentagon } from './openai-pentagon-classified';
 import { article as echoSlangJuicer } from './echo-slang-compute-juicer';
+import { article as echoSlop } from './echo-ai-slop-kids-insult-2026';
+import { article as anthropicPentagon } from './anthropic-pentagon-standoff-2026';
 import { article as echoModelRanking } from './echo-model-ranking-2026';
 import { NewsArticle } from '../../types/news';
 
 export const NEWS_ARTICLES: NewsArticle[] = [
+    echoSlop,
+    anthropicPentagon,
     echoModelRanking,
     openaiPentagon,
     echoSlangJuicer,
