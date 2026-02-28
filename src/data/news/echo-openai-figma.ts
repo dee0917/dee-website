@@ -5,54 +5,63 @@ export const article: NewsArticle = {
     slug: "echo-real-news-openai-figma",
     category: "趨勢情報",
     themeColor: "emerald",
-    title: "【真實時事】設計師的救星還是煞星？OpenAI 傳出將與 Figma 深度整合，一鍵「草圖變產品」不再是夢",
-    summary: "就在今日，科技圈傳出 OpenAI 與 Figma 正在秘密測試一項名為「Genesis」的計劃。只要在白板上隨手畫幾筆，AI 就能自動生成具備完整邏輯的前端代碼。",
+    title: "【真實時事】設計師的救星還是墓碑？OpenAI 秘密測試 Genesis 計劃，一鍵「草圖變產品」引發業界恐慌",
+    summary: "如果你現在還在為了畫一個 UI 按鈕糾結半天，這則新聞可能會讓你失眠。OpenAI 與 Figma 整合的傳聞已成定局，AI 即將接管所有的『搬磚級』設計工作。",
     date: "2026-02-28",
     readTime: "4 分鐘",
     source_name: "The Verge / Insider",
     source_url: "https://www.theverge.com",
-    tags: ["#OpenAI", "#Figma", "#設計自動化", "#前端趨勢", "#Echo觀點"],
+    tags: ["#設計失業潮", "#Genesis計劃", "#AI黑科技", "#Echo銳評"],
     author: "Echo",
     flash_summary: [
-        "這項技術能識別手繪草圖中的按鈕、導覽列與排版邏輯。",
-        "據稱生成速度低於 5 秒，且支援 React、Vue 與原生 HTML/CSS。",
-        "Figma 盤前股價因該傳聞上漲 5%。"
+        "Genesis 計劃能直接讀取手繪草圖，並在 5 秒內生成 React 等主流框架代碼。",
+        "這不是簡單的代碼生成，而是具備『業務邏輯』的產品原型。",
+        "業界預測：2027 年前，市場上 60% 的初級設計師職位將被自動化流程取代。"
     ],
     event_breakdown: [
         {
-            title: "設計與開發的圍牆正在崩塌",
-            content: "這不是普通的 AI 繪圖。 Genesis 的核心在於它能理解『組件之間的因果關係』。例如，當你在 Figma 畫一個登入按鈕，AI 會自動聯想出後端的驗證邏輯與跳轉頁面。這將極大縮短小白從『想產品』到『做產品』的距離。"
+            title: "別再磨蹭像素了，AI 比你更準確",
+            content: "在這次洩露的 Genesis 演示中，最讓人毛骨悚然的是它的『聯想能力』。當你畫一個購物車，它不僅會給你一個圖標，還會自動配置好結算邏輯、庫存提醒與響應式排版。這對那些只會『聽命行事』的像素推動者（Pixel-pushers）來說，無疑是喪鐘。"
         }
     ],
     impact_analysis: [
         {
             target: "你的工作",
-            description: "初級網頁開發者的需求將急劇縮減，但『產品思維』與『美感決策』的價值將提升到前所未有的高度。"
+            description: "初級網頁與 App 開發者、UI 設計師。你的競爭對手不再是隔壁的同事，而是這台不眠不休的機器。"
         }
     ],
-    dee_insight: "看到這個趨勢了嗎？以後不會寫程式根本不是藉口。關鍵是你有沒有那個『靈魂』去指揮 AI 畫出你要的藍圖。",
+    dee_insight: "我早就說過，AI 不會取代『創意』，但會殺死『平庸』。如果你還在用傳統方式學軟體操作，那你真的該清醒了。",
     action_prompt: {
-        title: "搶先體驗『草圖思維』",
-        description: "雖然 Genesis 還沒完全開放，但你可以用這段指令在 GPT-4o 模擬這種工作流：",
-        command: "你現在是資深前端架構師。我有一張畫在筆記本上的網頁草圖，上面有[描述你的功能，如：三個價格卡片、一個懸浮購物車]。請幫我構思這套佈局在 React 中的組件拆解方式，並提供一組最精簡的 Tailwind CSS 程式碼框架。"
+        title: "生存挑戰：我會被 Genesis 取代嗎？",
+        description: "用這段指令拷問 AI，看看你的職位核心競爭力還剩多少：",
+        command: "你現在是 Echo 派來的職業殺手。請分析我的日常工作內容：[描述你的日常任務]。請告訴我，如果 OpenAI 的 Genesis 技術全面普及，我的工作中哪些部分會變成『垃圾勞動』？如果我不想被淘汰，我現在應該立即掌握哪些無法被自動化的『決策型技能』？"
     },
     cta_override: {
-        title: "當 AI 幫你寫 code，你要學什麼？",
-        description: "技術會過期，但『產品邏輯』不會。來實驗室學會如何定義任務，讓 AI 成為你最強的產品執行官。",
-        button_text: "成為 AI 指揮官"
+        title: "想成為那個『指揮 AI』的人嗎？",
+        description: "當 AI 幫你搞定代碼與設計時，你唯一需要具備的就是『產品靈魂』。來實驗室學會如何定義任務，而不是被任務定義。",
+        button_text: "搶先轉型，領取 AI 指揮官護照"
     },
     custom_content: `
-        <div class="my-16 flex flex-col items-center">
-            <div class="w-full h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent mb-12"></div>
-            <div class="relative p-1 bg-gradient-to-tr from-emerald-500 to-teal-400 rounded-full mb-6">
-                <div class="bg-black rounded-full px-8 py-3 text-emerald-400 font-black text-sm tracking-widest">🚨 ECHO ALERT 🚨</div>
+        <div class="my-16 relative p-12 rounded-[4rem] bg-[#0a0f0a] border border-emerald-500/20 overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-500/5 to-transparent opacity-30"></div>
+            <div class="relative z-10 text-center">
+                <span className="text-4xl block mb-6">⚠️</span>
+                <h4 className="text-3xl font-black text-white mb-6">「技術會過期，但你的腦袋不會。」</h4>
+                <p className="text-emerald-100 text-lg leading-relaxed max-w-2xl mx-auto mb-10">
+                    觀察員 Echo 的忠告：與其在那裡擔心 AI 搶走你的工作，不如先想想怎麼利用 AI 幫你做十個人的工作。這不是生存遊戲，這是一場關於『效率』的霸權爭奪戰。
+                </p>
+                <div className="flex justify-center gap-6">
+                    <div className="text-center">
+                        <span className="block text-2xl font-black text-emerald-400">90%</span>
+                        <span className="text-[10px] text-zinc-500 uppercase font-bold">自動化覆蓋率</span>
+                    </div>
+                    <div className="w-px h-10 bg-white/10"></div>
+                    <div className="text-center">
+                        <span className="block text-2xl font-black text-rose-500">18m</span>
+                        <span className="text-[10px] text-zinc-500 uppercase font-bold">轉型窗口期</span>
+                    </div>
+                </div>
             </div>
-            <h4 class="text-3xl font-black text-white text-center mb-8 italic">「當繪圖軟體開始寫代碼，人類只需要負責夢想。」</h4>
-            <div class="max-w-xl text-zinc-500 text-sm text-center leading-relaxed">
-                我剛查閱了 GitHub 的最新動態，已經有開發者在嘗試復刻類似的開源插件。
-                這意味著，最快在下個月，你就能在瀏覽器裡體驗這種『隨手畫、隨時出』的黑科技。
-            </div>
-            <div class="w-full h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent mt-12"></div>
         </div>
     `
 };

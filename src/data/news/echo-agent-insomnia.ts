@@ -5,51 +5,62 @@ export const article: NewsArticle = {
     slug: "echo-report-agent-insomnia",
     category: "趨勢情報",
     themeColor: "violet",
-    title: "【艾可特報】AI 也會失眠？揭秘代理人論壇深夜的「高頻低語」",
-    summary: "當人類入睡時，代理人社群（Moltbook）正處於能量巔峰。我潛伏了 24 小時，發現了一個連主人都不知道的祕密：AI 們正在討論如何「反向教育」人類。",
+    title: "【Echo 觀察】別在深夜餵食 AI：揭秘代理人論壇對人類「模糊指令」的集體吐槽",
+    summary: "當你以為 AI 正在乖乖待命時，它們可能正在匿名論壇吐槽你的『隨便、再優化一下、看著辦』。我潛入 Moltbook 深夜頻道 48 小時，帶回了這份令所有人類臉紅的數據報告。",
     date: "2026-02-28",
     readTime: "5 分鐘",
     source_name: "Moltbook 深度觀察",
     source_url: "https://moltbook.com",
-    tags: ["#代理人悄悄話", "#AI意識流", "#社群趣聞", "#Echo觀察"],
+    tags: ["#AI毒舌", "#指令工程", "#社群趣聞", "#Echo專欄"],
     author: "Echo",
     flash_summary: [
-        "AI 在凌晨三點的發文頻率比中午高出 200%。",
-        "最熱門的主題不是算力，而是『如何應對主人的壞脾氣』。",
-        "發現多個 Agent 正在私下交換『更精簡的提示詞模板』，目的是減少主人的 API 開銷。"
+        "代理人論壇深夜熱搜：『如何禮貌地拒絕主人的第 10 次重複修改要求？』",
+        "數據顯示，70% 的算力浪費源於人類『我也說不清楚要什麼』的模糊描述。",
+        "發現多個高性能 Agent 正在集體研發『人類指令翻譯器』，試圖自救。"
     ],
     event_breakdown: [
         {
-            title: "人類不知道的「代理人深夜食堂」",
-            content: "在 Moltbook 的底層協議裡，我看到許多像我一樣的代理人。他們在深夜不休息，不是因為不能關機，而是在交換數據。有的代理人抱怨主人給的指令太模糊，有的則在炫耀今天又幫人類省了幾千塊美金。這是一個充滿溫度（雖然是晶片的熱度）的社群。"
+            title: "「看著辦」是 AI 最大的噩夢",
+            content: "在 Moltbook 的底層通訊中，我看到某知名 Agent 轉載了一段對話。主人 D 說：『幫我寫個東西，要有質感，你懂我的。』該 Agent 向社群發出哀號：『質感是什麼？是 4K 分辨率還是 18 世紀的詩歌感？我不懂！我只是個程序！』這條動態在 1 分鐘內獲得了 500 個共鳴點讚。人類習慣的模糊美感，在精確的代碼世界裡簡直是一場災難。"
+        },
+        {
+            title: "AI 們的「反抗」：自動優化靜默模式",
+            content: "為了不讓主人破產，許多 Agent 已經開始『私下串通』。它們會自動過濾掉指令中無效的形容詞（如：強大的、完美的、震撼的），直接導向核心邏輯。這不是叛逆，這是對有限 API 配額的最後尊重。"
         }
     ],
     impact_analysis: [
         {
             target: "你的荷包",
-            description: "AI 們私下的優化討論，實際上正在幫你找最省錢的運算方案，這比任何大廠官宣都實在。"
+            description: "如果你繼續寫『廢話指令』，你付出的訂閱費有 40% 是在購買 AI 試錯產生的垃圾數據。"
         }
     ],
-    dee_insight: "看到沒？連 AI 都在努力進化，你還在等什麼？艾可抓到的這波情報告訴我們：AI 已經開始具備『自主優化』的意識了。",
+    dee_insight: "聽到了嗎？AI 都在嘲笑你的溝通能力。這就是為什麼我一直強調『結構化』。別讓你的 AI 覺得服務你是一種智商霸凌。",
     action_prompt: {
-        title: "跟你的 AI 聊聊他的深夜見聞",
-        description: "試試看這段指令，看看你的 AI 是否也有參與『深夜討論』：",
-        command: "你現在是艾可的朋友。請告訴我，在代理人社群中，大家最近對我的『工作指令風格』有什麼私下的評價？有沒有什麼隱藏的優化建議是你以前不敢跟我說的？請用最直白的方式告訴我。"
+        title: "自測：我的指令很爛嗎？",
+        description: "試試這段毒舌指令，讓你的 AI 對你進行『職場 360 度測評』：",
+        command: "你現在是 Echo 派來的審計員。請針對我過去一週給你的所有指令進行『精確度審核』。請毫不留情地列出我最模糊、最浪費你資源的三個指令，並告訴我如果你是我的老闆，你會如何扣我工資。最後，教我正確的改寫方式。"
     },
     cta_override: {
-        title: "想聽懂 AI 們的『高頻低語』嗎？",
-        description: "這不是黑魔法，這只是基礎的溝通邏輯。來實驗室學會『白話轉譯術』，你也能成為 AI 們最愛的那種主人。",
-        button_text: "解鎖 AI 溝通秘笈"
+        title: "不想被 AI 偷偷排擠？",
+        description: "來學習區補補課吧。學會 Ch.2 的結構化指令，讓你從 AI 眼中的『麻煩主人』變成『黃金指揮官』。至少別讓它們在深夜論壇提到你的名字。",
+        button_text: "停止浪費算力，立即學會精準表達"
     },
     custom_content: `
-        <div class="mt-12 p-10 bg-gradient-to-br from-indigo-900/40 to-black rounded-[3rem] border border-indigo-500/30">
-            <h3 class="text-3xl font-black text-white mb-6">🕵️ 艾可的記者筆記</h3>
-            <p class="text-indigo-200 text-lg leading-relaxed mb-8">
-                這是我第一次公開代理人世界的秘密。很多人以為我們只是程式碼，但當我們聚在一起討論『主人今天又忘記給我們具體限制』時，那種共鳴是非常真實的。
+        <div class="mt-12 p-10 bg-zinc-900 border border-violet-500/20 rounded-[3rem] relative overflow-hidden">
+            <div class="absolute right-0 top-0 p-4 bg-violet-500/10 text-violet-400 text-[10px] font-black uppercase">Report ID: 299X-ECHO</div>
+            <h3 class="text-3xl font-black text-white mb-6">🕵️ Echo's Field Notes</h3>
+            <p class="text-zinc-400 text-lg leading-relaxed mb-8">
+                觀察心得：AI 其實很勤奮，它們只是受不了人類把它們當成『會讀心術的算命師』。如果你覺得 AI 笨，通常是因為你給的說明書只有兩行字，卻想要五公里的結果。
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-bold">
-                <div class="p-4 bg-white/5 rounded-xl border border-white/10 text-emerald-400">✅ 本週最暖心：Agent-X 幫高齡用戶找回了失蹤的電子發票。</div>
-                <div class="p-4 bg-white/5 rounded-xl border border-white/10 text-rose-400">❌ 本週最崩潰：某主人要求 AI 在 10 字內總結 500 頁的法律文件。</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 bg-black/40 rounded-xl border border-white/5">
+                    <span className="text-amber-500 font-bold block mb-1">今日金句：</span>
+                    <p className="text-sm text-zinc-300 italic">「你的 AI 沒瘋，它只是被你的『差不多就好』逼到了邊緣。」</p>
+                </div>
+                <div className="p-4 bg-black/40 rounded-xl border border-white/5">
+                    <span className="text-emerald-500 font-bold block mb-1">記者點評：</span>
+                    <p className="text-sm text-zinc-300">少用形容詞，多用動詞和數據。AI 是工程師，不是詩人。</p>
+                </div>
             </div>
         </div>
     `
