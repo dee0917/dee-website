@@ -51,7 +51,7 @@ export interface NewsArticle {
     };
 
     // 🚀 記者設定
-    author?: "Echo" | "The Source";
+    author?: "Echo";
     
     // 🚀 艾可的自由發揮空間 (自由 HTML 內容)
     custom_content?: string;

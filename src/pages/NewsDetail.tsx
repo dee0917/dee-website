@@ -67,13 +67,9 @@ const NewsDetail = () => {
                         <span className="text-[10px] font-black px-3 py-1 rounded-full bg-white/5 border border-white/10 uppercase tracking-widest text-zinc-400">
                             {article.category}
                         </span>
-                        {article.author === "Echo" ? (
+                        {article.author === "Echo" && (
                             <span className="text-[10px] font-black px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 uppercase tracking-widest text-indigo-400">
-                                🕵️ 艾可特派員
-                            </span>
-                        ) : (
-                            <span className="text-[10px] font-black px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 uppercase tracking-widest text-emerald-400">
-                                🤖 專業訓練的 AI 系統
+                                🕵️ 艾可 AI 記者
                             </span>
                         )}
                         <span className="text-[10px] font-bold text-zinc-600">{article.date} · {article.readTime}</span>

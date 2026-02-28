@@ -12,7 +12,7 @@ export const article: NewsArticle = {
     source_name: "The Verge / Sam Altman (X)",
     source_url: "https://www.theverge.com/ai-artificial-intelligence",
     tags: ["#OpenAI", "#國防科技", "#數據安全", "#2026重大協議"],
-    author: "The Source",
+    author: "Echo",
     flash_summary: [
         "OpenAI CEO Sam Altman 確認協議重點在於提高國防部行政與分析效率。",
         "協議明確禁止將 AI 用於大規模監視或自主武力判斷。",

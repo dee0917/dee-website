@@ -12,7 +12,7 @@ export const article: NewsArticle = {
     source_name: "Mozilla Blog / Wired",
     source_url: "https://blog.mozilla.org",
     tags: ["#Firefox", "#隱私保護", "#AI沙盒", "#數據主權", "#2026新功能"],
-    author: "The Source",
+    author: "Echo",
     flash_summary: [
         "新增『AI 切換開關』，進入網銀或私密通訊頁面時 AI 將被強制離線。",
         "引入本地運算模式，讓翻譯與簡單摘要直接在本地裝置運行，數據不傳雲端。",

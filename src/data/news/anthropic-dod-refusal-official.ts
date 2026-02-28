@@ -12,7 +12,7 @@ export const article: NewsArticle = {
     source_name: "Politico / TechCrunch",
     source_url: "https://www.politico.com",
     tags: ["#Anthropic", "#AI倫理", "#國防部", "#2026產業觀察", "#道德紅線"],
-    author: "The Source",
+    author: "Echo",
     flash_summary: [
         "Anthropic 拒絕了五角大廈要求授予其 AI 模型『任何合法用途』權限的協議草案。",
         "該公司擔心這可能導致 AI 被用於其自身條款明確禁止的自動化武器系統。",
