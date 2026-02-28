@@ -339,6 +339,18 @@ const ArticleDetail = () => {
                                         <div className="flex-1">
                                             <h3 className={`text-xl md:text-3xl font-black mb-4 tracking-tight ${isDone ? 'text-emerald-400' : 'text-white'}`}>{step.title}</h3>
                                             <p className="text-zinc-300 text-lg md:text-xl leading-relaxed mb-8">{step.body}</p>
+                                            
+                                            {/* External Links Buttons */}
+                                            {step.external_links && step.external_links.length > 0 && (
+                                                <div className="flex flex-wrap gap-4 mb-8">
+                                                    {step.external_links.map((link: any, lidx: number) => (
+                                                        <a key={lidx} href={link.url} target="_blank" rel="noopener noreferrer"
+                                                            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 border border-white/10 text-white font-bold hover:bg-white/20 transition-all">
+                                                            {link.label} <ArrowRight size={16} />
+                                                        </a>
+                                                    ))}
+                                                </div>
+                                            )}
                                             {step.dee_tip && (
                                                 <div className="bg-emerald-500/10 border-l-4 border-emerald-500 p-6 rounded-r-2xl mb-8">
                                                     <p className="text-emerald-400 text-base md:text-lg italic font-bold leading-relaxed">💡 Dee's Tip: {step.dee_tip}</p>

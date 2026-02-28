@@ -21,7 +21,12 @@ export const insight = {
         {
             title: "第一步：跟它說「你好」",
             body: "真的，就打「你好」兩個字。AI 會自我介紹，告訴你它能做什麼。冰就這樣破了。不要想太多，按下送出鍵就對了。",
-            dee_tip: "如果你打完「你好」覺得太短，可以加一句「我是第一次用你，請多指教」。AI 會特別友善地回覆。"
+            dee_tip: "如果你打完「你好」覺得太短，可以加一句「我是第一次用你，請多指教」。AI 會特別友善地回覆。",
+            external_links: [
+                { label: "開啟 ChatGPT", url: "https://chat.openai.com" },
+                { label: "開啟 Claude", url: "https://claude.ai" },
+                { label: "開啟 Gemini", url: "https://gemini.google.com" }
+            ]
         },
         {
             title: "第二步：問一個你知道答案的問題",

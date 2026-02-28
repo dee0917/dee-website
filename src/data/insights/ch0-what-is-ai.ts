@@ -21,17 +21,26 @@ export const insight = {
         {
             title: "ChatGPT — 全球最多人用的全能選手",
             body: "OpenAI 公司出品。想像它是一間什麼都賣的自助餐：寫文章、回答問題、翻譯、寫程式，幾乎什麼都會。目前最多人用，網路上的教學也最多。免費版就很夠用。",
-            dee_tip: "打開方式：用手機或電腦瀏覽器進入 chat.openai.com → 用 Google 帳號註冊 → 就可以開始聊了！"
+            dee_tip: "進入官網註冊後，就可以開始聊了！",
+            external_links: [
+                { label: "前往 ChatGPT 官網", url: "https://chat.openai.com" }
+            ]
         },
         {
             title: "Claude — 最會聽話、最有耐心的助理",
             body: "Anthropic 公司出品。如果你打了一大段話給它，它能完整理解並照做。特別擅長讀長文、寫報告、做分析。個性比較「乖」，不太會亂編東西。",
-            dee_tip: "打開方式：進入 claude.ai → 用 Google 帳號註冊 → 立刻就能用。我個人最推薦新手從 Claude 開始，因為它的回答最穩定。"
+            dee_tip: "我個人最推薦新手從 Claude 開始，因為它的回答最穩定。",
+            external_links: [
+                { label: "前往 Claude 官網", url: "https://claude.ai" }
+            ]
         },
         {
             title: "Gemini — Google 自家的智慧大腦",
-            body: "Google 出品。因為是 Google 做的，它能搜尋到最新的網路資訊（ChatGPT 和 Claude 有時會資料過時）。如果你常用 Google 的服務，Gemini 會特別順手。",
-            dee_tip: "打開方式：進入 gemini.google.com → 用你的 Google 帳號直接登入 → 就能開始了。如果你有 Android 手機，可能已經內建了。"
+            body: "Google 出品。因為是 Google 做的，它能搜尋到最新的網路資訊。如果你常用 Google 的服務，Gemini 會特別順手。",
+            dee_tip: "如果你有 Android 手機，可能已經內建了。",
+            external_links: [
+                { label: "前往 Gemini 官網", url: "https://gemini.google.com" }
+            ]
         }
     ],
     quiz: {
