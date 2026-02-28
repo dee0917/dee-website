@@ -6,6 +6,27 @@ import { Link } from 'react-router-dom';
 // AI 開發的專案資料
 const projects = [
     {
+        id: 0,
+        title: '指令復刻實驗室',
+        subtitle: '50+ 黃金指令範本庫',
+        description: '不知道怎麼跟 AI 溝通？這裡有經過實測的萬用指令範本，涵蓋職場、生活、行銷與學習。一鍵複製、填空即用，讓你秒變指令大師。',
+        url: '/lab/templates',
+        status: 'NEW',
+        statusColor: 'text-violet-400',
+        features: [
+            { icon: Copy, text: '一鍵複製黃金指令' },
+            { icon: Sparkles, text: '視覺化填空引導' },
+            { icon: Bot, text: '涵蓋 4 大常用領域' },
+            { icon: Shield, text: '100% 本地運行，無個資外洩' }
+        ],
+        techStack: ['React', 'Framer Motion', 'JSON Library'],
+        devTime: '1 天',
+        gradient: 'from-violet-600 to-indigo-600',
+        bg: 'bg-violet-500/10',
+        border: 'border-violet-500/30',
+        isInternal: true
+    },
+    {
         id: 1,
         title: 'iHaveTime',
         subtitle: '智慧空閒時間分析器',
@@ -100,7 +121,14 @@ const Lab = () => {
                                     <p className="text-lg text-zinc-400">{project.subtitle}</p>
                                 </div>
                                 <div className="flex flex-wrap gap-3">
-                                    {project.isCurrentSite ? (
+                                    {project.isInternal ? (
+                                        <Link
+                                            to={project.url}
+                                            className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r ${project.gradient} text-white font-bold hover:opacity-90 transition-opacity`}
+                                        >
+                                            立即進入 <ArrowRight size={18} />
+                                        </Link>
+                                    ) : project.isCurrentSite ? (
                                         <div className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500/10 text-emerald-500 font-bold border border-emerald-500/20">
                                             <Sparkles size={18} /> 你正在這裡
                                         </div>

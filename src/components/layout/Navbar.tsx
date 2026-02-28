@@ -27,6 +27,9 @@ const Navbar = () => {
                     <Link to="/news" className={linkClass('/news')}>
                         <Newspaper size={14} /> AI 新聞
                     </Link>
+                    <Link to="/lab/templates" className={linkClass('/lab/templates')}>
+                        <Zap size={14} className="text-amber-400" /> 指令庫
+                    </Link>
                     <Link to="/lab" className={linkClass('/lab')}>
                         <FlaskConical size={14} /> AI 實驗室
                     </Link>
