@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Copy, Check, ChevronDown, Lock, Sparkles, MousePointer2, ExternalLink, Smartphone, Gamepad2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Copy, Check, ChevronDown, Lock, Sparkles, MousePointer2, Smartphone, Gamepad2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { api } from '../lib/supabase';
@@ -100,12 +100,13 @@ const ArticleDetail = () => {
         setLoading(false);
     };
 
-    const handleCopy = (text: string) => {
-        navigator.clipboard.writeText(text);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 3000);
-        // Show AI jump modal after copy
-        setTimeout(() => setShowAiJumpModal(true), 500);
+    const handleClaimCommand = () => {
+        if (article?.practice_kit?.command) {
+            navigator.clipboard.writeText(article.practice_kit.command);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 3000);
+            setTimeout(() => setShowAiJumpModal(true), 500);
+        }
     };
 
     const scrollToHook = () => {
@@ -267,16 +268,6 @@ const ArticleDetail = () => {
                 </div>
             </section>
 
-            <section className="py-32 px-5 md:px-6 border-y border-white/5 bg-gradient-to-b from-transparent to-zinc-900/50">
-                <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
-                    <Sparkles className="text-emerald-400 mx-auto mb-8" size={40} />
-                    <h2 className="text-3xl md:text-5xl font-black text-white mb-10 tracking-tight leading-tight">Dee 的解法：{article.title}</h2>
-                    <p className="text-zinc-300 text-xl md:text-2xl leading-relaxed font-medium bg-emerald-500/5 p-8 rounded-3xl border border-emerald-500/10 italic">
-                        "{article.solution}"
-                    </p>
-                </motion.div>
-            </section>
-
             {hasSteps && (
                 <section className="py-32 px-5 md:px-6 text-left max-w-4xl mx-auto" ref={firstStepRef}>
                     <div className="text-center mb-24">
@@ -373,13 +364,15 @@ const ArticleDetail = () => {
                                 <span className="text-emerald-500 font-black text-sm tracking-[0.8em] mb-10 block uppercase opacity-60">Ready to execute</span>
                                 <h2 className="text-3xl md:text-6xl font-black text-white mb-10 tracking-tight leading-tight">{article.practice_kit?.title}</h2>
                                 <p className="text-zinc-400 text-xl md:text-2xl mb-12 leading-relaxed">{article.practice_kit?.description}</p>
-                                <div className="bg-black/50 border border-white/5 rounded-[2rem] p-8 md:p-12 mb-10 text-left relative group">
+                                <div className="bg-black/50 border border-white/5 rounded-[2rem] p-8 md:p-12 mb-12 text-left relative group">
                                     <pre className="text-zinc-300 text-base md:text-lg whitespace-pre-wrap font-mono leading-relaxed">{article.practice_kit?.command}</pre>
-                                    <motion.button whileTap={{ scale: 0.95 }} onClick={() => handleCopy(article.practice_kit?.command)}
-                                        className={`absolute top-6 right-6 p-4 rounded-xl transition-all ${copied ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/20' : 'bg-white/5 text-white hover:bg-white/10'}`}>
-                                        {copied ? <Check size={20} /> : <Copy size={20} />}
-                                    </motion.button>
                                 </div>
+
+                                {/* RESTORED LARGE BUTTON */}
+                                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleClaimCommand}
+                                    className="bg-emerald-500 text-black font-black py-6 px-12 rounded-2xl text-xl flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-400 transition-colors btn-glow">
+                                    <Copy size={24} /> 領取指令寶箱
+                                </motion.button>
                             </div>
                         </motion.div>
                     )}
@@ -467,33 +460,33 @@ const ArticleDetail = () => {
                 </motion.div>
             </section>
 
-            <section className="pb-48 px-5 md:px-6 text-left">
+            <section className="pb-48 px-5 md:px-6">
                 <div className="max-w-4xl mx-auto border-t border-white/10 pt-32">
                     {isFinale ? (
                         <motion.div {...fadeUp} className="text-center py-20 bg-emerald-500/5 rounded-[4rem] border border-emerald-500/10">
                             <div className="text-8xl mb-10">🎓</div>
                             <h2 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tight">恭喜大圓滿！</h2>
-                            <p className="text-zinc-400 text-xl md:text-2xl mb-14 max-w-lg mx-auto leading-relaxed font-medium">你已經完成了所有 12 篇主線任務。現在的你，已經具備了駕馭 AI 的核心靈魂。</p>
+                            <p className="text-zinc-400 text-xl md:text-2xl mb-14 max-w-lg mx-auto leading-relaxed font-medium">你已經完成了所有主線任務。現在的你，已經具備了駕馭 AI 的核心靈魂。</p>
                             <Link to="/insights" className="inline-flex items-center gap-4 bg-emerald-500 text-black font-black py-6 px-12 rounded-[2rem] text-2xl hover:bg-emerald-400 transition-all shadow-2xl">
                                 🗺️ 探索更多支線
                             </Link>
                         </motion.div>
                     ) : nextArticle ? (
-                        <>
-                            <p className="text-zinc-600 text-xs font-black uppercase tracking-[0.5em] mb-6">{nextLabel}</p>
-                            <Link to={`/insights/${nextArticle.id}`} className="group block bg-white/[0.02] border border-white/5 hover:border-emerald-500/40 p-12 md:p-20 rounded-[4rem] transition-all shadow-2xl hover:-translate-y-2">
-                                <div className="flex items-center justify-between gap-12">
-                                    <div>
-                                        <span className="text-emerald-500/60 font-black text-xs uppercase tracking-[0.4em] mb-8 block">{isMainQuest ? `STAGE ${mainIndex + 2} / 12` : 'NEXT LEVEL'}</span>
-                                        <h3 className="text-3xl md:text-6xl font-black text-white mb-6 tracking-tight leading-tight group-hover:text-emerald-400 transition-colors">{nextArticle.title}</h3>
-                                        <p className="text-zinc-500 text-lg md:text-xl line-clamp-2 max-w-2xl font-medium">{nextArticle.summary}</p>
+                        <div className="space-y-8">
+                            <span className="text-zinc-500 text-xs font-black uppercase tracking-[0.5em] block">{nextLabel}</span>
+                            <Link to={`/insights/${nextArticle.id}`} className="group block bg-white/[0.02] border border-white/5 hover:border-emerald-500/40 p-10 md:p-16 rounded-[3rem] transition-all shadow-2xl hover:-translate-y-2">
+                                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
+                                    <div className="min-w-0 flex-1">
+                                        <span className="text-emerald-500/60 font-black text-xs uppercase tracking-[0.4em] mb-4 block">{isMainQuest ? `STAGE ${mainIndex + 2} / 12` : 'NEXT LEVEL'}</span>
+                                        <h3 className="text-2xl md:text-5xl font-black text-white mb-6 tracking-tight leading-tight group-hover:text-emerald-400 transition-colors truncate">{nextArticle.title}</h3>
+                                        <p className="text-zinc-500 text-sm md:text-lg line-clamp-2 font-medium">{nextArticle.summary}</p>
                                     </div>
-                                    <div className="w-24 h-24 rounded-full bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all flex-shrink-0 shadow-lg">
-                                        <ArrowRight size={40} />
+                                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all flex-shrink-0 shadow-lg border border-emerald-500/20">
+                                        <ArrowRight size={28} />
                                     </div>
                                 </div>
                             </Link>
-                        </>
+                        </div>
                     ) : (
                         <div className="text-center py-20">
                             <Link to="/insights" className="inline-flex items-center gap-3 text-emerald-500 font-black text-xl hover:underline group">
@@ -507,38 +500,36 @@ const ArticleDetail = () => {
             <AnimatePresence>
                 {showAiJumpModal && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl">
-                        <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-zinc-900 border border-white/10 p-10 md:p-14 rounded-[3rem] max-w-2xl w-full shadow-2xl relative overflow-hidden">
+                        <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-zinc-900 border border-white/10 p-8 md:p-12 rounded-[2.5rem] max-w-lg w-full shadow-2xl relative overflow-hidden">
                             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-blue-500" />
-                            <button onClick={() => setShowAiJumpModal(false)} className="absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors"><X size={32} /></button>
+                            <button onClick={() => setShowAiJumpModal(false)} className="absolute top-6 right-6 text-zinc-500 hover:text-white transition-colors"><X size={24} /></button>
                             
-                            <div className="text-center mb-12">
-                                <div className="w-20 h-20 bg-emerald-500/10 rounded-3xl flex items-center justify-center mx-auto mb-8">
-                                    <Smartphone className="text-emerald-400" size={40} />
+                            <div className="text-center mb-8">
+                                <div className="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                    <Smartphone className="text-emerald-400" size={32} />
                                 </div>
-                                <h3 className="text-3xl md:text-4xl font-black text-white mb-4">指令已複製！</h3>
-                                <p className="text-zinc-400 text-lg">選一個 AI 工具直接貼上開始對話：</p>
+                                <h3 className="text-2xl md:text-3xl font-black text-white mb-2">指令已複製！</h3>
+                                <p className="text-zinc-500 text-sm">選一個工具直接貼上：</p>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="flex justify-center gap-4">
                                 {[
-                                    { name: 'ChatGPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com', color: 'hover:bg-[#10a37f]/10 hover:border-[#10a37f]/30' },
-                                    { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai', color: 'hover:bg-[#D97757]/10 hover:border-[#D97757]/30' },
-                                    { name: 'Gemini', logo: GeminiLogo, app: 'googleapp://', web: 'https://gemini.google.com', color: 'hover:bg-[#1C7DEB]/10 hover:border-[#1C7DEB]/30' }
+                                    { name: 'ChatGPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com', color: 'hover:bg-[#10a37f]/10' },
+                                    { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai', color: 'hover:bg-[#D97757]/10' },
+                                    { name: 'Gemini', logo: GeminiLogo, app: 'googleapp://', web: 'https://gemini.google.com', color: 'hover:bg-[#1C7DEB]/10' }
                                 ].map((ai, i) => (
-                                    <a key={i} href={ai.web} target="_blank" rel="noopener noreferrer" onClick={() => {
+                                    <a key={i} href={ai.web} target="_blank" rel="noopener noreferrer" onClick={(e) => {
+                                        e.preventDefault();
                                         const timer = setTimeout(() => { window.location.href = ai.web; }, 500);
                                         window.location.href = ai.app;
                                         clearTimeout(timer);
                                         setShowAiJumpModal(false);
-                                    }} className={`flex flex-col items-center gap-4 p-8 rounded-[2rem] bg-white/[0.03] border border-white/5 transition-all group ${ai.color}`}>
-                                        <ai.logo size={48} />
-                                        <span className="text-white font-black text-lg">{ai.name}</span>
-                                        <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest group-hover:text-emerald-400 transition-colors">Open App</span>
+                                    }} className={`flex flex-col items-center gap-3 p-4 rounded-2xl bg-white/[0.03] border border-white/5 transition-all group flex-1 ${ai.color}`}>
+                                        <ai.logo size={32} />
+                                        <span className="text-white font-black text-xs">{ai.name}</span>
                                     </a>
                                 ))}
                             </div>
-                            
-                            <p className="mt-12 text-center text-zinc-600 text-xs font-medium italic">提示：如果手機已安裝 App 會自動開啟，否則將開啟網頁版</p>
                         </motion.div>
                     </motion.div>
                 )}
