@@ -94,12 +94,12 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                                 <div><div className="font-black">ChatGPT</div><div className="text-zinc-500 text-xs">OpenAI · 全球最多人用</div></div>
                             </button>
                             <button onClick={() => handlePlatform('claude')}
-                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-violet-500/10 hover:border-violet-500/30 text-white font-bold text-lg transition-all text-left flex items-center gap-4">
+                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-white font-bold text-lg transition-all text-left flex items-center gap-4">
                                 <div className="w-9 h-9 rounded-xl bg-[#D97757]/15 flex items-center justify-center flex-shrink-0"><ClaudeLogo size={22} /></div>
                                 <div><div className="font-black">Claude</div><div className="text-zinc-500 text-xs">Anthropic · 最會聽話</div></div>
                             </button>
                             <button onClick={() => handlePlatform('gemini')}
-                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-blue-500/10 hover:border-blue-500/30 text-white font-bold text-lg transition-all text-left flex items-center gap-4">
+                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-white font-bold text-lg transition-all text-left flex items-center gap-4">
                                 <div className="w-9 h-9 rounded-xl bg-[#1C7DEB]/15 flex items-center justify-center flex-shrink-0"><GeminiLogo size={22} /></div>
                                 <div><div className="font-black">Gemini</div><div className="text-zinc-500 text-xs">Google · 搜尋最即時</div></div>
                             </button>
@@ -147,12 +147,12 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                                 <div className="text-zinc-500 text-xs">知道怎麼用，但不太確定怎麼問才能得到好答案</div>
                             </button>
                             <button onClick={() => handleExperience(1)}
-                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-white font-bold transition-all text-left">
+                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-white font-bold transition-all text-left">
                                 <div className="font-black mb-1">🔧 寫文章、翻譯、整理資料</div>
                                 <div className="text-zinc-500 text-xs">已經用 AI 處理過實際任務，想學更有效率的方法</div>
                             </button>
                             <button onClick={() => handleExperience(2)}
-                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-white font-bold transition-all text-left">
+                                className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-emerald-500/10 hover:border-emerald-500/30 text-white font-bold transition-all text-left">
                                 <div className="font-black mb-1">🏆 已經很熟了，想學進階技巧</div>
                                 <div className="text-zinc-500 text-xs">每天都在用，想看看有什麼我還不知道的</div>
                             </button>
@@ -239,7 +239,7 @@ const SkipChapterModal = ({ targetChapter, onPass, onClose }: { targetChapter: n
                         <div className="space-y-3">
                             {questions[current].options.map((opt, idx) => (
                                 <motion.button key={idx} whileTap={{ scale: 0.97 }} onClick={() => handleAnswer(idx)}
-                                    className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-amber-500/10 hover:border-amber-500/30 text-zinc-300 hover:text-white font-bold transition-all text-base text-left">
+                                    className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-amber-500/10 hover:border-amber-500/30 text-zinc-300 hover:text-white font-bold transition-all text-base text-left">
                                     {opt}
                                 </motion.button>
                             ))}
@@ -374,14 +374,15 @@ const Insights = () => {
         });
     }, [allInsights, freeFilter, searchQuery, completedIds]);
 
+    const playerLevel = Math.floor(completedIds.length / 1.5) + 1;
+    const xp = completedIds.length * 200;
+
     if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse">SYNCING...</div>;
 
     const totalMain = MAIN_QUEST_ORDER.length;
     const completedMain = completedIds.filter(id => MAIN_QUEST_ORDER.includes(id)).length;
     const totalAll = allInsights.length;
     const progressPct = (viewMode === 'adventure' ? (completedMain / totalMain) : (completedIds.length / totalAll)) || 0;
-    const playerLevel = Math.floor(completedIds.length / 1.5) + 1;
-    const xp = completedIds.length * 200;
 
     // Smart recommendation for free mode
     const nextRecommended = allInsights.find(i =>
