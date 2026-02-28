@@ -4,7 +4,7 @@ export const article: NewsArticle = {
     id: 501,
     slug: "google-tpu-vs-nvidia-2026-ai-cost",
     category: "趨勢情報",
-    themeColor: "blue",
+    themeColor: "violet",
     title: "Google TPU 算力大爆發！2026 算力市場不再被 Nvidia 壟斷？小白也能用的平價 AI 即將到來",
     summary: "Google 大規模開放自研 TPU 算力，挑戰 Nvidia 市場地位。這場算力大戰將直接導致 AI 訂閱成本下降，讓更多強大模型進入平價時代。",
     date: "2026.02.28",

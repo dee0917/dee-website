@@ -1,4 +1,4 @@
-import{j as e,m as x,A as f}from"./vendor-motion-9fg7QrD3.js";import{r as a}from"./vendor-react-Cr6ANo4s.js";import{Z as j,X as w}from"./index-rit6P-v8.js";import{S as N,C as y}from"./search-DUxYQoZp.js";import{C as m}from"./check-CWOj_Z9g.js";import{C as p}from"./copy-9n4mC6a3.js";const h=[{id:"work-01",title:"專業商務郵件撰寫",category:"職場溝通",description:"快速撰寫得體、專業且具備行動呼籲的商務郵件。",prompt:`你是[角色：例如 專案經理]。請幫我寫一封關於[主題：例如 下週會議延期]的郵件給[對象：例如 全體合作夥伴]。
+import{j as e,m as x,A as f}from"./vendor-motion-CAAolTk7.js";import{r as a}from"./vendor-react-DWmd66on.js";import{Z as j,X as w}from"./index-CWbzvtML.js";import{S as N,C as y}from"./search-BNff0MLo.js";import{C as m}from"./check-Bt7NZ2m1.js";import{C as p}from"./copy-qD4NjTvR.js";const h=[{id:"work-01",title:"專業商務郵件撰寫",category:"職場溝通",description:"快速撰寫得體、專業且具備行動呼籲的商務郵件。",prompt:`你是[角色：例如 專案經理]。請幫我寫一封關於[主題：例如 下週會議延期]的郵件給[對象：例如 全體合作夥伴]。
 
 要求：
 - 語氣要[風格：例如 正式且誠誠懇]

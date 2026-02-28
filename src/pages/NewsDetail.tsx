@@ -43,6 +43,7 @@ const NewsDetail = () => {
         rose: 'from-rose-500/20 to-pink-500/10 text-rose-400 border-rose-500/20',
         amber: 'from-amber-500/20 to-yellow-500/10 text-amber-400 border-amber-500/20',
         emerald: 'from-emerald-500/20 to-teal-500/10 text-emerald-400 border-emerald-500/20',
+        violet: 'from-violet-500/20 to-purple-500/10 text-violet-400 border-violet-500/20',
     };
 
     return (

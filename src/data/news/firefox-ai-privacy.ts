@@ -4,7 +4,7 @@ export const article: NewsArticle = {
     id: 502,
     slug: "firefox-ai-privacy-sandbox-2026-data-protection",
     category: "安全隱私",
-    themeColor: "rose",
+    themeColor: "blue",
     title: "拒絕被 AI 偷看！Firefox 2026 全新「AI 隱私沙盒」功能詳解：如何守護你的網銀與私密數據",
     summary: "Mozilla 宣布在 Firefox 推出全球首個 AI 權限控制中心，讓用戶能一鍵切斷 AI 助手對敏感網頁的存取，解決瀏覽器 AI 帶來的數據外洩風險。",
     date: "2026.02.28",
