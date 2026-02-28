@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Copy, Check, ChevronDown, Lock, Sparkles, MousePointer2, Smartphone, Gamepad2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Copy, Check, ChevronDown, Lock, Sparkles, MousePointer2, Smartphone, Gamepad2, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { api } from '../lib/supabase';
@@ -37,13 +37,12 @@ const ArticleDetail = () => {
     const treasureRef = useRef<HTMLDivElement>(null);
     const quizRef = useRef<HTMLDivElement>(null);
     const rewardRef = useRef<HTMLDivElement>(null);
-    const firstStepRef = useRef<HTMLDivElement>(null);
     const hookRef = useRef<HTMLDivElement>(null);
 
     const getColorClasses = (themeColor: string) => {
         const colors: Record<string, any> = {
             emerald: { text: 'text-emerald-500', lightText: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', gradient: 'from-emerald-500/20 to-teal-500/10', glow: 'shadow-emerald-500/20', solid: 'bg-emerald-500' },
-            yellow: { text: 'text-yellow-500', lightText: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', gradient: 'from-yellow-500/10 to-orange-500/10', glow: 'shadow-yellow-500/20', solid: 'bg-yellow-500' },
+            yellow: { text: 'text-yellow-500', lightText: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', gradient: 'from-yellow-500/10 to-orange-500/10', glow: 'shadow-emerald-500/20', solid: 'bg-yellow-500' },
             amber: { text: 'text-amber-500', lightText: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20', gradient: 'from-amber-500/20 to-yellow-500/10', glow: 'shadow-amber-500/20', solid: 'bg-amber-500' },
             blue: { text: 'text-blue-500', lightText: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-500/20', gradient: 'from-blue-500/20 to-indigo-500/10', glow: 'shadow-blue-500/20', solid: 'bg-blue-500' },
             violet: { text: 'text-violet-500', lightText: 'text-violet-400', bg: 'bg-violet-500/10', border: 'border-violet-500/20', gradient: 'from-violet-500/20 to-purple-500/10', glow: 'shadow-violet-500/20', solid: 'bg-violet-500' },
@@ -109,8 +108,8 @@ const ArticleDetail = () => {
         }
     };
 
-    const scrollToFirstStep = () => {
-        firstStepRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const scrollToHook = () => {
+        hookRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
     const handleStepComplete = (idx: number) => {
@@ -143,8 +142,6 @@ const ArticleDetail = () => {
                 setTimeout(() => {
                     setTreasurePhase('exploding');
                     confetti({ particleCount: 300, spread: 160, origin: { y: 0.5 }, colors: ['#fbbf24', '#f59e0b', '#10b981', '#ffffff', '#a855f7', '#ec4899'] });
-                    setTimeout(() => confetti({ particleCount: 150, spread: 120, origin: { y: 0.4, x: 0.3 }, colors: ['#10b981', '#14b8a6', '#fbbf24'] }), 200);
-                    setTimeout(() => confetti({ particleCount: 150, spread: 120, origin: { y: 0.4, x: 0.7 }, colors: ['#a855f7', '#ec4899', '#f59e0b'] }), 400);
                 }, 1800);
                 setTimeout(() => setTreasurePhase('revealed'), 2600);
             }, 200);
@@ -208,12 +205,12 @@ const ArticleDetail = () => {
     const nextArticle = nextArticleId ? INSIGHTS.find(i => i.id === nextArticleId) : null;
     const isFinale = isMainQuest && mainIndex === MAIN_QUEST_ORDER.length - 1;
 
-    let nextLabel = "下一篇教學";
+    let nextLabelText = "下一篇教學";
     if (nextArticle) {
         const nextChapter = CHAPTERS.find(c => c.articleIds.includes(nextArticle.id));
         const currentChapter = CHAPTERS.find(c => c.articleIds.includes(article.id));
         if (nextChapter && currentChapter && nextChapter.id > currentChapter.id) {
-            nextLabel = `🎉 進入新章節：${nextChapter.title}`;
+            nextLabelText = `🎉 進入新章節：${nextChapter.title}`;
         }
     }
 
@@ -234,11 +231,11 @@ const ArticleDetail = () => {
                     </Link>
                     <div className="flex items-center justify-center gap-3 mb-6">
                         <span className={`text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest ${theme.bg} ${theme.text} border ${theme.border}`}>{article.category}</span>
-                        <div className="flex gap-1">{[...Array(5)].map((_, i) => <Star key={i} size={10} className={i < (article.difficulty_level || 1) ? theme.text : 'text-zinc-800'} fill="currentColor" />)}</div>
+                        <div className="flex gap-1">{[...Array(5)].map((_, i) => <StarIcon key={i} size={10} className={i < (article.difficulty_level || 1) ? theme.text : 'text-zinc-800'} fill="currentColor" />)}</div>
                     </div>
                     <h1 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tight leading-[1.1]">{article.title}</h1>
                     <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed">{article.summary}</p>
-                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={scrollToFirstStep}
+                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={scrollToHook}
                         className="bg-white text-black font-black py-5 px-10 rounded-2xl text-lg flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-500 transition-colors group">
                         <Gamepad2 size={24} /> 開始修煉 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                     </motion.button>
@@ -247,7 +244,7 @@ const ArticleDetail = () => {
                 <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-20"><ChevronDown size={32} /></div>
             </section>
 
-            <section className="py-32 px-5 md:px-6 bg-zinc-900/30">
+            <section className="py-32 px-5 md:px-6 bg-zinc-900/30" ref={hookRef}>
                 <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center mb-24">
                     <span className="transition-label">痛點切入</span>
                     <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tight">你也正為了這件事煩惱嗎？</h2>
@@ -269,7 +266,7 @@ const ArticleDetail = () => {
             </section>
 
             {hasSteps && (
-                <section className="py-32 px-5 md:px-6 text-left max-w-4xl mx-auto" ref={firstStepRef}>
+                <section className="py-32 px-5 md:px-6 text-left max-w-4xl mx-auto">
                     <div className="text-center mb-24">
                         <span className="transition-label">實戰演練</span>
                         <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">一步一步跟著做</h2>
@@ -368,7 +365,6 @@ const ArticleDetail = () => {
                                     <pre className="text-zinc-300 text-base md:text-lg whitespace-pre-wrap font-mono leading-relaxed">{article.practice_kit?.command}</pre>
                                 </div>
 
-                                {/* RESTORED LARGE BUTTON */}
                                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleClaimCommand}
                                     className="bg-emerald-500 text-black font-black py-6 px-12 rounded-2xl text-xl flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-400 transition-colors btn-glow">
                                     <Copy size={24} /> 領取指令寶箱
@@ -428,12 +424,7 @@ const ArticleDetail = () => {
 
             <section className="py-40 px-5 md:px-6 text-center" ref={rewardRef}>
                 <motion.div {...fadeUp} className="max-w-xl mx-auto">
-                    {!badgeEarned ? (
-                        <motion.button whileTap={{ scale: 0.95 }} onClick={handleEarnBadge} disabled={!allStepsDone || (hasQuiz && !quizSubmitted)}
-                            className="bg-emerald-500 text-black font-black py-8 px-16 rounded-[2rem] text-2xl shadow-2xl hover:scale-105 transition-all disabled:opacity-20 disabled:grayscale btn-glow">
-                            🏆 領取修行勳章
-                        </motion.button>
-                    ) : (
+                    {badgeEarned ? (
                         <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", damping: 10 }}>
                             <div className="inline-block bg-zinc-900 border-2 border-emerald-500/40 rounded-[4rem] p-12 md:p-20 shadow-2xl relative overflow-hidden">
                                 {badgeGlow && (
@@ -456,6 +447,11 @@ const ArticleDetail = () => {
                                 </div>
                             </div>
                         </motion.div>
+                    ) : (
+                        <motion.button whileTap={{ scale: 0.95 }} onClick={handleEarnBadge} disabled={!allStepsDone || (hasQuiz && !quizSubmitted)}
+                            className="bg-emerald-500 text-black font-black py-8 px-16 rounded-[2rem] text-2xl shadow-2xl hover:scale-105 transition-all disabled:opacity-20 disabled:grayscale btn-glow">
+                            🏆 領取修行勳章
+                        </motion.button>
                     )}
                 </motion.div>
             </section>
@@ -473,15 +469,15 @@ const ArticleDetail = () => {
                         </motion.div>
                     ) : nextArticle ? (
                         <div className="space-y-8">
-                            <span className="text-zinc-500 text-xs font-black uppercase tracking-[0.5em] block">{nextLabel}</span>
-                            <Link to={`/insights/${nextArticle.id}`} className="group block bg-white/[0.02] border border-white/5 hover:border-emerald-500/40 p-10 md:p-16 rounded-[3rem] transition-all shadow-2xl hover:-translate-y-2">
+                            <span className="text-zinc-500 text-xs font-black uppercase tracking-[0.5em] block font-mono">{nextLabelText}</span>
+                            <Link to={`/insights/${nextArticle.id}`} className="group block bg-zinc-900 border border-white/5 hover:border-emerald-500/40 p-8 md:p-14 rounded-[3rem] transition-all shadow-2xl hover:-translate-y-2 overflow-hidden">
                                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
                                     <div className="min-w-0 flex-1">
-                                        <span className="text-emerald-500/60 font-black text-xs uppercase tracking-[0.4em] mb-4 block">{isMainQuest ? `STAGE ${mainIndex + 2} / 12` : 'NEXT LEVEL'}</span>
-                                        <h3 className="text-2xl md:text-5xl font-black text-white mb-6 tracking-tight leading-tight group-hover:text-emerald-400 transition-colors truncate">{nextArticle.title}</h3>
-                                        <p className="text-zinc-500 text-sm md:text-lg line-clamp-2 font-medium">{nextArticle.summary}</p>
+                                        <span className="text-emerald-500/60 font-black text-xs uppercase tracking-[0.4em] mb-4 block font-mono">{isMainQuest ? `STAGE ${mainIndex + 2} / 12` : 'NEXT LEVEL'}</span>
+                                        <h3 className="text-2xl md:text-4xl font-black text-white mb-4 tracking-tight leading-tight group-hover:text-emerald-400 transition-colors truncate">{nextArticle.title}</h3>
+                                        <p className="text-zinc-400 text-base md:text-lg line-clamp-2 font-medium leading-relaxed">{nextArticle.summary}</p>
                                     </div>
-                                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all flex-shrink-0 shadow-lg border border-emerald-500/20">
+                                    <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all flex-shrink-0 shadow-lg border border-emerald-500/20">
                                         <ArrowRight size={28} />
                                     </div>
                                 </div>
@@ -500,21 +496,21 @@ const ArticleDetail = () => {
             <AnimatePresence>
                 {showAiJumpModal && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl">
-                        <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-zinc-900 border border-white/10 p-8 md:p-12 rounded-[2.5rem] max-w-lg w-full shadow-2xl relative overflow-hidden">
+                        <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-zinc-900 border border-white/10 p-8 md:p-10 rounded-[2rem] max-w-sm w-full shadow-2xl relative overflow-hidden">
                             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-blue-500" />
-                            <button onClick={() => setShowAiJumpModal(false)} className="absolute top-6 right-6 text-zinc-500 hover:text-white transition-colors"><X size={24} /></button>
+                            <button onClick={() => setShowAiJumpModal(false)} className="absolute top-6 right-6 text-zinc-500 hover:text-white transition-colors"><XIcon size={24} /></button>
                             
                             <div className="text-center mb-8">
-                                <div className="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                                    <Smartphone className="text-emerald-400" size={32} />
+                                <div className="w-14 h-14 bg-emerald-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                    <Smartphone className="text-emerald-400" size={28} />
                                 </div>
-                                <h3 className="text-2xl md:text-3xl font-black text-white mb-2">指令已複製！</h3>
-                                <p className="text-zinc-500 text-sm">選一個工具直接貼上：</p>
+                                <h3 className="text-xl md:text-2xl font-black text-white mb-2 tracking-tight">指令已複製！</h3>
+                                <p className="text-zinc-500 text-sm font-medium">選一個工具直接貼上</p>
                             </div>
 
                             <div className="flex justify-center gap-4">
                                 {[
-                                    { name: 'ChatGPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com', color: 'hover:bg-[#10a37f]/10' },
+                                    { name: 'GPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com', color: 'hover:bg-[#10a37f]/10' },
                                     { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai', color: 'hover:bg-[#D97757]/10' },
                                     { name: 'Gemini', logo: GeminiLogo, app: 'googleapp://', web: 'https://gemini.google.com', color: 'hover:bg-[#1C7DEB]/10' }
                                 ].map((ai, i) => (
@@ -524,9 +520,9 @@ const ArticleDetail = () => {
                                         window.location.href = ai.app;
                                         clearTimeout(timer);
                                         setShowAiJumpModal(false);
-                                    }} className={`flex flex-col items-center gap-3 p-4 rounded-2xl bg-white/[0.03] border border-white/5 transition-all group flex-1 ${ai.color}`}>
-                                        <ai.logo size={32} />
-                                        <span className="text-white font-black text-xs">{ai.name}</span>
+                                    }} className={`flex flex-col items-center gap-2 p-3 rounded-2xl bg-white/[0.03] border border-white/5 transition-all group flex-1 ${ai.color}`}>
+                                        <ai.logo size={28} />
+                                        <span className="text-white font-black text-[10px] uppercase tracking-tighter">{ai.name}</span>
                                     </a>
                                 ))}
                             </div>
@@ -538,14 +534,14 @@ const ArticleDetail = () => {
     );
 };
 
-const X = ({ size, className }: any) => (
+const XIcon = ({ size, className }: any) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}>
         <line x1="18" y1="6" x2="6" y2="18"></line>
         <line x1="6" y1="6" x2="18" y2="18"></line>
     </svg>
 );
 
-const Star = ({ size, className, fill }: any) => (
+const StarIcon = ({ size, className, fill }: any) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill={fill} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
     </svg>
