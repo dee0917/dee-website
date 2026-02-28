@@ -323,15 +323,20 @@ const Insights = () => {
 
     // Auto-expand current chapter in adventure mode
     useEffect(() => {
-        const currentChapter = CHAPTERS.find(c => {
-            const items = c.articleIds;
-            const done = items.filter(id => completedIds.includes(id)).length;
-            return c.id <= unlockedChapter && done < items.length;
-        });
-        if (currentChapter) {
-            setExpandedChapters(new Set([currentChapter.id]));
+        if (viewMode === 'adventure') {
+            const currentChapter = CHAPTERS.find(c => {
+                const items = c.articleIds;
+                const done = items.filter(id => completedIds.includes(id)).length;
+                return c.id === unlockedChapter && done < items.length;
+            });
+            if (currentChapter) {
+                setExpandedChapters(new Set([currentChapter.id]));
+            } else if (unlockedChapter > 0) {
+                // If the current unlocked chapter is fully done, expand it anyway or the next one
+                setExpandedChapters(new Set([unlockedChapter]));
+            }
         }
-    }, [unlockedChapter, completedIds]);
+    }, [unlockedChapter, completedIds, viewMode]);
 
     const handleOnboardingComplete = (mode: 'guided' | 'free', chapter?: number) => {
         const ch = chapter || 1;
