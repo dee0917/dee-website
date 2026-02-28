@@ -29,53 +29,75 @@ const Home = () => {
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <SEO path="/" />
+            <div className="grid-bg" />
 
             {/* ═══════════ HERO — 遊戲開始畫面 (可讀性優化版) ═══════════ */}
-            <section className="relative min-h-[95vh] flex items-center justify-center px-6 overflow-hidden pt-20">
+            <section className="relative min-h-[90vh] flex items-center justify-center px-6 overflow-hidden pt-10">
                 {/* Background effects */}
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/[0.04] blur-[150px] rounded-full" />
                     <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-teal-500/[0.03] blur-[120px] rounded-full" />
-                    <motion.div animate={{ y: [0, -15, 0], x: [0, 8, 0] }} transition={{ duration: 10, repeat: Infinity }} className="absolute top-1/3 left-[10%] w-2 h-2 bg-emerald-500/20 rounded-full" />
-                    <motion.div animate={{ y: [0, 12, 0], x: [0, -5, 0] }} transition={{ duration: 8, repeat: Infinity, delay: 2 }} className="absolute top-1/2 right-[15%] w-1.5 h-1.5 bg-teal-400/25 rounded-full" />
+                    
+                    {/* Floating Particles - Denser */}
+                    {[...Array(15)].map((_, i) => (
+                        <motion.div
+                            key={i}
+                            animate={{ 
+                                y: [0, Math.random() * -100 - 50, 0], 
+                                x: [0, (Math.random() - 0.5) * 60, 0],
+                                opacity: [0, 0.4, 0]
+                            }}
+                            transition={{ 
+                                duration: Math.random() * 10 + 5, 
+                                repeat: Infinity, 
+                                delay: Math.random() * 5,
+                                ease: "easeInOut"
+                            }}
+                            className="absolute w-1 h-1 bg-emerald-500/30 rounded-full"
+                            style={{
+                                top: `${Math.random() * 100}%`,
+                                left: `${Math.random() * 100}%`
+                            }}
+                        />
+                    ))}
                 </div>
 
                 <div className="relative z-10 text-center max-w-5xl mx-auto">
                     {/* Header: Beta + Brain Emoji */}
-                    <div className="flex flex-col items-center mb-8">
+                    <div className="flex flex-col items-center mb-4">
                         <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
-                            className="inline-flex items-center gap-2 border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 px-5 py-2 rounded-full text-sm mb-10 font-bold relative group">
-                            <Rocket size={16} /> 讓 AI 成為你的好夥伴
-                            <span className="absolute -top-2 -right-12 px-2.5 py-1 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-[11px] font-black rounded-lg shadow-lg shadow-orange-500/30 animate-pulse uppercase tracking-tighter">Beta</span>
+                            className="inline-flex items-center gap-2 border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 px-5 py-2 rounded-full text-xs mb-6 font-bold relative group">
+                            <Rocket size={14} /> 讓 AI 成為你的好夥伴
+                            <span className="absolute -top-2 -right-12 px-2.5 py-1 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-[10px] font-black rounded-lg shadow-lg shadow-orange-500/30 animate-pulse uppercase tracking-tighter">Beta</span>
                         </motion.div>
                         
                         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 0.2 }}>
-                            <span className="text-7xl md:text-8xl block mb-6">🧠</span>
+                            <span className="text-6xl md:text-7xl block mb-4">🧠</span>
                         </motion.div>
                     </div>
 
                     {/* The靈魂文字 (From image, with Typewriter) */}
                     <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-                        className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-12 tracking-tight leading-[1.1]">
+                        className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tight leading-[1.1]">
                         將繁瑣交給 AI，<br />
-                        <span className="font-serif italic font-normal text-zinc-400 text-4xl md:text-6xl lg:text-7xl">
+                        <span className="font-serif italic font-normal text-zinc-400 text-3xl md:text-6xl">
                             把時間留給 <Typewriter texts={['家人', '思考', '生活', '創意']} className="text-[#4285F4] not-italic font-black" />
                         </span>
                     </motion.h1>
 
                     {/* THE CRITICAL SUBTITLE (Contrast increased) */}
                     <motion.p initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
-                        className="text-xl md:text-2xl text-zinc-200 mb-14 leading-relaxed max-w-2xl mx-auto font-medium">
+                        className="text-lg md:text-xl text-zinc-200 mb-10 leading-relaxed max-w-2xl mx-auto font-medium">
                         用最白話的方式學 AI。<br />
                         <span className="text-white font-black underline decoration-emerald-500 decoration-4 underline-offset-8">{totalArticles} 篇免費互動教學</span>，從完全不會到熟練運用。
                     </motion.p>
 
                     <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
-                        className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                        className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                         <Link to="/insights"
-                            className="group inline-flex items-center gap-3 bg-emerald-500 text-black px-12 py-6 rounded-2xl font-black text-xl hover:bg-emerald-400 transition-all shadow-xl shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:-translate-y-1">
+                            className="group inline-flex items-center gap-3 bg-emerald-500 text-black px-10 py-5 rounded-2xl font-black text-lg hover:bg-emerald-400 transition-all shadow-xl shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:-translate-y-1">
                             開始冒險之旅
-                            <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
+                            <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                         <Link to="/about"
                             className="inline-flex items-center gap-2 bg-white/5 text-white px-8 py-5 rounded-2xl font-black text-lg border border-white/10 hover:bg-white/10 transition-all">
