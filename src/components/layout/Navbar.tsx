@@ -13,10 +13,10 @@ const Navbar = () => {
     return (
         <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-[#0A0A0A]/90 backdrop-blur-md">
             <div className="max-w-[1400px] mx-auto px-6 h-20 flex items-center justify-between gap-4">
-                <Link to="/" className="flex items-center gap-3 cursor-pointer group flex-shrink-0">
+                <Link to="/" className="flex items-center gap-2 md:gap-3 cursor-pointer group flex-shrink-0">
                     <span className="font-signature text-2xl md:text-3xl text-white group-hover:text-emerald-400 transition-colors">Dee.</span>
                     <span className="h-4 w-[1px] bg-zinc-800"></span>
-                    <span className="text-[10px] md:text-xs uppercase tracking-widest text-zinc-500 whitespace-nowrap">AI 生活實驗室</span>
+                    <span className="text-[9px] md:text-xs uppercase tracking-widest text-zinc-500 whitespace-nowrap">AI 生活實驗室</span>
                 </Link>
 
                 {/* 桌面版導航 */}
@@ -90,6 +90,12 @@ const Navbar = () => {
                     </Link>
                     <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300 flex items-center gap-2">
                         <User size={18} /> 關於 Dee
+                    </Link>
+                    <a href="https://pay.ecpay.com.tw/CreditPayment/ExpressCredit?MerchantID=3378826" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-lg text-amber-500 font-bold flex items-center gap-2">
+                        <Coffee size={18} /> 請喝咖啡
+                    </a>
+                    <Link to="/insights" onClick={() => setMobileMenuOpen(false)} className="bg-white text-black px-6 py-4 rounded-2xl text-center font-black text-lg">
+                        開始學習
                     </Link>
                 </div>
             )}
