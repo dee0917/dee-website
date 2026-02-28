@@ -511,20 +511,27 @@ const ArticleDetail = () => {
                             <div className="flex justify-center gap-4">
                                 {[
                                     { name: 'GPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com', color: 'hover:bg-[#10a37f]/10' },
-                                    { name: 'Claude', logo: ClaudeLogo, app: 'anthropic://', web: 'https://claude.ai', color: 'hover:bg-[#D97757]/10' },
+                                    { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai', color: 'hover:bg-[#D97757]/10' },
                                     { name: 'Gemini', logo: GeminiLogo, app: 'googlegemini://', web: 'https://gemini.google.com', color: 'hover:bg-[#1C7DEB]/10' }
                                 ].map((ai, i) => (
                                     <a key={i} href={ai.web} target="_blank" rel="noopener noreferrer" onClick={(e) => {
                                         e.preventDefault();
-                                        const timer = setTimeout(() => { window.location.href = ai.web; }, 500);
                                         window.location.href = ai.app;
-                                        clearTimeout(timer);
-                                        setShowAiJumpModal(false);
+                                        setTimeout(() => {
+                                            window.open(ai.web, '_blank');
+                                            setShowAiJumpModal(false);
+                                        }, 2500);
                                     }} className={`flex flex-col items-center gap-2 p-3 rounded-2xl bg-white/[0.03] border border-white/5 transition-all group flex-1 ${ai.color}`}>
                                         <ai.logo size={28} />
                                         <span className="text-white font-black text-[10px] uppercase tracking-tighter">{ai.name}</span>
                                     </a>
                                 ))}
+                            </div>
+                            <div className="mt-8 pt-6 border-t border-white/5 text-center">
+                                <p className="text-[10px] text-zinc-600 font-bold leading-relaxed">
+                                    * 建議預先安裝 App 以獲得最佳體驗<br/>
+                                    * 若未自動跳轉，系統將於 2.5 秒後開啟網頁版
+                                </p>
                             </div>
                         </motion.div>
                     </motion.div>
