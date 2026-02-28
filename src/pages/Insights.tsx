@@ -321,22 +321,27 @@ const Insights = () => {
     const mainQuests = useMemo(() => allInsights.filter(i => MAIN_QUEST_ORDER.includes(i.id)), [allInsights]);
     const sideQuests = useMemo(() => allInsights.filter(i => SIDE_QUEST_IDS.includes(i.id)), [allInsights]);
 
-    // Auto-expand current chapter in adventure mode
+    // Auto-expand and scroll to current chapter in adventure mode
     useEffect(() => {
         if (viewMode === 'adventure') {
-            const currentChapter = CHAPTERS.find(c => {
-                const items = c.articleIds;
-                const done = items.filter(id => completedIds.includes(id)).length;
-                return c.id === unlockedChapter && done < items.length;
-            });
-            if (currentChapter) {
-                setExpandedChapters(new Set([currentChapter.id]));
-            } else if (unlockedChapter > 0) {
-                // If the current unlocked chapter is fully done, expand it anyway or the next one
-                setExpandedChapters(new Set([unlockedChapter]));
-            }
+            const targetChId = unlockedChapter;
+            setExpandedChapters(new Set([targetChId]));
+            
+            // Allow time for DOM to render expanded content
+            setTimeout(() => {
+                const element = document.getElementById(`chapter-node-${targetChId}`);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    const absoluteElementTop = rect.top + window.pageYOffset;
+                    const offset = -100; // Leave some space at the top
+                    window.scrollTo({
+                        top: absoluteElementTop + offset,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 500);
         }
-    }, [unlockedChapter, completedIds, viewMode]);
+    }, [unlockedChapter, viewMode]);
 
     const handleOnboardingComplete = (mode: 'guided' | 'free', chapter?: number) => {
         const ch = chapter || 1;
@@ -650,6 +655,7 @@ const ChapterNode = ({ chapter, items, completedIds, completedCount, isLocked, i
 
     return (
         <motion.div initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.05 }}
+            id={`chapter-node-${chapter.id}`}
             className={`relative pl-0 md:pl-16 ${isLocked ? 'opacity-40' : ''}`}>
             <div className={`hidden md:flex absolute left-[11px] top-7 w-6 h-6 rounded-full items-center justify-center border-2 z-10 shadow-lg ${statusColor}`}>
                 {isLocked ? <Lock size={10} className="text-zinc-700" /> : isComplete ? <CheckCircle2 size={10} className="text-black" /> : <span className="w-1.5 h-1.5 bg-black rounded-full" />}
@@ -669,11 +675,11 @@ const ChapterNode = ({ chapter, items, completedIds, completedCount, isLocked, i
                         <span className="text-3xl flex-shrink-0 group-hover:scale-110 transition-transform duration-500">{chapter.emoji}</span>
                         <div className="min-w-0">
                             <div className="flex items-center gap-3 flex-wrap">
-                                <h2 className="text-xl font-black text-white truncate">{chapter.title}</h2>
-                                {isCurrent && <span className={`text-[8px] bg-${themeColor}-500 text-black px-2 py-0.5 rounded font-black uppercase tracking-wider animate-pulse`}>Questing</span>}
-                                {isComplete && <span className={`text-[8px] bg-${themeColor}-500/10 text-${themeColor}-400 px-2 py-0.5 rounded font-black uppercase tracking-wider`}>Done</span>}
+                                <h2 className="text-2xl md:text-3xl font-black text-white truncate">{chapter.title}</h2>
+                                {isCurrent && <span className={`text-xs bg-${themeColor}-500 text-black px-2 py-0.5 rounded font-black uppercase tracking-wider animate-pulse`}>Questing</span>}
+                                {isComplete && <span className={`text-xs bg-${themeColor}-500/10 text-${themeColor}-400 px-2 py-0.5 rounded font-black uppercase tracking-wider`}>Done</span>}
                             </div>
-                            <p className="text-zinc-600 text-xs mt-1 truncate">{chapter.subtitle}</p>
+                            <p className="text-zinc-500 text-sm md:text-base mt-1 truncate">{chapter.subtitle}</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-4 flex-shrink-0 ml-4">
@@ -709,9 +715,9 @@ const ChapterNode = ({ chapter, items, completedIds, completedCount, isLocked, i
                                                     {isDone ? <CheckCircle2 size={16} /> : i + 1}
                                                 </div>
                                                 <div className="flex-1 min-w-0">
-                                                    <h4 className="text-sm md:text-base font-black text-white truncate group-hover/item:text-emerald-300 transition-colors">{item.title}</h4>
+                                                    <h4 className="text-base md:text-xl font-black text-white truncate group-hover/item:text-emerald-300 transition-colors">{item.title}</h4>
                                                     <div className="flex items-center gap-3 mt-1">
-                                                        <span className="text-zinc-700 text-[9px] font-mono flex items-center gap-1"><Zap size={8} /> {item.readTime}</span>
+                                                        <span className="text-zinc-600 text-xs font-mono flex items-center gap-1"><Zap size={10} /> {item.readTime}</span>
                                                         <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); onTagClick?.(item.category); }} 
                                                             className={`text-${themeColor}-500/50 text-[8px] font-black uppercase tracking-tighter hover:text-${themeColor}-400`}>
                                                             {item.category}
