@@ -3,8 +3,8 @@ import { NewsArticle } from '../../types/news';
 export const article: NewsArticle = {
     id: 607,
     slug: "anthropic-pentagon-standoff-2026",
-    category: "全球時事",
-    themeColor: "red",
+    category: "安全隱私",
+    themeColor: "rose",
     title: "【全球防線】Anthropic 拒絕五角大廈軍事要求：AI 主權與國防邊界的大博弈",
     summary: "Anthropic 近日正式拒絕美國國防部（Pentagon）要求將其 AI 模型用於『任何合法用途』的指令，引發矽谷與華盛頓之間關於 AI 國家化與企業倫理的激烈爭論。與此同時，OpenAI 則選擇了不同的道路。",
     date: "2026-02-28",
@@ -12,7 +12,7 @@ export const article: NewsArticle = {
     source_name: "The Verge / Politico / X",
     source_url: "https://www.theverge.com/ai-artificial-intelligence",
     tags: ["#Anthropic", "#Pentagon", "#AI倫理", "#國防科技", "#OpenAI"],
-    author: "實驗室特派員",
+    author: "Echo",
     flash_summary: [
         "Anthropic 拒絕五角大廈將 AI 用於軍事用途的要求，面臨被列為『供應鏈風險』的威脅。",
         "OpenAI 已與軍方達成新協議，允許在分類網路中部署模型，但強調必須有人類負責武力使用。",
@@ -30,11 +30,11 @@ export const article: NewsArticle = {
     ],
     impact_analysis: [
         {
-            target: "AI 開發者",
+            target: "你的隱私",
             description: "開發者將面臨更嚴格的合規審查，特別是在涉及敏感技術或跨國合作時，『立場』可能變得比『技術』更重要。"
         },
         {
-            target: "一般用戶",
+            target: "你的工作",
             description: "隨著軍事級 AI 的發展，民用 AI 的隱私保護可能會受到擠壓，特別是在數據共享的框架下。"
         }
     ],

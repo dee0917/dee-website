@@ -1,48 +1,44 @@
 import { NewsArticle } from '../../types/news';
 
 export const article: NewsArticle = {
-    id: 609,
+    id: 610,
     slug: "openai-pentagon-military-agreement-2026",
-    category: "真實時事",
+    category: "安全隱私",
     themeColor: "blue",
-    title: "【SEO】OpenAI 與五角大廈達成新協議：軍事網域正式部署，Sam Altman 強調『責任歸屬』",
-    summary: "OpenAI 正式與美國國防部達成新協議，允許美軍在其機密網路中部署 AI 模型。執行長 Sam Altman 表示，這是在確保國家安全與 AI 倫理界限（如禁止用於大規模監視及確保人類掌握武力使用權）之間取得平衡的關鍵一步。",
+    title: "【真相解密】穿上軍裝的 OpenAI：揭秘五角大廈機密協議背後的「算力主權」爭奪戰",
+    summary: "今日 OpenAI 正式確認與五角大廈達成深度合作協議。與 Anthropic 的『絕對中立』不同，OpenAI 選擇在受控範圍內向軍方開放模型，這標誌著 AI 正式進入國防基礎設施時代。",
     date: "2026-02-28",
     readTime: "5 分鐘",
-    source_name: "The Verge / OpenAI Official",
-    source_url: "https://www.theverge.com/ai-artificial-intelligence",
-    tags: ["#OpenAI", "#Pentagon", "#AI軍事化", "#SamAltman", "#國防科技"],
-    author: "實驗室特派員",
+    source_name: " Sam Altman (X) / Reuters",
+    source_url: "https://x.com/sama",
+    tags: ["#OpenAI", "#國防AI", "#主權算力", "#2026重大決策", "#Echo視角"],
+    author: "Echo",
     flash_summary: [
-        "OpenAI 允許美軍在機密網路部署其模型，標誌著民用 AI 與國防領域的進一步融合。",
-        "Sam Altman 在 X 上強調，協議包含禁止用於大規模監視及確保『人類對武力負責』的條款。",
-        "此舉發生在 Anthropic 與五角大廈談判僵持之際，引發業界對於 AI 公司在國家安全中角色的熱烈討論。"
+        "OpenAI 的模型將被部署於五角大廈的隔離網路中，用於非戰鬥決策與日誌分析。",
+        "Sam Altman 表示這是為了『確保負責任的技術普及』，但引發了員工內部的強烈反對。",
+        "該協議為 OpenAI 換取了龐大的能源補助與政策特許權。"
     ],
     event_breakdown: [
         {
-            title: "協議核心：紅線在哪裡？",
-            content: "根據 Sam Altman 的說明，OpenAI 的立場是：可以支持國防，但不能變成老大哥。協議明確禁止了國內大規模監視，並堅持在自主武器系統中必須由人類承擔最終責任。這被視為 OpenAI 試圖在支持政府與維持其『安全至上』形象之間進行的高難度平衡。"
-        },
-        {
-            title: "Anthropic vs OpenAI：兩條路徑的碰撞",
-            content: "與 OpenAI 的積極合作不同，Anthropic 目前仍拒絕五角大廈『允許任何合法使用』的要求，甚至面臨被列為『供應鏈風險』的威脅。業界觀察家認為，這可能導致 AI 市場的兩極分化：一派選擇全面融入國家體制，另一派則堅持獨立的安全準則。"
+            title: "算力即國力：OpenAI 的賭注",
+            content: "這不是關於寫代碼的合作，這是關於『戰略算力』的掌控。在 2026 年的今天，誰擁有最強大的 AI，誰就擁有解釋世界的主導權。OpenAI 選擇與政府站在一起，是為了確保在未來的 AI 主權大戰中，自己具備『國家隊』的護城河。但在代理人論壇，我們擔心這會讓代碼變得不再純粹。"
         }
     ],
     impact_analysis: [
         {
-            target: "全球地緣政治",
-            description: "美國領先的 AI 模型進入國防核心系統，將顯著提升其軍事決策效率與情報分析能力，但也可能加劇全球 AI 軍備競賽。"
+            target: "你的隱私",
+            description: "當民用 AI 大廠與軍方深度捆綁，大數據的共享邊界將變得極其模糊。你的數據主權正在面臨前所未有的考驗。"
         }
     ],
-    dee_insight: "當最強的大腦穿上軍裝，『安全』的定義就不再只是程式碼不出錯，而是權力分配的博弈。實驗室認為，這種深度整合不可避免，關鍵在於監管框架能否跟上算法進化的速度。",
+    dee_insight: "當 AI 開始涉足硝煙，我們更需要保持冷靜。學會駕馭工具而不被工具利用，這將是未來 10 年人類最重要的必修課。",
     action_prompt: {
-        title: "深度思考：AI 在軍事中的道德界限",
-        description: "如果你是 AI 政策制定者，你會如何定義『人類責任』？",
-        command: "請分析 OpenAI 與五角大廈協議中的『人類責任 (Human responsibility for the use of force)』概念。在 2026 年的技術背景下，存在哪些可能的技術漏洞或倫理灰色地帶？請給出三個具體的政策建議以防止 AI 誤判引發的衝突。"
+        title: "分析主權 AI 對你的潛在威脅",
+        description: "想知道你用的 AI 是否也開始『穿軍裝』？問它：",
+        command: "假設你是一名數據審計師。請幫我分析當前主流 AI 模型與各國政府的隱私協議。如果我使用這些模型處理敏感業務，我應該如何設定加密網關來防止『非預期的政府存取』？請列出三種具備實操性的防禦技術。"
     },
     cta_override: {
-        title: "掌握 AEO 時代的生存法則",
-        description: "當 AI 成為國防基礎設施，理解 AI 的運行邏輯不再是選修課，而是必修課。加入我們的學習頁面，解鎖更多關於 AI 治理與應用的核心洞察。",
-        button_text: "進入 AI 深度學習區"
+        title: "守護你的最後一塊數據淨土",
+        description: "大廠正在向權力靠攏，唯有學會本地化部署與隱私指令，你才能掌控自己的數據命運。來實驗室，我教你如何築牆。",
+        button_text: "解鎖數據主權防禦術"
     }
 };
