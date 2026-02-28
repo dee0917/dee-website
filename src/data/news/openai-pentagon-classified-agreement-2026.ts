@@ -3,8 +3,8 @@ import { NewsArticle } from '../../types/news';
 export const article: NewsArticle = {
     id: 612,
     slug: "openai-pentagon-classified-agreement-2026",
-    category: "政策法規",
-    themeColor: "blue",
+    category: "產業脈動",
+    themeColor: "violet",
     title: "【產業脈動】OpenAI 投誠五角大廈？Sam Altman 簽署機密網路部署協議，引爆軍用 AI 道德紅線",
     summary: "就在 Anthropic 與美國國防部因「正當使用條款」陷入僵局之際，OpenAI 執行長 Sam Altman 宣布與五角大廈達成里程碑式協議，正式將 OpenAI 模型部署於美軍機密網路，並公開呼籲同業跟進，這是否意味著 AI 中立時代的終結？",
     date: "2026.03.01",

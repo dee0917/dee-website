@@ -1,7 +1,7 @@
 import SEO from '../components/ui/SEO';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight, Zap, Clock, Shield, TrendingUp, Filter, Star, Info } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Zap, Clock, Shield, TrendingUp, Filter, Star } from 'lucide-react';
 import { NEWS_ARTICLES } from '../data/news';
 import { useMemo } from 'react';
 
@@ -20,7 +20,7 @@ const THEME_CONFIG: Record<string, any> = {
     blue: { text: 'text-blue-500', lightText: 'text-blue-400', tag: 'bg-blue-500/10 text-blue-500', border: 'hover:border-blue-500/20', glow: 'group-hover:shadow-blue-500/10' },
     violet: { text: 'text-violet-500', lightText: 'text-violet-400', tag: 'bg-violet-500/10 text-violet-500', border: 'hover:border-violet-500/20', glow: 'group-hover:shadow-violet-500/10' },
     rose: { text: 'text-rose-500', lightText: 'text-rose-400', tag: 'bg-rose-500/10 text-rose-500', border: 'hover:border-rose-500/20', glow: 'group-hover:shadow-rose-500/10' },
-    amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-500', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
+    amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-400', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
 };
 
 const News = () => {
@@ -46,7 +46,7 @@ const News = () => {
                     </div>
                     <div>
                         <h1 className="text-2xl md:text-3xl font-black text-white tracking-tight">AI 新聞情報站</h1>
-                        <span className="text-emerald-500/60 font-mono text-[9px] tracking-[0.4em] uppercase block mt-1">Intelligence Intelligence Hub</span>
+                        <span className="text-emerald-500/60 font-mono text-[9px] tracking-[0.4em] uppercase block mt-1">Intelligence Hub</span>
                     </div>
                 </div>
                 
@@ -55,7 +55,6 @@ const News = () => {
                     我們將艱澀的新聞，轉化為對你有用的 <span className="text-white">情報</span> 與 <span className="text-white">指令</span>。
                 </p>
 
-                {/* 專業大分類過濾器 */}
                 <div className="flex items-center gap-4 mb-10 overflow-x-auto pb-4 scrollbar-hide">
                     <div className="flex-shrink-0 text-zinc-700 mr-1"><Filter size={16} /></div>
                     {categories.map(tag => {
@@ -75,10 +74,13 @@ const News = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredArticles.map((article, i) => (
-                    <NewsCard key={article.slug} article={article} idx={i} />
-                ))}
+            {/* 列表區域，使用 AnimatePresence 防止卡頓 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[600px]">
+                <AnimatePresence mode="popLayout">
+                    {filteredArticles.map((article, i) => (
+                        <NewsCard key={article.slug} article={article} idx={i} />
+                    ))}
+                </AnimatePresence>
             </div>
 
             <section className="mt-40 text-center py-20 border-t border-white/5">
@@ -111,10 +113,15 @@ const NewsCard = ({ article, idx }: any) => {
     const theme = THEME_CONFIG[themeColor] || THEME_CONFIG.emerald;
 
     return (
-        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.04 }} viewport={{ once: true }}
+        <motion.div 
+            layout
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.3 }}
             onClick={() => navigate(`/news/${article.slug}`)}
-            className={`bg-zinc-900/50 backdrop-blur-sm border border-white/[0.05] ${theme.border} p-6 md:p-7 rounded-[2rem] h-full flex flex-col relative transition-all duration-500 group group-hover:shadow-2xl ${theme.glow} cursor-pointer`}>
-            
+            className={`bg-zinc-900/50 backdrop-blur-sm border border-white/[0.05] ${theme.border} p-6 md:p-7 rounded-[2rem] h-full flex flex-col relative transition-all duration-500 group group-hover:shadow-2xl ${theme.glow} cursor-pointer`}
+        >
             <div className="flex flex-wrap items-center justify-between gap-2 mb-5">
                 <span className={`text-[9px] font-black px-3 py-1.5 rounded-lg tracking-[0.1em] uppercase transition-all hover:brightness-125 ${theme.tag}`}>
                     {article.category}
@@ -135,7 +142,7 @@ const NewsCard = ({ article, idx }: any) => {
                         <Clock size={10} className="text-zinc-500" /> {article.readTime}
                     </span>
                     <div className={`flex items-center gap-1.5 text-${themeColor}-500/50 group-hover:text-${themeColor}-400 transition-all`}>
-                        <span className="text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all">Read Intelligence</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all">Read</span>
                         <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </div>
                 </div>
