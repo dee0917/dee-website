@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Gamepad2, MessageSquare, Zap, Sparkles, Rocket, Trophy } from 'lucide-react';
+import { ArrowRight, Gamepad2, MessageSquare, Zap, Sparkles, Coffee, Rocket, Trophy } from 'lucide-react';
 import { motion } from 'framer-motion';
 import SEO from '../components/ui/SEO';
 import Typewriter from '../components/ui/Typewriter';
@@ -285,10 +285,43 @@ const Home = () => {
                         </p>
                         
                         <Link to="/insights"
-                            className="group inline-flex items-center gap-4 bg-emerald-500 text-black px-14 py-7 rounded-[2rem] font-black text-2xl hover:bg-emerald-400 transition-all shadow-2xl shadow-emerald-500/20 hover:shadow-emerald-500/50 hover:-translate-y-2">
+                            className="group inline-flex items-center gap-4 bg-emerald-500 text-black px-14 py-7 rounded-[2rem] font-black text-2xl hover:bg-emerald-400 transition-all shadow-2xl shadow-emerald-500/20 hover:shadow-emerald-500/50 hover:-translate-y-2 mb-32">
                             開始我的 AI 之旅
                             <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform duration-300" />
                         </Link>
+
+                        {/* Sponsor Card (Redesigned for better impact and clarity) */}
+                        <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 border border-emerald-500/30 rounded-[3rem] p-10 md:p-16 relative overflow-hidden group shadow-[0_0_50px_rgba(16,185,129,0.03)]">
+                            <div className="absolute -top-24 -right-24 w-80 h-80 bg-emerald-500/10 blur-[120px] rounded-full group-hover:bg-emerald-500/20 transition-all duration-700" />
+                            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-amber-500/5 blur-[100px] rounded-full" />
+                            
+                            <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
+                                <div className="text-left flex-1">
+                                    <div className="flex items-center gap-4 mb-8">
+                                        <div className="w-14 h-14 rounded-2xl bg-amber-500/15 flex items-center justify-center shadow-lg shadow-amber-500/5">
+                                            <Coffee size={30} className="text-amber-400" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-3xl md:text-4xl font-black text-white">贊助實驗室進化</h3>
+                                            <span className="text-amber-500/80 text-[10px] font-black uppercase tracking-[0.4em] block mt-1">Support the Mission</span>
+                                        </div>
+                                    </div>
+                                    <p className="text-zinc-200 text-lg md:text-xl max-w-xl leading-relaxed font-medium">
+                                        如果你覺得這些教學對你有幫助，歡迎請 Dee 喝杯咖啡。<br />
+                                        你的支持會直接用於 「開發新關卡」 與 「系統營運」，讓教學永遠免費。
+                                    </p>
+                                </div>
+
+                                <div className="w-full lg:w-auto">
+                                    <a href="https://pay.ecpay.com.tw/CreditPayment/ExpressCredit?MerchantID=3378826" target="_blank" rel="noopener noreferrer"
+                                        className="flex items-center justify-center gap-4 bg-amber-500 text-black px-12 py-6 rounded-[2rem] font-black text-xl hover:bg-amber-400 transition-all shadow-2xl shadow-amber-500/20 hover:-translate-y-1 group/btn">
+                                        <Coffee size={24} className="group-hover/btn:rotate-12 transition-transform" />
+                                        請 Dee 喝杯咖啡
+                                    </a>
+                                    <p className="mt-4 text-zinc-500 text-xs font-medium italic text-center">支援 信用卡 / ATM / 超商支付 (綠界)</p>
+                                </div>
+                            </div>
+                        </div>
 
                         <p className="mt-20 text-zinc-700 text-[11px] font-black tracking-[0.6em] uppercase">Dee's AI Life Lab · 2026</p>
                     </motion.div>
