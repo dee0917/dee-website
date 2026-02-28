@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Newspaper, BookOpen, FlaskConical, Package, User } from 'lucide-react';
+import { Menu, X, Newspaper, BookOpen, FlaskConical, Package, User, Coffee } from 'lucide-react';
 
 const Navbar = () => {
     const location = useLocation();
@@ -35,6 +35,9 @@ const Navbar = () => {
                     <Link to="/about" className={linkClass('/about')}>
                         <User size={14} /> 關於 Dee
                     </Link>
+                    <a href="https://p.ecpay.com.tw/XXXXXX" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors flex items-center gap-1.5 text-zinc-400">
+                        <Coffee size={14} /> 贊助
+                    </a>
                     <Link to="/insights" className="bg-white text-black px-4 py-2 rounded-full hover:bg-zinc-200 transition-colors font-semibold text-xs tracking-wide">
                         開始學習
                     </Link>

@@ -93,7 +93,7 @@ const InsightsList = () => {
                 </div>
                 <Link
                     to="/admin/insights/new"
-                    className="bg-google-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600 transition-colors"
+                    className="bg-emerald-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600 transition-colors"
                 >
                     <Plus size={18} /> 新增文章
                 </Link>
@@ -108,7 +108,7 @@ const InsightsList = () => {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         placeholder="搜尋文章..."
-                        className="w-full bg-[#111] border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white focus:outline-none focus:border-google-blue transition-colors"
+                        className="w-full bg-[#111] border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                     />
                 </div>
                 <div className="flex gap-2">
@@ -117,7 +117,7 @@ const InsightsList = () => {
                             key={f}
                             onClick={() => setFilter(f)}
                             className={`px-4 py-2 rounded-lg transition-colors ${filter === f
-                                    ? 'bg-google-blue text-white'
+                                    ? 'bg-emerald-500 text-white'
                                     : 'bg-white/5 text-zinc-400 hover:bg-white/10'
                                 }`}
                         >
@@ -146,7 +146,7 @@ const InsightsList = () => {
                             return (
                                 <tr key={insight.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
                                     <td className="px-6 py-4">
-                                        <Link to={`/admin/insights/${insight.id}`} className="font-medium text-white hover:text-google-blue transition-colors">
+                                        <Link to={`/admin/insights/${insight.id}`} className="font-medium text-white hover:text-emerald-500 transition-colors">
                                             {insight.title}
                                         </Link>
                                     </td>

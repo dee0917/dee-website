@@ -73,7 +73,7 @@ const SiteSettingsPage = () => {
                 <button
                     onClick={handleSave}
                     disabled={saving}
-                    className="bg-google-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600 disabled:opacity-50"
+                    className="bg-emerald-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600 disabled:opacity-50"
                 >
                     {saving ? <RefreshCw size={16} className="animate-spin" /> : <Save size={16} />}
                     儲存設定
@@ -92,7 +92,7 @@ const SiteSettingsPage = () => {
                                 type="text"
                                 value={settings.hero_badge}
                                 onChange={(e) => setSettings({ ...settings, hero_badge: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-google-blue"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500"
                                 placeholder="例如：AI 學習引路人"
                             />
                             <p className="text-xs text-zinc-500 mt-1">顯示在主標題上方的小標籤</p>
@@ -105,7 +105,7 @@ const SiteSettingsPage = () => {
                                     type="text"
                                     value={settings.hero_title_line1}
                                     onChange={(e) => setSettings({ ...settings, hero_title_line1: e.target.value })}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-google-blue"
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500"
                                 />
                             </div>
                             <div>
@@ -114,7 +114,7 @@ const SiteSettingsPage = () => {
                                     type="text"
                                     value={settings.hero_title_line2}
                                     onChange={(e) => setSettings({ ...settings, hero_title_line2: e.target.value })}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-google-blue"
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500"
                                 />
                             </div>
                         </div>
@@ -125,7 +125,7 @@ const SiteSettingsPage = () => {
                                 type="text"
                                 value={typewriterText}
                                 onChange={(e) => setTypewriterText(e.target.value)}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-google-blue"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500"
                                 placeholder="思考, 生活, 家人, 創意"
                             />
                             <p className="text-xs text-zinc-500 mt-1">用逗號分隔多個詞彙，會輪流顯示</p>
@@ -136,7 +136,7 @@ const SiteSettingsPage = () => {
                             <textarea
                                 value={settings.hero_description}
                                 onChange={(e) => setSettings({ ...settings, hero_description: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-google-blue resize-none"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 resize-none"
                                 rows={3}
                             />
                         </div>
@@ -147,12 +147,12 @@ const SiteSettingsPage = () => {
                 <section className="bg-[#111] border border-white/10 rounded-xl p-6">
                     <h2 className="text-xl font-bold mb-6 pb-4 border-b border-white/10">預覽</h2>
                     <div className="bg-[#0a0a0a] rounded-lg p-8">
-                        <div className="inline-flex items-center gap-2 border border-google-blue/30 bg-google-blue/10 text-google-blue px-3 py-1 rounded text-xs mb-4 font-medium">
+                        <div className="inline-flex items-center gap-2 border border-emerald-500/30 bg-emerald-500/10 text-emerald-500 px-3 py-1 rounded text-xs mb-4 font-medium">
                             {settings.hero_badge}
                         </div>
                         <h3 className="text-3xl font-bold text-white mb-2">{settings.hero_title_line1}</h3>
                         <h3 className="text-3xl font-serif italic text-zinc-400 mb-4">
-                            {settings.hero_title_line2} <span className="text-google-blue">{typewriterText.split(',')[0]?.trim()}</span>
+                            {settings.hero_title_line2} <span className="text-emerald-500">{typewriterText.split(',')[0]?.trim()}</span>
                         </h3>
                         <p className="text-zinc-400">{settings.hero_description}</p>
                     </div>

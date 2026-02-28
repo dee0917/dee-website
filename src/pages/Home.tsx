@@ -230,29 +230,56 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* ═══════════ 最終 CTA ═══════════ */}
+            {/* ═══════════ 最終 CTA + Sponsor ═══════════ */}
             <section className="py-24 px-6 border-t border-white/5">
-                <div className="max-w-2xl mx-auto text-center">
+                <div className="max-w-4xl mx-auto text-center">
                     <motion.div {...fadeUp}>
                         <Sparkles size={28} className="text-emerald-500 mx-auto mb-6" />
                         <h2 className="text-3xl md:text-4xl font-black text-white mb-4 tracking-tight">準備好了嗎？</h2>
-                        <p className="text-zinc-500 text-base mb-10 leading-relaxed">
+                        <p className="text-zinc-500 text-base mb-14 leading-relaxed">
                             {totalArticles} 篇免費教學。5 個章節。1 段冒險旅程。<br />
                             <span className="text-zinc-400">全程免費，沒有付費牆。</span>
                         </p>
+                        
                         <Link to="/insights"
-                            className="group inline-flex items-center gap-3 bg-emerald-500 text-black px-10 py-5 rounded-2xl font-black text-lg hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 hover:-translate-y-0.5">
+                            className="group inline-flex items-center gap-3 bg-emerald-500 text-black px-12 py-6 rounded-2xl font-black text-xl hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 hover:-translate-y-0.5 mb-24">
                             開始我的 AI 之旅
-                            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                            <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
 
-                        {/* Buy me a coffee */}
-                        <div className="mt-12 pt-8 border-t border-white/5">
-                            <a href="https://buymeacoffee.com/deedeeboy" target="_blank" rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 text-zinc-700 hover:text-amber-400 text-xs font-bold transition-colors">
-                                <Coffee size={14} /> 覺得有幫助？請 Dee 喝杯咖啡
-                            </a>
+                        {/* Sponsor Card */}
+                        <div className="bg-gradient-to-br from-zinc-900 to-black border border-emerald-500/20 rounded-[2.5rem] p-8 md:p-14 relative overflow-hidden group">
+                            <div className="absolute -top-24 -right-24 w-64 h-64 bg-emerald-500/5 blur-[100px] rounded-full group-hover:bg-emerald-500/10 transition-all" />
+                            
+                            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
+                                <div className="text-left">
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <div className="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center">
+                                            <Coffee size={24} className="text-amber-500" />
+                                        </div>
+                                        <h3 className="text-2xl md:text-3xl font-black text-white">贊助實驗室進化</h3>
+                                    </div>
+                                    <p className="text-zinc-400 text-base md:text-lg max-w-md leading-relaxed">
+                                        如果你覺得這些教學對你有幫助，歡迎支持我。你的贊助會讓實驗室開發出更多、更酷的免費關卡。
+                                    </p>
+                                </div>
+
+                                <div className="flex flex-col gap-4 w-full md:w-auto">
+                                    <a href="https://p.ecpay.com.tw/XXXXXX" target="_blank" rel="noopener noreferrer"
+                                        className="flex items-center justify-center gap-3 bg-[#00a650] text-white px-10 py-5 rounded-2xl font-black text-lg hover:opacity-90 transition-all shadow-xl shadow-[#00a650]/10">
+                                        <span className="text-xs border border-white/30 px-2 py-0.5 rounded-md">TW</span>
+                                        綠界贊助 (ECPay)
+                                    </a>
+                                    <a href="https://buymeacoffee.com/deedeeboy" target="_blank" rel="noopener noreferrer"
+                                        className="flex items-center justify-center gap-3 bg-[#FFDD00] text-black px-10 py-5 rounded-2xl font-black text-lg hover:opacity-90 transition-all shadow-xl shadow-[#FFDD00]/10">
+                                        <Coffee size={20} />
+                                        請喝咖啡
+                                    </a>
+                                </div>
+                            </div>
                         </div>
+
+                        <p className="mt-12 text-zinc-700 text-[10px] font-bold tracking-[0.5em] uppercase">Dee's AI Life Lab · 2026</p>
                     </motion.div>
                 </div>
             </section>

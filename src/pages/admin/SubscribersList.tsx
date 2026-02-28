@@ -85,7 +85,7 @@ const SubscribersList = () => {
                         共 {subscribers.length} 位訂閱者，其中 {activeSubscribers.length} 位活躍
                     </p>
                 </div>
-                <button onClick={handleExport} className="bg-google-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600">
+                <button onClick={handleExport} className="bg-emerald-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600">
                     <Download size={18} /> 匯出 CSV
                 </button>
             </div>

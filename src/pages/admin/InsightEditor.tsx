@@ -152,7 +152,7 @@ const InsightEditor = () => {
                     <button
                         onClick={() => handleSave(true)}
                         disabled={saving}
-                        className="px-4 py-2 bg-google-blue hover:bg-blue-600 rounded-lg transition-colors flex items-center gap-2 disabled:opacity-50"
+                        className="px-4 py-2 bg-emerald-500 hover:bg-blue-600 rounded-lg transition-colors flex items-center gap-2 disabled:opacity-50"
                     >
                         發布
                     </button>
@@ -168,7 +168,7 @@ const InsightEditor = () => {
                             type="text"
                             value={insight.title}
                             onChange={(e) => setInsight({ ...insight, title: e.target.value })}
-                            className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 text-2xl font-bold text-white focus:outline-none focus:border-google-blue transition-colors"
+                            className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 text-2xl font-bold text-white focus:outline-none focus:border-emerald-500 transition-colors"
                             placeholder="輸入教學標題..."
                         />
                     </div>
@@ -178,7 +178,7 @@ const InsightEditor = () => {
                         <textarea
                             value={insight.summary || ''}
                             onChange={(e) => setInsight({ ...insight, summary: e.target.value })}
-                            className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-google-blue transition-colors resize-none"
+                            className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-emerald-500 transition-colors resize-none"
                             rows={3}
                             placeholder="簡短描述這篇教學的內容..."
                         />
@@ -204,7 +204,7 @@ const InsightEditor = () => {
                             <select
                                 value={insight.category}
                                 onChange={(e) => setInsight({ ...insight, category: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-google-blue transition-colors"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                             >
                                 <option value="">選擇分類</option>
                                 <option value="入門心法">入門心法</option>
@@ -221,7 +221,7 @@ const InsightEditor = () => {
                                 type="text"
                                 value={insight.read_time}
                                 onChange={(e) => setInsight({ ...insight, read_time: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-google-blue transition-colors"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                                 placeholder="例如：5 分鐘"
                             />
                         </div>
@@ -232,7 +232,7 @@ const InsightEditor = () => {
                                     type="checkbox"
                                     checked={insight.is_published}
                                     onChange={(e) => setInsight({ ...insight, is_published: e.target.checked })}
-                                    className="w-5 h-5 rounded border-white/20 bg-white/5 text-google-blue focus:ring-google-blue focus:ring-offset-0"
+                                    className="w-5 h-5 rounded border-white/20 bg-white/5 text-emerald-500 focus:ring-emerald-500 focus:ring-offset-0"
                                 />
                                 <span className="text-white">已發布</span>
                             </label>
@@ -248,7 +248,7 @@ const InsightEditor = () => {
                                 type="text"
                                 value={insight.seo_title || ''}
                                 onChange={(e) => setInsight({ ...insight, seo_title: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-google-blue transition-colors"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                                 placeholder="針對搜尋引擎優化的標題"
                             />
                         </div>
@@ -259,7 +259,7 @@ const InsightEditor = () => {
                                 type="text"
                                 value={insight.keywords?.join(', ') || ''}
                                 onChange={(e) => setInsight({ ...insight, keywords: e.target.value.split(',').map(k => k.trim()).filter(k => k) })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-google-blue transition-colors"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                                 placeholder="AI教學, ChatGPT使用方法, AI提示詞"
                             />
                         </div>
@@ -269,7 +269,7 @@ const InsightEditor = () => {
                             <textarea
                                 value={insight.search_intent || ''}
                                 onChange={(e) => setInsight({ ...insight, search_intent: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-google-blue transition-colors resize-none"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors resize-none"
                                 rows={2}
                                 placeholder="學習者想要了解為什麼 AI 聽不懂指令，以及如何有效與 AI 溝通"
                             />
@@ -281,7 +281,7 @@ const InsightEditor = () => {
                                 type="text"
                                 value={insight.target_audience || ''}
                             onChange={(e) => setInsight({ ...insight, target_audience: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-google-blue transition-colors"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                                 placeholder="AI 新手、初學者、剛開始使用 ChatGPT/GPT 的使用者"
                             />
                         </div>
@@ -291,7 +291,7 @@ const InsightEditor = () => {
                             <textarea
                                 value={insight.pain_point || ''}
                                 onChange={(e) => setInsight({ ...insight, pain_point: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-google-blue transition-colors resize-none"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors resize-none"
                                 rows={2}
                                 placeholder="你覺得 AI 笨笨的，回答總是不達標嗎？"
                             />
@@ -302,7 +302,7 @@ const InsightEditor = () => {
                             <textarea
                                 value={insight.scenario || ''}
                                 onChange={(e) => setInsight({ ...insight, scenario: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-google-blue transition-colors resize-none"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors resize-none"
                                 rows={2}
                                 placeholder="想像你要讓實習生幫你寫一份報告..."
                             />
@@ -313,7 +313,7 @@ const InsightEditor = () => {
                             <textarea
                                 value={insight.solution || ''}
                                 onChange={(e) => setInsight({ ...insight, solution: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-google-blue transition-colors resize-none"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors resize-none"
                                 rows={2}
                                 placeholder="把 AI 想像成第一天報到的實習生..."
                             />
@@ -329,7 +329,7 @@ const InsightEditor = () => {
                                             ? { ...insight.example, wrong: e.target.value }
                                             : { wrong: e.target.value, right: '' }
                                 })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-google-blue transition-colors resize-none"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors resize-none"
                                 rows={2}
                                 placeholder="錯誤的指令範例，例如：幫我寫個報告"
                             />
@@ -345,7 +345,7 @@ const InsightEditor = () => {
                                             ? { ...insight.example, right: e.target.value }
                                             : { wrong: '', right: e.target.value }
                                 })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-google-blue transition-colors resize-none"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors resize-none"
                                 rows={2}
                                 placeholder="正確的指令範例，包含背景、角色、目標"
                             />
@@ -414,7 +414,7 @@ const InsightEditor = () => {
                                 type="text"
                                 value={insight.semantic_tags?.join(', ') || ''}
                                 onChange={(e) => setInsight({ ...insight, semantic_tags: e.target.value.split(',').map(k => k.trim()).filter(k => k) })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-google-blue transition-colors"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                                 placeholder="AI入門, 指令技巧, 溝通方法"
                             />
                         </div>
@@ -428,7 +428,7 @@ const InsightEditor = () => {
                                     max="100"
                                     value={insight.relevance_score || ''}
                                     onChange={(e) => setInsight({ ...insight, relevance_score: e.target.value ? parseInt(e.target.value) : null })}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-google-blue transition-colors"
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                                     placeholder="85"
                                 />
                             </div>
@@ -439,7 +439,7 @@ const InsightEditor = () => {
                                     min="0"
                                     value={insight.popularity_score || ''}
                                     onChange={(e) => setInsight({ ...insight, popularity_score: e.target.value ? parseInt(e.target.value) : null })}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-google-blue transition-colors"
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500 transition-colors"
                                     placeholder="75"
                                 />
                             </div>

@@ -276,7 +276,7 @@ const AdminDashboard = () => {
     const activeSubscribers = subscribers.filter(s => s.status === 'active');
 
     const tabs = [
-        { id: 'insights' as TabType, label: '免費教學', icon: FileText, count: insights.length, color: 'google-blue' },
+        { id: 'insights' as TabType, label: '免費教學', icon: FileText, count: insights.length, color: 'emerald-500' },
         { id: 'solutions' as TabType, label: '學習方案', icon: Package, count: solutions.length, color: 'green-500' },
         { id: 'testimonials' as TabType, label: '學員回饋', icon: MessageSquare, count: testimonials.length, color: 'yellow-500' },
         { id: 'settings' as TabType, label: '網站設定', icon: Settings, count: 1, color: 'purple-500' }
@@ -292,12 +292,12 @@ const AdminDashboard = () => {
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
                             className={`bg-[#111] border rounded-xl p-6 text-left transition-all ${activeTab === tab.id
-                                ? 'border-google-blue bg-google-blue/5'
+                                ? 'border-emerald-500 bg-emerald-500/5'
                                 : 'border-white/10 hover:border-white/20'
                                 }`}
                         >
                             <div className="flex items-center justify-between mb-4">
-                                <tab.icon className={activeTab === tab.id ? 'text-google-blue' : 'text-zinc-400'} size={24} />
+                                <tab.icon className={activeTab === tab.id ? 'text-emerald-500' : 'text-zinc-400'} size={24} />
                                 <span className="text-3xl font-bold text-white">{tab.count}</span>
                             </div>
                             <h3 className={activeTab === tab.id ? 'text-white font-medium' : 'text-zinc-400'}>{tab.label}</h3>
@@ -319,14 +319,14 @@ const AdminDashboard = () => {
                             <div className="bg-[#111] border border-white/10 rounded-xl p-6">
                                 <div className="flex items-center justify-between mb-6">
                                     <h2 className="text-xl font-bold">洞察文章</h2>
-                                    <button onClick={handleNewInsight} className="bg-google-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600">
+                                    <button onClick={handleNewInsight} className="bg-emerald-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600">
                                         <Plus size={18} /> 新增文章
                                     </button>
                                 </div>
 
                                 {/* 編輯區域 */}
                                 {editingInsight && (
-                                    <div className="mb-6 p-6 bg-white/5 rounded-xl border border-google-blue/30">
+                                    <div className="mb-6 p-6 bg-white/5 rounded-xl border border-emerald-500/30">
                                         <div className="flex items-center justify-between mb-6">
                                             <h3 className="font-bold text-lg">{editingInsight.id ? '編輯文章' : '新增文章'}</h3>
                                             <button onClick={() => setEditingInsight(null)} className="text-zinc-400 hover:text-white">
@@ -403,7 +403,7 @@ const AdminDashboard = () => {
                                                         <Save size={16} /> 僅儲存
                                                     </button>
                                                     {editingInsight.is_published && activeSubscribers.length > 0 && (
-                                                        <button onClick={() => handleSaveInsight(true)} disabled={saving} className="px-4 py-2 bg-google-blue rounded-lg flex items-center gap-2 hover:bg-blue-600 disabled:opacity-50">
+                                                        <button onClick={() => handleSaveInsight(true)} disabled={saving} className="px-4 py-2 bg-emerald-500 rounded-lg flex items-center gap-2 hover:bg-blue-600 disabled:opacity-50">
                                                             <Mail size={16} /> 發布並通知 ({activeSubscribers.length})
                                                         </button>
                                                     )}
@@ -450,7 +450,7 @@ const AdminDashboard = () => {
                             <div className="bg-[#111] border border-white/10 rounded-xl p-6">
                                 <div className="flex items-center justify-between mb-6">
                                     <h2 className="text-xl font-bold">學習方案</h2>
-                                    <button onClick={handleNewSolution} className="bg-google-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600">
+                                    <button onClick={handleNewSolution} className="bg-emerald-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600">
                                         <Plus size={18} /> 新增方案
                                     </button>
                                 </div>
@@ -484,7 +484,7 @@ const AdminDashboard = () => {
                                                     </div>
                                                     <div className="flex justify-end gap-2 pt-4 border-t border-white/10">
                                                         <button onClick={() => setEditingSolution(null)} className="px-4 py-2 text-zinc-400 hover:text-white">取消</button>
-                                                        <button onClick={handleSaveSolution} disabled={saving} className="px-4 py-2 bg-google-blue rounded-lg flex items-center gap-2 hover:bg-blue-600 disabled:opacity-50">
+                                                        <button onClick={handleSaveSolution} disabled={saving} className="px-4 py-2 bg-emerald-500 rounded-lg flex items-center gap-2 hover:bg-blue-600 disabled:opacity-50">
                                                             <Save size={16} /> 儲存
                                                         </button>
                                                     </div>
@@ -516,7 +516,7 @@ const AdminDashboard = () => {
                             <div className="bg-[#111] border border-white/10 rounded-xl p-6">
                                 <div className="flex items-center justify-between mb-6">
                                     <h2 className="text-xl font-bold">學員回饋</h2>
-                                    <button onClick={handleNewTestimonial} className="bg-google-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600">
+                                    <button onClick={handleNewTestimonial} className="bg-emerald-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600">
                                         <Plus size={18} /> 新增回饋
                                     </button>
                                 </div>
@@ -542,7 +542,7 @@ const AdminDashboard = () => {
                                                     </div>
                                                     <div className="flex justify-end gap-2">
                                                         <button onClick={() => setEditingTestimonial(null)} className="px-4 py-2 text-zinc-400 hover:text-white">取消</button>
-                                                        <button onClick={handleSaveTestimonial} disabled={saving} className="px-4 py-2 bg-google-blue rounded-lg flex items-center gap-2 hover:bg-blue-600 disabled:opacity-50">
+                                                        <button onClick={handleSaveTestimonial} disabled={saving} className="px-4 py-2 bg-emerald-500 rounded-lg flex items-center gap-2 hover:bg-blue-600 disabled:opacity-50">
                                                             <Save size={16} /> 儲存
                                                         </button>
                                                     </div>
@@ -584,7 +584,7 @@ const AdminDashboard = () => {
                                             共 {subscribers.length} 位訂閱者，其中 {activeSubscribers.length} 位活躍
                                         </p>
                                     </div>
-                                    <button onClick={handleExportSubscribers} className="bg-google-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600">
+                                    <button onClick={handleExportSubscribers} className="bg-emerald-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600">
                                         <Download size={18} /> 匯出 CSV
                                     </button>
                                 </div>
@@ -657,7 +657,7 @@ const AdminDashboard = () => {
                             <div className="bg-[#111] border border-white/10 rounded-xl p-6">
                                 <div className="flex items-center justify-between mb-6">
                                     <h2 className="text-xl font-bold">網站設定</h2>
-                                    <button onClick={handleSaveSettings} disabled={saving} className="bg-google-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600 disabled:opacity-50">
+                                    <button onClick={handleSaveSettings} disabled={saving} className="bg-emerald-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600 disabled:opacity-50">
                                         <Save size={18} /> 儲存設定
                                     </button>
                                 </div>
@@ -690,9 +690,9 @@ const AdminDashboard = () => {
                                     <div className="mt-8 pt-6 border-t border-white/10">
                                         <h3 className="text-sm text-zinc-400 mb-4">預覽</h3>
                                         <div className="bg-[#0a0a0a] rounded-lg p-6">
-                                            <div className="inline-flex items-center gap-2 border border-google-blue/30 bg-google-blue/10 text-google-blue px-3 py-1 rounded text-xs mb-3">{siteSettings.hero_badge}</div>
+                                            <div className="inline-flex items-center gap-2 border border-emerald-500/30 bg-emerald-500/10 text-emerald-500 px-3 py-1 rounded text-xs mb-3">{siteSettings.hero_badge}</div>
                                             <h3 className="text-2xl font-bold text-white mb-1">{siteSettings.hero_title_line1}</h3>
-                                            <h3 className="text-2xl font-serif italic text-zinc-400 mb-3">{siteSettings.hero_title_line2} <span className="text-google-blue">{typewriterText.split(',')[0]?.trim()}</span></h3>
+                                            <h3 className="text-2xl font-serif italic text-zinc-400 mb-3">{siteSettings.hero_title_line2} <span className="text-emerald-500">{typewriterText.split(',')[0]?.trim()}</span></h3>
                                             <p className="text-zinc-400 text-sm">{siteSettings.hero_description}</p>
                                         </div>
                                     </div>

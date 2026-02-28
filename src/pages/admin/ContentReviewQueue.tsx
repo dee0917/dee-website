@@ -197,7 +197,7 @@ export default function ContentReviewQueue() {
               onClick={() => setFilter(status as any)}
               className={`px-4 py-2 rounded-lg transition-colors ${
                 filter === status
-                  ? 'bg-google-blue text-white'
+                  ? 'bg-emerald-500 text-white'
                   : 'bg-white/5 text-zinc-400 hover:bg-white/10'
               }`}
             >
@@ -321,7 +321,7 @@ export default function ContentReviewQueue() {
                 value={reviewNotes}
                 onChange={(e) => setReviewNotes(e.target.value)}
                 placeholder="請輸入拒絕原因（將會顯示在審核記錄中）..."
-                className="w-full h-32 bg-black/50 border border-white/10 rounded-lg p-3 text-white placeholder:text-zinc-500 resize-none focus:outline-none focus:border-google-blue"
+                className="w-full h-32 bg-black/50 border border-white/10 rounded-lg p-3 text-white placeholder:text-zinc-500 resize-none focus:outline-none focus:border-emerald-500"
               />
 
               <div className="flex justify-end gap-3 mt-4">

@@ -27,7 +27,7 @@ const MenuButton = ({
     <button
         type="button"
         onClick={onClick}
-        className={`p-2 rounded hover:bg-white/10 transition-colors ${isActive ? 'bg-google-blue text-white' : 'text-zinc-400'
+        className={`p-2 rounded hover:bg-white/10 transition-colors ${isActive ? 'bg-emerald-500 text-white' : 'text-zinc-400'
             }`}
     >
         {children}
@@ -150,8 +150,8 @@ const RichTextEditor = ({ content, onChange, placeholder = '開始撰寫文章..
                     [&_.ProseMirror_h2]:text-2xl [&_.ProseMirror_h2]:font-bold [&_.ProseMirror_h2]:mb-3 [&_.ProseMirror_h2]:text-white
                     [&_.ProseMirror_ul]:list-disc [&_.ProseMirror_ul]:pl-6
                     [&_.ProseMirror_ol]:list-decimal [&_.ProseMirror_ol]:pl-6
-                    [&_.ProseMirror_blockquote]:border-l-4 [&_.ProseMirror_blockquote]:border-google-blue [&_.ProseMirror_blockquote]:pl-4 [&_.ProseMirror_blockquote]:italic
-                    [&_.ProseMirror_a]:text-google-blue [&_.ProseMirror_a]:underline
+                    [&_.ProseMirror_blockquote]:border-l-4 [&_.ProseMirror_blockquote]:border-emerald-500 [&_.ProseMirror_blockquote]:pl-4 [&_.ProseMirror_blockquote]:italic
+                    [&_.ProseMirror_a]:text-emerald-500 [&_.ProseMirror_a]:underline
                     [&_.ProseMirror_.is-editor-empty:first-child::before]:content-[attr(data-placeholder)] [&_.ProseMirror_.is-editor-empty:first-child::before]:text-zinc-600 [&_.ProseMirror_.is-editor-empty:first-child::before]:float-left [&_.ProseMirror_.is-editor-empty:first-child::before]:pointer-events-none
                 "
             />

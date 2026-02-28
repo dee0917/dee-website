@@ -88,7 +88,7 @@ const NewsletterForm = ({ className = '', variant = 'default' }: NewsletterFormP
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="你的 Email"
                             disabled={status === 'loading' || status === 'success'}
-                            className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white placeholder:text-zinc-500 focus:outline-none focus:border-google-blue transition-colors disabled:opacity-50"
+                            className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-500 transition-colors disabled:opacity-50"
                         />
                     </div>
                     <button
@@ -96,7 +96,7 @@ const NewsletterForm = ({ className = '', variant = 'default' }: NewsletterFormP
                         disabled={status === 'loading' || status === 'success'}
                         className={`px-6 rounded font-medium whitespace-nowrap transition-all flex items-center gap-2 ${status === 'success'
                             ? 'bg-green-500 text-white'
-                            : 'bg-google-blue text-white hover:bg-[#3367D6]'
+                            : 'bg-emerald-500 text-white hover:bg-[#3367D6]'
                             } disabled:opacity-70`}
                     >
                         {status === 'loading' && <Loader2 size={16} className="animate-spin" />}
@@ -125,10 +125,10 @@ const NewsletterForm = ({ className = '', variant = 'default' }: NewsletterFormP
     }
 
     return (
-        <div className={`bg-gradient-to-br from-google-blue/10 to-transparent border border-google-blue/20 rounded-2xl p-8 ${className}`}>
+        <div className={`bg-gradient-to-br from-emerald-500/10 to-transparent border border-emerald-500/20 rounded-2xl p-8 ${className}`}>
             <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-google-blue/20 flex items-center justify-center">
-                    <Send size={18} className="text-google-blue" />
+                <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                    <Send size={18} className="text-emerald-500" />
                 </div>
                 <div>
                     <h3 className="text-lg font-bold text-white">訂閱 AI 週報</h3>
@@ -150,7 +150,7 @@ const NewsletterForm = ({ className = '', variant = 'default' }: NewsletterFormP
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="輸入你的 Email"
                             disabled={status === 'loading'}
-                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-zinc-500 focus:outline-none focus:border-google-blue transition-colors"
+                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-500 transition-colors"
                         />
                         {status === 'error' && (
                             <p className="text-red-400 text-sm mt-2 flex items-center gap-1">
@@ -161,7 +161,7 @@ const NewsletterForm = ({ className = '', variant = 'default' }: NewsletterFormP
                     <button
                         type="submit"
                         disabled={status === 'loading'}
-                        className="w-full bg-google-blue text-white py-3 rounded-lg font-medium hover:bg-[#3367D6] transition-colors flex items-center justify-center gap-2 disabled:opacity-70"
+                        className="w-full bg-emerald-500 text-white py-3 rounded-lg font-medium hover:bg-[#3367D6] transition-colors flex items-center justify-center gap-2 disabled:opacity-70"
                     >
                         {status === 'loading' ? (
                             <>

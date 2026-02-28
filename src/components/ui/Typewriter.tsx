@@ -33,7 +33,7 @@ const Typewriter: React.FC<TypewriterProps> = ({ texts, speed = 150, delay = 200
     }, [currentText, isDeleting, texts, currentTextIndex, speed, delay]);
 
     return (
-        <span className="text-google-blue inline-flex items-center">
+        <span className="text-emerald-500 inline-flex items-center">
             {currentText}
             <span className="animate-blink ml-1">|</span>
         </span>

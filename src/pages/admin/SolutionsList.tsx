@@ -101,7 +101,7 @@ const SolutionsList = () => {
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}>
             <div className="flex items-center justify-between mb-8">
                 <h1 className="text-3xl font-bold">學習方案管理</h1>
-                <button onClick={handleAdd} className="bg-google-blue text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600">
+                <button onClick={handleAdd} className="bg-emerald-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600">
                     <Plus size={18} /> 新增方案
                 </button>
             </div>
@@ -186,7 +186,7 @@ const SolutionsList = () => {
                                 </div>
                                 <div className="flex justify-end gap-2 pt-4 border-t border-white/10">
                                     <button onClick={() => setEditingId(null)} className="px-4 py-2 text-zinc-400 hover:text-white">取消</button>
-                                    <button onClick={handleSave} className="px-4 py-2 bg-google-blue rounded-lg flex items-center gap-2 hover:bg-blue-600">
+                                    <button onClick={handleSave} className="px-4 py-2 bg-emerald-500 rounded-lg flex items-center gap-2 hover:bg-blue-600">
                                         <Save size={16} /> 儲存
                                     </button>
                                 </div>
