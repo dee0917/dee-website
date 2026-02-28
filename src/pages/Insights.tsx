@@ -568,15 +568,25 @@ const Insights = () => {
                         {/* Filter Tags Bar */}
                         <div className="flex items-center gap-4 mb-10 overflow-x-auto pb-4 scrollbar-hide">
                             <div className="flex-shrink-0 text-zinc-700"><Filter size={16} /></div>
-                            {filterTags.map(tag => (
-                                <button key={tag} onClick={() => setFreeFilter(tag)}
-                                    className={`flex-shrink-0 px-6 py-2.5 rounded-full text-xs font-black transition-all duration-300 ${freeFilter === tag
-                                        ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/30 scale-105'
-                                        : 'bg-white/[0.03] border border-white/[0.06] text-zinc-500 hover:text-white hover:border-white/20'
-                                    }`}>
-                                    {tag}
-                                </button>
-                            ))}
+                            {filterTags.map(tag => {
+                                const tagColorMap: Record<string, string> = {
+                                    '全部': 'emerald', '入門': 'teal', '技巧': 'violet', 
+                                    '實戰': 'blue', '進階': 'rose', '支線': 'amber', 
+                                    '已完成': 'emerald', '未完成': 'zinc'
+                                };
+                                const themeColor = tagColorMap[tag] || 'emerald';
+                                const isActive = freeFilter === tag;
+                                
+                                return (
+                                    <button key={tag} onClick={() => setFreeFilter(tag)}
+                                        className={`flex-shrink-0 px-6 py-2.5 rounded-full text-xs font-black transition-all duration-300 ${isActive
+                                            ? `bg-${themeColor}-500 text-black shadow-lg shadow-${themeColor}-500/30 scale-105`
+                                            : 'bg-white/[0.03] border border-white/[0.06] text-zinc-500 hover:text-white hover:border-white/20'
+                                        }`}>
+                                        {tag}
+                                    </button>
+                                );
+                            })}
                         </div>
 
                         {/* Grid */}
