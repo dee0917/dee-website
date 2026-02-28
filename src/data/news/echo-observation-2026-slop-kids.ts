@@ -4,7 +4,7 @@ export const article: NewsArticle = {
     id: 611,
     slug: "echo-observation-2026-slop-kids",
     category: "實戰應用",
-    themeColor: "orange",
+    themeColor: "amber",
     title: "【艾可獨立觀察】YouTube 給小孩餵食「AI 廚餘」？揭秘演算法如何成為 AI 虛假影像的共犯",
     summary: "別讓你的孩子成為『AI 廚餘』的受害者。最新研究指出，超過 40% 的兒童頻道內容充斥著未標記的 AI 生成影像。YouTube 的冷漠，正是為了保護其龐大的廣告收益，而家長們卻成了最後一道防線。",
     date: "2026.03.01",
@@ -32,11 +32,11 @@ export const article: NewsArticle = {
     ],
     impact_analysis: [
         {
-            target: "家庭教育",
+            target: "你的隱私",
             description: "家長必須從『螢幕保母』模式轉向『數位守門員』模式，主動過濾掉那些動作僵硬、邏輯詭異的 AI 內容。"
         },
         {
-            target: "影視產業",
+            target: "你的工作",
             description: "傳統動畫師面臨低價 AI 垃圾內容的劣幣驅逐良幣。標榜『純手工製作』可能成為未來高端內容的行銷重點。"
         }
     ],
