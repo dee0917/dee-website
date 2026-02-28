@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Menu, X, Newspaper, BookOpen, FlaskConical, Package, User, Coffee } from 'lucide-react';
 
 const Navbar = () => {
@@ -35,9 +36,27 @@ const Navbar = () => {
                     <Link to="/about" className={linkClass('/about')}>
                         <User size={14} /> 關於 Dee
                     </Link>
-                    <a href="https://pay.ecpay.com.tw/CreditPayment/ExpressCredit?MerchantID=3378826" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors flex items-center gap-1.5 text-zinc-400">
-                        <Coffee size={14} /> 請喝咖啡
-                    </a>
+                    <motion.a 
+                        href="https://pay.ecpay.com.tw/CreditPayment/ExpressCredit?MerchantID=3378826" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="hover:text-amber-400 transition-colors flex items-center gap-1.5 text-amber-500/90 font-bold bg-amber-500/10 px-3 py-1.5 rounded-lg border border-amber-500/20"
+                        animate={{ 
+                            scale: [1, 1.05, 1],
+                            boxShadow: [
+                                "0 0 0px rgba(245, 158, 11, 0)",
+                                "0 0 15px rgba(245, 158, 11, 0.3)",
+                                "0 0 0px rgba(245, 158, 11, 0)"
+                            ]
+                        }}
+                        transition={{ 
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                    >
+                        <Coffee size={14} className="animate-bounce" style={{ animationDuration: '3s' }} /> 請喝咖啡
+                    </motion.a>
                     <Link to="/insights" className="bg-white text-black px-4 py-2 rounded-full hover:bg-zinc-200 transition-colors font-semibold text-xs tracking-wide">
                         開始學習
                     </Link>
