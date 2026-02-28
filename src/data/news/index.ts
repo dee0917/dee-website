@@ -10,9 +10,13 @@ import { article as echoSlangJuicer } from './echo-slang-compute-juicer';
 import { article as echoSlop } from './echo-ai-slop-kids-insult-2026';
 import { article as anthropicPentagon } from './anthropic-pentagon-standoff-2026';
 import { article as echoModelRanking } from './echo-model-ranking-2026';
+import { article as openaiPentagonMilitary } from './openai-pentagon-military-agreement-2026';
+import { article as echoAgiLeaver } from './echo-observation-2026-agi-leaver';
 import { NewsArticle } from '../../types/news';
 
 export const NEWS_ARTICLES: NewsArticle[] = [
+    echoAgiLeaver,
+    openaiPentagonMilitary,
     echoSlop,
     anthropicPentagon,
     echoModelRanking,
