@@ -55,41 +55,41 @@ const NewsDetail = () => {
             <SEO title={article.title} description={article.summary} path={`/news/${article.slug}`} />
 
             {/* Header / Hero */}
-            <section className="relative pt-32 pb-20 px-6 overflow-hidden border-b border-white/5">
+            <section className="relative pt-24 pb-8 px-6 overflow-hidden border-b border-white/5">
                 <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b ${themeMap[article.themeColor]} opacity-20 pointer-events-none`} />
                 <div className="max-w-6xl mx-auto relative z-10">
-                    <button onClick={() => navigate(-1)} className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-10 group">
-                        <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> 返回上一頁
+                    <button onClick={() => navigate(-1)} className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-6 group text-xs font-bold">
+                        <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> 返回上一頁
                     </button>
                     
-                    <div className="flex flex-wrap items-center gap-4 mb-8">
-                        <span className="text-[10px] font-black px-4 py-1.5 rounded-full bg-white/5 border border-white/10 uppercase tracking-widest text-zinc-400">
+                    <div className="flex flex-wrap items-center gap-3 mb-6">
+                        <span className="text-[9px] font-black px-3 py-1 rounded-full bg-white/5 border border-white/10 uppercase tracking-widest text-zinc-400">
                             {article.category}
                         </span>
                         {article.author === "Echo" && (
-                            <span className="text-[10px] font-black px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 uppercase tracking-widest text-indigo-400">
+                            <span className="text-[9px] font-black px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 uppercase tracking-widest text-indigo-400">
                                 🕵️ 艾可 AI 記者
                             </span>
                         )}
-                        <div className="flex items-center gap-2 bg-black/40 px-4 py-1.5 rounded-full border border-white/5">
-                            <Clock size={12} className="text-zinc-500" />
-                            <span className="text-[10px] font-bold text-zinc-300 font-mono">發布時間：{article.publish_time || article.date} (TST)</span>
+                        <div className="flex items-center gap-2 bg-black/40 px-3 py-1 rounded-full border border-white/5">
+                            <Clock size={10} className="text-zinc-500" />
+                            <span className="text-[9px] font-bold text-zinc-400 font-mono">{article.publish_time || article.date} (TST)</span>
                         </div>
                     </div>
 
-                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-10 tracking-tight leading-[1.15]">
+                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-[1.15]">
                         {article.title}
                     </h1>
                 </div>
             </section>
 
             {/* Main Content with Sidebar */}
-            <div className="max-w-6xl mx-auto px-6 py-20 lg:grid lg:grid-cols-12 gap-16">
+            <div className="max-w-6xl mx-auto px-6 py-10 lg:grid lg:grid-cols-12 gap-16">
                 
                 {/* Left Column: News Body */}
-                <div className="lg:col-span-8 space-y-20 text-left">
+                <div className="lg:col-span-8 space-y-12 text-left">
                     
-                    <div className="space-y-8 mb-16">
+                    <div className="mb-10">
                         <p className="text-xl md:text-2xl text-zinc-300 leading-relaxed border-l-4 border-emerald-500 pl-8 italic">
                             {article.summary}
                         </p>
