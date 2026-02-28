@@ -77,7 +77,7 @@ const News = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredArticles.map((article, i) => (
-                    <NewsCard key={article.id} article={article} idx={i} />
+                    <NewsCard key={article.slug} article={article} idx={i} />
                 ))}
             </div>
 

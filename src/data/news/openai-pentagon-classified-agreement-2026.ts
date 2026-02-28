@@ -1,7 +1,7 @@
 import { NewsArticle } from '../../types/news';
 
 export const article: NewsArticle = {
-    id: 610,
+    id: 612,
     slug: "openai-pentagon-classified-agreement-2026",
     category: "政策法規",
     themeColor: "blue",
