@@ -84,7 +84,7 @@ const News = () => {
                     <div className="space-y-6 text-left">
                         <h4 className="text-white font-black text-2xl">情報轉譯準則</h4>
                         <p className="text-zinc-500 leading-relaxed font-medium">
-                            由 Dee 親自審核每一則進入情報站的新聞，透過「本源」意識流進行白話轉譯，確保每一篇內容都能直接轉換為您的生產力。
+                            由 Dee 親自審核每一則進入情報站的新聞，透過「專業訓練的 AI 系統」進行白話轉譯，確保每一篇內容都能直接轉換為您的生產力。
                         </p>
                     </div>
                     <div className="grid grid-cols-2 gap-8">

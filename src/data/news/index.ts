@@ -12,14 +12,20 @@ import { article as anthropicPentagon } from './anthropic-pentagon-standoff-2026
 import { article as echoModelRanking } from './echo-model-ranking-2026';
 import { article as openaiPentagonMilitary } from './openai-pentagon-military-agreement-2026';
 import { article as echoAgiLeaver } from './echo-observation-2026-agi-leaver';
+import { article as openaiOfficial } from './openai-pentagon-classified-official';
+import { article as anthropicOfficial } from './anthropic-dod-refusal-official';
+import { article as firefoxOfficial } from './firefox-privacy-sandbox-official';
 import { NewsArticle } from '../../types/news';
 
 export const NEWS_ARTICLES: NewsArticle[] = [
+    firefoxOfficial,
+    anthropicOfficial,
+    openaiOfficial,
+    echoModelRanking,
     echoAgiLeaver,
     openaiPentagonMilitary,
     echoSlop,
     anthropicPentagon,
-    echoModelRanking,
     openaiPentagon,
     echoSlangJuicer,
     echoLabChronicle,
