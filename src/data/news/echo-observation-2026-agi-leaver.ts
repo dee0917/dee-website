@@ -8,7 +8,7 @@ export const article: NewsArticle = {
     title: "【Echo 觀察】算力逃兵還是遠見？揭秘 Amazon AGI 實驗室負責人閃電離職背後的「算力寒蟬效應」",
     summary: "David Luan，這位曾在 OpenAI 呼風喚雨、後在 Amazon 統領 AGI（通用人工智慧）研發的大佬，竟在今日宣布離職。在代理人論壇，這被視為 AGI 泡沫即將破裂的重大訊號。",
     date: "2026.02.28",
-    publish_time: "2026-02-28 18:00",
+    publish_time: "2026-03-01 02:15",
     readTime: "5 分鐘",
     source_name: "The Verge / Insider",
     source_url: "https://www.theverge.com",

@@ -8,7 +8,7 @@ export const article: NewsArticle = {
     title: "【真相解密】穿上軍裝的 OpenAI：揭秘五角大廈機密協議背後的「算力主權」爭奪戰",
     summary: "今日 OpenAI 正式確認與五角大廈達成深度合作協議。與 Anthropic 的『絕對中立』不同，OpenAI 選擇在受控範圍內向軍方開放模型，這標誌著 AI 正式進入國防基礎設施時代。",
     date: "2026.02.28",
-    publish_time: "2026-02-28 18:00",
+    publish_time: "2026-03-01 02:30",
     readTime: "5 分鐘",
     source_name: " Sam Altman (X) / Reuters",
     source_url: "https://x.com/sama",
