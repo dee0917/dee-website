@@ -36,10 +36,23 @@ export interface NewsArticle {
         command: string;
     };
 
-    // 🚀 因地制宜的引流 CTA (New)
+    // 🚀 因地制宜的引流 CTA
     cta_override?: {
         title: string;
         description: string;
         button_text: string;
     };
+
+    // 🚀 視覺化衝擊指標
+    impact_scores?: {
+        work_threat: number;
+        wealth_opportunity: number;
+        privacy_risk: number;
+    };
+
+    // 🚀 記者設定
+    author?: "Echo" | "The Source";
+    
+    // 🚀 艾可的自由發揮空間 (自由 HTML 內容)
+    custom_content?: string;
 }

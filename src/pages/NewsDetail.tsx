@@ -67,6 +67,11 @@ const NewsDetail = () => {
                         <span className="text-[10px] font-black px-3 py-1 rounded-full bg-white/5 border border-white/10 uppercase tracking-widest text-zinc-400">
                             {article.category}
                         </span>
+                        {article.author === "Echo" && (
+                            <span className="text-[10px] font-black px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 uppercase tracking-widest text-indigo-400">
+                                🕵️ 艾可特派員
+                            </span>
+                        )}
                         <span className="text-[10px] font-bold text-zinc-600">{article.date} · {article.readTime}</span>
                     </div>
 
@@ -147,6 +152,14 @@ const NewsDetail = () => {
                         </p>
                     </div>
                 </motion.section>
+
+                {/* 🚀 艾可的自由發揮空間 (Custom Content) */}
+                {article.custom_content && (
+                    <motion.section 
+                        {...fadeUp}
+                        dangerouslySetInnerHTML={{ __html: article.custom_content }}
+                    />
+                )}
 
                 {/* 5. 今日實踐指令 (Interactive) */}
                 <motion.section {...fadeUp} className="bg-gradient-to-br from-violet-900/20 to-black border border-violet-500/30 rounded-[3rem] p-10 md:p-16 text-center shadow-2xl">
