@@ -1,7 +1,7 @@
 import SEO from '../components/ui/SEO';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Zap, Clock, Shield, TrendingUp, Filter, Star, Info, MessageCircle, Sparkles, Coffee, AlertTriangle, X } from 'lucide-react';
+import { ArrowRight, Zap, Clock, Shield, TrendingUp, Filter, Star, Info, MessageCircle, Sparkles, Coffee, AlertTriangle, X, History, GitMerge, ChevronRight } from 'lucide-react';
 import { NEWS_ARTICLES } from '../data/news';
 import { useMemo } from 'react';
 
@@ -28,7 +28,6 @@ const CATEGORY_THEMES: Record<string, string> = {
     [CAT_ALL]: 'emerald'
 };
 
-// 避免 Tailwind JIT 沒抓到動態類別，改用靜態對照表
 const BUTTON_THEMES: Record<string, string> = {
     orange: 'bg-orange-500 text-black border-orange-500 shadow-orange-500/20',
     teal: 'bg-teal-500 text-black border-teal-500 shadow-teal-500/20',
@@ -57,18 +56,19 @@ const News = () => {
     const activeCategory = searchParams.get('cat') || CAT_ALL;
     const activeTrend = searchParams.get('trend');
 
+    const availableTrends = useMemo(() => {
+        const trends = new Set(NEWS_ARTICLES.map(a => a.trend_cluster).filter(Boolean));
+        return Array.from(trends);
+    }, []);
+
     const categories = [CAT_ALL, CAT_GOSSIP, CAT_BRAIN, CAT_LAZY, CAT_INDUSTRY, CAT_POLICY, CAT_APP, CAT_SECURITY, CAT_CAREER];
 
     const filteredArticles = useMemo(() => {
-        let items = NEWS_ARTICLES;
-        
-        // 優先處理趨勢過濾 (如有)
+        let items = [...NEWS_ARTICLES];
         if (activeTrend) {
-            return items.filter(a => a.trend_cluster === activeTrend);
+            return items.filter(a => a.trend_cluster === activeTrend).sort((a, b) => a.id - b.id);
         }
-
         if (activeCategory === CAT_ALL) return items;
-        // 使用 trim 與 包含 邏輯，增加匹配容錯率
         return items.filter(a => a.category.trim() === activeCategory.trim());
     }, [activeCategory, activeTrend]);
 
@@ -86,20 +86,88 @@ const News = () => {
                         <span className="text-emerald-500/60 font-mono text-[9px] tracking-[0.4em] uppercase block mt-1">Intelligence Intelligence Hub</span>
                     </div>
                 </div>
+
+                {/* 🚀 2.0 高級組件：趨勢雷達入口 (Trend Radar) */}
+                <div className="mb-10 p-1 bg-white/5 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-md">
+                    <div className="flex items-center px-4 py-2 border-b border-white/5 bg-white/[0.02]">
+                        <Sparkles size={14} className="text-indigo-400 mr-2" />
+                        <span className="text-[10px] font-black text-zinc-400 uppercase tracking-widest">艾可 2.0 戰略趨勢雷達 · 深度演進導航</span>
+                    </div>
+                    <div className="flex gap-2 p-2 overflow-x-auto scrollbar-hide">
+                        {availableTrends.map((trend: any) => (
+                            <button 
+                                key={trend}
+                                onClick={() => setSearchParams({ trend })}
+                                className={`flex-shrink-0 px-4 py-2 rounded-xl text-[11px] font-bold transition-all flex items-center gap-2 ${
+                                    activeTrend === trend 
+                                    ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/20' 
+                                    : 'bg-black/40 text-zinc-500 hover:text-zinc-300 hover:bg-white/5'
+                                }`}
+                            >
+                                <History size={12} className={activeTrend === trend ? 'animate-spin-slow' : ''} />
+                                {trend}
+                            </button>
+                        ))}
+                    </div>
+                </div>
                 
                 {activeTrend ? (
-                    <div className="mb-12 p-8 rounded-[2.5rem] bg-indigo-500/5 border border-indigo-500/10 relative overflow-hidden">
-                         <div className="absolute top-0 right-0 p-4 opacity-10"><Sparkles size={80} /></div>
-                         <h2 className="text-indigo-400 font-black text-2xl mb-2 flex items-center gap-3">
-                            <TrendingUp size={24} /> {activeTrend} · 技術演進脈絡
-                         </h2>
-                         <p className="text-zinc-500 text-sm max-w-2xl leading-relaxed">
-                            艾可正在為您追蹤「{activeTrend}」領域的歷史演進。以下是該趨勢中所有關鍵的情報節點，按時間線排列。
-                         </p>
-                         <button onClick={() => setSearchParams({})} className="mt-6 text-xs font-bold text-zinc-500 hover:text-white transition-colors flex items-center gap-2">
-                            <X size={14} /> 清除趨勢過濾，查看全部新聞
-                         </button>
-                    </div>
+                    <motion.div 
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="mb-12 p-8 md:p-12 rounded-[3rem] bg-gradient-to-br from-indigo-500/10 via-zinc-900/80 to-black border border-indigo-500/20 relative overflow-hidden shadow-2xl"
+                    >
+                         <div className="absolute inset-0 opacity-10 pointer-events-none">
+                            <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+                            <div className="absolute top-1/2 left-0 w-full h-px bg-indigo-500/30" />
+                         </div>
+
+                         <div className="relative z-10">
+                            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                                <div>
+                                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-400 text-[9px] font-black uppercase tracking-widest mb-4">
+                                        <GitMerge size={12} /> 技術演進脈絡 (Evolutionary Path)
+                                    </div>
+                                    <h2 className="text-white font-black text-3xl md:text-5xl tracking-tighter mb-4">
+                                        {activeTrend}
+                                    </h2>
+                                    <p className="text-zinc-400 text-base md:text-lg max-w-2xl leading-relaxed">
+                                        艾可正在為您溯源「{activeTrend}」的崛起。從早期的學術降維到今日的產業爆發，我們為您梳理出每一道關鍵節點。
+                                    </p>
+                                </div>
+                                <button onClick={() => setSearchParams({})} className="px-6 py-3 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-bold text-sm transition-all border border-white/10 flex items-center gap-2">
+                                    <X size={16} /> 退出演進模式
+                                </button>
+                            </div>
+
+                            <div className="flex flex-col md:flex-row items-stretch gap-4 relative overflow-x-auto pb-4 scrollbar-hide">
+                                {filteredArticles.map((article, idx) => (
+                                    <div key={article.slug} className="flex-shrink-0 w-full md:w-64 flex flex-col group/step">
+                                        <div className="flex items-center mb-6">
+                                            <div className="w-10 h-10 rounded-full bg-indigo-500 text-black flex items-center justify-center font-black text-sm z-10 group-hover/step:scale-125 transition-all shadow-lg shadow-indigo-500/40">
+                                                {idx + 1}
+                                            </div>
+                                            {idx < filteredArticles.length - 1 && (
+                                                <div className="hidden md:block flex-1 h-px bg-gradient-to-r from-indigo-500 to-transparent opacity-30" />
+                                            )}
+                                        </div>
+                                        <div 
+                                            onClick={() => navigate(`/news/${article.slug}`)}
+                                            className="p-5 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-indigo-500/40 hover:bg-indigo-500/[0.02] cursor-pointer transition-all h-full"
+                                        >
+                                            <span className="text-[10px] font-mono text-indigo-500/60 block mb-2">{article.date}</span>
+                                            <h4 className="text-sm font-black text-white group-hover/step:text-indigo-300 transition-colors leading-snug line-clamp-2">
+                                                {article.title}
+                                            </h4>
+                                            <div className="mt-4 flex items-center gap-2 text-zinc-600 text-[10px] font-bold">
+                                                <ChevronRight size={12} /> 查看詳細情報
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                         </div>
+                    </motion.div>
                 ) : (
                     <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mb-12 leading-relaxed">
                         不只是搬運，更是深度轉譯。<br />
@@ -107,7 +175,6 @@ const News = () => {
                     </p>
                 )}
 
-                {/* 專業大分類過濾器 */}
                 {!activeTrend && (
                     <div className="flex items-center gap-4 mb-10 overflow-x-auto pb-4 scrollbar-hide">
                         <div className="flex-shrink-0 text-zinc-700 mr-1"><Filter size={16} /></div>
