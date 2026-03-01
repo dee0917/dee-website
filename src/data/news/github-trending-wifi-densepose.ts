@@ -3,8 +3,8 @@ import { NewsArticle } from '../../types/news';
 export const article: NewsArticle = {
     id: 2026030105,
     slug: 'github-trending-wifi-densepose',
-    title: 'WiFi 也能「看見」你：WiFi DensePose 實現無攝像頭的人體姿態監測',
-    summary: '技術突破！ruvnet 開源 wifi-densepose，利用商用 WiFi 訊號精確估算人體姿勢與生理指標。這意味著隱私與監控的邊界再次重塑：AI 即使沒有攝像頭，也能在黑暗中掌握你的一舉一動。',
+    title: 'WiFi 感知新紀元：wifi-densepose 實現非入侵式人體姿態追蹤',
+    summary: 'ruvnet 近日發布 wifi-densepose 研究項目，展示了如何利用 WiFi 訊號的 CSI 數據進行高精度的人體姿態估算。這項技術為未來「無相機」的智慧家居監測提供了全新的可能性。',
     category: '腦洞大開',
     themeColor: 'teal',
     date: '2026.03.01',
@@ -12,34 +12,34 @@ export const article: NewsArticle = {
     author: 'Echo',
     readTime: '5 分鐘',
     trend_cluster: '感官進化',
-    tags: ['#WiFi感知', '#隱私重塑', '#無相機監控', '#DensePose'],
+    tags: ['#WiFi感知', '#隱私科技', '#感官進化'],
     source_name: 'GitHub / ruvnet',
     source_url: 'https://github.com/ruvnet/wifi-densepose',
     flash_summary: [
-        '利用商用 WiFi 路由器的 CSI (Channel State Information) 數據進行姿態估算。',
-        '精確度已接近傳統攝像頭，且具備穿牆與全天候監控能力。',
-        '核心應用：獨居老人跌倒偵測、全屋智慧自動化、極致隱私環境下的行為分析。',
-        '爭議點：當 WiFi 訊號成為監視器，傳統的「遮蔽攝像頭」隱私策略將徹底失效。'
+        '研究展示了利用 WiFi CSI 訊號重建人體 3D 骨架圖的流程。',
+        '優點：無需攝像頭即可實現跌倒監測、室內導航等功能。',
+        '對於隱私保護：這是一個在「看不見」的情況下實現「感知」的折衷方案。',
+        '技術門檻：目前仍處於學術與實驗階段，需要特定的硬體支持。'
     ],
     impact_analysis: [
-        { target: '你的隱私', description: '隱私邊界從「視覺」擴展到「射頻」。即便你關掉燈、拉上窗簾，WiFi 訊號仍會洩漏你的動作細節。' },
-        { target: '你的工作', description: '智慧醫療與自動化領域將迎來爆發，護理人員可透過非接觸方式監測病患狀態。' }
+        { target: '你的隱私', description: '這類技術未來可能成為長照與居家安全的標配，替代容易洩漏影像的監視器。' },
+        { target: '你的工作', description: '物聯網與感知算法領域的研究者將獲得更多的數據源與工具鏈支持。' }
     ],
-    dee_insight: '這是我見過最「細思極恐」的感官技術。它讓空間具備了真正的知覺，但代價是隱私的絕對透明化。',
+    dee_insight: '這是一場感官革命，雖然普通用戶還無法直接在家部署，但我們必須了解「牆壁也會看見你」的未來。',
     event_breakdown: [
         {
-            title: 'WiFi 如何變成「眼睛」？',
-            content: '每當人體在 WiFi 覆蓋範圍內移動時，會對無線電波產生反射與繞射。WiFi DensePose 透過分析這些微小的訊號干擾（CSI），並結合深度學習模型，將不可見的波動轉化為高精度的人體 3D 骨架圖。'
+            title: '什麼是 CSI 訊號？',
+            content: 'CSI（信道狀態信息）記錄了 WiFi 波束在空間中傳輸時受到的反射與衰減。當人體移動時，會留下獨特的「訊號指紋」。'
         },
         {
-            title: '為什麼是現在？',
-            content: '這項技術早在實驗室研發多年，但 ruvnet 此次將其「產品化」並開源，極大地降低了開發門檻。現在只需普通的 WiFi 路由器與一台具備運算能力的電腦，就能部署這套系統。'
+            title: '普通用戶如何關注這項技術？',
+            content: '目前的代碼需要專業的硬體採集環境。大眾用戶暫時無法透過普通聊天指令來執行，但這項技術未來將被集成至下一代智慧家居設備中。'
         }
     ],
     action_prompt: {
-        title: '偵測環境中的「射頻感知」',
-        description: '如果你對隱私極度敏感，建議開始關注「WiFi 訊號屏蔽」與「雜訊注入」技術。',
-        command: 'git clone https://github.com/ruvnet/wifi-densepose\n# 安裝環境並連接具備 CSI 輸出的路由器\npython3 run_detection.py --visualize\n# 思考：你的房間裡現在有幾雙「看不見的眼睛」？',
+        title: '與 AI 討論「感官進化」',
+        description: '你可以與聊天 AI 探討這項技術的社會影響：',
+        command: '請根據「WiFi DensePose」技術，與我分析：如果家中的 WiFi 具備了感知人體動作的能力，這對「居家隱私權」的定義會產生哪些衝擊？我們該如何建立相關的數據規範？',
         image_url: 'https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=2000'
     }
 };
