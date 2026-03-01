@@ -1,4 +1,4 @@
-import{j as e,m as c}from"./vendor-motion-aCq-fmil.js";import{c as o,S as m,a as i,A as l}from"./index-CNW-o77A.js";import{L as r}from"./vendor-react-CUP2xbH8.js";import{C as n}from"./copy-CCFy-8-w.js";import{E as p}from"./external-link-LIvRjVgl.js";import{C as b}from"./clock-sn-u6oR7.js";/**
+import{j as e,m as c}from"./vendor-motion-aCq-fmil.js";import{c as o,S as m,a as i,A as l}from"./index-CdwA--SQ.js";import{L as r}from"./vendor-react-CUP2xbH8.js";import{C as n}from"./copy-2sdRmOx0.js";import{E as p}from"./external-link-13goYoZo.js";import{C as b}from"./clock-aFBmj30J.js";/**
  * @license lucide-react v0.344.0 - ISC
  *
  * This source code is licensed under the ISC license.

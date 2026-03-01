@@ -312,16 +312,25 @@ const Insights = () => {
     };
 
     const handleModeSwitch = (m: 'adventure' | 'free') => {
+        console.log(`Switching to mode: ${m}`);
         if (m === 'free') {
             const isElite = localStorage.getItem('dee_elite_status') === 'true';
             const totalMain = MAIN_QUEST_ORDER.length;
             const doneMain = completedIds.filter(id => MAIN_QUEST_ORDER.includes(id)).length;
             
             if (!isElite && doneMain < totalMain) {
-                setSkipTarget(999); // 5 題測驗
+                setSkipTarget(999);
                 return;
             }
         }
+        
+        // 強制重置展開狀態，避免 React Diffing 錯誤
+        if (m === 'adventure') {
+            setExpandedChapters(new Set([unlockedChapter]));
+        } else {
+            setExpandedChapters(new Set());
+        }
+
         setViewMode(m);
         localStorage.setItem('dee_view_preference', m);
     };
