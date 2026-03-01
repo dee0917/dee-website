@@ -78,15 +78,12 @@ const ArticleDetail = () => {
             setCopied(false);
             setShowAiJumpModal(false);
 
-            if (isFree) {
-                setStepsCompleted(new Array(article.steps.length).fill(false));
-                setCurrentStep(0);
-                setTreasurePhase('locked');
-            } else {
-                setStepsCompleted(new Array(article.steps.length).fill(false));
-                setCurrentStep(0);
-                setTreasurePhase('locked');
-            }
+            // 🚀 核心修復：無論哪種模式，都必須一步步點擊「我了解了」才能解鎖寶箱
+            // 這是為了緩慢釋放多巴胺，讓學員體驗成長的過程
+            setStepsCompleted(new Array(article.steps.length).fill(false));
+            setCurrentStep(0);
+            setTreasurePhase('locked');
+            
             stepRefs.current = new Array(article.steps.length).fill(null);
         }
     }, [article?.id, article?.steps?.length]);
@@ -288,8 +285,8 @@ const ArticleDetail = () => {
                     <div className="space-y-12">
                         {article.steps.map((step: any, idx: number) => {
                             const isDone = stepsCompleted[idx];
-                            const isActive = freeMode ? !isDone : idx === currentStep;
-                            const isFuture = freeMode ? false : idx > currentStep;
+                            const isActive = idx === currentStep; // 🚀 關鍵修復：無論模式，一次只啟動一個步驟，緩慢釋放多巴胺
+                            const isFuture = idx > currentStep;
                             return (
                                 <motion.div key={idx} ref={el => stepRefs.current[idx] = el}
                                     initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}

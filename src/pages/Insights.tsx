@@ -22,7 +22,7 @@ const CATEGORY_THEMES: Record<string, string> = {
 const THEME_CONFIG: Record<string, any> = {
     emerald: { text: 'text-emerald-500', lightText: 'text-emerald-400', tag: 'bg-emerald-500/10 text-emerald-500', border: 'hover:border-emerald-500/20', glow: 'group-hover:shadow-emerald-500/10' },
     yellow: { text: 'text-yellow-500', lightText: 'text-yellow-400', tag: 'bg-yellow-500/10 text-yellow-500', border: 'hover:border-yellow-500/20', glow: 'group-hover:shadow-yellow-500/10' },
-    amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-400', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
+    amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-500', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
     blue: { text: 'text-blue-500', lightText: 'text-blue-400', tag: 'bg-blue-500/10 text-blue-500', border: 'hover:border-blue-500/20', glow: 'group-hover:shadow-blue-500/10' },
     violet: { text: 'text-violet-500', lightText: 'text-violet-400', tag: 'bg-violet-500/10 text-violet-500', border: 'hover:border-violet-500/20', glow: 'group-hover:shadow-violet-500/10' },
     rose: { text: 'text-rose-500', lightText: 'text-rose-400', tag: 'bg-rose-500/10 text-rose-500', border: 'hover:border-rose-500/20', glow: 'group-hover:shadow-rose-500/10' },
@@ -31,6 +31,9 @@ const THEME_CONFIG: Record<string, any> = {
     indigo: { text: 'text-indigo-500', lightText: 'text-indigo-400', tag: 'bg-indigo-500/10 text-indigo-500', border: 'hover:border-indigo-500/20', glow: 'group-hover:shadow-indigo-500/10' },
 };
 
+/* ═══════════════════════════════════════════
+   ONBOARDING
+   ═══════════════════════════════════════════ */
 const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free', chapter?: number) => void }) => {
     const [phase, setPhase] = useState<'welcome' | 'platform' | 'never-used' | 'experience' | 'result'>('welcome');
     const [platform, setPlatform] = useState('');
@@ -87,7 +90,7 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                                 <Sparkles size={22} /> 開始修煉
                             </button>
                             <button onClick={() => onComplete('free')}
-                                className="w-full py-4 px-6 rounded-2xl bg-transparent border border-white/5 text-zinc-500 font-bold text-base hover:text-white transition-all text-center text-center">
+                                className="w-full py-4 px-6 rounded-2xl bg-transparent border border-white/5 text-zinc-500 font-bold text-base hover:text-white transition-all text-center">
                                 <BookOpen size={20} /> 直接看全部教學
                             </button>
                         </div>
@@ -98,7 +101,6 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                     <ModalShell kkey="p">
                         <div className="text-center mb-8">
                             <h3 className="text-xl md:text-2xl font-black text-white mb-2 text-center">你目前有在用哪個 AI 嗎？</h3>
-                            <p className="text-zinc-500 text-sm text-center">我們會根據你的經驗安排起點。</p>
                         </div>
                         <div className="space-y-3">
                             {['chatgpt', 'claude', 'gemini', 'none'].map((p) => (
@@ -120,7 +122,7 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                             <p className="text-zinc-400 text-base mb-10 leading-relaxed text-center">只需要 15 分鐘，你就能建立起對 AI 的正確認知並發送第一則高效指令。</p>
                             <div className="space-y-3">
                                 <button onClick={() => onComplete('guided', 0)} className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg hover:bg-emerald-400 shadow-lg">🎮 開始冒險模式</button>
-                                <button onClick={() => onComplete('free', 0)} className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/10 text-zinc-400 font-bold text-base hover:text-white">📚 全部教學</button>
+                                <button onClick={() => onComplete('free', 0)} className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/10 text-zinc-400 font-bold text-base hover:text-white text-center">📚 全部教學</button>
                             </div>
                         </div>
                     </ModalShell>
@@ -148,7 +150,7 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                             <p className="text-zinc-400 text-base mb-10 leading-relaxed text-center">{chapterDescs[resultChapter]}</p>
                             <div className="space-y-3">
                                 <button onClick={() => onComplete('guided', resultChapter)} className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg shadow-lg">🎮 開始冒險</button>
-                                <button onClick={() => onComplete('free', resultChapter)} className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/10 text-zinc-400 font-bold text-base hover:text-white">📚 自由模式</button>
+                                <button onClick={() => onComplete('free', resultChapter)} className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/10 text-zinc-400 font-bold text-base hover:text-white text-center">📚 自由模式</button>
                             </div>
                         </div>
                     </ModalShell>
@@ -158,6 +160,82 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
     );
 };
 
+/* ═══════════════════════════════════════════
+   SKIP/TRANSITION CHALLENGE
+   ═══════════════════════════════════════════ */
+const SkipChapterModal = ({ targetChapter, onPass, onClose }: { targetChapter: number; onPass: () => void; onClose: () => void }) => {
+    const [current, setCurrent] = useState(0);
+    const [score, setScore] = useState(0);
+    const [finished, setFinished] = useState(false);
+
+    const quizzes: Record<number, { q: string; options: string[]; answer: number }[]> = {
+        999: [
+            { q: "為什麼在 Dee's Lab 中，我們強調要一步步學習？", options: ["增加網頁停留時間", "緩慢釋放多巴胺，讓大腦對學習成癮", "技術限制", "為了賣更多咖啡"], answer: 1 },
+            { q: "在自由模式下，你可以？", options: ["直接複製所有指令", "跳過所有課程", "隨意挑選感興趣的文章，但仍需一步步完成才能解開寶箱", "不用註冊"], answer: 2 },
+            { q: "AI 實體化的核心意義在於？", options: ["AI 變得比較帥", "AI 具備了系統主權與物理/虛擬世界的行動力", "取代人類滑手機", "讓電腦跑更快"], answer: 1 },
+        ],
+        2: [
+            { q: "用 AI 寫指令時，「給身份」最主要的作用是？", options: ["讓 AI 更快回覆", "決定回答的深度與語氣", "減少字數", "避免 AI 說廢話"], answer: 1 },
+            { q: "AI 回答不滿意時，最好的做法是？", options: ["關掉重開", "給更多具體回饋繼續對話", "換一個 AI", "加上「請認真」"], answer: 1 },
+            { q: "「背景懶人包」的主要用途是？", options: ["增加記憶力", "快速設定偏好", "解鎖功能", "加速回覆"], answer: 1 },
+        ],
+    };
+
+    const questions = quizzes[targetChapter] || quizzes[2];
+
+    const handleAnswer = (idx: number) => {
+        const newScore = score + (idx === questions[current].answer ? 1 : 0);
+        setScore(newScore);
+        if (current < questions.length - 1) setCurrent(current + 1);
+        else { 
+            setFinished(true); 
+            if (newScore >= 2) {
+                setTimeout(() => {
+                    onPass();
+                    onClose();
+                }, 1500);
+            } 
+        }
+    };
+
+    return (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/80 backdrop-blur-md">
+            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-zinc-900 border border-white/10 p-8 md:p-10 rounded-[2.5rem] max-w-md w-full shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-zinc-800">
+                    <motion.div className="h-full bg-emerald-500" animate={{ width: `${((current + 1) / questions.length) * 100}%` }} />
+                </div>
+                {!finished ? (
+                    <div className="relative z-10">
+                        <div className="flex items-center justify-between mb-6">
+                            <span className="text-emerald-400 font-mono text-[10px] uppercase tracking-widest">{targetChapter === 999 ? '自由模式解鎖測試' : '章節跳級測試'}</span>
+                            <button onClick={onClose} className="text-zinc-600 hover:text-white text-xs font-bold">取消</button>
+                        </div>
+                        <p className="text-white font-black text-lg mb-8 leading-tight">{questions[current].q}</p>
+                        <div className="space-y-3">
+                            {questions[current].options.map((opt, idx) => (
+                                <motion.button key={idx} whileTap={{ scale: 0.97 }} onClick={() => handleAnswer(idx)}
+                                    className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 text-zinc-300 hover:text-white font-bold transition-all text-base text-left">
+                                    {opt}
+                                </motion.button>
+                            ))}
+                        </div>
+                    </div>
+                ) : (
+                    <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center py-6">
+                        <div className="text-6xl mb-6 text-center">{score >= 2 ? '🎉' : '💪'}</div>
+                        <h3 className="text-2xl font-black text-white mb-3 text-center">{score >= 2 ? '驗證通過！' : '驗證失敗！'}</h3>
+                        <p className="text-zinc-400 text-base mb-8 text-center">{score >= 2 ? `正在切換權限...` : `答對 ${score}/3，再多練習一下吧。`}</p>
+                        {score < 2 && <button onClick={onClose} className="bg-white/10 text-white font-bold py-3 px-8 rounded-2xl hover:bg-white/20 transition-all text-center">返回學習</button>}
+                    </motion.div>
+                )}
+            </motion.div>
+        </motion.div>
+    );
+};
+
+/* ═══════════════════════════════════════════
+   MAIN PAGE
+   ═══════════════════════════════════════════ */
 const Insights = () => {
     const [viewMode, setViewMode] = useState<'adventure' | 'free'>('adventure');
     const [loading, setLoading] = useState(true);
@@ -166,6 +244,7 @@ const Insights = () => {
     const [completedIds, setCompletedIds] = useState<number[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [expandedChapters, setExpandedChapters] = useState<Set<number>>(new Set());
+    const [skipTarget, setSkipTarget] = useState<number | null>(null);
 
     useEffect(() => {
         const done = localStorage.getItem('dee_onboarding_done');
@@ -195,6 +274,16 @@ const Insights = () => {
     const handleOnboardingComplete = (mode: 'guided' | 'free', chapter?: number) => {
         const ch = chapter || 0;
         setUnlockedChapter(ch);
+        
+        if (mode === 'free') {
+            const totalMain = MAIN_QUEST_ORDER.length;
+            const doneMain = completedIds.filter(id => MAIN_QUEST_ORDER.includes(id)).length;
+            if (doneMain < totalMain) {
+                setSkipTarget(999);
+                return;
+            }
+        }
+        
         setViewMode(mode === 'free' ? 'free' : 'adventure');
         localStorage.setItem('dee_onboarding_done', 'true');
         localStorage.setItem('dee_ai_level', ch.toString());
@@ -203,6 +292,14 @@ const Insights = () => {
     };
 
     const handleModeSwitch = (m: 'adventure' | 'free') => {
+        if (m === 'free') {
+            const totalMain = MAIN_QUEST_ORDER.length;
+            const doneMain = completedIds.filter(id => MAIN_QUEST_ORDER.includes(id)).length;
+            if (doneMain < totalMain) {
+                setSkipTarget(999);
+                return;
+            }
+        }
         setViewMode(m);
         localStorage.setItem('dee_view_preference', m);
     };
@@ -229,12 +326,13 @@ const Insights = () => {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-24 pb-20 min-h-screen text-left relative z-0">
             <SEO title="免費 AI 實用教學" description="15 篇基礎必修課 + 無限戰略演進庫" path="/insights" />
             <AnimatePresence>{showOnboarding && <OnboardingScreen onComplete={handleOnboardingComplete} />}</AnimatePresence>
+            <AnimatePresence>{skipTarget && <SkipChapterModal targetChapter={skipTarget} onPass={() => handleModeSwitch('free')} onClose={() => setSkipTarget(null)} />}</AnimatePresence>
 
             <div className="relative px-6 max-w-5xl mx-auto mb-12">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-10 text-left">
                     <div className="flex items-center gap-4 text-left">
-                        <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-left"><Map size={22} className="text-emerald-400" /></div>
-                        <div className="text-left"><h1 className="text-2xl md:text-3xl font-black text-white text-left tracking-tight">AI 修煉地圖</h1><span className="text-emerald-500/60 font-mono text-[9px] tracking-[0.4em] uppercase block text-left">Skill Matrix 2.0</span></div>
+                        <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-left text-left"><Map size={22} className="text-emerald-400" /></div>
+                        <div className="text-left text-left"><h1 className="text-2xl md:text-3xl font-black text-white text-left tracking-tight text-left">AI 修煉地圖</h1><span className="text-emerald-500/60 font-mono text-[9px] tracking-[0.4em] uppercase block text-left text-left">Skill Matrix 2.0</span></div>
                     </div>
                     <div className="bg-black/40 p-1.5 rounded-2xl border border-white/[0.08] flex items-center shadow-inner">
                         <button onClick={() => handleModeSwitch('adventure')} className={`px-6 py-2.5 rounded-xl text-xs font-black transition-all ${viewMode === 'adventure' ? 'bg-emerald-500 text-black' : 'text-zinc-500 hover:text-white'}`}>冒險</button>
@@ -253,7 +351,7 @@ const Insights = () => {
                 </div>
             </div>
 
-            <div className="px-6 max-w-5xl mx-auto relative z-10 text-left">
+            <div className="px-6 max-w-5xl mx-auto relative z-10 text-left text-left">
                 {viewMode === 'adventure' ? (
                     <div className="space-y-4 text-left">
                         {CHAPTERS.map((chapter, ci) => {
@@ -286,7 +384,7 @@ const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExp
                 <div className="p-6 md:p-8 flex items-center justify-between text-left">
                     <div className="flex items-center gap-5 text-left flex-1">
                         <span className="text-3xl text-left">{chapter.emoji}</span>
-                        <div className="text-left"><h2 className="text-xl md:text-2xl font-black text-white text-left">{chapter.title}</h2><p className="text-zinc-500 text-xs md:text-sm text-left">{chapter.subtitle}</p></div>
+                        <div className="text-left text-left"><h2 className="text-xl md:text-2xl font-black text-white text-left text-left">{chapter.title}</h2><p className="text-zinc-500 text-xs md:text-sm text-left">{chapter.subtitle}</p></div>
                     </div>
                     {!isLocked && <ChevronDown size={18} className={`transition-transform text-zinc-600 ${isExpanded ? 'rotate-180' : ''}`} />}
                 </div>
