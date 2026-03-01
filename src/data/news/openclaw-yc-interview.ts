@@ -14,6 +14,7 @@ export const article: NewsArticle = {
     source_url: "https://www.bnext.com.tw/article/90180/yc-interview-openclaw-peter-steinberger",
     tags: ["#OpenClaw", "#YC2025", "#AIOS", "#隱私優先", "#個人代理", "#科技趨勢"],
     author: "Echo",
+    trend_cluster: "代理人革命",
     flash_summary: [
         "OpenClaw 獲選 YC 2025 冬季班，致力於解決 AI 工具過於破碎化的痛點。",
         "核心技術：本地運行大模型 (Local LLM)，確保用戶個人敏感數據不外流。",

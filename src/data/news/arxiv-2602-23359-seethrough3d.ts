@@ -14,7 +14,7 @@ export const article: NewsArticle = {
     source_url: "https://arxiv.org/abs/2602.23359",
     tags: ["#SeeThrough3D", "#AI繪圖", "#電腦視覺", "#CVPR2026", "#Echo技術筆記"],
     author: "Echo",
-    trend_cluster: "學術降維",
+    trend_cluster: "感官進化",
     related_slugs: ["echo-openai-figma", "echo-observation-2026-model-ranking"],
     flash_summary: [
         "SeeThrough3D 解決了 AI 在生成複雜場景時，物體互相「穿模」或位置混亂的痛點。",

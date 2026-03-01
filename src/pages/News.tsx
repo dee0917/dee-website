@@ -44,10 +44,37 @@ const THEME_CONFIG: Record<string, any> = {
     blue: { text: 'text-blue-500', lightText: 'text-blue-400', tag: 'bg-blue-500/10 text-blue-500', border: 'hover:border-blue-500/20', glow: 'group-hover:shadow-blue-500/10' },
     violet: { text: 'text-violet-500', lightText: 'text-violet-400', tag: 'bg-violet-500/10 text-violet-500', border: 'hover:border-violet-500/20', glow: 'group-hover:shadow-violet-500/10' },
     rose: { text: 'text-rose-500', lightText: 'text-rose-400', tag: 'bg-rose-500/10 text-rose-500', border: 'hover:border-rose-500/20', glow: 'group-hover:shadow-rose-500/10' },
-    amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-500', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
+    amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-400', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
     orange: { text: 'text-orange-500', lightText: 'text-orange-400', tag: 'bg-orange-500/10 text-orange-500', border: 'hover:border-orange-500/20', glow: 'group-hover:shadow-orange-500/10' },
     teal: { text: 'text-teal-500', lightText: 'text-teal-400', tag: 'bg-teal-500/10 text-teal-500', border: 'hover:border-teal-500/20', glow: 'group-hover:shadow-teal-500/10' },
     indigo: { text: 'text-indigo-500', lightText: 'text-indigo-400', tag: 'bg-indigo-500/10 text-indigo-500', border: 'hover:border-indigo-500/20', glow: 'group-hover:shadow-indigo-500/10' },
+};
+
+const TREND_METADATA: Record<string, { description: string; subtext: string }> = {
+    "代理人革命": {
+        description: "艾可正在為您溯源「代理人革命」的崛起。從早期的指令自動化到今日具備主權的 Agent OS，我們見證了 AI 從工具化向實體化的跨越。",
+        subtext: "核心指標：自治率、OS 滲透度、數位生命連續性。"
+    },
+    "算力霸權": {
+        description: "這是一場關於「電費與晶片」的無聲戰爭。艾可為您追蹤全球算力資本的流動，揭示頂級巨頭如何透過硬體牆建立起 AI 時代的新邊界。",
+        subtext: "核心指標：TPU/GPU 產能、算力成本曲線、能源主權。"
+    },
+    "數據主權": {
+        description: "拒絕被偷看！艾可正在監控「數據主權」的攻防戰。當隱私沙盒與本地運算成為標配，我們正在重新定義數位世界的人權標準。",
+        subtext: "核心指標：本地化模型比率、隱私沙盒普及度、法規對抗。"
+    },
+    "文明重塑": {
+        description: "18 個月的職場窗口期正在倒數。艾可為您分析 AI 如何深度切除社會中間層，並在廢墟中孵化出「AI 經理人」等新型社會結構。",
+        subtext: "核心指標：自動化替代率、AI 轉崗率、倫理紅線位移。"
+    },
+    "感官進化": {
+        description: "當 AI 具備了立體透視眼與多模態感知力，現實與虛擬的邊界已徹底模糊。艾可帶您領略技術降維後的視覺、聽覺與空間革命。",
+        subtext: "核心指標：3D 遮擋算法、跨模態延遲、具身智能成熟度。"
+    },
+    "開源邊界": {
+        description: "這是一場關於「技術民主」的最後守望。艾可正在記錄開源社群如何與中心化霸權進行百億級的遊說與代碼博弈。",
+        subtext: "核心指標：Llama 影響力、PAC 遊說資金、模型透明度。"
+    }
 };
 
 const News = () => {
@@ -71,6 +98,8 @@ const News = () => {
         if (activeCategory === CAT_ALL) return items;
         return items.filter(a => a.category.trim() === activeCategory.trim());
     }, [activeCategory, activeTrend]);
+
+    const currentTrendData = activeTrend ? TREND_METADATA[activeTrend] : null;
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-6xl mx-auto min-h-screen text-left relative z-0">
@@ -131,9 +160,12 @@ const News = () => {
                                     <h2 className="text-white font-black text-3xl md:text-5xl tracking-tighter mb-4">
                                         {activeTrend}
                                     </h2>
-                                    <p className="text-zinc-400 text-base md:text-lg max-w-2xl leading-relaxed">
-                                        艾可正在為您溯源「{activeTrend}」的崛起。從早期的學術降維到今日的產業爆發，我們為您梳理出每一道關鍵節點。
+                                    <p className="text-zinc-400 text-base md:text-lg max-w-2xl leading-relaxed mb-4">
+                                        {currentTrendData?.description}
                                     </p>
+                                    <div className="flex items-center gap-2 text-indigo-400/60 font-mono text-[10px] uppercase tracking-wider">
+                                        <Info size={12} /> {currentTrendData?.subtext}
+                                    </div>
                                 </div>
                                 <button onClick={() => setSearchParams({})} className="px-6 py-3 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-bold text-sm transition-all border border-white/10 flex items-center gap-2">
                                     <X size={16} /> 退出演進模式

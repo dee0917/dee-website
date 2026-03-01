@@ -60,5 +60,5 @@ export interface NewsArticle {
 
     // 🔗 知識圖譜關聯 (Knowledge Graph)
     related_slugs?: string[];
-    trend_cluster?: "代理人時代" | "算力戰爭" | "隱私主權" | "職場變革" | "學術降維";
+    trend_cluster?: "代理人革命" | "算力霸權" | "數據主權" | "文明重塑" | "感官進化" | "開源邊界";
 }

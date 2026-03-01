@@ -14,6 +14,7 @@ export const article: NewsArticle = {
     source_url: "https://thehill.com",
     tags: ["#AndrewYang", "#AI失業", "#2026職場", "#白領轉型", "#就業危機", "#AI經理人"],
     author: "Echo",
+    trend_cluster: "文明重塑",
     flash_summary: [
         "AI 進化已從單點對話轉向『自主代理』，可處理 90% 的行政、初級法律與基礎數據任務。",
         "Andrew Yang 預測 2026-2027 年將出現大型企業行政部門的規模化裁員。",
