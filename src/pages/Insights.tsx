@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     ArrowRight, Star, BookOpen, Lock, CheckCircle2, Sparkles,
     Zap, Gamepad2, Trophy, ChevronDown, ChevronRight, Filter,
-    Compass, Map, Shield, Search, X, Info
+    Compass, Map as MapIcon, Shield, Search, X, Info
 } from 'lucide-react';
 import { CHAPTERS, MAIN_QUEST_ORDER, INSIGHTS_LIST } from '../data/insights';
 import { ChatGPTLogo, ClaudeLogo, GeminiLogo } from '../components/AILogos';
@@ -209,13 +209,13 @@ const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExp
                                 {items.map((item: any, i: number) => {
                                     const isDone = completedIds.includes(item.id);
                                     return (
-                                        <Link key={item.id} to={`/insights/${item.id}`} className={`flex items-center gap-6 p-6 md:p-8 rounded-[2.5rem] transition-all text-left border border-transparent ${isDone ? 'bg-emerald-500/5 border-emerald-500/10' : 'hover:bg-zinc-900/80 hover:border-white/20'}`}>
+                                        <Link key={item.id} to={`/insights/${item.id}`} className={`flex items-center gap-6 p-6 md:p-8 rounded-[2.5rem] transition-all text-left border border-transparent group ${isDone ? 'bg-emerald-500/5 border-emerald-500/10' : 'hover:bg-zinc-900/80 hover:border-white/20'}`}>
                                             <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-lg font-black flex-shrink-0 text-left ${isDone ? 'bg-emerald-500 text-black shadow-lg' : 'bg-zinc-800 text-zinc-500'}`}>{isDone ? '✓' : i + 1}</div>
                                             <div className="flex-1 text-left min-w-0 text-left">
-                                                <h4 className="text-2xl md:text-3xl font-black text-white text-left tracking-tighter truncate">{item.title}</h4>
+                                                <h4 className="text-2xl md:text-3xl font-black text-white text-left tracking-tighter truncate group-hover:text-emerald-400 transition-colors">{item.title}</h4>
                                                 <p className="text-zinc-500 text-[10px] uppercase font-black tracking-[0.3em] mt-2">Status: {isDone ? 'Mastered' : 'Ready to begin'}</p>
                                             </div>
-                                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-700 group-hover:text-emerald-500 transition-colors">
+                                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-700 group-hover:text-emerald-500 group-hover:bg-emerald-500/10 transition-all">
                                                 <ChevronRight size={22} />
                                             </div>
                                         </Link>
@@ -291,7 +291,10 @@ const Insights = () => {
 
     useEffect(() => {
         if (viewMode === 'adventure') {
-            setExpandedChapters(new Set([unlockedChapter]));
+            setExpandedChapters(prev => {
+                if (prev.size === 0) return new Set([unlockedChapter]);
+                return prev;
+            });
         }
     }, [unlockedChapter, viewMode]);
 
@@ -361,7 +364,7 @@ const Insights = () => {
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-10 text-left">
                     <div className="flex items-center gap-5 text-left">
                         <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shadow-lg shadow-emerald-500/5">
-                            <Map size={24} className="text-emerald-400 text-left" />
+                            <MapIcon size={24} className="text-emerald-400 text-left" />
                         </div>
                         <div className="text-left">
                             <h1 className="text-3xl font-black text-white tracking-tighter">AI 修煉地圖</h1>
