@@ -57,4 +57,8 @@ export interface NewsArticle {
     
     // 🚀 艾可的自由發揮空間 (自由 HTML 內容)
     custom_content?: string;
+
+    // 🔗 知識圖譜關聯 (Knowledge Graph)
+    related_slugs?: string[];
+    trend_cluster?: "代理人時代" | "算力戰爭" | "隱私主權" | "職場變革" | "學術降維";
 }

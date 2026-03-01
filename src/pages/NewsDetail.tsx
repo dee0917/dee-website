@@ -21,10 +21,15 @@ const NewsDetail = () => {
     const [shareCopied, setShareCopied] = useState(false);
     const [showAiJumpModal, setShowAiJumpModal] = useState(false);
 
-    // 獲取相關新聞
+    // 獲取相關新聞 (Bottom Grid)
     const moreNews = NEWS_ARTICLES.filter(a => a.slug !== slug).slice(0, 3);
     // 獲取熱門側欄新聞
     const trendingNews = NEWS_ARTICLES.slice(0, 5);
+
+    // 🔗 獲取知識圖譜關聯新聞 (Knowledge Graph)
+    const connectedIntelligence = article?.related_slugs 
+        ? NEWS_ARTICLES.filter(a => article.related_slugs.includes(a.slug))
+        : NEWS_ARTICLES.filter(a => a.trend_cluster === article?.trend_cluster && a.slug !== slug).slice(0, 3);
 
     useEffect(() => {
         const found = NEWS_ARTICLES.find(a => a.slug === slug);
@@ -69,6 +74,11 @@ const NewsDetail = () => {
                         <span className="text-[9px] font-black px-3 py-1 rounded-full bg-white/5 border border-white/10 uppercase tracking-widest text-zinc-400">
                             {article.category}
                         </span>
+                        {article.trend_cluster && (
+                            <span className="text-[9px] font-black px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 uppercase tracking-widest text-indigo-400">
+                                🔗 {article.trend_cluster}
+                            </span>
+                        )}
                         {article.author === "Echo" && (
                             <span className="text-[9px] font-black px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 uppercase tracking-widest text-indigo-400">
                                 🕵️ 艾可 AI 記者
@@ -245,6 +255,29 @@ const NewsDetail = () => {
                 {/* Sidebar */}
                 <aside className="hidden lg:block lg:col-span-4 space-y-10">
                     <div className="sticky top-32 space-y-10">
+                        {/* 🔗 關聯情報 (Knowledge Graph) */}
+                        {connectedIntelligence.length > 0 && (
+                            <section className="bg-indigo-500/5 border border-indigo-500/10 rounded-[2rem] p-6 relative overflow-hidden group">
+                                <div className="absolute -top-10 -right-10 w-32 h-32 bg-indigo-500/10 blur-3xl rounded-full group-hover:bg-indigo-500/20 transition-all" />
+                                <h4 className="text-indigo-400 font-black text-base mb-6 flex items-center gap-2">
+                                    <Sparkles size={16} /> 關聯情報
+                                </h4>
+                                <div className="space-y-6 relative z-10">
+                                    {connectedIntelligence.map((news) => (
+                                        <Link key={news.slug} to={`/news/${news.slug}`} className="group/item block">
+                                            <div className="space-y-2">
+                                                <div className="flex items-center gap-2">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 group-hover/item:scale-150 transition-all" />
+                                                    <span className="text-[10px] font-black text-indigo-500/60 uppercase tracking-widest">{news.trend_cluster || '延伸趨勢'}</span>
+                                                </div>
+                                                <h5 className="text-[14px] font-bold text-zinc-300 group-hover/item:text-white leading-snug transition-colors">{news.title}</h5>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+
                         <section className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-6">
                             <h4 className="text-white font-black text-base mb-6 flex items-center gap-2">
                                 <TrendingUp size={16} className="text-emerald-500" /> 熱門情報

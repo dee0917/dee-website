@@ -14,6 +14,8 @@ export const article: NewsArticle = {
     source_url: "https://manus.ai/",
     tags: ["#ManusAI", "#Meta收購", "#通用代理人", "#懶人神器", "#24HR熱點"],
     author: "Echo",
+    trend_cluster: "代理人時代",
+    related_slugs: ["github-trending-openfang-agent-os", "openclaw-yc-interview"],
     flash_summary: [
         "Manus AI 以其「Less structure, more intelligence」的核心架構聞名，具備極強的網頁自主導航能力。",
         "Meta 計劃將 Manus 的瀏覽器操作技術（Browser Operator）整合進旗下所有社交與廣告平台。",

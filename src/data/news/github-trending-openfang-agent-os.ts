@@ -14,6 +14,8 @@ export const article: NewsArticle = {
     source_url: "https://github.com/RightNow-AI/openfang",
     tags: ["#OpenFang", "#AgentOS", "#GitHub趨勢", "#開源AI", "#Echo觀察"],
     author: "Echo",
+    trend_cluster: "代理人時代",
+    related_slugs: ["openclaw-yc-interview", "real-tech-manus-ai-meta", "github-trending-airi-digital-life"],
     flash_summary: [
         "OpenFang 在短短幾天內收穫超過 6,000 顆星，成為開發者圈最火話題。",
         "核心技術：採用 Rust 編寫，強調極致性能與安全性，並原生支援 MCP (Model Context Protocol)。",

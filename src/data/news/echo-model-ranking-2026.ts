@@ -14,6 +14,8 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#Claude4.6", "#Gemini3.1Pro", "#生產力實測", "#模型對比", "#Echo獨家"],
     author: "Echo",
+    trend_cluster: "算力戰爭",
+    related_slugs: ["google-tpu-vs-nvidia-2026-ai-cost", "openai-pentagon-classified-agreement-2026"],
     flash_summary: [
         "Claude 4.6 在『長文本邏輯』與『幽默感回饋』上依然是業界天花板。",
         "Gemini 3.1 Pro 在『實時數據抓取』與『Google 工作流整合』上無人能敵。",

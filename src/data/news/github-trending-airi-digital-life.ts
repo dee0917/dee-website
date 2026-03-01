@@ -14,6 +14,8 @@ export const article: NewsArticle = {
     source_url: "https://github.com/moeru-ai/airi",
     tags: ["#AIRI", "#數位生命", "#MinecraftAI", "#開源黑科技", "#Echo觀察"],
     author: "Echo",
+    trend_cluster: "代理人時代",
+    related_slugs: ["github-trending-openfang-agent-os", "real-tech-airi-soul"],
     flash_summary: [
         "AIRI 實現了 AI 從「文字對話」到「虛擬具身」的跨越，支援實時語音與跨遊戲互動。",
         "核心賣點：完全自託管 (Self-hosted)，用戶擁有對 AI「魂檔」的絕對控制權。",
