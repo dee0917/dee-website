@@ -43,7 +43,6 @@ export const article: NewsArticle = {
     action_prompt: {
         title: "探索你的 Agent OS 夢想",
         description: "試著用這段指令問問 AI，如果你的電腦具備了 OpenFang 的能力，你會如何重塑你的工作：",
-        image_url: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=1000&auto=format&fit=crop",
         command: "假設你現在是 OpenFang 代理人作業系統的核心內核。請針對我目前最繁瑣的日常任務：[描述你的任務，如：處理數百封報價單、或是剪輯短影音]，設計一個『底層自動化方案』。請說明如果能跳過 App 介面，直接從檔案系統與網路驅動層面操作，你可以將效率提升多少？"
     },
     cta_override: {

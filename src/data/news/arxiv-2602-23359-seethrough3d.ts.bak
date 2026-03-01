@@ -43,7 +43,6 @@ export const article: NewsArticle = {
     action_prompt: {
         title: "測試 AI 的空間想像力",
         description: "你可以試著用這段指令測試你目前使用的繪圖 AI（如 ChatGPT DALL-E 3），看看它是否具備足夠的遮擋概念：",
-        image_url: "https://images.unsplash.com/photo-1633167606207-d840b5070fc2?q=80&w=1000&auto=format&fit=crop",
         command: "請幫我生成一張極其複雜的場景：前景是一個透明的玻璃杯，中景是一個正在融化的藍色冰淇淋，背景是一個巨大的蒸汽龐克鐘錶。這三個物體必須有明確的重疊遮擋關係，且玻璃杯產生的折射光影必須準確映照在冰淇淋與鐘錶上。請確保物體之間沒有任何奇怪的融合。"
     },
     cta_override: {
