@@ -250,7 +250,7 @@ const ArticleDetail = () => {
                 <motion.div className="h-full bg-emerald-500" style={{ width: `${progress * 100}%` }} />
             </div>
 
-            <section className="relative min-h-[90vh] flex flex-col items-center justify-center px-6 overflow-hidden">
+            <section className="relative min-h-[70vh] flex flex-col items-center justify-center px-6 overflow-hidden">
                 <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b ${theme.gradient} opacity-20 pointer-events-none`} />
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none" />
                 
@@ -273,8 +273,8 @@ const ArticleDetail = () => {
                 <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-20"><ChevronDown size={32} /></div>
             </section>
 
-            <section className="py-32 px-5 md:px-6 bg-zinc-900/30" ref={hookRef}>
-                <motion.div {...fadeUp} className="max-w-4xl mx-auto text-left mb-24">
+            <section className="py-16 px-5 md:px-6 bg-zinc-900/30" ref={hookRef}>
+                <motion.div {...fadeUp} className="max-w-4xl mx-auto text-left mb-12">
                     <span className="transition-label">痛點切入</span>
                     <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tighter">你也正為了這件事煩惱嗎？</h2>
                     <p className="text-2xl md:text-3xl text-white/90 leading-relaxed border-l-4 border-emerald-500 pl-10 italic font-medium">{article.pain_point}</p>
@@ -295,8 +295,8 @@ const ArticleDetail = () => {
             </section>
 
             {hasSteps && (
-                <section className="py-32 px-5 md:px-6 text-left max-w-4xl mx-auto">
-                    <div className="text-left mb-24">
+                <section className="py-16 px-5 md:px-6 text-left max-w-4xl mx-auto">
+                    <div className="text-left mb-12">
                         <span className="transition-label">實戰演練</span>
                         <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter">一步一步跟著做</h2>
                     </div>
@@ -308,7 +308,7 @@ const ArticleDetail = () => {
                             return (
                                 <motion.div key={idx} ref={el => stepRefs.current[idx] = el}
                                     initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                                    className={`relative rounded-[3rem] border p-8 md:p-14 transition-all duration-500 overflow-hidden ${isDone ? 'bg-white/[0.01] border-emerald-500/20' : isActive ? 'bg-zinc-900 border-white/20 shadow-2xl scale-[1.02]' : 'border-white/5 opacity-10 pointer-events-none'}`}>
+                                    className={`relative rounded-[3rem] border p-6 md:p-10 transition-all duration-500 overflow-hidden ${isDone ? 'bg-white/[0.01] border-emerald-500/20' : isActive ? 'bg-zinc-900 border-white/20 shadow-2xl scale-[1.02]' : 'border-white/5 opacity-10 pointer-events-none'}`}>
                                     {rippleStep === idx && (
                                         <>
                                             <motion.div initial={{ scale: 0, opacity: 0.5 }} animate={{ scale: 4, opacity: 0 }} transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -362,7 +362,7 @@ const ArticleDetail = () => {
                 </section>
             )}
 
-            <section className="py-40 px-5 md:px-6 text-center border-t border-white/5 relative overflow-hidden" ref={treasureRef}>
+            <section className="py-20 px-5 md:px-6 text-center border-t border-white/5 relative overflow-hidden" ref={treasureRef}>
                 <div className={`absolute inset-0 bg-gradient-to-b ${theme.gradient} opacity-5 pointer-events-none`} />
                 <motion.div {...fadeUp} className="max-w-3xl mx-auto relative z-10">
                     {treasurePhase === 'locked' && (
@@ -408,13 +408,13 @@ const ArticleDetail = () => {
             </section>
 
             {hasQuiz && (
-                <section className="py-40 px-5 md:px-6 bg-zinc-900/20 border-t border-white/5" ref={quizRef}>
+                <section className="py-20 px-5 md:px-6 bg-zinc-900/20 border-t border-white/5" ref={quizRef}>
                     <motion.div {...fadeUp} className="max-w-4xl mx-auto">
-                        <div className="text-left mb-20">
+                        <div className="text-left mb-10">
                             <span className="transition-label">終極考驗</span>
                             <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter">驗收你的修行成果</h2>
                         </div>
-                        <div className="bg-zinc-900 border border-white/10 rounded-[3rem] p-8 md:p-16 shadow-2xl relative">
+                        <div className="bg-zinc-900 border border-white/10 rounded-[3rem] p-6 md:p-12 shadow-2xl relative">
                             <p className="text-2xl md:text-4xl font-black text-white mb-12 leading-tight tracking-tighter">{article.quiz.question}</p>
                             <div className="space-y-4">
                                 {article.quiz.options.map((opt: string, i: number) => (
@@ -454,7 +454,7 @@ const ArticleDetail = () => {
                 </section>
             )}
 
-            <section className="py-40 px-5 md:px-6 text-center" ref={rewardRef}>
+            <section className="py-20 px-5 md:px-6 text-center" ref={rewardRef}>
                 <motion.div {...fadeUp} className="max-w-xl mx-auto">
                     {badgeEarned ? (
                         <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", damping: 10 }}>
@@ -488,8 +488,8 @@ const ArticleDetail = () => {
                 </motion.div>
             </section>
 
-            <section className="pb-48 px-5 md:px-6">
-                <div className="max-w-4xl mx-auto border-t border-white/10 pt-32">
+            <section className="pb-24 px-5 md:px-6">
+                <div className="max-w-4xl mx-auto border-t border-white/10 pt-16">
                     {isFinale ? (
                         <motion.div {...fadeUp} className="text-center py-20 bg-emerald-500/5 rounded-[4rem] border border-emerald-500/10">
                             <div className="text-8xl mb-10">🎓</div>

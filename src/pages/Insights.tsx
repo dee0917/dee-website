@@ -180,7 +180,7 @@ const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExp
     return (
         <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.05 }} className={`relative text-left text-left`}>
             <div className={`border rounded-2xl transition-all cursor-pointer text-left text-left ${isLocked ? 'opacity-30 grayscale' : ''} ${isExpanded ? 'bg-white/[0.02] border-white/10' : 'border-white/5 hover:border-white/10'}`} onClick={isLocked ? undefined : onToggle}>
-                <div className="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between text-left gap-6">
+                <div className="p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between text-left gap-6">
                     <div className="flex items-center gap-5 text-left flex-1 min-w-0">
                         <span className="text-4xl text-left flex-shrink-0 text-center">{chapter.emoji}</span>
                         <div className="text-left min-w-0 flex-1">
@@ -234,8 +234,8 @@ const InsightCard = ({ insight, idx, completed }: any) => {
     return (
         <Link to={`/insights/${insight.id}`} className="block h-full text-left">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.03 }} viewport={{ once: true }}
-                className={`bg-[#0c0c0c] border p-7 md:p-10 rounded-[2.5rem] h-full flex flex-col transition-all text-left shadow-xl ${completed ? 'border-emerald-500/40 shadow-[0_0_30px_rgba(16,185,129,0.05)]' : 'border-white/[0.06] hover:bg-zinc-900/80 hover:border-white/20'}`}>
-                <div className="flex justify-between items-center mb-6 text-left">
+                className={`bg-[#0c0c0c] border p-6 md:p-8 rounded-[2.5rem] h-full flex flex-col transition-all text-left shadow-xl ${completed ? 'border-emerald-500/40 shadow-[0_0_30px_rgba(16,185,129,0.05)]' : 'border-white/[0.06] hover:bg-zinc-900/80 hover:border-white/20'}`}>
+                <div className="flex justify-between items-center mb-4 text-left">
                     <span className="text-[10px] font-black px-3 py-1 rounded bg-white/5 text-zinc-500 uppercase tracking-widest text-left">{insight.category}</span>
                     <span className="text-[11px] text-zinc-500 font-mono font-bold">{insight.date || '2026.03.01'}</span>
                 </div>
@@ -406,12 +406,12 @@ const Insights = () => {
     console.log(`[Insights] Rendering ${viewMode} mode. Unlocked Ch: ${unlockedChapter}, RemountKey: ${remountKey}`);
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-24 pb-12 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0 text-left">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-16 pb-12 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0 text-left">
             <SEO title="免費 AI 實用教學" description="15 篇基礎必修課 + 無限戰略演進庫" path="/insights" />
             <AnimatePresence>{showOnboarding && <OnboardingScreen onComplete={handleOnboardingComplete} />}</AnimatePresence>
             <AnimatePresence>{skipTarget && <SkipChapterModal targetChapter={skipTarget} onPass={handleChallengePassed} onClose={() => setSkipTarget(null)} />}</AnimatePresence>
 
-            <div className="relative mb-12 text-left">
+            <div className="relative mb-8 text-left">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-10 text-left">
                     <div className="flex items-center gap-5 text-left">
                         <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shadow-lg shadow-emerald-500/5">

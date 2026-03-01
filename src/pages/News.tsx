@@ -102,11 +102,11 @@ const News = () => {
     const currentTrendData = activeTrend ? TREND_METADATA[activeTrend] : null;
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-24 pb-12 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-16 pb-8 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0">
             <SEO title="AI 新聞情報站 - 2026 最新趨勢解析" description="由 Dee 主理的 AI 新聞板塊，透過頂尖 AI Agent 系統進行精確轉譯，助您快速掌握全球 AI 核心脈動。" path="/news" />
             
-            <div className="mb-10">
-                <div className="flex items-center gap-5 mb-6 text-left">
+            <div className="mb-6">
+                <div className="flex items-center gap-5 mb-4 text-left">
                     <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shadow-lg shadow-emerald-500/5">
                         <Zap size={24} className="text-emerald-400" />
                     </div>
@@ -235,10 +235,10 @@ const NewsCard = ({ article, idx }: any) => {
     return (
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: (idx % 5) * 0.05 }} viewport={{ once: true }}
             onClick={() => { navigate(`/news/${article.slug}`); window.scrollTo(0, 0); }}
-            className="bg-[#0c0c0c] border border-white/[0.06] p-7 md:p-10 rounded-[2.5rem] cursor-pointer group transition-all hover:bg-zinc-900/80 hover:border-white/20 h-full flex flex-col md:flex-row gap-8 items-center text-left shadow-xl"
+            className="bg-[#0c0c0c] border border-white/[0.06] p-6 md:p-8 rounded-[2.5rem] cursor-pointer group transition-all hover:bg-zinc-900/80 hover:border-white/20 h-full flex flex-col md:flex-row gap-6 items-center text-left shadow-xl"
         >
             <div className="flex-1 w-full text-left">
-                <div className="flex justify-between items-center mb-6 text-left">
+                <div className="flex justify-between items-center mb-4 text-left">
                     <div className="flex items-center gap-3">
                         <span className={`text-[10px] font-black px-3 py-1 rounded-lg uppercase tracking-widest ${themeMap[article.trend_cluster as keyof typeof themeMap] || 'text-zinc-400 bg-white/5'}`}>
                             {article.trend_cluster || article.category}

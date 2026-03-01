@@ -58,11 +58,11 @@ const NewsDetail = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a] text-zinc-300 pb-20 overflow-x-hidden">
+        <div className="min-h-screen bg-[#0a0a0a] text-zinc-300 pb-12 overflow-x-hidden">
             <SEO title={article.title} description={article.summary} path={`/news/${article.slug}`} />
 
             {/* 1. Header (平衡排版) */}
-            <section className="relative pt-20 pb-8 px-6 overflow-hidden border-b border-white/5 text-left">
+            <section className="relative pt-12 pb-6 px-6 overflow-hidden border-b border-white/5 text-left">
                 <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b ${themeMap[article.themeColor] || 'from-zinc-500/10'} opacity-10 pointer-events-none`} />
                 <div className="max-w-6xl mx-auto relative z-10 text-left">
                     <button onClick={() => navigate(-1)} className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-6 text-xs font-black uppercase tracking-widest">
@@ -93,17 +93,17 @@ const NewsDetail = () => {
                 </div>
             </section>
 
-            <div className="max-w-6xl mx-auto px-6 py-12 text-left">
-                <div className="max-w-4xl space-y-20">
+            <div className="max-w-6xl mx-auto px-6 py-8 text-left">
+                <div className="max-w-4xl space-y-12">
                     {/* 2. Summary (大字體) */}
                     <div className="text-left">
-                        <p className="text-2xl md:text-3xl text-white/90 leading-relaxed border-l-4 border-emerald-500 pl-10 italic font-medium text-left">
+                        <p className="text-2xl md:text-3xl text-white/90 leading-relaxed border-l-4 border-emerald-500 pl-8 italic font-medium text-left">
                             {article.summary}
                         </p>
                     </div>
 
                     {/* 3. Flash Summary (深灰色加深，加強對比) */}
-                    <motion.section {...fadeUp} className="bg-white/[0.02] border border-white/10 rounded-[3rem] p-8 md:p-12 text-left shadow-2xl">
+                    <motion.section {...fadeUp} className="bg-white/[0.02] border border-white/10 rounded-[3rem] p-6 md:p-10 text-left shadow-2xl">
                         <div className="flex items-center gap-3 mb-8 text-left">
                             <Zap size={22} className="text-amber-400" />
                             <h2 className="text-xl font-black text-white uppercase tracking-widest text-left">戰略情報摘要</h2>
@@ -119,18 +119,18 @@ const NewsDetail = () => {
                     </motion.section>
 
                     {/* 4. Event Breakdown (提高文字亮度與間距) */}
-                    <motion.section {...fadeUp} className="space-y-16 text-left">
-                        <div className="flex items-center gap-3 text-left mb-4">
+                    <motion.section {...fadeUp} className="space-y-12 text-left">
+                        <div className="flex items-center gap-3 text-left mb-2">
                             <Info size={24} className="text-emerald-500" />
                             <h2 className="text-2xl font-black text-white text-left tracking-tight">深度事件解析</h2>
                         </div>
                         {article.event_breakdown.map((item: any, i: number) => (
-                            <div key={i} className="space-y-8 text-left">
+                            <div key={i} className="space-y-6 text-left">
                                 <h3 className="text-2xl font-black text-white flex items-center gap-4 text-left group">
                                     <div className="w-1.5 h-6 bg-emerald-500 rounded-full group-hover:scale-y-125 transition-transform" /> 
                                     {item.title}
                                 </h3>
-                                <div className="text-lg md:text-xl text-zinc-300 leading-[1.8] space-y-6 text-left font-medium">
+                                <div className="text-lg md:text-xl text-zinc-300 leading-[1.8] space-y-4 text-left font-medium">
                                     {item.content.split('。').map((sentence: string, sidx: number) => (
                                         sentence.length > 2 && <p key={sidx} className="text-left">{sentence}。</p>
                                     ))}
