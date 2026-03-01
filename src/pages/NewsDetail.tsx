@@ -76,7 +76,7 @@ const NewsDetail = () => {
                         </span>
                         {article.trend_cluster && (
                             <span className="text-[9px] font-black px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 uppercase tracking-widest text-indigo-400">
-                                🔗 {article.trend_cluster}
+                                🔗 {article.trend_cluster} 趨勢勳章
                             </span>
                         )}
                         {article.author === "Echo" && (
