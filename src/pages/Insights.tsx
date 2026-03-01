@@ -170,6 +170,12 @@ const SkipChapterModal = ({ targetChapter, onPass, onClose }: { targetChapter: n
 /* ═══════════════════════════════════════════
    MAIN PAGE
    ═══════════════════════════════════════════ */
+const StarIcon = ({ size, className, fill }: any) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={fill} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+    </svg>
+);
+
 const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExpanded, onToggle, onSkip, index }: any) => {
     return (
         <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.05 }} className={`relative text-left text-left`}>
@@ -203,13 +209,15 @@ const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExp
                                 {items.map((item: any, i: number) => {
                                     const isDone = completedIds.includes(item.id);
                                     return (
-                                        <Link key={item.id} to={`/insights/${item.id}`} className={`flex items-center gap-6 p-6 rounded-2xl transition-all text-left border border-transparent ${isDone ? 'bg-emerald-500/5 border-emerald-500/10' : 'hover:bg-white/5 hover:border-white/10'}`}>
-                                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black flex-shrink-0 text-left ${isDone ? 'bg-emerald-500 text-black shadow-lg' : 'bg-zinc-800 text-zinc-500'}`}>{isDone ? '✓' : i + 1}</div>
+                                        <Link key={item.id} to={`/insights/${item.id}`} className={`flex items-center gap-6 p-6 md:p-8 rounded-[2.5rem] transition-all text-left border border-transparent ${isDone ? 'bg-emerald-500/5 border-emerald-500/10' : 'hover:bg-zinc-900/80 hover:border-white/20'}`}>
+                                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-lg font-black flex-shrink-0 text-left ${isDone ? 'bg-emerald-500 text-black shadow-lg' : 'bg-zinc-800 text-zinc-500'}`}>{isDone ? '✓' : i + 1}</div>
                                             <div className="flex-1 text-left min-w-0 text-left">
-                                                <h4 className="text-base md:text-xl font-black text-white text-left tracking-tight truncate">{item.title}</h4>
-                                                <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mt-1">Status: {isDone ? 'Mastered' : 'Ready'}</p>
+                                                <h4 className="text-2xl md:text-3xl font-black text-white text-left tracking-tighter truncate">{item.title}</h4>
+                                                <p className="text-zinc-500 text-[10px] uppercase font-black tracking-[0.3em] mt-2">Status: {isDone ? 'Mastered' : 'Ready to begin'}</p>
                                             </div>
-                                            <ChevronRight size={18} className="text-zinc-700 flex-shrink-0 text-left group-hover:text-emerald-500 transition-colors" />
+                                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-700 group-hover:text-emerald-500 transition-colors">
+                                                <ChevronRight size={22} />
+                                            </div>
                                         </Link>
                                     );
                                 })}
@@ -229,25 +237,21 @@ const InsightCard = ({ insight, idx, completed }: any) => {
                 className={`bg-[#0c0c0c] border p-7 md:p-10 rounded-[2.5rem] h-full flex flex-col transition-all text-left shadow-xl ${completed ? 'border-emerald-500/40 shadow-[0_0_30px_rgba(16,185,129,0.05)]' : 'border-white/[0.06] hover:bg-zinc-900/80 hover:border-white/20'}`}>
                 <div className="flex justify-between items-center mb-6 text-left">
                     <span className="text-[10px] font-black px-3 py-1 rounded bg-white/5 text-zinc-500 uppercase tracking-widest text-left">{insight.category}</span>
-                    {completed && (
-                        <div className="flex items-center gap-2 text-emerald-400 font-black text-[10px] uppercase tracking-widest">
-                             已完賽 <CheckCircle2 size={14} className="text-emerald-500 shadow-lg text-left" />
-                        </div>
-                    )}
+                    <span className="text-[11px] text-zinc-500 font-mono font-bold">{insight.date || '2026.03.01'}</span>
                 </div>
                 <h4 className="text-2xl md:text-3xl font-black text-white mb-4 line-clamp-2 leading-tight tracking-tighter group-hover:text-emerald-300 transition-colors text-left">
                     {insight.title}
                 </h4>
-                <p className="text-zinc-400 text-base md:text-lg line-clamp-2 leading-relaxed text-left font-medium">
+                <p className="text-zinc-400 text-base md:text-lg line-clamp-2 leading-relaxed text-left font-medium mb-8">
                     {insight.summary}
                 </p>
 
-                <div className="mt-8 pt-6 border-t border-white/[0.05] flex items-center justify-between text-left">
-                    <div className="flex items-center gap-4">
-                        <span className="text-[10px] text-zinc-500 font-bold text-left uppercase tracking-widest">Level {insight.difficulty_level || 1}</span>
-                        <div className="flex gap-1">{[...Array(5)].map((_, i) => <Star key={i} size={10} className={i < (insight.difficulty_level || 1) ? 'text-emerald-500' : 'text-zinc-800'} fill="currentColor" />)}</div>
+                <div className="mt-auto pt-6 border-t border-white/[0.05] flex items-center justify-between text-left">
+                    <div className="flex items-center gap-6">
+                        <span className="flex items-center gap-2 text-xs text-zinc-500 font-bold text-left uppercase tracking-widest"><Star size={14} className="text-emerald-500" /> Level {insight.difficulty_level || 1}</span>
+                        <div className="flex gap-1">{[...Array(5)].map((_, i) => <StarIcon key={i} size={10} className={i < (insight.difficulty_level || 1) ? 'text-emerald-500' : 'text-zinc-800'} fill="currentColor" />)}</div>
                     </div>
-                    <div className="flex items-center gap-2 text-white font-black text-xs uppercase tracking-widest">
+                    <div className="flex items-center gap-2 text-white font-black text-xs uppercase tracking-widest group-hover:gap-4 transition-all">
                         進入修煉 <ArrowRight size={18} className="text-emerald-500" />
                     </div>
                 </div>
@@ -348,22 +352,31 @@ const Insights = () => {
     if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse text-center text-center">INITIALIZING_SYLLABUS...</div>;
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-24 pb-20 min-h-screen text-left relative z-0 text-left">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-24 pb-12 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0 text-left">
             <SEO title="免費 AI 實用教學" description="15 篇基礎必修課 + 無限戰略演進庫" path="/insights" />
             <AnimatePresence>{showOnboarding && <OnboardingScreen onComplete={handleOnboardingComplete} />}</AnimatePresence>
             <AnimatePresence>{skipTarget && <SkipChapterModal targetChapter={skipTarget} onPass={handleChallengePassed} onClose={() => setSkipTarget(null)} />}</AnimatePresence>
 
-            <div className="relative px-6 max-w-5xl mx-auto mb-12 text-left">
+            <div className="relative mb-12 text-left">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-10 text-left">
-                    <div className="flex items-center gap-4 text-left">
-                        <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-left text-left"><Map size={22} className="text-emerald-400 text-left" /></div>
-                        <div className="text-left text-left text-left text-left"><h1 className="text-2xl md:text-3xl font-black text-white text-left tracking-tight text-left">AI 修煉地圖</h1><span className="text-emerald-500/60 font-mono text-[9px] tracking-[0.4em] uppercase block text-left text-left text-left">Skill Matrix 2.0</span></div>
+                    <div className="flex items-center gap-5 text-left">
+                        <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shadow-lg shadow-emerald-500/5">
+                            <Map size={24} className="text-emerald-400 text-left" />
+                        </div>
+                        <div className="text-left">
+                            <h1 className="text-3xl font-black text-white tracking-tighter">AI 修煉地圖</h1>
+                            <span className="text-emerald-500/60 font-mono text-[10px] tracking-[0.4em] uppercase block">Skill Matrix 2.0</span>
+                        </div>
                     </div>
                     <div className="bg-black/40 p-1.5 rounded-2xl border border-white/[0.08] flex items-center shadow-inner text-left">
                         <button onClick={() => handleModeSwitch('adventure')} className={`px-6 py-2.5 rounded-xl text-xs font-black transition-all ${viewMode === 'adventure' ? 'bg-emerald-500 text-black shadow-lg scale-105' : 'text-zinc-500 hover:text-white'} text-left`}>冒險</button>
                         <button onClick={() => handleModeSwitch('free')} className={`px-6 py-2.5 rounded-xl text-xs font-black transition-all ${viewMode === 'free' ? 'bg-emerald-500 text-black shadow-lg scale-105' : 'text-zinc-500 hover:text-white'} text-left`}>自由</button>
                     </div>
                 </div>
+
+                <p className="text-zinc-400 text-lg max-w-2xl mb-8 leading-relaxed text-left">
+                    不只是教學，更是靈魂的重塑。透過 15 篇必修與無限支線，掌握 <span className="text-white">AI 核心主權</span>。
+                </p>
 
                 <div className="relative z-10 text-left">
                     <div className="flex items-center justify-between mb-3 text-left text-left">
@@ -376,9 +389,9 @@ const Insights = () => {
                 </div>
             </div>
 
-            <div className="px-6 max-w-5xl mx-auto relative z-10 text-left text-left">
+            <div className="relative z-10 text-left text-left">
                 {viewMode === 'adventure' ? (
-                    <div className="space-y-4 text-left">
+                    <div className="space-y-6 text-left">
                         {CHAPTERS.map((chapter, ci) => {
                             const items = chapter.articleIds.map(id => allInsights.find(i => i.id === id)).filter(Boolean);
                             const done = items.filter(i => completedIds.includes(i!.id)).length;
