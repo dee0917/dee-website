@@ -29,7 +29,7 @@ import { insight as ch5LogicVerification } from './ch5-logic-verification';
 import { insight as ch5MarkdownSovereignty } from './ch5-markdown-sovereignty';
 
 // ═══════════════════════════════════════════
-// Chapter 定義 — 主線任務的學習順序
+// Chapter 定義 — 主線任務的學習順序 (僅限 Ch 0-4)
 // ═══════════════════════════════════════════
 export const CHAPTERS = [
     {
@@ -52,23 +52,19 @@ export const CHAPTERS = [
         id: 4, emoji: '🏆', title: '進階挑戰', subtitle: '把 AI 用在需要更深度思考的場景',
         articleIds: [401, 403, 405],
     },
-    {
-        id: 5, emoji: '⚔️', title: '戰略演進', subtitle: '超越對話框，建立具備主權的代理人系統',
-        articleIds: [501, 502, 503, 504],
-    },
 ];
 
-// 主線順序表（嚴格順序）
+// 主線順序表（僅包含 Ch 0-4）
 export const MAIN_QUEST_ORDER: number[] = CHAPTERS.flatMap(c => c.articleIds);
 
-// 支線任務 IDs
-export const SIDE_QUEST_IDS: number[] = [205, 305, 306, 304, 309, 307, 402, 404, 312, 302];
+// 戰略演進與其餘支線 IDs (Chapter 5+ 轉化為自由學習庫)
+export const SIDE_QUEST_IDS: number[] = [501, 502, 503, 504, 205, 305, 306, 304, 309, 307, 402, 404, 312, 302];
 
 // ═══════════════════════════════════════════
 // 文章列表 — 主線 + 支線
 // ═══════════════════════════════════════════
 
-// 主線文章（按 Chapter 分配 level）
+// 主線文章（按 Chapter 分配 level 0-4）
 const mainQuest = [
     // Chapter 0: 出發準備 (level: 0)
     { ...ch0WhatIsAi, level: 0 },
@@ -90,15 +86,14 @@ const mainQuest = [
     { ...aiNewsReader, level: 4 },
     { ...englishCoach, level: 4 },
     { ...ch4AiManager, level: 4 },
-    // Chapter 5: 戰略演進 (level: 5)
-    { ...ch5VPhoneAgent, level: 5 },
-    { ...ch5LogicVerification, level: 5 },
-    { ...ch5WiFiDensePose, level: 5 },
-    { ...ch5MarkdownSovereignty, level: 5 },
 ];
 
-// 支線文章 (level: -1 = 支線)
+// 自由學習庫 (level: -1 = 戰略演進與支線)
 const sideQuests = [
+    { ...ch5VPhoneAgent, level: -1, category: "戰略演進" },
+    { ...ch5LogicVerification, level: -1, category: "戰略演進" },
+    { ...ch5WiFiDensePose, level: -1, category: "戰略演進" },
+    { ...ch5MarkdownSovereignty, level: -1, category: "戰略演進" },
     { ...ch1AiPhysicalization, level: -1 },
     { ...travelPlanner, level: -1 },
     { ...meetingMinutes, level: -1 },
