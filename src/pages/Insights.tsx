@@ -217,9 +217,11 @@ const Insights = () => {
 
     const handleModeSwitch = (m: 'adventure' | 'free') => {
         if (m === 'free') {
+            const isElite = localStorage.getItem('dee_elite_status') === 'true';
             const totalMain = MAIN_QUEST_ORDER.length;
             const doneMain = completedIds.filter(id => MAIN_QUEST_ORDER.includes(id)).length;
-            if (doneMain < totalMain) {
+            
+            if (!isElite && doneMain < totalMain) {
                 setSkipTarget(999); // 5 題測驗
                 return;
             }
@@ -232,6 +234,7 @@ const Insights = () => {
         if (targetId === 999) {
             setViewMode('free');
             localStorage.setItem('dee_view_preference', 'free');
+            localStorage.setItem('dee_elite_status', 'true'); // 永久紀錄精英身分
         } else {
             setUnlockedChapter(targetId);
             localStorage.setItem('dee_ai_level', targetId.toString());

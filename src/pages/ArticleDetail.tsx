@@ -71,21 +71,18 @@ const ArticleDetail = () => {
         if (article?.steps) {
             const isFree = localStorage.getItem('dee_view_preference') === 'free';
             setFreeMode(isFree);
-            if (isFree) {
-                setStepsCompleted(new Array(article.steps.length).fill(true));
-                setCurrentStep(article.steps.length - 1);
-                setTreasurePhase('revealed');
-            } else {
-                setStepsCompleted(new Array(article.steps.length).fill(false));
-                setCurrentStep(0);
-            }
+            
+            // 無論什麼模式，寶箱都初始鎖定，步驟都需手動點擊（維持多巴胺路徑）
+            setStepsCompleted(new Array(article.steps.length).fill(false));
+            setCurrentStep(0);
+            setTreasurePhase('locked');
+            
             stepRefs.current = new Array(article.steps.length).fill(null);
         }
         setQuizAnswer(null);
         setQuizSubmitted(false);
         setBadgeEarned(false);
         setCopied(false);
-        setTreasurePhase('locked');
         setShowAiJumpModal(false);
     }, [article?.id, article?.steps?.length]);
 
@@ -287,8 +284,8 @@ const ArticleDetail = () => {
                     <div className="space-y-12">
                         {article.steps.map((step: any, idx: number) => {
                             const isDone = stepsCompleted[idx];
-                            const isActive = freeMode ? !isDone : idx === currentStep;
-                            const isFuture = freeMode ? false : idx > currentStep;
+                            const isActive = idx === currentStep;
+                            const isFuture = idx > currentStep;
                             return (
                                 <motion.div key={idx} ref={el => stepRefs.current[idx] = el}
                                     initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
