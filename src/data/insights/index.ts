@@ -19,6 +19,7 @@ import { insight as petTranslator } from './pet-translator';
 import { insight as ch0WhatIsAi } from './ch0-what-is-ai';
 import { insight as ch0FirstMessage } from './ch0-first-message';
 import { insight as ch0AiTemper } from './ch0-ai-temper';
+import { article as ch1AiInstructions } from './ch1-ai-instructions';
 import { insight as ch1AiHallucination } from './ch1-ai-hallucination';
 import { insight as ch1AiPhysicalization } from './ch1-ai-physicalization';
 import { insight as ch3AiSocial } from './ch3-ai-social';
@@ -39,7 +40,7 @@ export const CHAPTERS = [
     },
     {
         id: 1, emoji: '🌱', title: '認識 AI', subtitle: '建立正確心態，讓 AI 成為你的夥伴',
-        articleIds: [201, 202, 203],
+        articleIds: [1, 202, 203],
     },
     {
         id: 2, emoji: '🔧', title: '指令進化', subtitle: '從「隨便說說」進化到「結構化指令」',
@@ -72,7 +73,7 @@ const mainQuest = [
     { ...ch0FirstMessage, level: 0 },
     { ...ch0AiTemper, level: 0 },
     // Chapter 1: 認識 AI (level: 1)
-    { ...heartMethod1, level: 1 },
+    { ...ch1AiInstructions, level: 1 },
     { ...heartMethod2, level: 1 },
     { ...heartMethod3, level: 1 },
     // Chapter 2: 指令進化 (level: 2)
