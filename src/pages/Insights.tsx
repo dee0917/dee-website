@@ -24,34 +24,92 @@ const PERSONA_CONFIG: Record<UserPersona, { label: string, icon: any, color: str
 const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free', chapter?: number, persona?: UserPersona) => void }) => {
     const [step, setStep] = useState(0);
     const [selectedPersona, setSelectedPersona] = useState<UserPersona>('general');
+    const [score, setScore] = useState(0);
 
     const ModalShell = ({ children, kkey }: { children: React.ReactNode; kkey: string }) => (
         <motion.div key={kkey} initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-zinc-900/90 border border-white/10 p-8 md:p-12 rounded-[2.5rem] max-w-lg w-full shadow-2xl relative overflow-hidden text-center">
+            className="bg-zinc-900/95 border border-white/10 p-8 md:p-12 rounded-[2.5rem] max-w-lg w-full shadow-2xl relative overflow-hidden text-center">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-600" />
             <div className="relative z-10">{children}</div>
         </motion.div>
     );
 
+    const questions = [
+        {
+            q: "你以前有跟 ChatGPT、Claude 或 Gemini 聊過天嗎？",
+            options: [
+                { text: "完全沒有，我是第一次嘗試", level: 0 },
+                { text: "有試過幾次，但不知道怎麼深入", level: 1 },
+                { text: "經常使用，想學點進階的黑科技", level: 2 }
+            ]
+        },
+        {
+            q: "你知道 AI 也有脾氣（隨機性），且需要給範例才能穩定嗎？",
+            options: [
+                { text: "不知道，難怪它每次回得都不一樣", level: 0 },
+                { text: "聽過，但不太會操作範例格式", level: 1 },
+                { text: "知道，我已經會用 One-shot 技巧了", level: 2 }
+            ]
+        },
+        {
+            q: "你知道什麼是「誠實約束」，如何防止 AI 一本正經胡說八道嗎？",
+            options: [
+                { text: "完全不知道，我以為它說的都是真的", level: 0 },
+                { text: "有聽過，知道要叫它不要編造", level: 1 },
+                { text: "知道，我會要求它列出參考來源並校對", level: 2 }
+            ]
+        }
+    ];
+
+    const handleAnswer = (levelValue: number) => {
+        const newScore = score + levelValue;
+        if (step < questions.length) {
+            setScore(newScore);
+            setStep(step + 1);
+        }
+    };
+
+    const finalLevel = Math.min(Math.floor(score / 1.5), 2);
+
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl text-center">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/95 backdrop-blur-2xl text-center">
             <AnimatePresence mode="wait">
                 {step === 0 ? (
                     <ModalShell kkey="welcome">
                         <div className="text-center mb-10">
-                            <div className="text-6xl mb-6 text-center">👋</div>
-                            <h2 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-tight text-center">嗨！歡迎來到 Dee's AI Lab</h2>
-                            <p className="text-zinc-400 text-base md:text-lg leading-relaxed text-center">這裡是你的 AI 修煉場。我們將帶你從零開始掌握 AI 核心主權。</p>
+                            <div className="text-6xl mb-6">👋</div>
+                            <h2 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-tight">歡迎參加入學測驗</h2>
+                            <p className="text-zinc-400 text-base md:text-lg leading-relaxed">我們將透過 3 個簡單問題，幫你精準定位到最適合的修煉章節。</p>
                         </div>
                         <button onClick={() => setStep(1)}
-                            className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all text-center">
-                            下一步：選擇你的身分
+                            className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+                            開始測驗
                         </button>
                     </ModalShell>
-                ) : (
+                ) : step <= questions.length ? (
+                    <ModalShell kkey={`q-${step}`}>
+                        <div className="text-left mb-8">
+                            <div className="flex items-center justify-between mb-4">
+                                <span className="text-emerald-500 font-mono text-[10px] uppercase tracking-widest">Question {step} / 3</span>
+                                <div className="h-1 flex-1 mx-4 bg-white/5 rounded-full overflow-hidden">
+                                    <motion.div className="h-full bg-emerald-500" animate={{ width: `${(step / 3) * 100}%` }} />
+                                </div>
+                            </div>
+                            <h2 className="text-xl md:text-2xl font-black text-white leading-tight">{questions[step - 1].q}</h2>
+                        </div>
+                        <div className="space-y-3">
+                            {questions[step - 1].options.map((opt, i) => (
+                                <button key={i} onClick={() => handleAnswer(opt.level)}
+                                    className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 text-zinc-300 hover:text-white font-bold text-left transition-all">
+                                    {opt.text}
+                                </button>
+                            ))}
+                        </div>
+                    </ModalShell>
+                ) : step === questions.length + 1 ? (
                     <ModalShell kkey="persona">
                         <div className="text-left mb-8">
-                            <h2 className="text-xl font-black text-white mb-2 tracking-tight">請選擇最貼近你的身分</h2>
+                            <h2 className="text-xl font-black text-white mb-2 tracking-tight">最後一步：選擇你的身分</h2>
                             <p className="text-zinc-500 text-sm">我們將根據你的選擇，為你準備專屬的實戰範例。</p>
                         </div>
                         <div className="grid grid-cols-2 gap-3 mb-8">
@@ -60,7 +118,7 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                                 return (
                                     <button key={p} onClick={() => setSelectedPersona(p)}
                                         className={`flex flex-col items-center gap-2 p-4 rounded-2xl border transition-all ${selectedPersona === p 
-                                            ? `bg-${conf.color}-500/20 border-${conf.color}-500 text-white` 
+                                            ? `bg-${conf.color}-500/20 border-${conf.color}-500 text-white shadow-lg` 
                                             : 'bg-white/5 border-white/5 text-zinc-500 hover:border-white/20'}`}>
                                         {React.createElement(conf.icon, { size: 24 })}
                                         <span className="text-xs font-black">{conf.label}</span>
@@ -68,10 +126,27 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                                 );
                             })}
                         </div>
-                        <button onClick={() => onComplete('guided', 0, selectedPersona)}
-                            className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all text-center">
-                            <Sparkles size={22} /> 開始修煉 (Ch.0)
+                        <button onClick={() => setStep(step + 1)}
+                            className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+                            查看分配結果
                         </button>
+                    </ModalShell>
+                ) : (
+                    <ModalShell kkey="result">
+                        <div className="text-center py-6">
+                            <div className="text-6xl mb-6">🎯</div>
+                            <h3 className="text-2xl font-black text-white mb-3">測驗完成！</h3>
+                            <p className="text-zinc-400 text-base mb-8">
+                                根據你的經驗，我們將你分配到：<br />
+                                <span className={`text-${PERSONA_CONFIG[selectedPersona].color}-400 font-black text-xl`}>
+                                    Chapter {finalLevel} - {CHAPTERS.find(c => c.id === finalLevel)?.title}
+                                </span>
+                            </p>
+                            <button onClick={() => onComplete('guided', finalLevel, selectedPersona)}
+                                className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+                                立即進入實驗室
+                            </button>
+                        </div>
                     </ModalShell>
                 )}
             </AnimatePresence>
