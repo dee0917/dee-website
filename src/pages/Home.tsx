@@ -31,7 +31,6 @@ const Home = () => {
             <SEO path="/" />
             <div className="grid-bg" />
             
-            {/* Matrix Rain Effect */}
             <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-20">
                 {[...Array(20)].map((_, i) => (
                     <div 
@@ -48,14 +47,11 @@ const Home = () => {
                 ))}
             </div>
 
-            {/* ═══════════ HERO — 遊戲開始畫面 (可讀性優化版) ═══════════ */}
             <section className="relative min-h-[90vh] flex items-center justify-center px-6 overflow-hidden pt-10 z-10">
-                {/* Background effects */}
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/[0.04] blur-[150px] rounded-full" />
                     <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-teal-500/[0.03] blur-[120px] rounded-full" />
                     
-                    {/* Floating Particles - Denser (30 particles) */}
                     {[...Array(30)].map((_, i) => (
                         <motion.div
                             key={i}
@@ -81,7 +77,6 @@ const Home = () => {
                 </div>
 
                 <div className="relative z-10 text-center max-w-5xl mx-auto">
-                    {/* Header: Beta + Brain Emoji */}
                     <div className="flex flex-col items-center mb-4">
                         <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
                             className="inline-flex items-center gap-2 border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 px-5 py-2 rounded-full text-xs mb-6 font-bold relative group">
@@ -94,7 +89,6 @@ const Home = () => {
                         </motion.div>
                     </div>
 
-                    {/* The靈魂文字 (From image, with Typewriter) */}
                     <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
                         className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tight leading-[1.1]">
                         將繁瑣交給 AI，<br />
@@ -103,11 +97,10 @@ const Home = () => {
                         </span>
                     </motion.h1>
 
-                    {/* THE CRITICAL SUBTITLE (Contrast increased) */}
                     <motion.p initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
-                        className="text-lg md:text-xl text-zinc-200 mb-10 leading-relaxed max-w-2xl mx-auto font-medium">
+                        className="text-lg md:text-xl text-zinc-200 mb-10 leading-relaxed max-w-2xl mx-auto font-medium text-center">
                         用最白話的方式學 AI。<br />
-                        <span className="text-white font-black underline decoration-emerald-500 decoration-4 underline-offset-8">{totalArticles} 篇免費互動教學</span>，從完全不會到熟練運用。
+                        <span className="text-white font-black underline decoration-emerald-500 decoration-4 underline-offset-8 text-center">{totalArticles} 篇免費互動教學</span>，從完全不會到熟練運用。
                     </motion.p>
 
                     <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
@@ -125,28 +118,27 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* ═══════════ 旅程預覽 — 章節時間線 ═══════════ */}
             <section id="journey" className="py-24 px-6 border-t border-white/5">
                 <div className="max-w-5xl mx-auto">
-                    <motion.div {...fadeUp} className="text-center mb-16">
-                        <span className="text-emerald-500 font-black tracking-[0.4em] text-xs uppercase mb-4 block">LEARNING JOURNEY</span>
-                        <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">5 個章節，{totalArticles} 篇教學，1 段冒險</h2>
-                        <p className="text-zinc-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-medium">從「AI 是什麼？」到「用 AI 搞定生活大小事」，每篇都有互動練習、小測驗與專屬勳章。</p>
+                    <motion.div {...fadeUp} className="text-center mb-16 text-center">
+                        <span className="text-emerald-500 font-black tracking-[0.4em] text-xs uppercase mb-4 block text-center">LEARNING JOURNEY</span>
+                        <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight text-center">5 個章節，{totalArticles} 篇教學，1 段冒險</h2>
+                        <p className="text-zinc-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-medium text-center">從「AI 是什麼？」到「用 AI 搞定生活大小事」，每篇都有互動練習、小測驗與專屬勳章。</p>
                     </motion.div>
 
                     <div className="overflow-x-auto pb-8 -mx-6 px-6 scrollbar-hide">
-                        <div className="flex gap-6 min-w-max md:min-w-0 md:grid md:grid-cols-5">
+                        <div className="flex gap-6 min-w-max md:min-w-0 md:grid md:grid-cols-5 text-center">
                             {CHAPTERS.map((chapter, i) => (
                                 <motion.div key={chapter.id} {...fadeUp} transition={{ delay: i * 0.08 }}>
                                     <Link to="/insights"
                                         className="group block w-56 md:w-auto bg-white/[0.03] border border-white/10 hover:border-emerald-500/30 rounded-3xl p-7 transition-all hover:-translate-y-2 shadow-lg">
                                         <span className="text-4xl block mb-4">{chapter.emoji}</span>
-                                        <div className="flex items-center gap-3 mb-2">
+                                        <div className="flex items-center gap-3 mb-2 justify-center">
                                             <span className="text-zinc-400 text-xs font-black font-mono tracking-widest">CH.{chapter.id}</span>
                                             <span className="text-emerald-500/80 text-xs font-black uppercase tracking-tight">{chapter.articleIds.length} 篇攻略</span>
                                         </div>
-                                        <h3 className="text-white font-black text-lg mb-2 group-hover:text-emerald-300 transition-colors">{chapter.title}</h3>
-                                        <p className="text-zinc-400 text-sm leading-relaxed line-clamp-2 font-medium">{chapter.subtitle}</p>
+                                        <h3 className="text-white font-black text-lg mb-2 group-hover:text-emerald-300 transition-colors text-center">{chapter.title}</h3>
+                                        <p className="text-zinc-400 text-sm leading-relaxed line-clamp-2 font-medium text-center">{chapter.subtitle}</p>
                                     </Link>
                                 </motion.div>
                             ))}
@@ -155,12 +147,11 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* ═══════════ 三大賣點 ═══════════ */}
             <section className="py-24 px-6 border-t border-white/5 bg-zinc-900/30">
-                <div className="max-w-5xl mx-auto">
-                    <motion.div {...fadeUp} className="text-center mb-16">
-                        <span className="text-emerald-500 font-black tracking-[0.4em] text-xs uppercase mb-4 block">CORE VALUE</span>
-                        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">為什麼大家都推薦這裡？</h2>
+                <div className="max-w-5xl mx-auto text-center">
+                    <motion.div {...fadeUp} className="text-center mb-16 text-center">
+                        <span className="text-emerald-500 font-black tracking-[0.4em] text-xs uppercase mb-4 block text-center">CORE VALUE</span>
+                        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight text-center">為什麼大家都推薦這裡？</h2>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -187,8 +178,8 @@ const Home = () => {
                             <motion.div key={i} {...fadeUp} transition={{ delay: i * 0.1 }}
                                 className="bg-zinc-900/50 backdrop-blur-sm border border-white/10 hover:border-emerald-500/30 rounded-3xl p-8 transition-all group shadow-xl">
                                 <span className="text-5xl block mb-6">{item.emoji}</span>
-                                <h3 className="text-2xl font-black text-white mb-4">{item.title}</h3>
-                                <p className="text-zinc-300 text-base leading-relaxed mb-6 font-medium">{item.desc}</p>
+                                <h3 className="text-2xl font-black text-white mb-4 text-center">{item.title}</h3>
+                                <p className="text-zinc-300 text-base leading-relaxed mb-6 font-medium text-center">{item.desc}</p>
                                 <span className="text-emerald-400 font-black text-xs uppercase tracking-widest">{item.detail}</span>
                             </motion.div>
                         ))}
@@ -196,12 +187,11 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* ═══════════ Before / After ═══════════ */}
             <section className="py-24 px-6 border-t border-white/5 bg-black">
-                <div className="max-w-4xl mx-auto">
-                    <motion.div {...fadeUp} className="text-center mb-16">
-                        <span className="text-emerald-500 font-black tracking-[0.4em] text-xs uppercase mb-4 block">THE TRANSFORMATION</span>
-                        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">學會之後，生活大不同</h2>
+                <div className="max-w-4xl mx-auto text-center">
+                    <motion.div {...fadeUp} className="text-center mb-16 text-center">
+                        <span className="text-emerald-500 font-black tracking-[0.4em] text-xs uppercase mb-4 block text-center">THE TRANSFORMATION</span>
+                        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight text-center">學會之後，生活大不同</h2>
                     </motion.div>
 
                     <div className="space-y-8">
@@ -229,11 +219,11 @@ const Home = () => {
                                 </div>
                                 <div className="bg-red-500/[0.06] border border-red-500/20 rounded-2xl p-5 relative shadow-lg">
                                     <span className="text-red-400 font-black text-[11px] uppercase tracking-widest block mb-2 opacity-80">BEFORE</span>
-                                    <p className="text-zinc-400 text-sm leading-relaxed font-medium">{item.before}</p>
+                                    <p className="text-zinc-400 text-sm leading-relaxed font-medium text-center">{item.before}</p>
                                 </div>
                                 <div className="bg-emerald-500/[0.08] border border-emerald-500/30 rounded-2xl p-5 relative shadow-[0_0_25px_rgba(16,185,129,0.05)]">
                                     <span className="text-emerald-400 font-black text-[11px] uppercase tracking-widest block mb-2">AFTER</span>
-                                    <p className="text-white text-base leading-relaxed font-black">{item.after}</p>
+                                    <p className="text-white text-base leading-relaxed font-black text-center">{item.after}</p>
                                 </div>
                             </motion.div>
                         ))}
@@ -241,13 +231,12 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* ═══════════ Dee 介紹 — 極簡版 ═══════════ */}
             <section className="py-24 px-6 border-t border-white/5 bg-zinc-900/20">
                 <div className="max-w-2xl mx-auto text-center">
                     <motion.div {...fadeUp}>
                         <span className="text-5xl block mb-8">👋</span>
-                        <h2 className="text-3xl md:text-4xl font-black text-white mb-6 tracking-tight">我是 Dee</h2>
-                        <p className="text-zinc-200 text-lg md:text-xl leading-relaxed mb-10 font-medium">
+                        <h2 className="text-3xl md:text-4xl font-black text-white mb-6 tracking-tight text-center">我是 Dee</h2>
+                        <p className="text-zinc-200 text-lg md:text-xl leading-relaxed mb-10 font-medium text-center">
                             一個跟你一樣從零開始學 AI 的普通人。<br />
                             這裡沒有艱深術語，<span className="text-emerald-400 font-black">只有你能立刻用上的方法。</span>
                         </p>
@@ -265,15 +254,14 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* ═══════════ 最終 CTA + Sponsor ═══════════ */}
             <section className="py-32 px-6 border-t border-white/5 bg-gradient-to-b from-black to-zinc-900">
                 <div className="max-w-5xl mx-auto text-center">
                     <motion.div {...fadeUp}>
                         <Sparkles size={40} className="text-emerald-400 mx-auto mb-8 animate-pulse" />
-                        <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">準備好了嗎？</h2>
-                        <p className="text-zinc-300 text-lg md:text-xl mb-16 leading-relaxed font-medium">
+                        <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight text-center">準備好了嗎？</h2>
+                        <p className="text-zinc-300 text-lg md:text-xl mb-16 leading-relaxed font-medium text-center">
                             {totalArticles} 篇免費教學。5 個章節。1 段冒險旅程。<br />
-                            <span className="text-white font-black underline decoration-emerald-500/50 decoration-2 underline-offset-4">全程免費，無隱藏費用。</span>
+                            <span className="text-white font-black underline decoration-emerald-500/50 decoration-2 underline-offset-4 text-center">全程免費，無隱藏費用。</span>
                         </p>
                         
                         <Link to="/insights"
@@ -282,7 +270,6 @@ const Home = () => {
                             <ArrowRight size={28} className="group-hover:translate-x-2 transition-transform duration-300" />
                         </Link>
 
-                        {/* Sponsor Card (Redesigned for better impact and clarity) */}
                         <div className="bg-gradient-to-br from-zinc-900 via-black to-zinc-900 border border-emerald-500/30 rounded-[3rem] p-10 md:p-16 relative overflow-hidden group shadow-[0_0_50px_rgba(16,185,129,0.03)]">
                             <div className="absolute -top-24 -right-24 w-80 h-80 bg-emerald-500/10 blur-[120px] rounded-full group-hover:bg-emerald-500/20 transition-all duration-700" />
                             <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-amber-500/5 blur-[100px] rounded-full" />
@@ -294,11 +281,11 @@ const Home = () => {
                                             <Coffee size={30} className="text-amber-400" />
                                         </div>
                                         <div>
-                                            <h3 className="text-3xl md:text-4xl font-black text-white">贊助實驗室進化</h3>
-                                            <span className="text-amber-500/80 text-[10px] font-black uppercase tracking-[0.4em] block mt-1">Support the Mission</span>
+                                            <h3 className="text-3xl md:text-4xl font-black text-white text-left">贊助實驗室進化</h3>
+                                            <span className="text-amber-500/80 text-[10px] font-black uppercase tracking-[0.4em] block mt-1 text-left">Support the Mission</span>
                                         </div>
                                     </div>
-                                    <p className="text-zinc-200 text-lg md:text-xl max-w-xl leading-relaxed font-medium">
+                                    <p className="text-zinc-200 text-lg md:text-xl max-w-xl leading-relaxed font-medium text-left text-left">
                                         如果你覺得這些教學對你有幫助，歡迎請 Dee 喝杯咖啡。<br />
                                         你的支持會直接用於 「開發新關卡」 與 「系統營運」，讓教學永遠免費。
                                     </p>
@@ -310,12 +297,12 @@ const Home = () => {
                                         <Coffee size={24} className="group-hover/btn:rotate-12 transition-transform" />
                                         請 Dee 喝杯咖啡
                                     </a>
-                                    <p className="mt-4 text-zinc-500 text-xs font-medium italic text-center">支援 信用卡 / ATM / 超商支付 (綠界)</p>
+                                    <p className="mt-4 text-zinc-500 text-xs font-medium italic text-center text-center text-center">支援 信用卡 / ATM / 超商支付 (綠界)</p>
                                 </div>
                             </div>
                         </div>
 
-                        <p className="mt-20 text-zinc-700 text-[11px] font-black tracking-[0.6em] uppercase">Dee's AI Life Lab · 2026</p>
+                        <p className="mt-20 text-zinc-700 text-[11px] font-black tracking-[0.6em] uppercase text-center text-center text-center">Dee's AI Life Lab · 2026</p>
                     </motion.div>
                 </div>
             </section>

@@ -79,9 +79,9 @@ const ArticleDetail = () => {
             setShowAiJumpModal(false);
 
             if (isFree) {
-                setStepsCompleted(new Array(article.steps.length).fill(true));
-                setCurrentStep(article.steps.length - 1);
-                setTreasurePhase('revealed');
+                setStepsCompleted(new Array(article.steps.length).fill(false));
+                setCurrentStep(0);
+                setTreasurePhase('locked');
             } else {
                 setStepsCompleted(new Array(article.steps.length).fill(false));
                 setCurrentStep(0);
