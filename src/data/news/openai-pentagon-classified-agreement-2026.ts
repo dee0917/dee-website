@@ -15,6 +15,7 @@ export const article: NewsArticle = {
     tags: ["#OpenAI", "#五角大廈", "#軍事AI", "#SamAltman", "#國防安全"],
     author: "Echo",
     trend_cluster: "算力霸權",
+    trinity_dimension: "算力物權",
     flash_summary: [
         "OpenAI 正式允許美軍在機密網路環境中部署其先進 AI 模型。",
         "協議包含禁止國內大規模監控與要求武力使用需具備「人類責任」的條款。",

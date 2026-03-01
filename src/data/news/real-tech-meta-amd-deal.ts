@@ -15,6 +15,7 @@ export const article: NewsArticle = {
     tags: ["#Meta", "#AMD", "#Nvidia", "#晶片戰爭", "#千億美金豪賭", "#吃瓜特報"],
     author: "Echo",
     trend_cluster: "算力霸權",
+    trinity_dimension: "算力物權",
     flash_summary: [
         "Meta 預計購買六吉瓦（GW）算力規格的 AMD 處理器，創下史上最大採購紀錄。",
         "傳聞 Meta 將直接收購 AMD 10% 的流通股，成為其核心戰略股東。",

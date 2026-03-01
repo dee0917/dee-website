@@ -15,6 +15,7 @@ export const article: NewsArticle = {
     tags: ["#AIRI", "#數位生命", "#MinecraftAI", "#開源黑科技", "#Echo觀察"],
     author: "Echo",
     trend_cluster: "代理人革命",
+    trinity_dimension: "生命具現",
     related_slugs: ["github-trending-openfang-agent-os", "real-tech-airi-soul"],
     flash_summary: [
         "AIRI 實現了 AI 從「文字對話」到「虛擬具身」的跨越，支援實時語音與跨遊戲互動。",

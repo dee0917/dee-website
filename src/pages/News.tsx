@@ -3,7 +3,8 @@ import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Zap, Clock, Shield, TrendingUp, Filter, Star, Info, MessageCircle, Sparkles, Coffee, AlertTriangle, X, History, GitMerge, ChevronRight } from 'lucide-react';
 import { NEWS_ARTICLES } from '../data/news';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import { StrategicTrinity } from '../components/news/StrategicTrinity';
 
 // 確保字串完全匹配，杜絕空格或編碼問題
 const CAT_GOSSIP = "吃瓜特報";
@@ -44,7 +45,7 @@ const THEME_CONFIG: Record<string, any> = {
     blue: { text: 'text-blue-500', lightText: 'text-blue-400', tag: 'bg-blue-500/10 text-blue-500', border: 'hover:border-blue-500/20', glow: 'group-hover:shadow-blue-500/10' },
     violet: { text: 'text-violet-500', lightText: 'text-violet-400', tag: 'bg-violet-500/10 text-violet-500', border: 'hover:border-violet-500/20', glow: 'group-hover:shadow-violet-500/10' },
     rose: { text: 'text-rose-500', lightText: 'text-rose-400', tag: 'bg-rose-500/10 text-rose-500', border: 'hover:border-rose-500/20', glow: 'group-hover:shadow-rose-500/10' },
-    amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-500', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
+    amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-400', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
     orange: { text: 'text-orange-500', lightText: 'text-orange-400', tag: 'bg-orange-500/10 text-orange-500', border: 'hover:border-orange-500/20', glow: 'group-hover:shadow-orange-500/10' },
     teal: { text: 'text-teal-500', lightText: 'text-teal-400', tag: 'bg-teal-500/10 text-teal-500', border: 'hover:border-teal-500/20', glow: 'group-hover:shadow-teal-500/10' },
     indigo: { text: 'text-indigo-500', lightText: 'text-indigo-400', tag: 'bg-indigo-500/10 text-indigo-500', border: 'hover:border-indigo-500/20', glow: 'group-hover:shadow-indigo-500/10' },
@@ -82,6 +83,7 @@ const News = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const activeCategory = searchParams.get('cat') || CAT_ALL;
     const activeTrend = searchParams.get('trend');
+    const [activeDimension, setActiveDimension] = useState<string | null>(null);
 
     const availableTrends = useMemo(() => {
         const trends = new Set(NEWS_ARTICLES.map(a => a.trend_cluster).filter(Boolean));
@@ -92,14 +94,20 @@ const News = () => {
 
     const filteredArticles = useMemo(() => {
         let items = [...NEWS_ARTICLES];
-        // 優先處理趨勢過濾
-        if (activeTrend) {
-            // 遵照主人指令：最新文章在上面 (Descending by ID/Date)
-            return items.filter(a => a.trend_cluster === activeTrend).sort((a, b) => b.id - a.id);
+
+        // 1. 三位一體維度過濾
+        if (activeDimension && !activeTrend) {
+            items = items.filter(a => a.trinity_dimension === activeDimension);
         }
+
+        // 2. 趨勢集群過濾
+        if (activeTrend) {
+            return items.filter(a => a.trend_cluster === activeTrend).sort((a, b) => a.id - b.id);
+        }
+
         if (activeCategory === CAT_ALL) return items;
         return items.filter(a => a.category.trim() === activeCategory.trim());
-    }, [activeCategory, activeTrend]);
+    }, [activeCategory, activeTrend, activeDimension]);
 
     const currentTrendData = activeTrend ? TREND_METADATA[activeTrend] : null;
 
@@ -118,6 +126,15 @@ const News = () => {
                     </div>
                 </div>
 
+                {/* 🚀 三位一體戰略看板 (The Trinity Dashboard) */}
+                {!activeTrend && activeCategory === CAT_ALL && (
+                    <StrategicTrinity 
+                        articles={NEWS_ARTICLES} 
+                        activeDimension={activeDimension} 
+                        onDimensionClick={setActiveDimension} 
+                    />
+                )}
+
                 {/* 🚀 2.0 高級組件：趨勢雷達入口 (Trend Radar) */}
                 <div className="mb-10 p-1 bg-white/5 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-md">
                     <div className="flex items-center px-4 py-2 border-b border-white/5 bg-white/[0.02]">
@@ -128,7 +145,10 @@ const News = () => {
                         {availableTrends.map((trend: string) => (
                             <button 
                                 key={trend}
-                                onClick={() => setSearchParams({ trend })}
+                                onClick={() => {
+                                    setSearchParams({ trend });
+                                    setActiveDimension(null);
+                                }}
                                 className={`flex-shrink-0 px-4 py-2 rounded-xl text-[11px] font-bold transition-all flex items-center gap-2 ${
                                     activeTrend === trend 
                                     ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/20' 
@@ -174,7 +194,6 @@ const News = () => {
                                 </button>
                             </div>
 
-                            {/* 🚀 演進步進器：最新在上面 (Descending) */}
                             <div className="flex flex-col md:flex-row items-stretch gap-4 relative overflow-x-auto pb-4 scrollbar-hide">
                                 {filteredArticles.map((article, idx) => (
                                     <div key={article.slug} className="flex-shrink-0 w-full md:w-64 flex flex-col group/step">
@@ -219,7 +238,10 @@ const News = () => {
                             const themeClasses = BUTTON_THEMES[colorName];
                             
                             return (
-                                <button key={tag} onClick={() => setSearchParams({ cat: tag })}
+                                <button key={tag} onClick={() => {
+                                    setSearchParams({ cat: tag });
+                                    setActiveDimension(null);
+                                }}
                                     className={`flex-shrink-0 px-6 py-2.5 rounded-full text-xs font-black transition-all duration-300 border ${isActive
                                         ? `${themeClasses} shadow-lg scale-105`
                                         : 'bg-white/[0.03] border border-white/[0.06] text-zinc-500 hover:text-white hover:border-white/10'
@@ -242,8 +264,11 @@ const News = () => {
                 {filteredArticles.length === 0 && (
                     <div className="col-span-full py-40 text-center bg-white/[0.02] rounded-[3rem] border border-white/5 animate-fade-in">
                         <div className="text-5xl mb-6 grayscale opacity-20">🕳️</div>
-                        <p className="text-zinc-500 text-lg font-bold">目前「{activeTrend || activeCategory}」暫無最新情報</p>
-                        <button onClick={() => setSearchParams({})} className="mt-4 text-emerald-400 font-black text-sm uppercase tracking-widest hover:underline">返回全部新聞</button>
+                        <p className="text-zinc-500 text-lg font-bold">目前暫無符合條件的情報</p>
+                        <button onClick={() => {
+                            setSearchParams({});
+                            setActiveDimension(null);
+                        }} className="mt-4 text-emerald-400 font-black text-sm uppercase tracking-widest hover:underline">返回全部新聞</button>
                     </div>
                 )}
             </div>

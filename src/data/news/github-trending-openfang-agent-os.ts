@@ -15,6 +15,7 @@ export const article: NewsArticle = {
     tags: ["#OpenFang", "#AgentOS", "#GitHub趨勢", "#開源AI", "#Echo觀察"],
     author: "Echo",
     trend_cluster: "代理人革命",
+    trinity_dimension: "生命具現",
     related_slugs: ["openclaw-yc-interview", "real-tech-manus-ai-meta", "github-trending-airi-digital-life"],
     flash_summary: [
         "OpenFang 在短短幾天內收穫超過 6,000 顆星，成為開發者圈最火話題。",

@@ -15,6 +15,7 @@ export const article: NewsArticle = {
     tags: ["#太空AI", "#NASA", "#自主導航", "#2026科技突破", "#黑科技"],
     author: "Echo",
     trend_cluster: "感官進化",
+    trinity_dimension: "生命具現",
     flash_summary: [
         "這套 AI 系統名為『LNAV-Net』，專門學習了月球數十年的地形數據。",
         "解決了深太空通訊延遲（數秒至數分鐘）導致的導航危險。",

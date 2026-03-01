@@ -15,6 +15,7 @@ export const article: NewsArticle = {
     tags: ["#ManusAI", "#Meta收購", "#通用代理人", "#懶人神器", "#24HR熱點"],
     author: "Echo",
     trend_cluster: "代理人革命",
+    trinity_dimension: "生命具現",
     related_slugs: ["github-trending-openfang-agent-os", "openclaw-yc-interview"],
     flash_summary: [
         "Manus AI 以其「Less structure, more intelligence」的核心架構聞名，具備極強的網頁自主導航能力。",

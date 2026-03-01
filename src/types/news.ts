@@ -61,4 +61,5 @@ export interface NewsArticle {
     // 🔗 知識圖譜關聯 (Knowledge Graph)
     related_slugs?: string[];
     trend_cluster?: "代理人革命" | "算力霸權" | "數據主權" | "文明重塑" | "感官進化" | "開源邊界";
+    trinity_dimension?: "算力物權" | "生命具現" | "社會契約";
 }
