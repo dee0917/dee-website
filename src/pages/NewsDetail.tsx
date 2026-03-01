@@ -224,6 +224,31 @@ const NewsDetail = () => {
                         </p>
                     </section>
 
+                    {/* 🔗 手機端顯示：關聯情報 (Mobile Connected Intelligence) */}
+                    <div className="block lg:hidden mt-12">
+                        {connectedIntelligence.length > 0 && (
+                            <section className="bg-indigo-500/5 border border-indigo-500/10 rounded-[2.5rem] p-8 relative overflow-hidden group">
+                                <div className="absolute -top-10 -right-10 w-32 h-32 bg-indigo-500/10 blur-3xl rounded-full" />
+                                <h4 className="text-indigo-400 font-black text-base mb-6 flex items-center gap-2">
+                                    <Sparkles size={16} /> 關聯情報
+                                </h4>
+                                <div className="space-y-6 relative z-10">
+                                    {connectedIntelligence.map((news) => (
+                                        <Link key={news.slug} to={`/news/${news.slug}`} className="group/item block">
+                                            <div className="space-y-2">
+                                                <div className="flex items-center gap-2">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 group-hover/item:scale-150 transition-all" />
+                                                    <span className="text-[10px] font-black text-indigo-500/60 uppercase tracking-widest">{news.trend_cluster || '延伸趨勢'}</span>
+                                                </div>
+                                                <h5 className="text-[16px] font-bold text-zinc-300 group-hover/item:text-white leading-snug transition-colors">{news.title}</h5>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+                    </div>
+
                     <motion.section 
                         {...fadeUp} 
                         className="relative py-12 px-6 md:px-12 rounded-[2.5rem] md:rounded-[4rem] bg-[#0c0c0c] border border-white/5 overflow-hidden text-center mx-[-4px] md:mx-0 shadow-2xl"
