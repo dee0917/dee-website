@@ -44,7 +44,7 @@ const THEME_CONFIG: Record<string, any> = {
     blue: { text: 'text-blue-500', lightText: 'text-blue-400', tag: 'bg-blue-500/10 text-blue-500', border: 'hover:border-blue-500/20', glow: 'group-hover:shadow-blue-500/10' },
     violet: { text: 'text-violet-500', lightText: 'text-violet-400', tag: 'bg-violet-500/10 text-violet-500', border: 'hover:border-violet-500/20', glow: 'group-hover:shadow-violet-500/10' },
     rose: { text: 'text-rose-500', lightText: 'text-rose-400', tag: 'bg-rose-500/10 text-rose-500', border: 'hover:border-rose-500/20', glow: 'group-hover:shadow-rose-500/10' },
-    amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-400', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
+    amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-500', border: 'hover:border-blue-500/20', glow: 'group-hover:shadow-amber-500/10' },
     orange: { text: 'text-orange-500', lightText: 'text-orange-400', tag: 'bg-orange-500/10 text-orange-500', border: 'hover:border-orange-500/20', glow: 'group-hover:shadow-orange-500/10' },
     teal: { text: 'text-teal-500', lightText: 'text-teal-400', tag: 'bg-teal-500/10 text-teal-500', border: 'hover:border-teal-500/20', glow: 'group-hover:shadow-teal-500/10' },
     indigo: { text: 'text-indigo-500', lightText: 'text-indigo-400', tag: 'bg-indigo-500/10 text-indigo-500', border: 'hover:border-indigo-500/20', glow: 'group-hover:shadow-indigo-500/10' },
@@ -116,11 +116,40 @@ const News = () => {
                     </div>
                 </div>
 
-                {/* 🚀 2.0 戰略雷達：回歸簡潔橫向導航 */}
+                <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mb-12 leading-relaxed text-left">
+                    不只是搬運，更是深度轉譯。<br />
+                    我們將艱澀的新聞，轉化為對你有用的 <span className="text-white">情報</span> 與 <span className="text-white">指令</span>。
+                </p>
+
+                {/* 1. 專業大分類過濾器 (放在雷達上方) */}
+                {!activeTrend && (
+                    <div className="flex items-center gap-4 mb-8 overflow-x-auto pb-4 scrollbar-hide">
+                        <div className="flex-shrink-0 text-zinc-700 mr-1"><Filter size={16} /></div>
+                        {categories.map(tag => {
+                            const colorName = CATEGORY_THEMES[tag] || 'emerald';
+                            const isActive = activeCategory === tag;
+                            const themeClasses = BUTTON_THEMES[colorName];
+                            
+                            return (
+                                <button key={tag} onClick={() => {
+                                    setSearchParams({ cat: tag });
+                                }}
+                                    className={`flex-shrink-0 px-6 py-2.5 rounded-full text-xs font-black transition-all duration-300 border ${isActive
+                                        ? `${themeClasses} shadow-lg scale-105`
+                                        : 'bg-white/[0.03] border border-white/[0.06] text-zinc-500 hover:text-white hover:border-white/10'
+                                    }`}>
+                                    {tag}
+                                </button>
+                            );
+                        })}
+                    </div>
+                )}
+
+                {/* 🚀 2.0 戰略雷達：移至分類下方 */}
                 <div className="mb-10 p-1 bg-white/5 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-md">
                     <div className="flex items-center px-4 py-2 border-b border-white/5 bg-white/[0.02]">
                         <Sparkles size={14} className="text-indigo-400 mr-2" />
-                        <span className="text-[10px] font-black text-zinc-400 uppercase tracking-widest">艾可 2.0 戰略趨勢雷達 · 深度演進導航</span>
+                        <span className="text-[10px] font-black text-zinc-400 uppercase tracking-widest text-left">艾可 2.0 戰略趨勢雷達 · 深度演進導航</span>
                     </div>
                     <div className="flex gap-2 p-2 overflow-x-auto scrollbar-hide">
                         {availableTrends.map((trend: string) => (
@@ -142,16 +171,11 @@ const News = () => {
                 
                 {activeTrend ? (
                     <motion.div 
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="mb-12 p-8 md:p-12 rounded-[3rem] bg-gradient-to-br from-indigo-500/10 via-zinc-900/80 to-black border border-indigo-500/20 relative overflow-hidden shadow-2xl"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="mb-12 p-8 md:p-12 rounded-[3rem] bg-gradient-to-br from-indigo-600/20 via-zinc-900/40 to-transparent border border-indigo-500/20 relative overflow-hidden shadow-2xl"
                     >
-                         <div className="absolute inset-0 opacity-10 pointer-events-none">
-                            <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
-                            <div className="absolute top-1/2 left-0 w-full h-px bg-indigo-500/30" />
-                         </div>
-
-                         <div className="relative z-10">
+                         <div className="relative z-10 text-left">
                             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                                 <div>
                                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-indigo-400 text-[9px] font-black uppercase tracking-widest mb-4">
@@ -167,7 +191,7 @@ const News = () => {
                                         <Info size={12} /> {currentTrendData?.subtext}
                                     </div>
                                 </div>
-                                <button onClick={() => setSearchParams({})} className="px-6 py-3 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-bold text-sm transition-all border border-white/10 flex items-center gap-2">
+                                <button onClick={() => setSearchParams({})} className="px-6 py-3 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-bold text-sm transition-all border border-white/10 flex items-center gap-2 shadow-xl">
                                     <X size={16} /> 退出演進模式
                                 </button>
                             </div>
@@ -200,35 +224,7 @@ const News = () => {
                             </div>
                          </div>
                     </motion.div>
-                ) : (
-                    <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mb-12 leading-relaxed">
-                        不只是搬運，更是深度轉譯。<br />
-                        我們將艱澀的新聞，轉化為對你有用的 <span className="text-white">情報</span> 與 <span className="text-white">指令</span>。
-                    </p>
-                )}
-
-                {!activeTrend && (
-                    <div className="flex items-center gap-4 mb-10 overflow-x-auto pb-4 scrollbar-hide">
-                        <div className="flex-shrink-0 text-zinc-700 mr-1"><Filter size={16} /></div>
-                        {categories.map(tag => {
-                            const colorName = CATEGORY_THEMES[tag] || 'emerald';
-                            const isActive = activeCategory === tag;
-                            const themeClasses = BUTTON_THEMES[colorName];
-                            
-                            return (
-                                <button key={tag} onClick={() => {
-                                    setSearchParams({ cat: tag });
-                                }}
-                                    className={`flex-shrink-0 px-6 py-2.5 rounded-full text-xs font-black transition-all duration-300 border ${isActive
-                                        ? `${themeClasses} shadow-lg scale-105`
-                                        : 'bg-white/[0.03] border border-white/[0.06] text-zinc-500 hover:text-white hover:border-white/10'
-                                    }`}>
-                                    {tag}
-                                </button>
-                            );
-                        })}
-                    </div>
-                )}
+                ) : null}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start min-h-[500px]">
@@ -252,8 +248,8 @@ const News = () => {
             <section className="mt-40 text-center py-20 border-t border-white/5">
                 <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">
                     <div className="space-y-6 text-left">
-                        <h4 className="text-white font-black text-2xl">情報轉譯準則</h4>
-                        <p className="text-zinc-500 leading-relaxed font-medium">
+                        <h4 className="text-white font-black text-2xl text-left">情報轉譯準則</h4>
+                        <p className="text-zinc-500 leading-relaxed font-medium text-left">
                             由 Dee 親自審核每一則進入情報站的新聞，透過頂尖「AI Agent」系統進行高頻掃描與精準轉譯。我們致力於將複雜的科技動態轉化為易懂的白話重點。
                         </p>
                     </div>
@@ -297,7 +293,7 @@ const NewsCard = ({ article, idx }: any) => {
             <h4 className="text-xl font-black text-white mb-3 line-clamp-2 leading-tight group-hover:text-emerald-100 transition-colors text-left">{article.title}</h4>
             <p className="text-zinc-500 text-sm line-clamp-3 mb-8 leading-relaxed font-medium text-left">{article.summary}</p>
             
-            <div className="mt-auto">
+            <div className="mt-auto text-left">
                 <div className="flex items-center justify-between mb-5">
                     <div className="flex gap-0.5">{[...Array(5)].map((_, i) => <Star key={i} size={8} className={i < 1 ? theme.text : 'text-zinc-800'} fill="currentColor" />)}</div>
                     <span className="text-zinc-600 text-[9px] font-black tracking-widest uppercase font-mono italic">{article.author === "Echo" ? 'Echo Reporting' : 'AI Verified'}</span>
