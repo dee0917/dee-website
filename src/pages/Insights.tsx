@@ -28,12 +28,9 @@ const THEME_CONFIG: Record<string, any> = {
     rose: { text: 'text-rose-500', lightText: 'text-rose-400', tag: 'bg-rose-500/10 text-rose-500', border: 'hover:border-rose-500/20', glow: 'group-hover:shadow-rose-500/10' },
     teal: { text: 'text-teal-500', lightText: 'text-teal-400', tag: 'bg-teal-500/10 text-teal-500', border: 'hover:border-teal-500/20', glow: 'group-hover:shadow-teal-500/10' },
     zinc: { text: 'text-zinc-300', lightText: 'text-zinc-200', tag: 'bg-white/5 text-zinc-400', border: 'hover:border-zinc-300/20', glow: '' },
-    indigo: { text: 'text-indigo-500', lightText: 'text-indigo-400', tag: 'bg-indigo-500/10 text-indigo-500', border: 'hover:border-indigo-500/20', glow: 'group-hover:shadow-indigo-500/10' },
+    indigo: { text: 'text-indigo-500', lightText: 'text-indigo-400', tag: 'bg-indigo-500/10 text-indigo-400', border: 'hover:border-indigo-500/20', glow: 'group-hover:shadow-indigo-500/10' },
 };
 
-/* ═══════════════════════════════════════════
-   ONBOARDING
-   ═══════════════════════════════════════════ */
 const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free', chapter?: number) => void }) => {
     const [phase, setPhase] = useState<'welcome' | 'platform' | 'never-used' | 'experience' | 'result'>('welcome');
     const [platform, setPlatform] = useState('');
@@ -68,7 +65,7 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
 
     const ModalShell = ({ children, kkey }: { children: React.ReactNode; kkey: string }) => (
         <motion.div key={kkey} initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-zinc-900/90 border border-white/10 p-8 md:p-12 rounded-[2.5rem] max-w-lg w-full shadow-2xl relative overflow-hidden">
+            className="bg-zinc-900/90 border border-white/10 p-8 md:p-12 rounded-[2.5rem] max-w-lg w-full shadow-2xl relative overflow-hidden text-center">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-600" />
             <div className="relative z-10">{children}</div>
         </motion.div>
@@ -86,7 +83,7 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                         </div>
                         <div className="space-y-4">
                             <button onClick={() => setPhase('platform')}
-                                className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20">
+                                className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
                                 <Sparkles size={22} /> 開始修煉
                             </button>
                             <button onClick={() => onComplete('free')}
@@ -105,7 +102,7 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                         <div className="space-y-3">
                             {['chatgpt', 'claude', 'gemini', 'none'].map((p) => (
                                 <button key={p} onClick={() => handlePlatform(p)}
-                                    className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 text-white font-bold text-lg text-left flex items-center gap-4">
+                                    className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 text-white font-bold text-lg text-left flex items-center gap-4 transition-all">
                                     <span className="text-2xl">{p === 'none' ? '😶' : '🤖'}</span>
                                     <div><div className="font-black uppercase">{p}</div><div className="text-zinc-500 text-xs">{p === 'none' ? '完全沒關係，從頭開始' : '已有使用經驗'}</div></div>
                                 </button>
@@ -121,8 +118,8 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                             <h3 className="text-2xl font-black text-white mb-3 text-center">太好了，從頭開始最棒！</h3>
                             <p className="text-zinc-400 text-base mb-10 leading-relaxed text-center">只需要 15 分鐘，你就能建立起對 AI 的正確認知並發送第一則高效指令。</p>
                             <div className="space-y-3">
-                                <button onClick={() => onComplete('guided', 0)} className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg hover:bg-emerald-400 shadow-lg">🎮 開始冒險模式</button>
-                                <button onClick={() => onComplete('free', 0)} className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/10 text-zinc-400 font-bold text-base hover:text-white text-center">📚 全部教學</button>
+                                <button onClick={() => onComplete('guided', 0)} className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg hover:bg-emerald-400 shadow-lg active:scale-95 transition-all">🎮 開始冒險模式</button>
+                                <button onClick={() => onComplete('free', 0)} className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/10 text-zinc-400 font-bold text-base hover:text-white text-center transition-all">📚 全部教學</button>
                             </div>
                         </div>
                     </ModalShell>
@@ -134,9 +131,9 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                             <h3 className="text-xl md:text-2xl font-black text-white mb-2 text-center">你的 AI 熟練度？</h3>
                         </div>
                         <div className="space-y-3">
-                            <button onClick={() => handleExperience(0)} className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-emerald-500/10 text-white font-bold text-left">🌱 剛聽說，不太會用</button>
-                            <button onClick={() => handleExperience(1)} className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-emerald-500/10 text-white font-bold text-left">🔧 寫文案、做過簡單翻譯</button>
-                            <button onClick={() => handleExperience(2)} className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-emerald-500/10 text-white font-bold text-left">🏆 已經很熟了，想學戰略應用</button>
+                            <button onClick={() => handleExperience(0)} className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-emerald-500/10 text-white font-bold text-left transition-all">🌱 剛聽說，不太會用</button>
+                            <button onClick={() => handleExperience(1)} className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-emerald-500/10 text-white font-bold text-left transition-all">🔧 寫文案、做過簡單翻譯</button>
+                            <button onClick={() => handleExperience(2)} className="w-full py-5 px-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-emerald-500/10 text-white font-bold text-left transition-all">🏆 已經很熟了，想學戰略應用</button>
                         </div>
                     </ModalShell>
                 )}
@@ -149,8 +146,8 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                             <p className="text-emerald-400 font-black text-xl mb-4 text-center">{chapterNames[resultChapter]}</p>
                             <p className="text-zinc-400 text-base mb-10 leading-relaxed text-center">{chapterDescs[resultChapter]}</p>
                             <div className="space-y-3">
-                                <button onClick={() => onComplete('guided', resultChapter)} className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg shadow-lg">🎮 開始冒險</button>
-                                <button onClick={() => onComplete('free', resultChapter)} className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/10 text-zinc-400 font-bold text-base hover:text-white text-center">📚 自由模式</button>
+                                <button onClick={() => onComplete('guided', resultChapter)} className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg shadow-lg active:scale-95 transition-all">🎮 開始冒險</button>
+                                <button onClick={() => onComplete('free', resultChapter)} className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/10 text-zinc-400 font-bold text-base hover:text-white text-center transition-all">📚 自由模式</button>
                             </div>
                         </div>
                     </ModalShell>
@@ -176,7 +173,7 @@ const SkipChapterModal = ({ targetChapter, onPass, onClose }: { targetChapter: n
         ],
         2: [
             { q: "用 AI 寫指令時，「給身份」最主要的作用是？", options: ["讓 AI 更快回覆", "決定回答的深度與語氣", "減少字數", "避免 AI 說廢話"], answer: 1 },
-            { q: "AI 回答不滿意時，最好的做法是？", options: ["關掉重開", "給更多具體回饋繼續對話", "換一個 AI", "加上「請認真」"], answer: 1 },
+            { q: "AI 回答不滿意時，最好的做法是？", options: ["給更多回饋繼續對話", "關掉重開", "換一個 AI", "加上「請認真」"], answer: 0 },
             { q: "「背景懶人包」的主要用途是？", options: ["增加記憶力", "快速設定偏好", "解鎖功能", "加速回覆"], answer: 1 },
         ],
     };
@@ -200,17 +197,17 @@ const SkipChapterModal = ({ targetChapter, onPass, onClose }: { targetChapter: n
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/80 backdrop-blur-md">
-            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-zinc-900 border border-white/10 p-8 md:p-10 rounded-[2.5rem] max-w-md w-full shadow-2xl relative overflow-hidden">
+            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-zinc-900 border border-white/10 p-8 md:p-10 rounded-[2.5rem] max-w-md w-full shadow-2xl relative overflow-hidden text-center">
                 <div className="absolute top-0 left-0 w-full h-1 bg-zinc-800">
                     <motion.div className="h-full bg-emerald-500" animate={{ width: `${((current + 1) / questions.length) * 100}%` }} />
                 </div>
                 {!finished ? (
-                    <div className="relative z-10">
+                    <div className="relative z-10 text-left">
                         <div className="flex items-center justify-between mb-6">
                             <span className="text-emerald-400 font-mono text-[10px] uppercase tracking-widest">{targetChapter === 999 ? '自由模式解鎖測試' : '章節跳級測試'}</span>
                             <button onClick={onClose} className="text-zinc-600 hover:text-white text-xs font-bold">取消</button>
                         </div>
-                        <p className="text-white font-black text-lg mb-8 leading-tight">{questions[current].q}</p>
+                        <p className="text-white font-black text-lg mb-8 leading-tight text-left">{questions[current].q}</p>
                         <div className="space-y-3">
                             {questions[current].options.map((opt, idx) => (
                                 <motion.button key={idx} whileTap={{ scale: 0.97 }} onClick={() => handleAnswer(idx)}
@@ -240,7 +237,7 @@ const Insights = () => {
     const [viewMode, setViewMode] = useState<'adventure' | 'free'>('adventure');
     const [loading, setLoading] = useState(true);
     const [showOnboarding, setShowOnboarding] = useState(false);
-    const [unlockedChapter, setUnlockedChapter] = useState(1);
+    const [unlockedChapter, setUnlockedChapter] = useState(0); // 🚀 預設 0，強制從 Ch.0 開始
     const [completedIds, setCompletedIds] = useState<number[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [expandedChapters, setExpandedChapters] = useState<Set<number>>(new Set());
@@ -328,11 +325,11 @@ const Insights = () => {
             <AnimatePresence>{showOnboarding && <OnboardingScreen onComplete={handleOnboardingComplete} />}</AnimatePresence>
             <AnimatePresence>{skipTarget && <SkipChapterModal targetChapter={skipTarget} onPass={() => handleModeSwitch('free')} onClose={() => setSkipTarget(null)} />}</AnimatePresence>
 
-            <div className="relative px-6 max-w-5xl mx-auto mb-12">
+            <div className="relative px-6 max-w-5xl mx-auto mb-12 text-left">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-10 text-left">
                     <div className="flex items-center gap-4 text-left">
-                        <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-left text-left"><Map size={22} className="text-emerald-400" /></div>
-                        <div className="text-left text-left"><h1 className="text-2xl md:text-3xl font-black text-white text-left tracking-tight text-left">AI 修煉地圖</h1><span className="text-emerald-500/60 font-mono text-[9px] tracking-[0.4em] uppercase block text-left text-left">Skill Matrix 2.0</span></div>
+                        <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-left"><Map size={22} className="text-emerald-400" /></div>
+                        <div className="text-left"><h1 className="text-2xl md:text-3xl font-black text-white text-left tracking-tight">AI 修煉地圖</h1><span className="text-emerald-500/60 font-mono text-[9px] tracking-[0.4em] uppercase block text-left">Skill Matrix 2.0</span></div>
                     </div>
                     <div className="bg-black/40 p-1.5 rounded-2xl border border-white/[0.08] flex items-center shadow-inner">
                         <button onClick={() => handleModeSwitch('adventure')} className={`px-6 py-2.5 rounded-xl text-xs font-black transition-all ${viewMode === 'adventure' ? 'bg-emerald-500 text-black' : 'text-zinc-500 hover:text-white'}`}>冒險</button>
@@ -351,7 +348,7 @@ const Insights = () => {
                 </div>
             </div>
 
-            <div className="px-6 max-w-5xl mx-auto relative z-10 text-left text-left">
+            <div className="px-6 max-w-5xl mx-auto relative z-10 text-left">
                 {viewMode === 'adventure' ? (
                     <div className="space-y-4 text-left">
                         {CHAPTERS.map((chapter, ci) => {
@@ -382,11 +379,11 @@ const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExp
         <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.05 }} className={`relative text-left ${isLocked ? 'opacity-30' : ''}`}>
             <div className={`border rounded-2xl transition-all cursor-pointer text-left ${isExpanded ? 'bg-white/[0.02] border-white/10' : 'border-white/5 hover:border-white/10'}`} onClick={isLocked ? undefined : onToggle}>
                 <div className="p-6 md:p-8 flex items-center justify-between text-left">
-                    <div className="flex items-center gap-5 text-left flex-1">
-                        <span className="text-3xl text-left">{chapter.emoji}</span>
-                        <div className="text-left text-left"><h2 className="text-xl md:text-2xl font-black text-white text-left text-left">{chapter.title}</h2><p className="text-zinc-500 text-xs md:text-sm text-left">{chapter.subtitle}</p></div>
+                    <div className="flex items-center gap-5 text-left flex-1 min-w-0">
+                        <span className="text-3xl text-left flex-shrink-0">{chapter.emoji}</span>
+                        <div className="text-left min-w-0 flex-1"><h2 className="text-xl md:text-2xl font-black text-white text-left truncate">{chapter.title}</h2><p className="text-zinc-500 text-xs md:text-sm text-left truncate">{chapter.subtitle}</p></div>
                     </div>
-                    {!isLocked && <ChevronDown size={18} className={`transition-transform text-zinc-600 ${isExpanded ? 'rotate-180' : ''}`} />}
+                    {!isLocked && <ChevronDown size={18} className={`transition-transform text-zinc-600 flex-shrink-0 ${isExpanded ? 'rotate-180' : ''}`} />}
                 </div>
                 <AnimatePresence>
                     {isExpanded && !isLocked && (
@@ -398,7 +395,7 @@ const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExp
                                         <Link key={item.id} to={`/insights/${item.id}`} className={`flex items-center gap-4 p-4 rounded-xl transition-all text-left ${isDone ? 'bg-emerald-500/5' : 'hover:bg-white/5'}`}>
                                             <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black flex-shrink-0 text-left ${isDone ? 'bg-emerald-500 text-black' : 'bg-zinc-800 text-zinc-500'}`}>{isDone ? '✓' : i + 1}</div>
                                             <div className="flex-1 text-left min-w-0"><h4 className="text-sm md:text-base font-bold text-white text-left truncate">{item.title}</h4></div>
-                                            <ChevronRight size={14} className="text-zinc-700" />
+                                            <ChevronRight size={14} className="text-zinc-700 flex-shrink-0" />
                                         </Link>
                                     );
                                 })}
