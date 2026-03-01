@@ -18,73 +18,75 @@ import { insight as antiProcrastination } from './anti-procrastination';
 import { insight as petTranslator } from './pet-translator';
 import { insight as ch0WhatIsAi } from './ch0-what-is-ai';
 import { insight as ch0FirstMessage } from './ch0-first-message';
-import { insight as ch0AiTemper } from './ch0-ai-temper';
-import { insight as ch1AiHallucination } from './ch1-ai-hallucination';
-import { insight as ch1AiPhysicalization } from './ch1-ai-physicalization';
-import { insight as ch3AiSocial } from './ch3-ai-social';
-import { insight as ch4AiManager } from './ch4-ai-manager';
 
 // ═══════════════════════════════════════════
-// 🏛️ 核心基礎課程 (Ch. 0 - 4)：每章三篇，結構固定
+// Chapter 定義 — 主線任務的學習順序
 // ═══════════════════════════════════════════
 export const CHAPTERS = [
     {
-        id: 0, emoji: '🚀', title: '啟航入口', subtitle: '從 0 到 1 建立對話，註冊與預期管理',
-        articleIds: [100, 101, 102],
+        id: 0, emoji: '🚀', title: '出發準備', subtitle: '認識三大聊天 AI，完成你的第一段對話',
+        articleIds: [100, 101],
     },
     {
-        id: 1, emoji: '🧠', title: '心法重塑', subtitle: '別再把 AI 當搜尋引擎，掌握夥伴思維',
-        articleIds: [201, 202, 204],
+        id: 1, emoji: '🌱', title: '認識 AI', subtitle: '建立正確心態，讓 AI 成為你的夥伴',
+        articleIds: [201, 202, 203],
     },
     {
-        id: 2, emoji: '🔧', title: '指令進化', subtitle: '掌握結構化公式，賦予 AI 靈魂',
-        articleIds: [203, 301, 302],
+        id: 2, emoji: '🔧', title: '指令進化', subtitle: '從「隨便說說」進化到「結構化指令」',
+        articleIds: [204, 301, 302],
     },
     {
-        id: 3, emoji: '🎯', title: '生活實戰', subtitle: '解決每日煩瑣任務，優雅處理社交',
-        articleIds: [308, 310, 303],
+        id: 3, emoji: '🎯', title: '生活實戰', subtitle: '用 AI 解決每個人都會遇到的生活問題',
+        articleIds: [308, 310, 305, 306],
     },
     {
-        id: 4, emoji: '🏆', title: '職涯躍遷', subtitle: '整理會議、分析財報，晉升 AI 經理人',
-        articleIds: [306, 401, 405],
-    },
-    // ═══════════════════════════════════════════
-    // 🔗 戰略演進庫 (Ch. 5+)：無限延伸學習區
-    // ═══════════════════════════════════════════
-    {
-        id: 5, emoji: '🪐', title: '戰略演進庫', subtitle: '由蒼穹代理人每日獵取之全球最新教學',
-        articleIds: [205],
+        id: 4, emoji: '🏆', title: '進階挑戰', subtitle: '把 AI 用在需要更深度思考的場景',
+        articleIds: [403, 401],
     },
 ];
 
-// 主線順序表
+// 主線順序表（嚴格順序）
 export const MAIN_QUEST_ORDER: number[] = CHAPTERS.flatMap(c => c.articleIds);
 
+// 支線任務 IDs
+export const SIDE_QUEST_IDS: number[] = [304, 303, 309, 307, 402, 404];
+
 // ═══════════════════════════════════════════
-// 文章列表 — 基礎核心 + 戰略演進
+// 文章列表 — 主線 + 支線
 // ═══════════════════════════════════════════
 
-export const INSIGHTS_LIST = [
-    // Chapter 0
-    { ...ch0WhatIsAi, level: 0, id: 100 },
-    { ...ch0FirstMessage, level: 0, id: 101 },
-    { ...ch0AiTemper, level: 0, id: 102 },
-    // Chapter 1
-    { ...heartMethod1, level: 1, id: 201 },
-    { ...heartMethod2, level: 1, id: 202 },
-    { ...ch1AiHallucination, level: 1, id: 204 },
-    // Chapter 2
-    { ...heartMethod3, level: 2, id: 203 },
-    { ...anthropicDirect, level: 2, id: 301 },
-    { ...nanoBananaGuide, level: 2, id: 302 },
-    // Chapter 3
-    { ...mealPlanner, level: 3, id: 308 },
-    { ...travelPlanner, level: 3, id: 310 },
-    { ...ch3AiSocial, level: 3, id: 303 },
-    // Chapter 4
-    { ...meetingMinutes, level: 4, id: 306 },
-    { ...aiNewsReader, level: 4, id: 401 },
-    { ...ch4AiManager, level: 4, id: 405 },
-    // Chapter 5 (Evolution)
-    { ...ch1AiPhysicalization, level: 5, id: 205 },
+// 主線文章（按 Chapter 分配 level）
+const mainQuest = [
+    // Chapter 0: 出發準備 (level: 0)
+    { ...ch0WhatIsAi, level: 0 },
+    { ...ch0FirstMessage, level: 0 },
+    // Chapter 1: 認識 AI (level: 1)
+    { ...heartMethod1, level: 1 },
+    { ...heartMethod2, level: 1 },
+    { ...heartMethod3, level: 1 },
+    // Chapter 2: 指令進化 (level: 2)
+    { ...anthropicDirect, level: 2 },
+    { ...nanoBananaGuide, level: 2 },
+    { ...refusalMaster, level: 2 },
+    // Chapter 3: 生活實戰 (level: 3)
+    { ...mealPlanner, level: 3 },
+    { ...antiProcrastination, level: 3 },
+    { ...travelPlanner, level: 3 },
+    { ...meetingMinutes, level: 3 },
+    // Chapter 4: 進階挑戰 (level: 4)
+    { ...englishCoach, level: 4 },
+    { ...aiNewsReader, level: 4 },
 ];
+
+// 支線文章 (level: -1 = 支線)
+const sideQuests = [
+    { ...parentHero, level: -1 },
+    { ...seniorCoach, level: -1 },
+    { ...petTranslator, level: -1 },
+    { ...leadGenCover, level: -1 },
+    { ...stockAudit, level: -1 },
+    { ...stockTrends, level: -1 },
+];
+
+// 全部文章（主線在前，支線在後）
+export const INSIGHTS_LIST = [...mainQuest, ...sideQuests];
