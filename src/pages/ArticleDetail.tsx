@@ -83,13 +83,26 @@ const ArticleDetail = () => {
 
     const fetchArticle = async (articleId: number) => {
         setLoading(true);
+        
+        // 🚀 關鍵權限校驗：判斷該文章所屬章節是否已解鎖
+        const isFree = localStorage.getItem('dee_view_preference') === 'free';
+        const savedLevel = localStorage.getItem('dee_ai_level') || '0';
+        const currentLevel = parseInt(savedLevel);
+        
         const localArticle = INSIGHTS_LIST.find(i => i.id === articleId);
-        if (localArticle) {
-            setArticle(localArticle);
+        const articleToProcess = localArticle || await api.getInsightById(articleId);
+        
+        if (articleToProcess) {
+            // 找到該文章所屬章節
+            const chapter = CHAPTERS.find(c => c.articleIds.includes(articleToProcess.id));
+            if (!isFree && chapter && chapter.id > currentLevel) {
+                // 如果是冒險模式且章節未解鎖，強制退回地圖
+                navigate('/insights');
+                return;
+            }
+            setArticle(articleToProcess);
         } else {
-            const dbData = await api.getInsightById(articleId);
-            if (dbData) setArticle(dbData);
-            else navigate('/insights');
+            navigate('/insights');
         }
         setLoading(false);
     };

@@ -288,8 +288,8 @@ const Insights = () => {
         setShowOnboarding(false);
     };
 
-    const handleModeSwitch = (m: 'adventure' | 'free') => {
-        if (m === 'free') {
+    const handleModeSwitch = (m: 'adventure' | 'free', bypass: boolean = false) => {
+        if (m === 'free' && !bypass) {
             const totalMain = MAIN_QUEST_ORDER.length;
             const doneMain = completedIds.filter(id => MAIN_QUEST_ORDER.includes(id)).length;
             if (doneMain < totalMain) {
@@ -299,6 +299,7 @@ const Insights = () => {
         }
         setViewMode(m);
         localStorage.setItem('dee_view_preference', m);
+        setSkipTarget(null);
     };
 
     const toggleChapter = (id: number) => {
@@ -323,7 +324,7 @@ const Insights = () => {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-24 pb-20 min-h-screen text-left relative z-0">
             <SEO title="免費 AI 實用教學" description="15 篇基礎必修課 + 無限戰略演進庫" path="/insights" />
             <AnimatePresence>{showOnboarding && <OnboardingScreen onComplete={handleOnboardingComplete} />}</AnimatePresence>
-            <AnimatePresence>{skipTarget && <SkipChapterModal targetChapter={skipTarget} onPass={() => handleModeSwitch('free')} onClose={() => setSkipTarget(null)} />}</AnimatePresence>
+            <AnimatePresence>{skipTarget && <SkipChapterModal targetChapter={skipTarget} onPass={() => handleModeSwitch('free', true)} onClose={() => setSkipTarget(null)} />}</AnimatePresence>
 
             <div className="relative px-6 max-w-5xl mx-auto mb-12 text-left">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-10 text-left">
