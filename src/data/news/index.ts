@@ -20,10 +20,12 @@ import { article as metaLegislative } from './real-tech-meta-legislative-spend';
 import { article as metaAmdDeal } from './real-tech-meta-amd-deal';
 import { article as gitNexusTool } from './echo-fun-gitnexus-tool';
 import { article as manusAiMeta } from './real-tech-manus-ai-meta';
+import { article as arxivSeeThrough3D } from './arxiv-2602-23359-seethrough3d';
 import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
+    arxivSeeThrough3D,  // 最新：arXiv CVPR 2026 技術降維
     manusAiMeta,        // 真實：Manus AI 加入 Meta (今日)
     gitNexusTool,      // 真實：GitHub 爆款專案
     echoFunPerplexity, // 真實：Perplexity Computer
