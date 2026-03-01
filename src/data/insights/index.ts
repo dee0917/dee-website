@@ -27,6 +27,7 @@ import { insight as ch5VPhoneAgent } from './ch5-vphone-agent';
 import { insight as ch5WiFiDensePose } from './ch5-wifi-densepose';
 import { insight as ch5LogicVerification } from './ch5-logic-verification';
 import { insight as ch5MarkdownSovereignty } from './ch5-markdown-sovereignty';
+import { insight as ch5MultiAgentSwarms } from './ch5-multi-agent-swarms';
 
 // ═══════════════════════════════════════════
 // Chapter 定義 — 主線任務的學習順序 (僅限 Ch 0-4)
@@ -58,7 +59,7 @@ export const CHAPTERS = [
 export const MAIN_QUEST_ORDER: number[] = CHAPTERS.flatMap(c => c.articleIds);
 
 // 戰略演進與其餘支線 IDs (Chapter 5+ 轉化為自由學習庫)
-export const SIDE_QUEST_IDS: number[] = [501, 502, 503, 504, 205, 305, 306, 304, 309, 307, 402, 404, 312, 302];
+export const SIDE_QUEST_IDS: number[] = [501, 502, 503, 504, 505, 205, 305, 306, 304, 309, 307, 402, 404, 312, 302];
 
 // ═══════════════════════════════════════════
 // 文章列表 — 主線 + 支線
@@ -94,6 +95,7 @@ const sideQuests = [
     { ...ch5LogicVerification, level: -1, category: "戰略演進" },
     { ...ch5WiFiDensePose, level: -1, category: "戰略演進" },
     { ...ch5MarkdownSovereignty, level: -1, category: "戰略演進" },
+    { ...ch5MultiAgentSwarms, level: -1, category: "戰略演進" },
     { ...ch1AiPhysicalization, level: -1 },
     { ...travelPlanner, level: -1 },
     { ...meetingMinutes, level: -1 },
