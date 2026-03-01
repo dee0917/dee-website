@@ -24,6 +24,8 @@ import { insight as ch1AiPhysicalization } from './ch1-ai-physicalization';
 import { insight as ch3AiSocial } from './ch3-ai-social';
 import { insight as ch4AiManager } from './ch4-ai-manager';
 import { insight as ch5VPhoneAgent } from './ch5-vphone-agent';
+import { insight as ch5WiFiDensePose } from './ch5-wifi-densepose';
+import { insight as ch5LogicVerification } from './ch5-logic-verification';
 
 // ═══════════════════════════════════════════
 // Chapter 定義 — 主線任務的學習順序
@@ -51,7 +53,7 @@ export const CHAPTERS = [
     },
     {
         id: 5, emoji: '⚔️', title: '戰略演進', subtitle: '超越對話框，建立具備主權的代理人系統',
-        articleIds: [501],
+        articleIds: [501, 502, 503],
     },
 ];
 
@@ -89,6 +91,8 @@ const mainQuest = [
     { ...ch4AiManager, level: 4 },
     // Chapter 5: 戰略演進 (level: 5)
     { ...ch5VPhoneAgent, level: 5 },
+    { ...ch5LogicVerification, level: 5 },
+    { ...ch5WiFiDensePose, level: 5 },
 ];
 
 // 支線文章 (level: -1 = 支線)
