@@ -227,7 +227,7 @@ const News = () => {
                 ) : null}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start min-h-[500px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 items-start min-h-[500px]">
                 <AnimatePresence mode="popLayout">
                     {filteredArticles.map((article, i) => (
                         <NewsCard key={article.slug} article={article} idx={i} />
@@ -281,30 +281,30 @@ const NewsCard = ({ article, idx }: any) => {
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.2 }}
             onClick={() => navigate(`/news/${article.slug}`)}
-            className={`bg-zinc-900/50 backdrop-blur-sm border border-white/[0.05] ${theme.border} p-6 md:p-7 rounded-[2rem] h-full flex flex-col relative transition-all duration-500 group group-hover:shadow-2xl ${theme.glow} cursor-pointer`}
+            className={`bg-zinc-900/50 backdrop-blur-sm border border-white/[0.05] ${theme.border} p-5 rounded-[2rem] h-full flex flex-col relative transition-all duration-500 group group-hover:shadow-2xl ${theme.glow} cursor-pointer`}
         >
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-5">
-                <span className={`text-[9px] font-black px-3 py-1.5 rounded-lg tracking-[0.1em] uppercase transition-all hover:brightness-125 ${theme.tag}`}>
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                <span className={`text-[9px] font-black px-2 py-1 rounded-lg tracking-[0.1em] uppercase transition-all hover:brightness-125 ${theme.tag}`}>
                     {article.category}
                 </span>
-                <span className="text-zinc-700 text-[10px] font-bold font-mono">{article.publish_time || article.date}</span>
+                <span className="text-zinc-700 text-[9px] font-bold font-mono">{article.publish_time || article.date}</span>
             </div>
 
-            <h4 className="text-xl font-black text-white mb-3 line-clamp-2 leading-tight group-hover:text-emerald-100 transition-colors text-left">{article.title}</h4>
-            <p className="text-zinc-500 text-sm line-clamp-3 mb-8 leading-relaxed font-medium text-left">{article.summary}</p>
+            <h4 className="text-lg font-black text-white mb-2 line-clamp-2 leading-tight group-hover:text-emerald-100 transition-colors text-left">{article.title}</h4>
+            <p className="text-zinc-500 text-xs line-clamp-3 mb-6 leading-relaxed font-medium text-left">{article.summary}</p>
             
             <div className="mt-auto text-left">
-                <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center justify-between mb-4">
                     <div className="flex gap-0.5">{[...Array(5)].map((_, i) => <Star key={i} size={8} className={i < 1 ? theme.text : 'text-zinc-800'} fill="currentColor" />)}</div>
-                    <span className="text-zinc-600 text-[9px] font-black tracking-widest uppercase font-mono italic">{article.author === "Echo" ? 'Echo Reporting' : 'AI Verified'}</span>
+                    <span className="text-zinc-600 text-[8px] font-black tracking-widest uppercase font-mono italic">{article.author === "Echo" ? 'Echo Reporting' : 'AI Verified'}</span>
                 </div>
-                <div className="pt-5 border-t border-white/[0.05] flex items-center justify-between group-hover:border-white/[0.12] transition-colors">
-                    <span className="text-zinc-700 text-[10px] font-mono flex items-center gap-1.5">
+                <div className="pt-4 border-t border-white/[0.05] flex items-center justify-between group-hover:border-white/[0.12] transition-colors">
+                    <span className="text-zinc-700 text-[9px] font-mono flex items-center gap-1.5">
                         <Clock size={10} className="text-zinc-500" /> {article.readTime}
                     </span>
                     <div className={`flex items-center gap-1.5 text-${themeColor}-500/50 group-hover:text-${themeColor}-400 transition-all`}>
-                        <span className="text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all">Read</span>
-                        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                        <span className="text-[9px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all">Read</span>
+                        <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </div>
                 </div>
             </div>

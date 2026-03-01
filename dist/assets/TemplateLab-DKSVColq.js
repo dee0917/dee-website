@@ -1,4 +1,4 @@
-import{j as e,m as x,A as f}from"./vendor-motion-aCq-fmil.js";import{r as a}from"./vendor-react-CUP2xbH8.js";import{Z as j,X as w}from"./index-CRx6AF3u.js";import{S as N}from"./search-E3NI77xd.js";import{C as y}from"./chevron-right-BTeZ22Ip.js";import{C as m}from"./check-CY2ZZFHb.js";import{C as p}from"./copy-C_-BHmdp.js";const h=[{id:"work-01",title:"專業商務郵件撰寫",category:"職場溝通",description:"快速撰寫得體、專業且具備行動呼籲的商務郵件。",prompt:`你是[角色：例如 專案經理]。請幫我寫一封關於[主題：例如 下週會議延期]的郵件給[對象：例如 全體合作夥伴]。
+import{j as e,m as x,A as f}from"./vendor-motion-aCq-fmil.js";import{r as a}from"./vendor-react-CUP2xbH8.js";import{Z as j,X as w}from"./index-BQE884dj.js";import{S as N}from"./search-UzOGhms9.js";import{C as y}from"./chevron-right-BJuOOcss.js";import{C as m}from"./check-BEqjJsWR.js";import{C as p}from"./copy-BGRipG4y.js";const h=[{id:"work-01",title:"專業商務郵件撰寫",category:"職場溝通",description:"快速撰寫得體、專業且具備行動呼籲的商務郵件。",prompt:`你是[角色：例如 專案經理]。請幫我寫一封關於[主題：例如 下週會議延期]的郵件給[對象：例如 全體合作夥伴]。
 
 要求：
 - 語氣要[風格：例如 正式且誠誠懇]

@@ -217,22 +217,22 @@ const NewsDetail = () => {
                 </div>
             </div>
 
-            {/* 🚀 8. 整合延伸閱讀 (放在最下方，包含 10 篇) */}
+            {/* 🚀 8. 整合延伸閱讀 (更加密集排版) */}
             <section className="max-w-7xl mx-auto px-6 mt-32 pt-20 border-t border-white/5 text-left">
                 <div className="flex items-center justify-between mb-12 text-left">
-                    <h2 className="text-3xl font-black text-white flex items-center gap-4 text-left">
-                        <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-left">
-                            <Sparkles size={24} className="text-indigo-400" />
+                    <h2 className="text-2xl md:text-3xl font-black text-white flex items-center gap-4 text-left tracking-tighter">
+                        <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-left">
+                            <Sparkles size={20} className="text-indigo-400" />
                         </div>
-                        戰略相關情報與延伸閱讀
+                        戰略相關情報脈絡
                     </h2>
-                    <Link to="/news" className="text-zinc-500 hover:text-white font-bold text-xs flex items-center gap-2 transition-colors text-left text-left">
+                    <Link to="/news" className="text-zinc-500 hover:text-white font-bold text-xs flex items-center gap-2 transition-colors">
                         查看全部新聞 <ArrowRight size={14} />
                     </Link>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
-                    {integratedFeed.map((news, i) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 text-left">
+                    {integratedFeed.map((news: any, i: number) => (
                         <NewsCard key={news.slug} article={news} idx={i} />
                     ))}
                 </div>
