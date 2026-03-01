@@ -270,6 +270,9 @@ const Insights = () => {
     const [expandedChapters, setExpandedChapters] = useState<Set<number>>(new Set());
     const [skipTarget, setSkipTarget] = useState<number | null>(null);
 
+    // 強制 UI 與狀態對齊的 Key
+    const viewKey = `${viewMode}-${unlockedChapter}-${completedIds.length}`;
+
     useEffect(() => {
         const done = localStorage.getItem('dee_onboarding_done');
         const saved = localStorage.getItem('dee_ai_level');
@@ -339,7 +342,11 @@ const Insights = () => {
     const toggleChapter = (id: number) => {
         setExpandedChapters(prev => {
             const next = new Set(prev);
-            if (next.has(id)) next.delete(id); else next.add(id);
+            if (next.has(id)) {
+                next.delete(id);
+            } else {
+                next.add(id);
+            }
             return next;
         });
     };
@@ -392,7 +399,7 @@ const Insights = () => {
                 </div>
             </div>
 
-            <div className="relative z-10 text-left text-left">
+            <div key={viewKey} className="relative z-10 text-left text-left">
                 {viewMode === 'adventure' ? (
                     <div className="space-y-6 text-left">
                         {CHAPTERS.map((chapter, ci) => {
