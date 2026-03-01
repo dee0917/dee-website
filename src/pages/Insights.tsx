@@ -176,8 +176,11 @@ const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExp
             <div className={`border rounded-2xl transition-all cursor-pointer text-left text-left ${isLocked ? 'opacity-30 grayscale' : ''} ${isExpanded ? 'bg-white/[0.02] border-white/10' : 'border-white/5 hover:border-white/10'}`} onClick={isLocked ? undefined : onToggle}>
                 <div className="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between text-left gap-6">
                     <div className="flex items-center gap-5 text-left flex-1 min-w-0">
-                        <span className="text-3xl text-left flex-shrink-0 text-center">{chapter.emoji}</span>
-                        <div className="text-left min-w-0 flex-1"><h2 className="text-xl md:text-2xl font-black text-white text-left truncate">{chapter.title}</h2><p className="text-zinc-500 text-xs md:text-sm text-left truncate">{chapter.subtitle}</p></div>
+                        <span className="text-4xl text-left flex-shrink-0 text-center">{chapter.emoji}</span>
+                        <div className="text-left min-w-0 flex-1">
+                            <h2 className="text-2xl md:text-3xl font-black text-white text-left tracking-tighter truncate">{chapter.title}</h2>
+                            <p className="text-zinc-500 text-xs md:text-sm text-left font-bold uppercase tracking-widest mt-1 truncate">{chapter.subtitle}</p>
+                        </div>
                     </div>
                     
                     <div className="flex items-center gap-4 text-left">
@@ -200,10 +203,13 @@ const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExp
                                 {items.map((item: any, i: number) => {
                                     const isDone = completedIds.includes(item.id);
                                     return (
-                                        <Link key={item.id} to={`/insights/${item.id}`} className={`flex items-center gap-4 p-4 rounded-xl transition-all text-left ${isDone ? 'bg-emerald-500/5' : 'hover:bg-white/5'}`}>
-                                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black flex-shrink-0 text-left ${isDone ? 'bg-emerald-500 text-black shadow-lg' : 'bg-zinc-800 text-zinc-500'}`}>{isDone ? '✓' : i + 1}</div>
-                                            <div className="flex-1 text-left min-w-0 text-left"><h4 className="text-sm md:text-base font-bold text-white text-left truncate">{item.title}</h4></div>
-                                            <ChevronRight size={14} className="text-zinc-700 flex-shrink-0 text-left" />
+                                        <Link key={item.id} to={`/insights/${item.id}`} className={`flex items-center gap-6 p-6 rounded-2xl transition-all text-left border border-transparent ${isDone ? 'bg-emerald-500/5 border-emerald-500/10' : 'hover:bg-white/5 hover:border-white/10'}`}>
+                                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black flex-shrink-0 text-left ${isDone ? 'bg-emerald-500 text-black shadow-lg' : 'bg-zinc-800 text-zinc-500'}`}>{isDone ? '✓' : i + 1}</div>
+                                            <div className="flex-1 text-left min-w-0 text-left">
+                                                <h4 className="text-base md:text-xl font-black text-white text-left tracking-tight truncate">{item.title}</h4>
+                                                <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mt-1">Status: {isDone ? 'Mastered' : 'Ready'}</p>
+                                            </div>
+                                            <ChevronRight size={18} className="text-zinc-700 flex-shrink-0 text-left group-hover:text-emerald-500 transition-colors" />
                                         </Link>
                                     );
                                 })}
@@ -219,14 +225,32 @@ const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExp
 const InsightCard = ({ insight, idx, completed }: any) => {
     return (
         <Link to={`/insights/${insight.id}`} className="block h-full text-left">
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.03 }}
-                className={`bg-zinc-900 border p-5 rounded-2xl h-full flex flex-col transition-all text-left ${completed ? 'border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.05)]' : 'border-white/5 hover:border-white/10'}`}>
-                <div className="flex justify-between items-start mb-3 text-left">
-                    <span className="text-[9px] font-black px-2 py-0.5 rounded bg-white/5 text-zinc-500 uppercase text-left">{insight.category}</span>
-                    {completed && <CheckCircle2 size={14} className="text-emerald-500 shadow-lg text-left" />}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.03 }} viewport={{ once: true }}
+                className={`bg-[#0c0c0c] border p-7 md:p-10 rounded-[2.5rem] h-full flex flex-col transition-all text-left shadow-xl ${completed ? 'border-emerald-500/40 shadow-[0_0_30px_rgba(16,185,129,0.05)]' : 'border-white/[0.06] hover:bg-zinc-900/80 hover:border-white/20'}`}>
+                <div className="flex justify-between items-center mb-6 text-left">
+                    <span className="text-[10px] font-black px-3 py-1 rounded bg-white/5 text-zinc-500 uppercase tracking-widest text-left">{insight.category}</span>
+                    {completed && (
+                        <div className="flex items-center gap-2 text-emerald-400 font-black text-[10px] uppercase tracking-widest">
+                             已完賽 <CheckCircle2 size={14} className="text-emerald-500 shadow-lg text-left" />
+                        </div>
+                    )}
                 </div>
-                <h4 className="text-sm font-black text-white mb-2 line-clamp-2 text-left">{insight.title}</h4>
-                <p className="text-zinc-500 text-[11px] line-clamp-2 leading-relaxed text-left">{insight.summary}</p>
+                <h4 className="text-2xl md:text-3xl font-black text-white mb-4 line-clamp-2 leading-tight tracking-tighter group-hover:text-emerald-300 transition-colors text-left">
+                    {insight.title}
+                </h4>
+                <p className="text-zinc-400 text-base md:text-lg line-clamp-2 leading-relaxed text-left font-medium">
+                    {insight.summary}
+                </p>
+
+                <div className="mt-8 pt-6 border-t border-white/[0.05] flex items-center justify-between text-left">
+                    <div className="flex items-center gap-4">
+                        <span className="text-[10px] text-zinc-500 font-bold text-left uppercase tracking-widest">Level {insight.difficulty_level || 1}</span>
+                        <div className="flex gap-1">{[...Array(5)].map((_, i) => <Star key={i} size={10} className={i < (insight.difficulty_level || 1) ? 'text-emerald-500' : 'text-zinc-800'} fill="currentColor" />)}</div>
+                    </div>
+                    <div className="flex items-center gap-2 text-white font-black text-xs uppercase tracking-widest">
+                        進入修煉 <ArrowRight size={18} className="text-emerald-500" />
+                    </div>
+                </div>
             </motion.div>
         </Link>
     );
@@ -366,7 +390,7 @@ const Insights = () => {
                         })}
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-left text-left">
+                    <div className="grid grid-cols-1 gap-6 text-left text-left">
                         {filteredInsights.map((item, i) => (
                             <InsightCard key={item.id} insight={item} idx={i} completed={completedIds.includes(item.id)} />
                         ))}
