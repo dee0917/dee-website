@@ -44,7 +44,7 @@ const THEME_CONFIG: Record<string, any> = {
     blue: { text: 'text-blue-500', lightText: 'text-blue-400', tag: 'bg-blue-500/10 text-blue-500', border: 'hover:border-blue-500/20', glow: 'group-hover:shadow-blue-500/10' },
     violet: { text: 'text-violet-500', lightText: 'text-violet-400', tag: 'bg-violet-500/10 text-violet-500', border: 'hover:border-violet-500/20', glow: 'group-hover:shadow-violet-500/10' },
     rose: { text: 'text-rose-500', lightText: 'text-rose-400', tag: 'bg-rose-500/10 text-rose-500', border: 'hover:border-rose-500/20', glow: 'group-hover:shadow-rose-500/10' },
-    amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-400', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
+    amber: { text: 'text-amber-500', lightText: 'text-amber-400', tag: 'bg-amber-500/10 text-amber-500', border: 'hover:border-amber-500/20', glow: 'group-hover:shadow-amber-500/10' },
     orange: { text: 'text-orange-500', lightText: 'text-orange-400', tag: 'bg-orange-500/10 text-orange-500', border: 'hover:border-orange-500/20', glow: 'group-hover:shadow-orange-500/10' },
     teal: { text: 'text-teal-500', lightText: 'text-teal-400', tag: 'bg-teal-500/10 text-teal-500', border: 'hover:border-teal-500/20', glow: 'group-hover:shadow-teal-500/10' },
     indigo: { text: 'text-indigo-500', lightText: 'text-indigo-400', tag: 'bg-indigo-500/10 text-indigo-500', border: 'hover:border-indigo-500/20', glow: 'group-hover:shadow-indigo-500/10' },
@@ -85,15 +85,17 @@ const News = () => {
 
     const availableTrends = useMemo(() => {
         const trends = new Set(NEWS_ARTICLES.map(a => a.trend_cluster).filter(Boolean));
-        return Array.from(trends);
+        return Array.from(trends) as string[];
     }, []);
 
     const categories = [CAT_ALL, CAT_GOSSIP, CAT_BRAIN, CAT_LAZY, CAT_INDUSTRY, CAT_POLICY, CAT_APP, CAT_SECURITY, CAT_CAREER];
 
     const filteredArticles = useMemo(() => {
         let items = [...NEWS_ARTICLES];
+        // 優先處理趨勢過濾
         if (activeTrend) {
-            return items.filter(a => a.trend_cluster === activeTrend).sort((a, b) => a.id - b.id);
+            // 遵照主人指令：最新文章在上面 (Descending by ID/Date)
+            return items.filter(a => a.trend_cluster === activeTrend).sort((a, b) => b.id - a.id);
         }
         if (activeCategory === CAT_ALL) return items;
         return items.filter(a => a.category.trim() === activeCategory.trim());
@@ -123,7 +125,7 @@ const News = () => {
                         <span className="text-[10px] font-black text-zinc-400 uppercase tracking-widest">艾可 2.0 戰略趨勢雷達 · 深度演進導航</span>
                     </div>
                     <div className="flex gap-2 p-2 overflow-x-auto scrollbar-hide">
-                        {availableTrends.map((trend: any) => (
+                        {availableTrends.map((trend: string) => (
                             <button 
                                 key={trend}
                                 onClick={() => setSearchParams({ trend })}
@@ -172,12 +174,13 @@ const News = () => {
                                 </button>
                             </div>
 
+                            {/* 🚀 演進步進器：最新在上面 (Descending) */}
                             <div className="flex flex-col md:flex-row items-stretch gap-4 relative overflow-x-auto pb-4 scrollbar-hide">
                                 {filteredArticles.map((article, idx) => (
                                     <div key={article.slug} className="flex-shrink-0 w-full md:w-64 flex flex-col group/step">
                                         <div className="flex items-center mb-6">
                                             <div className="w-10 h-10 rounded-full bg-indigo-500 text-black flex items-center justify-center font-black text-sm z-10 group-hover/step:scale-125 transition-all shadow-lg shadow-indigo-500/40">
-                                                {idx + 1}
+                                                {filteredArticles.length - idx}
                                             </div>
                                             {idx < filteredArticles.length - 1 && (
                                                 <div className="hidden md:block flex-1 h-px bg-gradient-to-r from-indigo-500 to-transparent opacity-30" />
@@ -187,7 +190,7 @@ const News = () => {
                                             onClick={() => navigate(`/news/${article.slug}`)}
                                             className="p-5 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-indigo-500/40 hover:bg-indigo-500/[0.02] cursor-pointer transition-all h-full"
                                         >
-                                            <span className="text-[10px] font-mono text-indigo-500/60 block mb-2">{article.date}</span>
+                                            <span className="text-[10px] font-mono text-indigo-500/60 block mb-2">{article.publish_time}</span>
                                             <h4 className="text-sm font-black text-white group-hover/step:text-indigo-300 transition-colors leading-snug line-clamp-2">
                                                 {article.title}
                                             </h4>
