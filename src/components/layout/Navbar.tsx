@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Menu, X, Newspaper, BookOpen, FlaskConical, Package, User, Coffee, Zap } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Newspaper, BookOpen, FlaskConical, Package, User, Coffee, Zap, ChevronRight, Star } from 'lucide-react';
 
 const Navbar = () => {
     const location = useLocation();
@@ -70,35 +70,68 @@ const Navbar = () => {
                 </button>
             </div>
 
-            {/* 手機版選單 */}
-            {mobileMenuOpen && (
-                <div className="xl:hidden absolute top-20 left-0 w-full bg-[#0A0A0A] border-b border-white/10 p-6 flex flex-col gap-6 animate-fade-in shadow-2xl">
-                    <Link to="/insights" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300 flex items-center gap-2">
-                        <BookOpen size={18} /> 免費教學
-                    </Link>
-                    <Link to="/news" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300 flex items-center gap-2">
-                        <Newspaper size={18} /> AI 新聞
-                    </Link>
-                    <Link to="/lab/templates" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300 flex items-center gap-2">
-                        <Zap size={18} className="text-amber-400" /> 指令庫
-                    </Link>
-                    <Link to="/lab" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300 flex items-center gap-2">
-                        <FlaskConical size={18} /> AI 實驗室
-                    </Link>
-                    <Link to="/solutions" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300 flex items-center gap-2">
-                        <Package size={18} /> 學習資源
-                    </Link>
-                    <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-lg text-zinc-300 flex items-center gap-2">
-                        <User size={18} /> 關於 Dee
-                    </Link>
-                    <a href="https://pay.ecpay.com.tw/CreditPayment/ExpressCredit?MerchantID=3378826" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-lg text-amber-500 font-bold flex items-center gap-2">
-                        <Coffee size={18} /> 請喝咖啡
-                    </a>
-                    <Link to="/insights" onClick={() => setMobileMenuOpen(false)} className="bg-white text-black px-6 py-4 rounded-2xl text-center font-black text-lg">
-                        開始學習
-                    </Link>
-                </div>
-            )}
+            {/* 📱 手機版選單 (高密度精英版) */}
+            <AnimatePresence>
+                {mobileMenuOpen && (
+                    <motion.div 
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className="xl:hidden absolute top-20 left-0 w-full bg-[#050505] border-b border-white/[0.08] p-6 flex flex-col gap-1 shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-40"
+                    >
+                        <div className="mb-4">
+                            <span className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.3em] block mb-2 px-2">Navigation Menu</span>
+                        </div>
+
+                        {[
+                            { to: "/insights", icon: BookOpen, label: "免費教學", color: "text-zinc-200" },
+                            { to: "/news", icon: Newspaper, label: "AI 新聞", color: "text-zinc-200" },
+                            { to: "/lab/templates", icon: Zap, label: "指令庫", color: "text-amber-400" },
+                            { to: "/lab", icon: FlaskConical, label: "AI 實驗室", color: "text-zinc-200" },
+                            { to: "/solutions", icon: Package, label: "學習資源", color: "text-zinc-200" },
+                            { to: "/about", icon: User, label: "關於 Dee", color: "text-zinc-200" },
+                        ].map((link) => (
+                            <Link 
+                                key={link.to}
+                                to={link.to} 
+                                onClick={() => setMobileMenuOpen(false)} 
+                                className={`group flex items-center justify-between p-4 rounded-2xl transition-all border border-transparent ${isActive(link.to) ? 'bg-white/[0.03] border-white/10' : 'hover:bg-white/[0.02]'}`}
+                            >
+                                <div className="flex items-center gap-4">
+                                    <link.icon size={20} className={isActive(link.to) ? 'text-emerald-400' : link.color} />
+                                    <span className={`text-lg font-black tracking-tight ${isActive(link.to) ? 'text-white' : 'text-zinc-400'}`}>{link.label}</span>
+                                </div>
+                                <ChevronRight size={16} className={`transition-transform ${isActive(link.to) ? 'text-emerald-500 translate-x-1' : 'text-zinc-800'}`} />
+                            </Link>
+                        ))}
+
+                        <a 
+                            href="https://pay.ecpay.com.tw/CreditPayment/ExpressCredit?MerchantID=3378826" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            onClick={() => setMobileMenuOpen(false)} 
+                            className="flex items-center justify-between p-4 rounded-2xl hover:bg-amber-500/5 group transition-all mt-2"
+                        >
+                            <div className="flex items-center gap-4">
+                                <Coffee size={20} className="text-amber-500" />
+                                <span className="text-lg font-black text-amber-500 tracking-tight text-left">請喝咖啡</span>
+                            </div>
+                            <Star size={16} className="text-amber-500/20 group-hover:text-amber-500 transition-colors" fill="currentColor" />
+                        </a>
+
+                        <div className="mt-6 pt-6 border-t border-white/5">
+                            <Link 
+                                to="/insights" 
+                                onClick={() => setMobileMenuOpen(false)} 
+                                className="relative group block w-full bg-white text-black px-6 py-5 rounded-2xl text-center font-black text-xl shadow-2xl overflow-hidden active:scale-95 transition-all"
+                            >
+                                <div className="absolute inset-0 bg-emerald-500 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                                <span className="relative z-10 group-hover:text-white transition-colors">開始學習</span>
+                            </Link>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     );
 };
