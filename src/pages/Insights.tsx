@@ -341,7 +341,7 @@ const Insights = () => {
     if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse text-center">INITIALIZING...</div>;
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-16 pb-12 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0 text-left">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-12 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0 text-left">
             <SEO title="免費 AI 實用教學" description="掌握 AI 核心主權" path="/insights" />
             <AnimatePresence>{showOnboarding && <OnboardingScreen onComplete={handleOnboardingComplete} />}</AnimatePresence>
             <AnimatePresence>{skipTarget && <SkipChapterModal targetChapter={skipTarget} onPass={handleChallengePassed} onClose={() => setSkipTarget(null)} />}</AnimatePresence>

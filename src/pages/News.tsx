@@ -102,7 +102,7 @@ const News = () => {
     const currentTrendData = activeTrend ? TREND_METADATA[activeTrend] : null;
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-16 pb-8 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-8 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0">
             <SEO title="AI 新聞情報站 - 2026 最新趨勢解析" description="由 Dee 主理的 AI 新聞板塊，透過頂尖 AI Agent 系統進行精確轉譯，助您快速掌握全球 AI 核心脈動。" path="/news" />
             
             <div className="mb-6">
