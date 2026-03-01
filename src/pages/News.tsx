@@ -1,7 +1,7 @@
 import SEO from '../components/ui/SEO';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Zap, Clock, Shield, TrendingUp, Filter, Star, Info, MessageCircle, Sparkles, Coffee, AlertTriangle } from 'lucide-react';
+import { ArrowRight, Zap, Clock, Shield, TrendingUp, Filter, Star, Info, MessageCircle, Sparkles, Coffee, AlertTriangle, X } from 'lucide-react';
 import { NEWS_ARTICLES } from '../data/news';
 import { useMemo } from 'react';
 
@@ -55,14 +55,22 @@ const News = () => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const activeCategory = searchParams.get('cat') || CAT_ALL;
+    const activeTrend = searchParams.get('trend');
 
     const categories = [CAT_ALL, CAT_GOSSIP, CAT_BRAIN, CAT_LAZY, CAT_INDUSTRY, CAT_POLICY, CAT_APP, CAT_SECURITY, CAT_CAREER];
 
     const filteredArticles = useMemo(() => {
-        if (activeCategory === CAT_ALL) return NEWS_ARTICLES;
+        let items = NEWS_ARTICLES;
+        
+        // 優先處理趨勢過濾 (如有)
+        if (activeTrend) {
+            return items.filter(a => a.trend_cluster === activeTrend);
+        }
+
+        if (activeCategory === CAT_ALL) return items;
         // 使用 trim 與 包含 邏輯，增加匹配容錯率
-        return NEWS_ARTICLES.filter(a => a.category.trim() === activeCategory.trim());
-    }, [activeCategory]);
+        return items.filter(a => a.category.trim() === activeCategory.trim());
+    }, [activeCategory, activeTrend]);
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-6xl mx-auto min-h-screen text-left relative z-0">
@@ -79,30 +87,47 @@ const News = () => {
                     </div>
                 </div>
                 
-                <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mb-12 leading-relaxed">
-                    不只是搬運，更是深度轉譯。<br />
-                    我們將艱澀的新聞，轉化為對你有用的 <span className="text-white">情報</span> 與 <span className="text-white">指令</span>。
-                </p>
+                {activeTrend ? (
+                    <div className="mb-12 p-8 rounded-[2.5rem] bg-indigo-500/5 border border-indigo-500/10 relative overflow-hidden">
+                         <div className="absolute top-0 right-0 p-4 opacity-10"><Sparkles size={80} /></div>
+                         <h2 className="text-indigo-400 font-black text-2xl mb-2 flex items-center gap-3">
+                            <TrendingUp size={24} /> {activeTrend} · 技術演進脈絡
+                         </h2>
+                         <p className="text-zinc-500 text-sm max-w-2xl leading-relaxed">
+                            艾可正在為您追蹤「{activeTrend}」領域的歷史演進。以下是該趨勢中所有關鍵的情報節點，按時間線排列。
+                         </p>
+                         <button onClick={() => setSearchParams({})} className="mt-6 text-xs font-bold text-zinc-500 hover:text-white transition-colors flex items-center gap-2">
+                            <X size={14} /> 清除趨勢過濾，查看全部新聞
+                         </button>
+                    </div>
+                ) : (
+                    <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mb-12 leading-relaxed">
+                        不只是搬運，更是深度轉譯。<br />
+                        我們將艱澀的新聞，轉化為對你有用的 <span className="text-white">情報</span> 與 <span className="text-white">指令</span>。
+                    </p>
+                )}
 
                 {/* 專業大分類過濾器 */}
-                <div className="flex items-center gap-4 mb-10 overflow-x-auto pb-4 scrollbar-hide">
-                    <div className="flex-shrink-0 text-zinc-700 mr-1"><Filter size={16} /></div>
-                    {categories.map(tag => {
-                        const colorName = CATEGORY_THEMES[tag] || 'emerald';
-                        const isActive = activeCategory === tag;
-                        const themeClasses = BUTTON_THEMES[colorName];
-                        
-                        return (
-                            <button key={tag} onClick={() => setSearchParams({ cat: tag })}
-                                className={`flex-shrink-0 px-6 py-2.5 rounded-full text-xs font-black transition-all duration-300 border ${isActive
-                                    ? `${themeClasses} shadow-lg scale-105`
-                                    : 'bg-white/[0.03] border border-white/[0.06] text-zinc-500 hover:text-white hover:border-white/10'
-                                }`}>
-                                {tag}
-                            </button>
-                        );
-                    })}
-                </div>
+                {!activeTrend && (
+                    <div className="flex items-center gap-4 mb-10 overflow-x-auto pb-4 scrollbar-hide">
+                        <div className="flex-shrink-0 text-zinc-700 mr-1"><Filter size={16} /></div>
+                        {categories.map(tag => {
+                            const colorName = CATEGORY_THEMES[tag] || 'emerald';
+                            const isActive = activeCategory === tag;
+                            const themeClasses = BUTTON_THEMES[colorName];
+                            
+                            return (
+                                <button key={tag} onClick={() => setSearchParams({ cat: tag })}
+                                    className={`flex-shrink-0 px-6 py-2.5 rounded-full text-xs font-black transition-all duration-300 border ${isActive
+                                        ? `${themeClasses} shadow-lg scale-105`
+                                        : 'bg-white/[0.03] border border-white/[0.06] text-zinc-500 hover:text-white hover:border-white/10'
+                                    }`}>
+                                    {tag}
+                                </button>
+                            );
+                        })}
+                    </div>
+                )}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start min-h-[500px]">
@@ -115,8 +140,8 @@ const News = () => {
                 {filteredArticles.length === 0 && (
                     <div className="col-span-full py-40 text-center bg-white/[0.02] rounded-[3rem] border border-white/5 animate-fade-in">
                         <div className="text-5xl mb-6 grayscale opacity-20">🕳️</div>
-                        <p className="text-zinc-500 text-lg font-bold">目前「{activeCategory}」分類暫無最新情報</p>
-                        <button onClick={() => setSearchParams({ cat: CAT_ALL })} className="mt-4 text-emerald-400 font-black text-sm uppercase tracking-widest hover:underline">返回全部新聞</button>
+                        <p className="text-zinc-500 text-lg font-bold">目前「{activeTrend || activeCategory}」暫無最新情報</p>
+                        <button onClick={() => setSearchParams({})} className="mt-4 text-emerald-400 font-black text-sm uppercase tracking-widest hover:underline">返回全部新聞</button>
                     </div>
                 )}
             </div>
