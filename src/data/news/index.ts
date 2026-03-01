@@ -29,10 +29,14 @@ import { article as githubMarkItDown } from './github-trending-markitdown';
 import { article as githubRuflo } from './github-trending-ruflo';
 import { article as newbieAISearch } from './newbie-ai-search';
 import { article as deepseekLogicV3 } from './real-tech-deepseek-logic-v3';
+import { article as arxivAiTrading } from './arxiv-ai-trading-multi-agent';
+import { article as echoFunAiGame } from './echo-fun-ai-game-playing';
 import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
+    echoFunAiGame,      // arXiv: 記憶體回收演算法
+    arxivAiTrading,     // arXiv: AI 操盤手進化
     newbieAISearch,     // 最新：小白搜尋指南
     githubRuflo,        // 最新：多代理編排引擎
     deepseekLogicV3,    // 最新：DeepSeek 邏輯驗證
