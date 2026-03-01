@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Zap, Clock, Shield, TrendingUp, Filter, Star, Info, MessageCircle, Sparkles, Coffee, AlertTriangle, X, History, GitMerge, ChevronRight } from 'lucide-react';
 import { NEWS_ARTICLES } from '../data/news';
 import { useMemo, useState } from 'react';
-import { StrategicTrinity } from '../components/news/StrategicTrinity';
 
 // 確保字串完全匹配，杜絕空格或編碼問題
 const CAT_GOSSIP = "吃瓜特報";
@@ -83,7 +82,6 @@ const News = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const activeCategory = searchParams.get('cat') || CAT_ALL;
     const activeTrend = searchParams.get('trend');
-    const [activeDimension, setActiveDimension] = useState<string | null>(null);
 
     const availableTrends = useMemo(() => {
         const trends = new Set(NEWS_ARTICLES.map(a => a.trend_cluster).filter(Boolean));
@@ -94,20 +92,12 @@ const News = () => {
 
     const filteredArticles = useMemo(() => {
         let items = [...NEWS_ARTICLES];
-
-        // 1. 三位一體維度過濾
-        if (activeDimension && !activeTrend) {
-            items = items.filter(a => a.trinity_dimension === activeDimension);
-        }
-
-        // 2. 趨勢集群過濾
         if (activeTrend) {
-            return items.filter(a => a.trend_cluster === activeTrend).sort((a, b) => a.id - b.id);
+            return items.filter(a => a.trend_cluster === activeTrend).sort((a, b) => b.id - a.id);
         }
-
         if (activeCategory === CAT_ALL) return items;
         return items.filter(a => a.category.trim() === activeCategory.trim());
-    }, [activeCategory, activeTrend, activeDimension]);
+    }, [activeCategory, activeTrend]);
 
     const currentTrendData = activeTrend ? TREND_METADATA[activeTrend] : null;
 
@@ -126,37 +116,32 @@ const News = () => {
                     </div>
                 </div>
 
-                {/* 🚀 三位一體戰略看板 (The Trinity Dashboard) */}
-                {!activeTrend && activeCategory === CAT_ALL && (
-                    <StrategicTrinity 
-                        articles={NEWS_ARTICLES} 
-                        activeDimension={activeDimension} 
-                        onDimensionClick={setActiveDimension} 
-                    />
-                )}
-
-                {/* 🚀 2.0 高級組件：趨勢雷達入口 (Trend Radar) */}
-                <div className="mb-10 p-1 bg-white/5 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-md">
-                    <div className="flex items-center px-4 py-2 border-b border-white/5 bg-white/[0.02]">
-                        <Sparkles size={14} className="text-indigo-400 mr-2" />
-                        <span className="text-[10px] font-black text-zinc-400 uppercase tracking-widest">艾可 2.0 戰略趨勢雷達 · 深度演進導航</span>
+                {/* 🚀 2.0 戰略雷達：全站導航核心 */}
+                <div className="mb-12">
+                    <div className="flex items-center gap-3 mb-6">
+                        <div className="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                           <Sparkles size={12} className="animate-pulse" /> 戰略趨勢雷達
+                        </div>
+                        <div className="flex-1 h-px bg-white/5" />
                     </div>
-                    <div className="flex gap-2 p-2 overflow-x-auto scrollbar-hide">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
                         {availableTrends.map((trend: string) => (
                             <button 
                                 key={trend}
-                                onClick={() => {
-                                    setSearchParams({ trend });
-                                    setActiveDimension(null);
-                                }}
-                                className={`flex-shrink-0 px-4 py-2 rounded-xl text-[11px] font-bold transition-all flex items-center gap-2 ${
+                                onClick={() => setSearchParams({ trend })}
+                                className={`group px-4 py-4 rounded-2xl border transition-all text-left relative overflow-hidden ${
                                     activeTrend === trend 
-                                    ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/20' 
-                                    : 'bg-black/40 text-zinc-500 hover:text-zinc-300 hover:bg-white/5'
+                                    ? 'bg-indigo-500 border-indigo-400 shadow-[0_0_20px_rgba(99,102,241,0.3)]' 
+                                    : 'bg-white/[0.02] border-white/5 hover:border-indigo-500/30 hover:bg-indigo-500/[0.02]'
                                 }`}
                             >
-                                <History size={12} className={activeTrend === trend ? 'animate-spin-slow' : ''} />
-                                {trend}
+                                <History size={16} className={`mb-3 ${activeTrend === trend ? 'text-white' : 'text-zinc-600 group-hover:text-indigo-400'} transition-colors`} />
+                                <div className={`text-[12px] font-black uppercase tracking-tighter ${activeTrend === trend ? 'text-white' : 'text-zinc-400 group-hover:text-white'}`}>
+                                    {trend}
+                                </div>
+                                {activeTrend === trend && (
+                                    <motion.div layoutId="activeTrend" className="absolute inset-0 bg-white/10 pointer-events-none" />
+                                )}
                             </button>
                         ))}
                     </div>
@@ -164,15 +149,10 @@ const News = () => {
                 
                 {activeTrend ? (
                     <motion.div 
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="mb-12 p-8 md:p-12 rounded-[3rem] bg-gradient-to-br from-indigo-500/10 via-zinc-900/80 to-black border border-indigo-500/20 relative overflow-hidden shadow-2xl"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="mb-12 p-8 md:p-12 rounded-[3rem] bg-gradient-to-br from-indigo-600/20 via-zinc-900/40 to-transparent border border-indigo-500/20 relative overflow-hidden shadow-2xl"
                     >
-                         <div className="absolute inset-0 opacity-10 pointer-events-none">
-                            <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
-                            <div className="absolute top-1/2 left-0 w-full h-px bg-indigo-500/30" />
-                         </div>
-
                          <div className="relative z-10">
                             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                                 <div>
@@ -189,11 +169,12 @@ const News = () => {
                                         <Info size={12} /> {currentTrendData?.subtext}
                                     </div>
                                 </div>
-                                <button onClick={() => setSearchParams({})} className="px-6 py-3 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-bold text-sm transition-all border border-white/10 flex items-center gap-2">
+                                <button onClick={() => setSearchParams({})} className="px-6 py-3 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-bold text-sm transition-all border border-white/10 flex items-center gap-2 shadow-xl">
                                     <X size={16} /> 退出演進模式
                                 </button>
                             </div>
 
+                            {/* 🚀 演進步進器：最新在上面 (Descending) */}
                             <div className="flex flex-col md:flex-row items-stretch gap-4 relative overflow-x-auto pb-4 scrollbar-hide">
                                 {filteredArticles.map((article, idx) => (
                                     <div key={article.slug} className="flex-shrink-0 w-full md:w-64 flex flex-col group/step">
@@ -240,7 +221,6 @@ const News = () => {
                             return (
                                 <button key={tag} onClick={() => {
                                     setSearchParams({ cat: tag });
-                                    setActiveDimension(null);
                                 }}
                                     className={`flex-shrink-0 px-6 py-2.5 rounded-full text-xs font-black transition-all duration-300 border ${isActive
                                         ? `${themeClasses} shadow-lg scale-105`
@@ -267,7 +247,6 @@ const News = () => {
                         <p className="text-zinc-500 text-lg font-bold">目前暫無符合條件的情報</p>
                         <button onClick={() => {
                             setSearchParams({});
-                            setActiveDimension(null);
                         }} className="mt-4 text-emerald-400 font-black text-sm uppercase tracking-widest hover:underline">返回全部新聞</button>
                     </div>
                 )}

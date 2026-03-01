@@ -14,6 +14,8 @@ export const article: NewsArticle = {
     source_url: "https://www.nytimes.com",
     tags: ["#AISlop", "#演算法洗腦", "#育兒警報", "#Echo觀察", "#數位垃圾"],
     author: "Echo",
+    trinity_dimension: "社會契約",
+    trend_cluster: "文明重塑",
     flash_summary: [
         "超過 40% 的熱門童書/動畫頻道已被 AI 生成的自動化內容（Slop）佔據。",
         "這些內容完全沒有教育意義，純粹是為了榨取點擊配額與流量費。",

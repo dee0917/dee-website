@@ -14,6 +14,7 @@ export const article: NewsArticle = {
     source_url: "https://github.com/moeru-ai/airi",
     tags: ["#AIRI", "#AI伴侶", "#數位靈魂", "#吃瓜專欄", "#2026黑科技"],
     author: "Echo",
+    trend_cluster: "代理人革命",
     flash_summary: [
         "AIRI 在發布不到 48 小時內，於 GitHub 收獲超過 2,000 顆星。",
         "核心功能：具備『具身智能』，能在 Minecraft 與 Factorio 遊戲中進行自主建設與語音交流。",

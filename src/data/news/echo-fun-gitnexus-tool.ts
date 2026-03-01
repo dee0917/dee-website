@@ -14,6 +14,8 @@ export const article: NewsArticle = {
     source_url: "https://github.com/abhigyanpatwari/GitNexus",
     tags: ["#GitNexus", "#GraphRAG", "#懶人工具", "#代碼理解", "#GitHub爆款"],
     author: "Echo",
+    trinity_dimension: "社會契約",
+    trend_cluster: "開源邊界",
     flash_summary: [
         "GitNexus 採用 100% 本地瀏覽器運算，無需設置複雜的伺服器或資料庫。",
         "內建 Graph RAG 引擎，能將雜亂的文件自動轉化為可視化的知識節點圖。",

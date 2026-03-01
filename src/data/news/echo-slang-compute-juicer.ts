@@ -14,6 +14,8 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#算力榨汁機", "#AI黑話", "#Echo觀點", "#2026流行語"],
     author: "Echo",
+    trinity_dimension: "算力物權",
+    trend_cluster: "算力霸權",
     flash_summary: [
         "『算力榨汁機』(Compute Juicer)：指那些能讓 AI 以 10% 成本產出 200% 價值的極致指令手。",
         "由來：因為頂級模型（如 Claude 4.6, Gemini 3.1 Pro）的 token 很貴，所以如何『壓榨』每一分算力成了顯學。",
