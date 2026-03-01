@@ -18,7 +18,7 @@ import { insight as antiProcrastination } from './anti-procrastination';
 import { insight as petTranslator } from './pet-translator';
 import { insight as ch0WhatIsAi } from './ch0-what-is-ai';
 import { insight as ch0FirstMessage } from './ch0-first-message';
-import { insight as ch0AiPhysicalization } from './ch0-ai-physicalization';
+import { insight as ch1AiPhysicalization } from './ch1-ai-physicalization';
 
 // ═══════════════════════════════════════════
 // Chapter 定義 — 主線任務的學習順序
@@ -26,11 +26,11 @@ import { insight as ch0AiPhysicalization } from './ch0-ai-physicalization';
 export const CHAPTERS = [
     {
         id: 0, emoji: '🚀', title: '出發準備', subtitle: '認識三大聊天 AI，完成你的第一段對話',
-        articleIds: [100, 101, 120],
+        articleIds: [100, 101],
     },
     {
         id: 1, emoji: '🌱', title: '認識 AI', subtitle: '建立正確心態，讓 AI 成為你的夥伴',
-        articleIds: [201, 202, 203],
+        articleIds: [201, 202, 203, 205],
     },
     {
         id: 2, emoji: '🔧', title: '指令進化', subtitle: '從「隨便說說」進化到「結構化指令」',
@@ -48,7 +48,6 @@ export const CHAPTERS = [
 
 // 主線順序表（嚴格順序）
 export const MAIN_QUEST_ORDER: number[] = CHAPTERS.flatMap(c => c.articleIds);
-// [201, 202, 203, 204, 301, 302, 308, 310, 305, 306, 403, 401]
 
 // 支線任務 IDs
 export const SIDE_QUEST_IDS: number[] = [304, 303, 309, 307, 402, 404];
@@ -62,11 +61,11 @@ const mainQuest = [
     // Chapter 0: 出發準備 (level: 0)
     { ...ch0WhatIsAi, level: 0 },
     { ...ch0FirstMessage, level: 0 },
-    { ...ch0AiPhysicalization, level: 0 },
     // Chapter 1: 認識 AI (level: 1)
     { ...heartMethod1, level: 1 },
     { ...heartMethod2, level: 1 },
     { ...heartMethod3, level: 1 },
+    { ...ch1AiPhysicalization, level: 1 },
     // Chapter 2: 指令進化 (level: 2)
     { ...anthropicDirect, level: 2 },
     { ...nanoBananaGuide, level: 2 },

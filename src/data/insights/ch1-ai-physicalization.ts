@@ -1,11 +1,11 @@
 export const insight = {
-    id: 120,
-    category: "出發準備",
+    id: 205,
+    category: "認識 AI",
     themeColor: "indigo",
-    difficulty_level: 1,
-    level: 0,
-    tags: ["#AI實體化", "#數位生命", "#AgentOS", "#新手必讀", "#2026趨勢", "#AIRI", "#OpenFang"],
-    title: "AI 也有身體嗎？3 分鐘看懂 2026 最紅的「AI 實體化」革命",
+    difficulty_level: 2,
+    level: 1,
+    tags: ["#AI實體化", "#數位生命", "#AgentOS", "#趨勢洞察", "#2026趨勢", "#AIRI", "#OpenFang"],
+    title: "AI 也有身體嗎？看懂 2026 最紅的「AI 實體化」趨勢",
     summary: "AI 不再只是網頁上的一個對話框。從住進電腦底層的 Agent OS 到遊戲裡的數位生命，帶你預見 AI 如何從「工具」變成你的「虛擬隊友」。",
     date: "2026.03.01",
     readTime: "4 分鐘",
@@ -36,17 +36,17 @@ export const insight = {
         }
     ],
     quiz: {
-        question: "「AI 實體化」對小白用戶最大的改變是什麼？",
+        question: "「AI 實體化」對學員最大的啟發是什麼？",
         options: [
             "AI 變得比較會寫程式",
-            "AI 能夠直接操作作業系統，甚至在虛擬環境中與人互動",
+            "AI 正從純對話工具演變為具備主權的作業實體，我們需要學會與之共生",
             "AI 的註冊過程變簡單了",
             "AI 不需要電力就能運作"
         ],
         answer: 1,
-        explanation: "正確！實體化意味著 AI 脫離了純對話框，具備了操作系統與虛擬互動的能力。"
+        explanation: "正確！了解實體化是為了讓學員建立「主權意識」，明白 AI 未來將深度滲透進實體作業系統。"
     },
-    skill_badge: "🛡️ 未來主權意識",
+    skill_badge: "🛡️ 時代趨勢洞察",
     practice_kit: {
         title: "測試 AI 的「具身」想像力",
         description: "試著跟你的 AI 玩一個角色扮演，測試它是否能跳出對話框的思維：",
