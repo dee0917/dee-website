@@ -41,5 +41,10 @@ export const article: NewsArticle = {
         description: '試著把這段指令貼給你的聊天 AI，看看它與 Google 的差別：',
         command: '我想在 [你的城市] 找一家 [料理類型，如：義大利菜] 餐廳。條件：1. 必須適合 [人數] 聚餐。2. 評論中必須提到過 [某道菜，如：提拉米蘇] 很出色。3. 請列出三家並整理它們的優缺點與訂位連結。',
         image_url: 'https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&q=80&w=2000'
+    },
+    cta_override: {
+        title: '不想再被廣告耍得團團轉？',
+        description: '進入實驗室，學習更多 AI 搜尋黑話，讓精準情報成為你的直覺。',
+        button_text: '立即開啟搜尋革命'
     }
 };

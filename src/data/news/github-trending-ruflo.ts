@@ -41,5 +41,10 @@ export const article: NewsArticle = {
         description: '你可以與聊天 AI 討論如何將單一任務轉化為代理人工作流：',
         command: '請根據「Ruflo」的設計理念，與我探討：如果我要自動化一個「市場情報採集與轉譯」的流程，你建議我如何將其拆解為 3 個互補的代理人角色（如 採集員、分析師、撰稿員）？他們之間的「接棒點」應如何定義？',
         image_url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000'
+    },
+    cta_override: {
+        title: '想一個人營運一支部隊？',
+        description: '加入實驗室，學習如何從「指令者」進化為「AI 指揮官」。',
+        button_text: '立即學習集群調度'
     }
 };

@@ -41,5 +41,10 @@ export const article: NewsArticle = {
         description: '你可以與聊天 AI 討論如何利用這項技術優化你的筆記系統：',
         command: '請根據「MarkItDown」技術動態，與我分析：如果我能將過去五年的 Word 與 PDF 筆記全部轉化為 Markdown，我該如何設計一個「個人知識庫索引系統」，讓聊天 AI 能在秒級內精確回答我關於過去工作細節的問題？請給出 3 個架構建議。',
         image_url: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=2000'
+    },
+    cta_override: {
+        title: '受夠了亂七八糟的文檔？',
+        description: '進入實驗室，學習如何奪回數據主權，把硬碟廢紙變成 AI 金礦。',
+        button_text: '立即解救我的文件'
     }
 };

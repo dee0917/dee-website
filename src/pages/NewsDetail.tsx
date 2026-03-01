@@ -175,7 +175,7 @@ const NewsDetail = () => {
                                 <Link to="/insights" className="group/btn relative inline-flex items-center justify-center">
                                     <div className="absolute -inset-6 bg-emerald-500/20 blur-3xl rounded-full opacity-0 group-hover/btn:opacity-100 transition-all duration-700 animate-pulse" />
                                     <div className="relative bg-emerald-500 text-black px-10 py-5 rounded-2xl font-black text-xl flex items-center gap-4 shadow-2xl hover:bg-emerald-400 transition-all">
-                                        <span>立即進入實驗室學習</span>
+                                        <span>{article.cta_override?.button_text || '立即進入實驗室學習'}</span>
                                         <ArrowRight size={24} />
                                     </div>
                                 </Link>
