@@ -1,5 +1,5 @@
 import SEO from '../components/ui/SEO';
-import { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -21,7 +21,10 @@ const PERSONA_CONFIG: Record<UserPersona, { label: string, icon: any, color: str
     slashie: { label: '斜槓生存家', icon: RocketIcon, color: 'indigo', description: '專攻爆款標題與社群貼文。' }
 };
 
-const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free', chapter?: number) => void }) => {
+const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free', chapter?: number, persona?: UserPersona) => void }) => {
+    const [step, setStep] = useState(0);
+    const [selectedPersona, setSelectedPersona] = useState<UserPersona>('general');
+
     const ModalShell = ({ children, kkey }: { children: React.ReactNode; kkey: string }) => (
         <motion.div key={kkey} initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
             className="bg-zinc-900/90 border border-white/10 p-8 md:p-12 rounded-[2.5rem] max-w-lg w-full shadow-2xl relative overflow-hidden text-center">
@@ -33,19 +36,44 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl text-center">
             <AnimatePresence mode="wait">
-                <ModalShell kkey="w">
-                    <div className="text-center mb-10">
-                        <div className="text-6xl mb-6 text-center">👋</div>
-                        <h2 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-tight text-center">嗨！歡迎來到 Dee's AI Lab</h2>
-                        <p className="text-zinc-400 text-base md:text-lg leading-relaxed text-center">這裡是你的 AI 修煉場。我們將透過 15 篇基礎必修課，帶你從零開始掌握 AI 核心主權。</p>
-                    </div>
-                    <div className="space-y-4">
-                        <button onClick={() => onComplete('guided', 0)}
+                {step === 0 ? (
+                    <ModalShell kkey="welcome">
+                        <div className="text-center mb-10">
+                            <div className="text-6xl mb-6 text-center">👋</div>
+                            <h2 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-tight text-center">嗨！歡迎來到 Dee's AI Lab</h2>
+                            <p className="text-zinc-400 text-base md:text-lg leading-relaxed text-center">這裡是你的 AI 修煉場。我們將帶你從零開始掌握 AI 核心主權。</p>
+                        </div>
+                        <button onClick={() => setStep(1)}
+                            className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all text-center">
+                            下一步：選擇你的身分
+                        </button>
+                    </ModalShell>
+                ) : (
+                    <ModalShell kkey="persona">
+                        <div className="text-left mb-8">
+                            <h2 className="text-xl font-black text-white mb-2 tracking-tight">請選擇最貼近你的身分</h2>
+                            <p className="text-zinc-500 text-sm">我們將根據你的選擇，為你準備專屬的實戰範例。</p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3 mb-8">
+                            {(Object.keys(PERSONA_CONFIG) as UserPersona[]).map(p => {
+                                const conf = PERSONA_CONFIG[p];
+                                return (
+                                    <button key={p} onClick={() => setSelectedPersona(p)}
+                                        className={`flex flex-col items-center gap-2 p-4 rounded-2xl border transition-all ${selectedPersona === p 
+                                            ? `bg-${conf.color}-500/20 border-${conf.color}-500 text-white` 
+                                            : 'bg-white/5 border-white/5 text-zinc-500 hover:border-white/20'}`}>
+                                        {React.createElement(conf.icon, { size: 24 })}
+                                        <span className="text-xs font-black">{conf.label}</span>
+                                    </button>
+                                );
+                            })}
+                        </div>
+                        <button onClick={() => onComplete('guided', 0, selectedPersona)}
                             className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all text-center">
                             <Sparkles size={22} /> 開始修煉 (Ch.0)
                         </button>
-                    </div>
-                </ModalShell>
+                    </ModalShell>
+                )}
             </AnimatePresence>
         </motion.div>
     );
@@ -259,10 +287,12 @@ const Insights = () => {
         }
     }, [viewMode, unlockedChapter]);
 
-    const handleOnboardingComplete = (mode: 'guided' | 'free', chapter?: number) => {
+    const handleOnboardingComplete = (mode: 'guided' | 'free', chapter?: number, p?: UserPersona) => {
         const ch = chapter || 0;
+        const personaToSet = p || 'general';
         setUnlockedChapter(ch);
         setViewMode('adventure');
+        setPersona(personaToSet);
         localStorage.setItem('dee_onboarding_done', 'true');
         localStorage.setItem('dee_ai_level', ch.toString());
         localStorage.setItem('dee_view_preference', 'adventure');
@@ -370,30 +400,27 @@ const Insights = () => {
                     不只是教學，更是靈魂的重塑。透過 15 篇必修與無限支線，掌握 <span className="text-white">AI 核心主權</span>。
                 </p>
 
-                {/* 🚀 身分濾鏡膠囊 */}
+                {/* 🚀 身分切換簡化區塊 */}
                 <div className="mb-10 text-left">
-                    <div className="flex items-center gap-2 mb-4">
-                        <User size={14} className="text-zinc-500" />
-                        <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">代入修煉情境：{PERSONA_CONFIG[persona].label}</span>
-                    </div>
-                    <div className="flex flex-wrap gap-2.5 text-left">
-                        {(Object.keys(PERSONA_CONFIG) as UserPersona[]).map(p => {
-                            const conf = PERSONA_CONFIG[p];
-                            const isActive = persona === p;
-                            return (
-                                <button key={p} onClick={() => setPersona(p)}
-                                    className={`flex items-center gap-2 px-5 py-3 rounded-2xl text-xs font-black transition-all border ${isActive 
-                                        ? `bg-${conf.color}-500 text-black border-${conf.color}-500 shadow-lg scale-105` 
-                                        : 'bg-white/[0.03] border-white/[0.08] text-zinc-500 hover:text-white hover:bg-white/5'
-                                    }`}>
-                                    <conf.icon size={16} /> {conf.label}
-                                </button>
-                            );
-                        })}
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-sm">
+                        <div className="flex items-center gap-5">
+                            <div className={`w-14 h-14 rounded-2xl bg-${PERSONA_CONFIG[persona].color}-500/20 border border-${PERSONA_CONFIG[persona].color}-500/30 flex items-center justify-center text-${PERSONA_CONFIG[persona].color}-400 shadow-lg shadow-${PERSONA_CONFIG[persona].color}-500/5`}>
+                                {React.createElement(PERSONA_CONFIG[persona].icon, { size: 28 })}
+                            </div>
+                            <div className="text-left">
+                                <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-1">當前修煉身分</span>
+                                <h3 className="text-white font-black text-xl">{PERSONA_CONFIG[persona].label}</h3>
+                            </div>
+                        </div>
+                        
+                        <button onClick={() => setShowOnboarding(true)} 
+                            className="px-6 py-3 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-black text-sm border border-white/10 flex items-center justify-center gap-3 transition-all active:scale-95 shadow-xl">
+                            <Filter size={18} className="text-emerald-500" /> 切換身分
+                        </button>
                     </div>
                     <motion.p key={persona} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
-                        className="mt-4 text-zinc-500 text-xs font-medium italic">
-                        💡 {PERSONA_CONFIG[persona].description}
+                        className="mt-4 text-zinc-500 text-xs font-medium italic pl-6 border-l-2 border-emerald-500/20">
+                        💡 系統已為您代入：{PERSONA_CONFIG[persona].description}
                     </motion.p>
                 </div>
 
