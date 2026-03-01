@@ -1,0 +1,27 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/dee0917/dee-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dee0917/dee-website/issues"
+  },
+  "homepage": "https://github.com/dee0917/dee-website#readme",
+  "dependencies": {
+    "@types/axios": "^0.9.36",
+    "@types/node": "^25.3.3",
+    "axios": "^1.13.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
