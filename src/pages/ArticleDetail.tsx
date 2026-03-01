@@ -237,24 +237,32 @@ const ArticleDetail = () => {
                 <motion.div className="h-full bg-emerald-500" style={{ width: `${progress * 100}%` }} />
             </div>
 
-            <section className="relative min-h-[40vh] flex flex-col items-center justify-center px-6 overflow-hidden pt-8 pb-8 border-b border-white/5">
+            <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden border-b border-white/5">
                 <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b ${theme.gradient} opacity-20 pointer-events-none`} />
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none" />
                 
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl w-full text-center relative z-10">
-                    <Link to="/insights" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-3 group text-[10px] font-black uppercase tracking-widest">
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl w-full text-center relative z-10 -mt-20">
+                    <Link to="/insights" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-4 group text-[10px] font-black uppercase tracking-widest">
                         <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" /> Back
                     </Link>
-                    <div className="flex items-center justify-center gap-3 mb-3">
+                    <div className="flex items-center justify-center gap-3 mb-4">
                         <span className={`text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest ${theme.bg} ${theme.text} border ${theme.border}`}>{article.category}</span>
                         <div className="flex gap-1">{[...Array(5)].map((_, i) => <StarIcon key={i} size={8} className={i < (article.difficulty_level || 1) ? theme.text : 'text-zinc-800'} fill="currentColor" />)}</div>
                     </div>
-                    <h1 className="text-3xl md:text-7xl font-black text-white mb-3 tracking-tighter leading-[1.1]">{article.title}</h1>
-                    <p className="text-lg md:text-2xl text-zinc-400 mb-6 max-w-2xl mx-auto leading-relaxed font-medium">{article.summary}</p>
+                    <h1 className="text-3xl md:text-7xl font-black text-white mb-4 tracking-tighter leading-[1.1]">{article.title}</h1>
+                    <p className="text-lg md:text-2xl text-zinc-400 mb-8 max-w-2xl mx-auto leading-relaxed font-medium">{article.summary}</p>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={scrollToHook}
-                        className="bg-white text-black font-black py-3 px-8 rounded-2xl text-base flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-500 transition-colors group">
-                        <Gamepad2 size={20} /> 開始修煉 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                        className="bg-white text-black font-black py-4 px-10 rounded-2xl text-lg flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-500 transition-colors group">
+                        <Gamepad2 size={24} /> 開始修煉 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                     </motion.button>
+                </motion.div>
+
+                <motion.div 
+                    animate={{ y: [0, 10, 0], opacity: [0.2, 0.5, 0.2] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="absolute bottom-10 left-1/2 -translate-x-1/2 text-zinc-500"
+                >
+                    <ChevronDown size={32} />
                 </motion.div>
             </section>
 
