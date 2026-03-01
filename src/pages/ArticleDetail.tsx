@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Copy, Check, ChevronDown, Lock, Sparkles, MousePointer2, Smartphone, Gamepad2, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,6 +8,7 @@ import { INSIGHTS } from '../data/mock';
 import { MAIN_QUEST_ORDER, CHAPTERS, SIDE_QUEST_IDS } from '../data/insights';
 import SEO from '../components/ui/SEO';
 import { ChatGPTLogo, ClaudeLogo, GeminiLogo } from '../components/AILogos';
+import { useIdentity } from '../context/IdentityContext';
 
 const fadeUp = {
     initial: { opacity: 0, y: 10 },
@@ -31,6 +32,7 @@ const StarIcon = ({ size, className, fill }: any) => (
 
 const ArticleDetail = () => {
     const { id } = useParams();
+    const { persona } = useIdentity();
     const [article, setArticle] = useState<any | null>(null);
     const [loading, setLoading] = useState(true);
     const [copied, setCopied] = useState(false);
@@ -51,11 +53,23 @@ const ArticleDetail = () => {
     const rewardRef = useRef<HTMLDivElement>(null);
     const hookRef = useRef<HTMLDivElement>(null);
 
+    // 🚀 身分內容計算器
+    const displayContent = useMemo(() => {
+        if (!article) return null;
+        const base = {
+            pain_point: article.pain_point,
+            example: article.example,
+            practice_kit: article.practice_kit
+        };
+        const override = article.persona_overrides?.[persona];
+        return override ? { ...base, ...override } : base;
+    }, [article, persona]);
+
     const getColorClasses = (themeColor: string) => {
         const colors: Record<string, any> = {
             emerald: { text: 'text-emerald-500', lightText: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', gradient: 'from-emerald-500/20 to-teal-500/10', glow: 'shadow-emerald-500/20', solid: 'bg-emerald-500' },
             yellow: { text: 'text-yellow-500', lightText: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', gradient: 'from-yellow-500/10 to-orange-500/10', glow: 'shadow-emerald-500/20', solid: 'bg-yellow-500' },
-            amber: { text: 'text-amber-500', lightText: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20', gradient: 'from-amber-500/20 to-yellow-500/10', glow: 'shadow-amber-500/20', solid: 'bg-amber-500' },
+            amber: { text: 'text-amber-500', lightText: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20', gradient: 'from-amber-500/20 to-yellow-500/10', glow: 'shadow-emerald-500/20', solid: 'bg-amber-500' },
             blue: { text: 'text-blue-500', lightText: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-500/20', gradient: 'from-blue-500/20 to-indigo-500/10', glow: 'shadow-blue-500/20', solid: 'bg-blue-500' },
             violet: { text: 'text-violet-500', lightText: 'text-violet-400', bg: 'bg-violet-500/10', border: 'border-violet-500/20', gradient: 'from-violet-500/20 to-purple-500/10', glow: 'shadow-violet-500/20', solid: 'bg-violet-500' },
             rose: { text: 'text-rose-500', lightText: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/20', gradient: 'from-rose-500/20 to-pink-500/10', glow: 'shadow-rose-500/20', solid: 'bg-rose-500' },
@@ -111,8 +125,8 @@ const ArticleDetail = () => {
     };
 
     const handleClaimCommand = () => {
-        if (article?.practice_kit?.command) {
-            navigator.clipboard.writeText(article.practice_kit.command);
+        if (displayContent?.practice_kit?.command) {
+            navigator.clipboard.writeText(displayContent.practice_kit.command);
             setCopied(true);
             setTimeout(() => setCopied(false), 3000);
             setTimeout(() => setShowAiJumpModal(true), 500);
@@ -270,19 +284,21 @@ const ArticleDetail = () => {
                 <motion.div {...fadeUp} className="max-w-4xl mx-auto text-left mb-4 mt-2">
                     <span className="transition-label">痛點切入</span>
                     <h2 className="text-2xl md:text-5xl font-black text-white mb-4 tracking-tighter">你也正為了這件事煩惱嗎？</h2>
-                    <p className="text-xl md:text-3xl text-white/90 leading-relaxed border-l-4 border-emerald-500 pl-6 italic font-medium">{article.pain_point}</p>
+                    <p className="text-xl md:text-3xl text-white/90 leading-relaxed border-l-4 border-emerald-500 pl-6 italic font-medium">
+                        {displayContent?.pain_point}
+                    </p>
                 </motion.div>
 
                 <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-3 mb-2">
                     <motion.div {...fadeUp} className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-5 md:p-6 relative overflow-hidden group">
                         <div className="text-white/5 text-6xl font-black absolute -right-4 -bottom-4 rotate-12">❌</div>
                         <span className="text-zinc-600 font-black text-[10px] block mb-2 uppercase tracking-[0.3em]">過去的你</span>
-                        <p className="text-zinc-400 text-base md:text-xl leading-relaxed relative z-10">{article.example?.wrong}</p>
+                        <p className="text-zinc-400 text-base md:text-xl leading-relaxed relative z-10">{displayContent?.example?.wrong}</p>
                     </motion.div>
                     <motion.div {...fadeUp} transition={{ delay: 0.1 }} className="bg-emerald-500/[0.03] border border-emerald-500/20 rounded-[2rem] p-5 md:p-6 relative overflow-hidden group shadow-[0_0_50px_rgba(16,185,129,0.05)]">
                         <div className="text-emerald-500/10 text-7xl font-black absolute -right-4 -bottom-4 -rotate-12">✅</div>
                         <span className="text-emerald-400 font-black text-[10px] block mb-2 uppercase tracking-[0.3em]">現在的你</span>
-                        <p className="text-white text-base md:text-xl leading-relaxed font-bold relative z-10">{article.example?.right}</p>
+                        <p className="text-white text-base md:text-xl leading-relaxed font-bold relative z-10">{displayContent?.example?.right}</p>
                     </motion.div>
                 </div>
             </section>
@@ -362,10 +378,16 @@ const ArticleDetail = () => {
                             <div className="bg-zinc-900 border-2 border-emerald-500/30 rounded-[2.5rem] p-6 md:p-8 shadow-2xl relative overflow-hidden mb-4">
                                 <div className="absolute top-0 left-0 w-full h-1.5 bg-emerald-500" />
                                 <span className="text-emerald-500 font-black text-[9px] tracking-[0.8em] mb-4 block uppercase opacity-60">Ready to execute</span>
-                                <h2 className="text-2xl md:text-5xl font-black text-white mb-4 tracking-tighter leading-tight">{article.practice_kit?.title}</h2>
-                                <p className="text-lg md:text-2xl text-white/90 leading-relaxed border-l-4 border-emerald-500 pl-6 italic font-medium mb-6">{article.practice_kit?.description}</p>
+                                <h2 className="text-2xl md:text-5xl font-black text-white mb-4 tracking-tighter leading-tight">
+                                    {displayContent?.practice_kit?.title}
+                                </h2>
+                                <p className="text-lg md:text-2xl text-white/90 leading-relaxed border-l-4 border-emerald-500 pl-6 italic font-medium mb-6">
+                                    {displayContent?.practice_kit?.description}
+                                </p>
                                 <div className="bg-black/50 border border-white/5 rounded-2xl p-5 md:p-6 mb-8 text-left">
-                                    <pre className="text-zinc-300 text-xs md:text-base whitespace-pre-wrap font-mono leading-relaxed">{article.practice_kit?.command}</pre>
+                                    <pre className="text-zinc-300 text-xs md:text-base whitespace-pre-wrap font-mono leading-relaxed">
+                                        {displayContent?.practice_kit?.command}
+                                    </pre>
                                 </div>
                                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleClaimCommand}
                                     className="bg-emerald-500 text-black font-black py-4 px-8 rounded-2xl text-lg flex items-center gap-3 mx-auto shadow-2xl">

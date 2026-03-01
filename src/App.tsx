@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { lazy, Suspense } from 'react';
+import { IdentityProvider } from './context/IdentityContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ScrollToTop from './components/ui/ScrollToTop';
@@ -33,6 +34,7 @@ const PageLoader = () => (
 function App() {
   return (
     <HelmetProvider>
+    <IdentityProvider>
     <Router>
       <ScrollToTop />
       <div className="min-h-screen bg-[#0A0A0A] flex flex-col relative">
@@ -59,6 +61,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </IdentityProvider>
     </HelmetProvider>
   );
 }

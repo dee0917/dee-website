@@ -5,18 +5,20 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     ArrowRight, Star, BookOpen, Lock, CheckCircle2, Sparkles,
     Zap, Gamepad2, Trophy, ChevronDown, ChevronRight, Filter,
-    Compass, Map as MapIcon, Shield, Search, X, Info
+    Compass, Map as MapIcon, Shield, Search, X, Info, User,
+    Briefcase, Utensils, Home as HomeIcon, GraduationCap, Rocket as RocketIcon
 } from 'lucide-react';
 import { CHAPTERS, MAIN_QUEST_ORDER, INSIGHTS_LIST } from '../data/insights';
 import { ChatGPTLogo, ClaudeLogo, GeminiLogo } from '../components/AILogos';
+import { useIdentity, UserPersona } from '../context/IdentityContext';
 
-const CATEGORY_THEMES: Record<string, string> = {
-    '啟航入口': 'teal',
-    '心法重塑': 'emerald',
-    '指令進化': 'violet',
-    '生活實戰': 'blue',
-    '職涯躍遷': 'rose',
-    '戰略演進': 'indigo'
+const PERSONA_CONFIG: Record<UserPersona, { label: string, icon: any, color: string, description: string }> = {
+    general: { label: '一般小白', icon: User, color: 'emerald', description: '從基礎心法開始穩紮穩打。' },
+    office: { label: '不再加班社畜', icon: Briefcase, color: 'blue', description: '專攻 Email、報表與會議摘要。' },
+    merchant: { label: '滿手蔥花店主', icon: Utensils, color: 'amber', description: '專攻招募、客訴與菜單發想。' },
+    parent: { label: '全能家庭守護者', icon: HomeIcon, color: 'rose', description: '專攻教養解釋、食譜與旅遊。' },
+    student: { label: '校園突圍者', icon: GraduationCap, color: 'violet', description: '專攻論文摘要、報告與翻譯。' },
+    slashie: { label: '斜槓生存家', icon: RocketIcon, color: 'indigo', description: '專攻爆款標題與社群貼文。' }
 };
 
 const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free', chapter?: number) => void }) => {
@@ -206,6 +208,7 @@ const InsightCard = ({ insight, idx, completed }: any) => {
 };
 
 const Insights = () => {
+    const { persona, setPersona } = useIdentity();
     const [viewMode, setViewMode] = useState<'adventure' | 'free'>('adventure');
     const [loading, setLoading] = useState(true);
     const [showOnboarding, setShowOnboarding] = useState(false);
@@ -366,6 +369,33 @@ const Insights = () => {
                 <p className="text-zinc-400 text-lg max-w-2xl mb-8 leading-relaxed text-left">
                     不只是教學，更是靈魂的重塑。透過 15 篇必修與無限支線，掌握 <span className="text-white">AI 核心主權</span>。
                 </p>
+
+                {/* 🚀 身分濾鏡膠囊 */}
+                <div className="mb-10 text-left">
+                    <div className="flex items-center gap-2 mb-4">
+                        <User size={14} className="text-zinc-500" />
+                        <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">代入修煉情境：{PERSONA_CONFIG[persona].label}</span>
+                    </div>
+                    <div className="flex flex-wrap gap-2.5 text-left">
+                        {(Object.keys(PERSONA_CONFIG) as UserPersona[]).map(p => {
+                            const conf = PERSONA_CONFIG[p];
+                            const isActive = persona === p;
+                            return (
+                                <button key={p} onClick={() => setPersona(p)}
+                                    className={`flex items-center gap-2 px-5 py-3 rounded-2xl text-xs font-black transition-all border ${isActive 
+                                        ? `bg-${conf.color}-500 text-black border-${conf.color}-500 shadow-lg scale-105` 
+                                        : 'bg-white/[0.03] border-white/[0.08] text-zinc-500 hover:text-white hover:bg-white/5'
+                                    }`}>
+                                    <conf.icon size={16} /> {conf.label}
+                                </button>
+                            );
+                        })}
+                    </div>
+                    <motion.p key={persona} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
+                        className="mt-4 text-zinc-500 text-xs font-medium italic">
+                        💡 {PERSONA_CONFIG[persona].description}
+                    </motion.p>
+                </div>
 
                 <div className="relative z-10 text-left">
                     <div className="flex items-center justify-between mb-3 text-left">
