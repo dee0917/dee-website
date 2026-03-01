@@ -269,9 +269,10 @@ const Insights = () => {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [expandedChapters, setExpandedChapters] = useState<Set<number>>(new Set());
     const [skipTarget, setSkipTarget] = useState<number | null>(null);
+    const [remountKey, setRemountKey] = useState(0);
 
-    // 強制 UI 與狀態對齊的 Key
-    const viewKey = `${viewMode}-${unlockedChapter}-${completedIds.length}`;
+    // 強制 UI 與狀態對齊的 Key，增加 remountKey 確保物理級別的重新掛載
+    const viewKey = `${viewMode}-${remountKey}-${unlockedChapter}`;
 
     useEffect(() => {
         const done = localStorage.getItem('dee_onboarding_done');
@@ -281,11 +282,23 @@ const Insights = () => {
 
         if (!done) setShowOnboarding(true);
         else {
-            if (saved) setUnlockedChapter(parseInt(saved));
+            setUnlockedChapter(parseInt(saved || '0') || 0);
             if (mode === 'free') setViewMode('free');
+            else setViewMode('adventure');
         }
+        
         if (comp) {
-            try { setCompletedIds(JSON.parse(comp)); } catch(e) { setCompletedIds([]); }
+            try { 
+                const parsed = JSON.parse(comp);
+                if (Array.isArray(parsed)) {
+                    setCompletedIds(parsed.map(id => typeof id === 'string' ? parseInt(id) : id).filter(id => !isNaN(id)));
+                } else {
+                    setCompletedIds([]);
+                }
+            } catch(e) { 
+                console.error("Failed to parse completed IDs", e);
+                setCompletedIds([]); 
+            }
         }
         setLoading(false);
     }, []);
@@ -312,7 +325,6 @@ const Insights = () => {
     };
 
     const handleModeSwitch = (m: 'adventure' | 'free') => {
-        console.log(`Switching to mode: ${m}`);
         if (m === 'free') {
             const isElite = localStorage.getItem('dee_elite_status') === 'true';
             const totalMain = MAIN_QUEST_ORDER.length;
@@ -324,23 +336,21 @@ const Insights = () => {
             }
         }
         
-        // 強制重置展開狀態，避免 React Diffing 錯誤
-        if (m === 'adventure') {
-            setExpandedChapters(new Set([unlockedChapter]));
-        } else {
-            setExpandedChapters(new Set());
-        }
-
+        // 核級別修復：透過 remountKey 強制銷毀並重新掛載整個列表組件
+        setRemountKey(prev => prev + 1);
+        setExpandedChapters(new Set(m === 'adventure' ? [unlockedChapter] : []));
         setViewMode(m);
         localStorage.setItem('dee_view_preference', m);
     };
 
     const handleChallengePassed = (targetId: number) => {
         if (targetId === 999) {
+            setRemountKey(prev => prev + 1);
             setViewMode('free');
             localStorage.setItem('dee_view_preference', 'free');
             localStorage.setItem('dee_elite_status', 'true'); // 永久紀錄精英身分
         } else {
+            setRemountKey(prev => prev + 1);
             setUnlockedChapter(targetId);
             localStorage.setItem('dee_ai_level', targetId.toString());
             setExpandedChapters(new Set([targetId]));
@@ -366,9 +376,15 @@ const Insights = () => {
         return allInsights.filter(i => (i.title + i.summary + i.category).toLowerCase().includes(q));
     }, [allInsights, searchQuery]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [viewMode]);
+
     const progressPct = allInsights.length > 0 ? completedIds.length / allInsights.length : 0;
 
     if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse text-center text-center">INITIALIZING_SYLLABUS...</div>;
+
+    console.log(`[Insights] Rendering ${viewMode} mode. Unlocked Ch: ${unlockedChapter}, RemountKey: ${remountKey}`);
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-24 pb-12 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0 text-left">
@@ -411,21 +427,31 @@ const Insights = () => {
             <div key={viewKey} className="relative z-10 text-left text-left">
                 {viewMode === 'adventure' ? (
                     <div className="space-y-6 text-left">
-                        {CHAPTERS.map((chapter, ci) => {
-                            const items = chapter.articleIds.map(id => allInsights.find(i => i.id === id)).filter(Boolean);
-                            const done = items.filter(i => completedIds.includes(i!.id)).length;
-                            const isLocked = chapter.id > unlockedChapter;
-                            const isComplete = done >= items.length;
-                            return (
-                                <ChapterNode key={chapter.id} chapter={chapter} items={items as any[]} completedIds={completedIds} isLocked={isLocked} isComplete={isComplete} isExpanded={expandedChapters.has(chapter.id)} onToggle={() => toggleChapter(chapter.id)} onSkip={() => setSkipTarget(chapter.id)} index={ci} />
-                            );
-                        })}
+                        {CHAPTERS && CHAPTERS.length > 0 ? CHAPTERS.map((chapter, ci) => {
+                            try {
+                                if (!chapter || !chapter.articleIds) return null;
+                                const items = chapter.articleIds.map(id => allInsights.find(i => i && i.id === id)).filter(Boolean);
+                                const done = items.filter(i => completedIds.includes(i!.id)).length;
+                                const isLocked = chapter.id > unlockedChapter;
+                                const isComplete = items.length > 0 && done >= items.length;
+                                return (
+                                    <ChapterNode key={`${viewKey}-ch-${chapter.id}`} chapter={chapter} items={items as any[]} completedIds={completedIds} isLocked={isLocked} isComplete={isComplete} isExpanded={expandedChapters.has(chapter.id)} onToggle={() => toggleChapter(chapter.id)} onSkip={() => setSkipTarget(chapter.id)} index={ci} />
+                                );
+                            } catch (e) {
+                                console.error(`Error rendering chapter ${ci}:`, e);
+                                return null;
+                            }
+                        }) : (
+                            <div className="text-zinc-500 text-center py-20 font-bold uppercase tracking-[0.2em]">Map Data Missing...</div>
+                        )}
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 gap-6 text-left text-left">
-                        {filteredInsights.map((item, i) => (
-                            <InsightCard key={item.id} insight={item} idx={i} completed={completedIds.includes(item.id)} />
-                        ))}
+                        {filteredInsights && filteredInsights.length > 0 ? filteredInsights.map((item, i) => (
+                            <InsightCard key={`${viewKey}-item-${item.id}`} insight={item} idx={i} completed={completedIds.includes(item.id)} />
+                        )) : (
+                            <div className="text-zinc-500 text-center py-20 font-bold uppercase tracking-[0.2em]">Library is Empty...</div>
+                        )}
                     </div>
                 )}
             </div>
