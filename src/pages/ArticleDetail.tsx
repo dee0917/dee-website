@@ -262,7 +262,7 @@ const ArticleDetail = () => {
                         <span className={`text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest ${theme.bg} ${theme.text} border ${theme.border}`}>{article.category}</span>
                         <div className="flex gap-1">{[...Array(5)].map((_, i) => <StarIcon key={i} size={10} className={i < (article.difficulty_level || 1) ? theme.text : 'text-zinc-800'} fill="currentColor" />)}</div>
                     </div>
-                    <h1 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tight leading-[1.1]">{article.title}</h1>
+                    <h1 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tighter leading-[1.1]">{article.title}</h1>
                     <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed">{article.summary}</p>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={scrollToHook}
                         className="bg-white text-black font-black py-5 px-10 rounded-2xl text-lg flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-500 transition-colors group">
@@ -274,10 +274,10 @@ const ArticleDetail = () => {
             </section>
 
             <section className="py-32 px-5 md:px-6 bg-zinc-900/30" ref={hookRef}>
-                <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center mb-24">
+                <motion.div {...fadeUp} className="max-w-4xl mx-auto text-left mb-24">
                     <span className="transition-label">痛點切入</span>
-                    <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tight">你也正為了這件事煩惱嗎？</h2>
-                    <p className="text-zinc-400 text-xl md:text-2xl leading-relaxed">{article.pain_point}</p>
+                    <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tighter">你也正為了這件事煩惱嗎？</h2>
+                    <p className="text-2xl md:text-3xl text-white/90 leading-relaxed border-l-4 border-emerald-500 pl-10 italic font-medium">{article.pain_point}</p>
                 </motion.div>
 
                 <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10">
@@ -296,9 +296,9 @@ const ArticleDetail = () => {
 
             {hasSteps && (
                 <section className="py-32 px-5 md:px-6 text-left max-w-4xl mx-auto">
-                    <div className="text-center mb-24">
+                    <div className="text-left mb-24">
                         <span className="transition-label">實戰演練</span>
-                        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">一步一步跟著做</h2>
+                        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter">一步一步跟著做</h2>
                     </div>
                     <div className="space-y-12">
                         {article.steps.map((step: any, idx: number) => {
@@ -322,8 +322,8 @@ const ArticleDetail = () => {
                                             {isDone ? '✓' : idx + 1}
                                         </div>
                                         <div className="flex-1">
-                                            <h3 className={`text-2xl md:text-4xl font-black mb-6 tracking-tight ${isDone ? 'text-emerald-400' : 'text-white'}`}>{step.title}</h3>
-                                            <p className="text-zinc-300 text-lg md:text-xl leading-relaxed mb-10 font-medium">{step.body}</p>
+                                            <h3 className={`text-2xl md:text-4xl font-black mb-6 tracking-tighter ${isDone ? 'text-emerald-400' : 'text-white'}`}>{step.title}</h3>
+                                            <p className="text-lg md:text-xl text-zinc-300 leading-[1.8] space-y-6 font-medium">{step.body}</p>
                                             {step.external_links && step.external_links.length > 0 && (
                                                 <div className="flex flex-wrap gap-4 mb-10">
                                                     {step.external_links.map((link: any, lidx: number) => (
@@ -391,8 +391,8 @@ const ArticleDetail = () => {
                             <div className="bg-zinc-900 border-2 border-emerald-500/30 rounded-[3rem] p-10 md:p-20 shadow-2xl relative overflow-hidden mb-16">
                                 <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.5)]" />
                                 <span className="text-emerald-500 font-black text-sm tracking-[0.8em] mb-10 block uppercase opacity-60">Ready to execute</span>
-                                <h2 className="text-3xl md:text-6xl font-black text-white mb-10 tracking-tight leading-tight">{article.practice_kit?.title}</h2>
-                                <p className="text-zinc-400 text-xl md:text-2xl mb-12 leading-relaxed">{article.practice_kit?.description}</p>
+                                <h2 className="text-3xl md:text-6xl font-black text-white mb-10 tracking-tighter leading-tight">{article.practice_kit?.title}</h2>
+                                <p className="text-2xl md:text-3xl text-white/90 leading-relaxed border-l-4 border-emerald-500 pl-10 italic font-medium mb-12">{article.practice_kit?.description}</p>
                                 <div className="bg-black/50 border border-white/5 rounded-[2rem] p-8 md:p-12 mb-12 text-left relative group">
                                     <pre className="text-zinc-300 text-base md:text-lg whitespace-pre-wrap font-mono leading-relaxed">{article.practice_kit?.command}</pre>
                                 </div>
@@ -409,13 +409,13 @@ const ArticleDetail = () => {
 
             {hasQuiz && (
                 <section className="py-40 px-5 md:px-6 bg-zinc-900/20 border-t border-white/5" ref={quizRef}>
-                    <motion.div {...fadeUp} className="max-w-3xl mx-auto">
-                        <div className="text-center mb-20">
+                    <motion.div {...fadeUp} className="max-w-4xl mx-auto">
+                        <div className="text-left mb-20">
                             <span className="transition-label">終極考驗</span>
-                            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">驗收你的修行成果</h2>
+                            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter">驗收你的修行成果</h2>
                         </div>
                         <div className="bg-zinc-900 border border-white/10 rounded-[3rem] p-8 md:p-16 shadow-2xl relative">
-                            <p className="text-2xl md:text-3xl font-black text-white mb-12 leading-tight">{article.quiz.question}</p>
+                            <p className="text-2xl md:text-4xl font-black text-white mb-12 leading-tight tracking-tighter">{article.quiz.question}</p>
                             <div className="space-y-4">
                                 {article.quiz.options.map((opt: string, i: number) => (
                                     <motion.button key={i} whileHover={{ x: 5 }} whileTap={{ scale: 0.98 }} disabled={quizSubmitted} onClick={() => setQuizAnswer(i)}
@@ -468,7 +468,7 @@ const ArticleDetail = () => {
                                 <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.4)]" />
                                 <motion.p animate={{ scale: [1, 1.1, 1], rotate: [0, -5, 5, 0] }} transition={{ duration: 3, repeat: Infinity }} className="text-9xl mb-12">🏆</motion.p>
                                 <p className="text-emerald-500 font-black text-sm tracking-[0.8em] mb-6 uppercase opacity-60">Quest Mastered</p>
-                                <p className="text-white text-3xl md:text-5xl font-black mb-12 tracking-tight">{article.skill_badge || article.title}</p>
+                                <p className="text-white text-3xl md:text-6xl font-black mb-12 tracking-tighter">{article.skill_badge || article.title}</p>
                                 <div className="pt-12 border-t border-white/10 flex flex-col items-center gap-8">
                                     <p className="text-zinc-600 text-[11px] uppercase tracking-[0.6em] font-black">Dee's AI Life Lab · 2026</p>
                                     <div className="flex gap-6">
@@ -506,7 +506,7 @@ const ArticleDetail = () => {
                                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
                                     <div className="min-w-0 flex-1">
                                         <span className="text-emerald-500/60 font-black text-xs uppercase tracking-[0.4em] mb-4 block font-mono">{isMainQuest ? `STAGE ${mainIndex + 2} / 12` : 'NEXT LEVEL'}</span>
-                                        <h3 className="text-2xl md:text-4xl font-black text-white mb-4 tracking-tight leading-tight group-hover:text-emerald-400 transition-colors truncate">{nextArticle.title}</h3>
+                                        <h3 className="text-2xl md:text-5xl font-black text-white mb-4 tracking-tighter leading-tight group-hover:text-emerald-400 transition-colors truncate">{nextArticle.title}</h3>
                                         <p className="text-zinc-400 text-base md:text-lg line-clamp-2 font-medium leading-relaxed">{nextArticle.summary}</p>
                                     </div>
                                     <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all flex-shrink-0 shadow-lg border border-emerald-500/20">
