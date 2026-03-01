@@ -270,9 +270,10 @@ const Insights = () => {
     const [expandedChapters, setExpandedChapters] = useState<Set<number>>(new Set());
     const [skipTarget, setSkipTarget] = useState<number | null>(null);
     const [remountKey, setRemountKey] = useState(0);
+    const [selectedCategory, setSelectedCategory] = useState<string>('全部');
 
     // 強制 UI 與狀態對齊的 Key，增加 remountKey 確保物理級別的重新掛載
-    const viewKey = `${viewMode}-${remountKey}-${unlockedChapter}`;
+    const viewKey = `${viewMode}-${remountKey}-${unlockedChapter}-${selectedCategory}`;
 
     useEffect(() => {
         const done = localStorage.getItem('dee_onboarding_done');
@@ -369,10 +370,30 @@ const Insights = () => {
     };
 
     const filteredInsights = useMemo(() => {
-        if (!searchQuery || searchQuery.trim() === '') return allInsights;
+        let items = allInsights;
+        
+        // 自由模式過濾：移除冒險模式中的主線文章 (Chapter 0-4)
+        if (viewMode === 'free') {
+            items = items.filter(i => !MAIN_QUEST_ORDER.includes(i.id));
+        }
+
+        if (selectedCategory !== '全部') {
+            items = items.filter(i => i.category === selectedCategory);
+        }
+
+        if (!searchQuery || searchQuery.trim() === '') return items;
         const q = searchQuery.toLowerCase();
-        return allInsights.filter(i => (i.title + i.summary + i.category).toLowerCase().includes(q));
-    }, [allInsights, searchQuery]);
+        return items.filter(i => (i.title + i.summary + i.category).toLowerCase().includes(q));
+    }, [allInsights, searchQuery, viewMode, selectedCategory]);
+
+    const availableCategories = useMemo(() => {
+        const cats = new Set(['全部']);
+        const pool = viewMode === 'free' 
+            ? allInsights.filter(i => !MAIN_QUEST_ORDER.includes(i.id))
+            : allInsights;
+        pool.forEach(i => cats.add(i.category));
+        return Array.from(cats);
+    }, [allInsights, viewMode]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -420,6 +441,22 @@ const Insights = () => {
                         <motion.div className="h-full bg-emerald-500 text-left" initial={{ width: 0 }} animate={{ width: `${progressPct * 100}%` }} transition={{ duration: 1, ease: "easeOut" }} />
                     </div>
                 </div>
+
+                {/* 分類過濾器 (僅在自由模式顯示) */}
+                {viewMode === 'free' && (
+                    <div className="mt-10 flex items-center gap-3 overflow-x-auto pb-3 scrollbar-hide text-left">
+                        <div className="flex-shrink-0 text-zinc-600 mr-1"><Filter size={18} /></div>
+                        {availableCategories.map(cat => (
+                            <button key={cat} onClick={() => setSelectedCategory(cat)}
+                                className={`flex-shrink-0 px-6 py-2 rounded-xl text-xs font-black transition-all border ${selectedCategory === cat
+                                    ? `bg-emerald-500 text-black border-emerald-500 shadow-lg scale-105`
+                                    : 'bg-white/[0.03] border-white/[0.08] text-zinc-400 hover:text-white hover:bg-white/5'
+                                }`}>
+                                {cat}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
 
             <div key={viewKey} className="relative z-10 text-left text-left">
