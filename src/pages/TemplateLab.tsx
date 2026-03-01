@@ -23,7 +23,7 @@ const TemplateLab = () => {
     };
 
     return (
-        <div className="bg-[#0a0a0a] min-h-screen pt-24 pb-20 px-6 max-w-6xl mx-auto text-left">
+        <div className="bg-[#0a0a0a] min-h-screen pt-32 pb-20 px-6 max-w-6xl mx-auto text-left">
             {/* Header */}
             <div className="mb-12">
                 <div className="flex items-center gap-3 mb-4">

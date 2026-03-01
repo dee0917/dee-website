@@ -47,7 +47,7 @@ const Home = () => {
                 ))}
             </div>
 
-            <section className="relative min-h-[90vh] flex items-center justify-center px-6 overflow-hidden pt-10 z-10">
+            <section className="relative min-h-[90vh] flex items-center justify-center px-6 overflow-hidden pt-32 z-10">
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/[0.04] blur-[150px] rounded-full" />
                     <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-teal-500/[0.03] blur-[120px] rounded-full" />
