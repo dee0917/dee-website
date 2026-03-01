@@ -27,13 +27,14 @@ import { article as githubVPhone } from './github-trending-vphone-cli';
 import { article as githubWiFiDensePose } from './github-trending-wifi-densepose';
 import { article as githubMarkItDown } from './github-trending-markitdown';
 import { article as githubRuflo } from './github-trending-ruflo';
+import { article as newbieAISearch } from './newbie-ai-search';
 import { article as deepseekLogicV3 } from './real-tech-deepseek-logic-v3';
 import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
+    newbieAISearch,     // 最新：小白搜尋指南
     githubRuflo,        // 最新：多代理編排引擎
-    githubMarkItDown,   // 最新：微軟開源工具
     deepseekLogicV3,    // 最新：DeepSeek 邏輯驗證
     githubWiFiDensePose, // 最新：WiFi 感知突破
     githubVPhone,       // 最新：iOS 虛擬化突破
