@@ -99,4 +99,4 @@ const sideQuests = [
 ];
 
 // 全部文章（主線在前，支線在後）
-export const INSIGHTS_LIST = [...mainQuest, ...sideQuests];
+export const INSIGHTS_LIST = [...mainQuest, ...sideQuests].filter(i => i && i.id);

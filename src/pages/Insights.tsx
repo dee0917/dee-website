@@ -170,6 +170,68 @@ const SkipChapterModal = ({ targetChapter, onPass, onClose }: { targetChapter: n
 /* ═══════════════════════════════════════════
    MAIN PAGE
    ═══════════════════════════════════════════ */
+const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExpanded, onToggle, onSkip, index }: any) => {
+    return (
+        <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.05 }} className={`relative text-left text-left`}>
+            <div className={`border rounded-2xl transition-all cursor-pointer text-left text-left ${isLocked ? 'opacity-30 grayscale' : ''} ${isExpanded ? 'bg-white/[0.02] border-white/10' : 'border-white/5 hover:border-white/10'}`} onClick={isLocked ? undefined : onToggle}>
+                <div className="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between text-left gap-6">
+                    <div className="flex items-center gap-5 text-left flex-1 min-w-0">
+                        <span className="text-3xl text-left flex-shrink-0 text-center">{chapter.emoji}</span>
+                        <div className="text-left min-w-0 flex-1"><h2 className="text-xl md:text-2xl font-black text-white text-left truncate">{chapter.title}</h2><p className="text-zinc-500 text-xs md:text-sm text-left truncate">{chapter.subtitle}</p></div>
+                    </div>
+                    
+                    <div className="flex items-center gap-4 text-left">
+                        {isLocked ? (
+                            <button onClick={(e) => { e.stopPropagation(); onSkip(); }} className="bg-amber-500 text-black px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-amber-400 transition-all flex items-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 text-left">
+                                <Zap size={12} fill="currentColor" /> 跳級測驗
+                            </button>
+                        ) : (
+                            <div className="flex items-center gap-3 text-left">
+                                {isComplete && <CheckCircle2 size={20} className="text-emerald-500" />}
+                                <ChevronDown size={18} className={`transition-transform text-zinc-600 flex-shrink-0 ${isExpanded ? 'rotate-180' : ''}`} />
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <AnimatePresence>
+                    {isExpanded && !isLocked && (
+                        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden border-t border-white/5 text-left">
+                            <div className="p-4 space-y-2 text-left">
+                                {items.map((item: any, i: number) => {
+                                    const isDone = completedIds.includes(item.id);
+                                    return (
+                                        <Link key={item.id} to={`/insights/${item.id}`} className={`flex items-center gap-4 p-4 rounded-xl transition-all text-left ${isDone ? 'bg-emerald-500/5' : 'hover:bg-white/5'}`}>
+                                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black flex-shrink-0 text-left ${isDone ? 'bg-emerald-500 text-black shadow-lg' : 'bg-zinc-800 text-zinc-500'}`}>{isDone ? '✓' : i + 1}</div>
+                                            <div className="flex-1 text-left min-w-0 text-left"><h4 className="text-sm md:text-base font-bold text-white text-left truncate">{item.title}</h4></div>
+                                            <ChevronRight size={14} className="text-zinc-700 flex-shrink-0 text-left" />
+                                        </Link>
+                                    );
+                                })}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        </motion.div>
+    );
+};
+
+const InsightCard = ({ insight, idx, completed }: any) => {
+    return (
+        <Link to={`/insights/${insight.id}`} className="block h-full text-left">
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.03 }}
+                className={`bg-zinc-900 border p-5 rounded-2xl h-full flex flex-col transition-all text-left ${completed ? 'border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.05)]' : 'border-white/5 hover:border-white/10'}`}>
+                <div className="flex justify-between items-start mb-3 text-left">
+                    <span className="text-[9px] font-black px-2 py-0.5 rounded bg-white/5 text-zinc-500 uppercase text-left">{insight.category}</span>
+                    {completed && <CheckCircle2 size={14} className="text-emerald-500 shadow-lg text-left" />}
+                </div>
+                <h4 className="text-sm font-black text-white mb-2 line-clamp-2 text-left">{insight.title}</h4>
+                <p className="text-zinc-500 text-[11px] line-clamp-2 leading-relaxed text-left">{insight.summary}</p>
+            </motion.div>
+        </Link>
+    );
+};
+
 const Insights = () => {
     const [viewMode, setViewMode] = useState<'adventure' | 'free'>('adventure');
     const [loading, setLoading] = useState(true);
@@ -257,7 +319,7 @@ const Insights = () => {
         return allInsights.filter(i => (i.title + i.summary + i.category).toLowerCase().includes(q));
     }, [allInsights, searchQuery]);
 
-    const progressPct = completedIds.length / allInsights.length;
+    const progressPct = allInsights.length > 0 ? completedIds.length / allInsights.length : 0;
 
     if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse text-center text-center">INITIALIZING_SYLLABUS...</div>;
 
@@ -312,68 +374,6 @@ const Insights = () => {
                 )}
             </div>
         </motion.div>
-    );
-};
-
-const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExpanded, onToggle, onSkip, index }: any) => {
-    return (
-        <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.05 }} className={`relative text-left text-left`}>
-            <div className={`border rounded-2xl transition-all cursor-pointer text-left text-left ${isLocked ? 'opacity-30 grayscale' : ''} ${isExpanded ? 'bg-white/[0.02] border-white/10' : 'border-white/5 hover:border-white/10'}`} onClick={isLocked ? undefined : onToggle}>
-                <div className="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between text-left gap-6">
-                    <div className="flex items-center gap-5 text-left flex-1 min-w-0">
-                        <span className="text-3xl text-left flex-shrink-0 text-center">{chapter.emoji}</span>
-                        <div className="text-left min-w-0 flex-1"><h2 className="text-xl md:text-2xl font-black text-white text-left truncate">{chapter.title}</h2><p className="text-zinc-500 text-xs md:text-sm text-left truncate">{chapter.subtitle}</p></div>
-                    </div>
-                    
-                    <div className="flex items-center gap-4 text-left">
-                        {isLocked ? (
-                            <button onClick={(e) => { e.stopPropagation(); onSkip(); }} className="bg-amber-500 text-black px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-amber-400 transition-all flex items-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 text-left">
-                                <Zap size={12} fill="currentColor" /> 跳級測驗
-                            </button>
-                        ) : (
-                            <div className="flex items-center gap-3 text-left">
-                                {isComplete && <CheckCircle2 size={20} className="text-emerald-500" />}
-                                <ChevronDown size={18} className={`transition-transform text-zinc-600 flex-shrink-0 ${isExpanded ? 'rotate-180' : ''}`} />
-                            </div>
-                        )}
-                    </div>
-                </div>
-                <AnimatePresence>
-                    {isExpanded && !isLocked && (
-                        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden border-t border-white/5 text-left">
-                            <div className="p-4 space-y-2 text-left">
-                                {items.map((item: any, i: number) => {
-                                    const isDone = completedIds.includes(item.id);
-                                    return (
-                                        <Link key={item.id} to={`/insights/${item.id}`} className={`flex items-center gap-4 p-4 rounded-xl transition-all text-left ${isDone ? 'bg-emerald-500/5' : 'hover:bg-white/5'}`}>
-                                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black flex-shrink-0 text-left ${isDone ? 'bg-emerald-500 text-black shadow-lg' : 'bg-zinc-800 text-zinc-500'}`}>{isDone ? '✓' : i + 1}</div>
-                                            <div className="flex-1 text-left min-w-0 text-left"><h4 className="text-sm md:text-base font-bold text-white text-left truncate">{item.title}</h4></div>
-                                            <ChevronRight size={14} className="text-zinc-700 flex-shrink-0 text-left" />
-                                        </Link>
-                                    );
-                                })}
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-        </motion.div>
-    );
-};
-
-const InsightCard = ({ insight, idx, completed }: any) => {
-    return (
-        <Link to={`/insights/${insight.id}`} className="block h-full text-left">
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.03 }}
-                className={`bg-zinc-900 border p-5 rounded-2xl h-full flex flex-col transition-all text-left ${completed ? 'border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.05)]' : 'border-white/5 hover:border-white/10'}`}>
-                <div className="flex justify-between items-start mb-3 text-left">
-                    <span className="text-[9px] font-black px-2 py-0.5 rounded bg-white/5 text-zinc-500 uppercase text-left">{insight.category}</span>
-                    {completed && <CheckCircle2 size={14} className="text-emerald-500 shadow-lg text-left" />}
-                </div>
-                <h4 className="text-sm font-black text-white mb-2 line-clamp-2 text-left">{insight.title}</h4>
-                <p className="text-zinc-500 text-[11px] line-clamp-2 leading-relaxed text-left">{insight.summary}</p>
-            </motion.div>
-        </Link>
     );
 };
 

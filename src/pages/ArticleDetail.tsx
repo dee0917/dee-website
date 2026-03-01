@@ -16,6 +16,19 @@ const fadeUp = {
     transition: { duration: 0.5, ease: "easeOut" }
 };
 
+const XIcon = ({ size, className }: any) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+);
+
+const StarIcon = ({ size, className, fill }: any) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={fill} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+    </svg>
+);
+
 const ArticleDetail = () => {
     const { id } = useParams();
     const [article, setArticle] = useState<any | null>(null);
@@ -87,13 +100,19 @@ const ArticleDetail = () => {
     }, [article?.id, article?.steps?.length]);
 
     const fetchArticle = async (articleId: number) => {
-        setLoading(true);
-        const localArticle = INSIGHTS.find(i => i.id === articleId);
-        const dbData = await api.getInsightById(articleId);
-        if (localArticle) setArticle({ ...dbData, ...localArticle });
-        else if (dbData) setArticle(dbData);
-        else setArticle(null);
-        setLoading(false);
+        try {
+            setLoading(true);
+            const localArticle = INSIGHTS.find(i => i.id === articleId);
+            const dbData = await api.getInsightById(articleId);
+            if (localArticle) setArticle({ ...dbData, ...localArticle });
+            else if (dbData) setArticle(dbData);
+            else setArticle(null);
+        } catch (e) {
+            console.error("Error fetching article:", e);
+            setArticle(null);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleClaimCommand = () => {
@@ -212,11 +231,11 @@ const ArticleDetail = () => {
     const isMainQuest = mainIndex !== -1;
     const isSideQuest = SIDE_QUEST_IDS.includes(article.id);
     const nextArticleId = isMainQuest ? MAIN_QUEST_ORDER[mainIndex + 1] : null;
-    const nextArticle = nextArticleId ? INSIGHTS.find(i => i.id === nextArticleId) : null;
+    const nextArticle: any = nextArticleId ? (INSIGHTS.find(i => i.id === nextArticleId) || null) : null;
     const isFinale = isMainQuest && mainIndex === MAIN_QUEST_ORDER.length - 1;
 
     let nextLabelText = "下一篇教學";
-    if (nextArticle) {
+    if (nextArticle && nextArticle.id) {
         const nextChapter = CHAPTERS.find(c => c.articleIds.includes(nextArticle.id));
         const currentChapter = CHAPTERS.find(c => c.articleIds.includes(article.id));
         if (nextChapter && currentChapter && nextChapter.id > currentChapter.id) {
@@ -553,18 +572,5 @@ const ArticleDetail = () => {
         </div>
     );
 };
-
-const XIcon = ({ size, className }: any) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}>
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-    </svg>
-);
-
-const StarIcon = ({ size, className, fill }: any) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill={fill} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-    </svg>
-);
 
 export default ArticleDetail;
