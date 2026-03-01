@@ -11,7 +11,7 @@ import { ChatGPTLogo, ClaudeLogo, GeminiLogo } from '../components/AILogos';
 const fadeUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-40px" },
+    viewport: { once: true, margin: "-60px" },
     transition: { duration: 0.4, ease: "easeOut" }
 };
 
@@ -31,11 +31,9 @@ const ArticleDetail = () => {
     const [freeMode, setFreeMode] = useState(false);
     const [rippleStep, setRippleStep] = useState<number | null>(null);
     const [showAiJumpModal, setShowAiJumpModal] = useState(false);
-    const [shareCopied, setShareCopied] = useState(false);
     
     const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
     const treasureRef = useRef<HTMLDivElement>(null);
-    const quizRef = useRef<HTMLDivElement>(null);
     const rewardRef = useRef<HTMLDivElement>(null);
     const hookRef = useRef<HTMLDivElement>(null);
 
@@ -70,11 +68,9 @@ const ArticleDetail = () => {
             const isFree = localStorage.getItem('dee_view_preference') === 'free';
             setFreeMode(isFree);
             
-            // 🚀 核心邏輯：無論模式，進入文章必須從第 1 步開始點擊，寶箱初始鎖定
             setStepsCompleted(new Array(article.steps.length).fill(false));
             setCurrentStep(0);
             setTreasurePhase('locked');
-            
             setQuizAnswer(null);
             setQuizSubmitted(false);
             setBadgeEarned(false);
@@ -128,7 +124,6 @@ const ArticleDetail = () => {
                 }
             }, 100);
         } else {
-            // 所有步驟完成，自動滾動並觸發寶箱特效
             setTimeout(() => {
                 treasureRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 setTimeout(() => setTreasurePhase('falling'), 500);
@@ -164,13 +159,19 @@ const ArticleDetail = () => {
                 completed.push(article.id);
                 localStorage.setItem('dee_ai_completed', JSON.stringify(completed));
             }
+            
+            // 🚀 關鍵解鎖邏輯：
+            // 如果這章的所有文章都完成了，解鎖下一章
             const currentChapter = CHAPTERS.find(c => c.articleIds.includes(article.id));
             if (currentChapter) {
-                const allDone = currentChapter.articleIds.every((id: number) => completed.includes(id));
-                if (allDone) {
-                    const nextLevel = currentChapter.id + 1;
+                const allInChapter = currentChapter.articleIds;
+                const isAllDone = allInChapter.every(id => completed.includes(id));
+                if (isAllDone) {
+                    const nextChapterId = currentChapter.id + 1;
                     const savedLevel = localStorage.getItem('dee_ai_level') || '0';
-                    if (nextLevel > parseInt(savedLevel)) localStorage.setItem('dee_ai_level', nextLevel.toString());
+                    if (nextChapterId > parseInt(savedLevel)) {
+                        localStorage.setItem('dee_ai_level', nextChapterId.toString());
+                    }
                 }
             }
         }
@@ -219,7 +220,7 @@ const ArticleDetail = () => {
                 </div>
             </section>
 
-            {/* STEPS - 🚀 確保一步步解鎖，無論冒險或自由模式 */}
+            {/* STEPS */}
             {hasSteps && (
                 <section className="py-20 px-6 max-w-4xl mx-auto text-left">
                     <div className="space-y-12">
@@ -258,16 +259,15 @@ const ArticleDetail = () => {
             <section className="py-40 px-6 text-center border-t border-white/5" ref={treasureRef}>
                 <AnimatePresence mode="wait">
                     {treasurePhase === 'locked' ? (
-                        <div className="opacity-20 grayscale flex flex-col items-center gap-8 py-20">
-                            <div className="text-8xl">🎁</div>
-                            <h3 className="text-xl font-black text-white uppercase tracking-[0.5em]">Treasure Locked</h3>
-                            <p className="text-xs font-bold text-zinc-600 tracking-widest">完成實戰演練以開啟</p>
+                        <div className="opacity-20 grayscale flex flex-col items-center gap-8 py-20 text-center">
+                            <div className="text-8xl text-center">🎁</div>
+                            <h3 className="text-xl font-black text-white uppercase tracking-[0.5em] text-center">Treasure Locked</h3>
                         </div>
                     ) : treasurePhase === 'revealed' ? (
                         <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="max-w-4xl mx-auto">
                             <div className="bg-zinc-900 border-2 border-emerald-500/30 rounded-[3rem] p-10 md:p-20 shadow-2xl relative overflow-hidden text-center">
                                 <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tighter text-center">{article.practice_kit?.title}</h2>
-                                <p className="text-zinc-400 text-lg md:text-xl mb-12 text-center font-medium leading-relaxed">{article.practice_kit?.description}</p>
+                                <p className="text-zinc-400 text-xl md:text-2xl mb-12 text-center font-medium leading-relaxed">{article.practice_kit?.description}</p>
                                 <div className="bg-black border border-white/5 rounded-2xl p-8 mb-12 text-left shadow-inner">
                                     <pre className="text-violet-300 whitespace-pre-wrap font-mono text-sm md:text-base leading-relaxed text-left">{article.practice_kit?.command}</pre>
                                 </div>
@@ -277,7 +277,7 @@ const ArticleDetail = () => {
                             </div>
                         </motion.div>
                     ) : (
-                        <div className="text-9xl py-20 animate-pulse">🎁</div>
+                        <div className="text-9xl py-20 animate-pulse text-center">🎁</div>
                     )}
                 </AnimatePresence>
             </section>
@@ -314,7 +314,7 @@ const ArticleDetail = () => {
                 </section>
             )}
 
-            {/* NEXT LESSON */}
+            {/* FOOTER NAV */}
             <section className="py-32 px-6 border-t border-white/5">
                 <div className="max-w-4xl mx-auto text-center">
                     {nextArticle ? (
@@ -324,44 +324,10 @@ const ArticleDetail = () => {
                             <ArrowRight size={40} className="mx-auto mt-8 text-emerald-500 group-hover:translate-x-3 transition-transform" />
                         </Link>
                     ) : (
-                        <Link to="/insights" className="text-emerald-500 font-black text-2xl hover:underline">🗺️ 返回冒險地圖</Link>
+                        <Link to="/insights" className="text-emerald-500 font-black text-2xl hover:underline text-center">🗺️ 返回冒險地圖</Link>
                     )}
                 </div>
             </section>
-            
-            {/* SPONSOR */}
-            <section className="max-w-4xl mx-auto px-6 mt-20 text-center">
-                <div className="p-12 rounded-[4rem] bg-zinc-900/40 border border-amber-500/10 text-center flex flex-col items-center">
-                    <Coffee size={40} className="text-amber-500 mb-6" />
-                    <h2 className="text-3xl font-black text-white mb-4 text-center">喜歡這份修煉嗎？</h2>
-                    <p className="text-zinc-500 mb-10 max-w-xs mx-auto text-center leading-relaxed">您的支持讓實驗室能持續進化出更高階的關卡。</p>
-                    <a href="https://pay.ecpay.com.tw/CreditPayment/ExpressCredit?MerchantID=3378826" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-amber-500 text-black font-black text-lg hover:bg-amber-400 transition-all shadow-xl active:scale-95">☕ 請 Dee 喝杯咖啡</a>
-                </div>
-            </section>
-
-            {/* AI JUMP MODAL */}
-            <AnimatePresence>
-                {showAiJumpModal && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[200] flex items-center justify-center px-6 bg-black/95 backdrop-blur-2xl text-center">
-                        <div className="max-w-sm w-full bg-zinc-900 border border-white/10 p-10 rounded-[3rem] shadow-2xl relative">
-                            <button onClick={() => setShowAiJumpModal(false)} className="absolute top-6 right-6 text-zinc-600 hover:text-white transition-colors"><X size={24} /></button>
-                            <h3 className="text-2xl font-black text-white mb-8 text-center">指令已複製！</h3>
-                            <div className="flex justify-center gap-4">
-                                {[
-                                    { name: 'GPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com' },
-                                    { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai' },
-                                    { name: 'Gemini', logo: GeminiLogo, app: 'googlegemini://', web: 'https://gemini.google.com' }
-                                ].map((ai, i) => (
-                                    <a key={i} href={ai.web} target="_blank" rel="noopener noreferrer" onClick={(e) => { e.preventDefault(); window.location.href = ai.app; setTimeout(() => { window.open(ai.web, '_blank'); setShowAiJumpModal(false); }, 2500); }} className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white/[0.03] hover:bg-white/10 transition-all flex-1 text-center">
-                                        <ai.logo size={32} />
-                                        <span className="text-white font-black text-[10px] uppercase text-center">{ai.name}</span>
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </div>
     );
 };
