@@ -1,6 +1,6 @@
 export const insight = {
-    id: 204,
-    category: "入門心法",
+    id: 210,
+    category: "指令技巧",
     themeColor: "violet",
     difficulty_level: 2,
     level: 2,
