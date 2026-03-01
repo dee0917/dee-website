@@ -10,10 +10,10 @@ import SEO from '../components/ui/SEO';
 import { ChatGPTLogo, ClaudeLogo, GeminiLogo } from '../components/AILogos';
 
 const fadeUp = {
-    initial: { opacity: 0, y: 15 },
+    initial: { opacity: 0, y: 10 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, margin: "-20px" },
-    transition: { duration: 0.4, ease: "easeOut" }
+    transition: { duration: 0.3 }
 };
 
 const XIcon = ({ size, className }: any) => (
@@ -55,7 +55,7 @@ const ArticleDetail = () => {
         const colors: Record<string, any> = {
             emerald: { text: 'text-emerald-500', lightText: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', gradient: 'from-emerald-500/20 to-teal-500/10', glow: 'shadow-emerald-500/20', solid: 'bg-emerald-500' },
             yellow: { text: 'text-yellow-500', lightText: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', gradient: 'from-yellow-500/10 to-orange-500/10', glow: 'shadow-emerald-500/20', solid: 'bg-yellow-500' },
-            amber: { text: 'text-amber-500', lightText: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20', gradient: 'from-amber-500/20 to-yellow-500/10', glow: 'shadow-emerald-500/20', solid: 'bg-amber-500' },
+            amber: { text: 'text-amber-500', lightText: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20', gradient: 'from-amber-500/20 to-yellow-500/10', glow: 'shadow-amber-500/20', solid: 'bg-amber-500' },
             blue: { text: 'text-blue-500', lightText: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-500/20', gradient: 'from-blue-500/20 to-indigo-500/10', glow: 'shadow-blue-500/20', solid: 'bg-blue-500' },
             violet: { text: 'text-violet-500', lightText: 'text-violet-400', bg: 'bg-violet-500/10', border: 'border-violet-500/20', gradient: 'from-violet-500/20 to-purple-500/10', glow: 'shadow-violet-500/20', solid: 'bg-violet-500' },
             rose: { text: 'text-rose-500', lightText: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/20', gradient: 'from-rose-500/20 to-pink-500/10', glow: 'shadow-rose-500/20', solid: 'bg-rose-500' },
@@ -237,20 +237,20 @@ const ArticleDetail = () => {
                 <motion.div className="h-full bg-emerald-500" style={{ width: `${progress * 100}%` }} />
             </div>
 
-            <section className="relative min-h-[40vh] flex flex-col items-center justify-center px-6 overflow-hidden pt-12">
+            <section className="relative min-h-[40vh] flex flex-col items-center justify-center px-6 overflow-hidden pt-8 pb-8 border-b border-white/5">
                 <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b ${theme.gradient} opacity-20 pointer-events-none`} />
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none" />
                 
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl w-full text-center relative z-10">
-                    <Link to="/insights" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-4 group text-xs">
-                        <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> 離開修煉
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl w-full text-center relative z-10">
+                    <Link to="/insights" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-3 group text-[10px] font-black uppercase tracking-widest">
+                        <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" /> Back
                     </Link>
-                    <div className="flex items-center justify-center gap-3 mb-4">
+                    <div className="flex items-center justify-center gap-3 mb-3">
                         <span className={`text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest ${theme.bg} ${theme.text} border ${theme.border}`}>{article.category}</span>
                         <div className="flex gap-1">{[...Array(5)].map((_, i) => <StarIcon key={i} size={8} className={i < (article.difficulty_level || 1) ? theme.text : 'text-zinc-800'} fill="currentColor" />)}</div>
                     </div>
-                    <h1 className="text-3xl md:text-7xl font-black text-white mb-4 tracking-tighter leading-[1.1]">{article.title}</h1>
-                    <p className="text-lg md:text-2xl text-zinc-400 mb-6 max-w-2xl mx-auto leading-relaxed">{article.summary}</p>
+                    <h1 className="text-3xl md:text-7xl font-black text-white mb-3 tracking-tighter leading-[1.1]">{article.title}</h1>
+                    <p className="text-lg md:text-2xl text-zinc-400 mb-6 max-w-2xl mx-auto leading-relaxed font-medium">{article.summary}</p>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={scrollToHook}
                         className="bg-white text-black font-black py-3 px-8 rounded-2xl text-base flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-500 transition-colors group">
                         <Gamepad2 size={20} /> 開始修煉 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -258,20 +258,20 @@ const ArticleDetail = () => {
                 </motion.div>
             </section>
 
-            <section className="py-4 px-5 md:px-6 bg-zinc-900/30 border-t border-white/5" ref={hookRef}>
-                <motion.div {...fadeUp} className="max-w-4xl mx-auto text-left mb-4 mt-4">
+            <section className="py-4 px-5 md:px-6 bg-zinc-900/30" ref={hookRef}>
+                <motion.div {...fadeUp} className="max-w-4xl mx-auto text-left mb-4 mt-2">
                     <span className="transition-label">痛點切入</span>
                     <h2 className="text-2xl md:text-5xl font-black text-white mb-4 tracking-tighter">你也正為了這件事煩惱嗎？</h2>
                     <p className="text-xl md:text-3xl text-white/90 leading-relaxed border-l-4 border-emerald-500 pl-6 italic font-medium">{article.pain_point}</p>
                 </motion.div>
 
-                <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-4 mb-4">
-                    <motion.div {...fadeUp} className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-5 md:p-8 relative overflow-hidden group">
+                <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-3 mb-2">
+                    <motion.div {...fadeUp} className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-5 md:p-6 relative overflow-hidden group">
                         <div className="text-white/5 text-6xl font-black absolute -right-4 -bottom-4 rotate-12">❌</div>
                         <span className="text-zinc-600 font-black text-[10px] block mb-2 uppercase tracking-[0.3em]">過去的你</span>
                         <p className="text-zinc-400 text-base md:text-xl leading-relaxed relative z-10">{article.example?.wrong}</p>
                     </motion.div>
-                    <motion.div {...fadeUp} transition={{ delay: 0.1 }} className="bg-emerald-500/[0.03] border border-emerald-500/20 rounded-[2rem] p-5 md:p-8 relative overflow-hidden group shadow-[0_0_50px_rgba(16,185,129,0.05)]">
+                    <motion.div {...fadeUp} transition={{ delay: 0.1 }} className="bg-emerald-500/[0.03] border border-emerald-500/20 rounded-[2rem] p-5 md:p-6 relative overflow-hidden group shadow-[0_0_50px_rgba(16,185,129,0.05)]">
                         <div className="text-emerald-500/10 text-7xl font-black absolute -right-4 -bottom-4 -rotate-12">✅</div>
                         <span className="text-emerald-400 font-black text-[10px] block mb-2 uppercase tracking-[0.3em]">現在的你</span>
                         <p className="text-white text-base md:text-xl leading-relaxed font-bold relative z-10">{article.example?.right}</p>
@@ -281,11 +281,11 @@ const ArticleDetail = () => {
 
             {hasSteps && (
                 <section className="py-4 px-5 md:px-6 text-left max-w-4xl mx-auto border-t border-white/5">
-                    <div className="text-left mb-4 mt-4">
+                    <div className="text-left mb-4 mt-2">
                         <span className="transition-label">實戰演練</span>
                         <h2 className="text-2xl md:text-5xl font-black text-white tracking-tighter">一步一步跟著做</h2>
                     </div>
-                    <div className="space-y-4 mb-4">
+                    <div className="space-y-3 mb-2">
                         {article.steps.map((step: any, idx: number) => {
                             const isDone = stepsCompleted[idx];
                             const isActive = idx === currentStep;
@@ -313,7 +313,7 @@ const ArticleDetail = () => {
                                             )}
                                             {step.dee_tip && (
                                                 <div className="bg-emerald-500/5 border-l-4 border-emerald-500 p-4 rounded-r-2xl mt-4 mb-4">
-                                                    <p className="text-emerald-400 text-sm md:text-xl italic font-black leading-relaxed">💡 Dee's Tip: {step.dee_tip}</p>
+                                                    <p className="text-emerald-400 text-base md:text-xl italic font-black leading-relaxed">💡 Dee's Tip: {step.dee_tip}</p>
                                                 </div>
                                             )}
                                             {isActive && !isDone && (
@@ -336,29 +336,28 @@ const ArticleDetail = () => {
                 </section>
             )}
 
-            <section className="py-10 px-5 md:px-6 text-center border-t border-white/5 relative overflow-hidden" ref={treasureRef}>
+            <section className="py-8 px-5 md:px-6 text-center border-t border-white/5 relative overflow-hidden" ref={treasureRef}>
                 <div className={`absolute inset-0 bg-gradient-to-b ${theme.gradient} opacity-5 pointer-events-none`} />
                 <motion.div {...fadeUp} className="max-w-3xl mx-auto relative z-10">
                     {treasurePhase === 'locked' && (
-                        <div className="flex flex-col items-center gap-6 py-6 grayscale opacity-30">
-                            <div className="text-7xl">🎁</div>
+                        <div className="flex flex-col items-center gap-6 py-4 grayscale opacity-30">
+                            <div className="text-6xl">🎁</div>
                             <h2 className="text-lg font-black text-white uppercase tracking-[0.5em]">Treasure Locked</h2>
-                            <p className="text-zinc-500 text-xs">完成所有步驟以開啟寶箱</p>
                         </div>
                     )}
                     {(treasurePhase === 'falling' || treasurePhase === 'impact') && (
-                        <motion.div initial={{ y: -300, rotate: -20 }} animate={{ y: 0, rotate: 0 }} transition={{ type: "spring", damping: 12, stiffness: 100 }} className="text-7xl py-6 relative">🎁</motion.div>
+                        <motion.div initial={{ y: -300, rotate: -20 }} animate={{ y: 0, rotate: 0 }} transition={{ type: "spring", damping: 12, stiffness: 100 }} className="text-7xl py-4 relative">🎁</motion.div>
                     )}
-                    {treasurePhase === 'exploding' && ( <motion.div animate={{ scale: [1, 1.5, 0], opacity: [1, 1, 0] }} transition={{ duration: 0.6 }} className="text-7xl py-6">💥</motion.div> )}
+                    {treasurePhase === 'exploding' && ( <motion.div animate={{ scale: [1, 1.5, 0], opacity: [1, 1, 0] }} transition={{ duration: 0.6 }} className="text-7xl py-4">💥</motion.div> )}
                     {treasurePhase === 'revealed' && (
                         <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
-                            <div className="bg-zinc-900 border-2 border-emerald-500/30 rounded-[2.5rem] p-6 md:p-10 shadow-2xl relative overflow-hidden mb-6">
+                            <div className="bg-zinc-900 border-2 border-emerald-500/30 rounded-[2.5rem] p-6 md:p-8 shadow-2xl relative overflow-hidden mb-4">
                                 <div className="absolute top-0 left-0 w-full h-1.5 bg-emerald-500" />
-                                <span className="text-emerald-500 font-black text-[9px] tracking-[0.8em] mb-6 block uppercase opacity-60">Ready to execute</span>
-                                <h2 className="text-2xl md:text-5xl font-black text-white mb-6 tracking-tighter leading-tight">{article.practice_kit?.title}</h2>
-                                <p className="text-lg md:text-3xl text-white/90 leading-relaxed border-l-4 border-emerald-500 pl-6 italic font-medium mb-8">{article.practice_kit?.description}</p>
-                                <div className="bg-black/50 border border-white/5 rounded-2xl p-6 md:p-8 mb-8 text-left">
-                                    <pre className="text-zinc-300 text-xs md:text-lg whitespace-pre-wrap font-mono leading-relaxed">{article.practice_kit?.command}</pre>
+                                <span className="text-emerald-500 font-black text-[9px] tracking-[0.8em] mb-4 block uppercase opacity-60">Ready to execute</span>
+                                <h2 className="text-2xl md:text-5xl font-black text-white mb-4 tracking-tighter leading-tight">{article.practice_kit?.title}</h2>
+                                <p className="text-lg md:text-2xl text-white/90 leading-relaxed border-l-4 border-emerald-500 pl-6 italic font-medium mb-6">{article.practice_kit?.description}</p>
+                                <div className="bg-black/50 border border-white/5 rounded-2xl p-5 md:p-6 mb-8 text-left">
+                                    <pre className="text-zinc-300 text-xs md:text-base whitespace-pre-wrap font-mono leading-relaxed">{article.practice_kit?.command}</pre>
                                 </div>
                                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleClaimCommand}
                                     className="bg-emerald-500 text-black font-black py-4 px-8 rounded-2xl text-lg flex items-center gap-3 mx-auto shadow-2xl">
@@ -371,14 +370,14 @@ const ArticleDetail = () => {
             </section>
 
             {hasQuiz && (
-                <section className="py-10 px-5 md:px-6 bg-zinc-900/20 border-t border-white/5" ref={quizRef}>
+                <section className="py-8 px-5 md:px-6 bg-zinc-900/20 border-t border-white/5" ref={quizRef}>
                     <motion.div {...fadeUp} className="max-w-4xl mx-auto">
                         <div className="text-left mb-6">
                             <span className="transition-label">終極考驗</span>
                             <h2 className="text-2xl md:text-5xl font-black text-white tracking-tighter">驗收你的修行成果</h2>
                         </div>
                         <div className="bg-zinc-900 border border-white/10 rounded-[2.5rem] p-5 md:p-8 shadow-2xl relative">
-                            <p className="text-lg md:text-4xl font-black text-white mb-8 leading-tight tracking-tighter">{article.quiz.question}</p>
+                            <p className="text-xl md:text-4xl font-black text-white mb-8 leading-tight tracking-tighter">{article.quiz.question}</p>
                             <div className="space-y-2">
                                 {article.quiz.options.map((opt: string, i: number) => (
                                     <motion.button key={i} whileHover={{ x: 5 }} whileTap={{ scale: 0.98 }} disabled={quizSubmitted} onClick={() => setQuizAnswer(i)}
@@ -392,12 +391,12 @@ const ArticleDetail = () => {
                             </div>
                             {!quizSubmitted ? (
                                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleQuizSubmit} disabled={quizAnswer === null}
-                                    className="w-full mt-8 py-4 rounded-2xl bg-white text-black font-black text-lg shadow-xl disabled:opacity-20 hover:bg-emerald-500 transition-colors">
+                                    className="w-full mt-6 py-4 rounded-2xl bg-white text-black font-black text-lg shadow-xl disabled:opacity-20 hover:bg-emerald-500 transition-colors">
                                     確認答案
                                 </motion.button>
                             ) : (
-                                <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`mt-8 p-6 rounded-2xl border relative overflow-hidden ${quizAnswer === article.quiz.answer ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-amber-500/10 border-amber-500/20'}`}>
-                                    <p className={`text-lg md:text-3xl font-black mb-3 ${quizAnswer === article.quiz.answer ? 'text-emerald-400' : 'text-amber-400'}`}>{quizAnswer === article.quiz.answer ? '🎉 完美答對！' : '💡 差一點點！'}</p>
+                                <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className={`mt-6 p-6 rounded-2xl border relative overflow-hidden ${quizAnswer === article.quiz.answer ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-amber-500/10 border-amber-500/20'}`}>
+                                    <p className={`text-xl md:text-3xl font-black mb-3 ${quizAnswer === article.quiz.answer ? 'text-emerald-400' : 'text-amber-400'}`}>{quizAnswer === article.quiz.answer ? '🎉 完美答對！' : '💡 差一點點！'}</p>
                                     <p className="text-zinc-300 text-sm md:text-xl leading-relaxed font-black">{article.quiz.explanation}</p>
                                 </motion.div>
                             )}
@@ -406,7 +405,7 @@ const ArticleDetail = () => {
                 </section>
             )}
 
-            <section className="py-10 px-5 md:px-6 text-center" ref={rewardRef}>
+            <section className="py-12 px-5 md:px-6 text-center" ref={rewardRef}>
                 <motion.div {...fadeUp} className="max-w-xl mx-auto">
                     {badgeEarned ? (
                         <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", damping: 10 }}>
