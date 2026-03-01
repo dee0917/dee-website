@@ -63,10 +63,8 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
 
     const handleAnswer = (levelValue: number) => {
         const newScore = score + levelValue;
-        if (step < questions.length) {
-            setScore(newScore);
-            setStep(step + 1);
-        }
+        setScore(newScore);
+        setStep(step + 1);
     };
 
     const finalLevel = Math.min(Math.floor(score / 1.5), 2);
