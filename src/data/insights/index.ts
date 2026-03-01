@@ -23,6 +23,7 @@ import { insight as ch1AiHallucination } from './ch1-ai-hallucination';
 import { insight as ch1AiPhysicalization } from './ch1-ai-physicalization';
 import { insight as ch3AiSocial } from './ch3-ai-social';
 import { insight as ch4AiManager } from './ch4-ai-manager';
+import { insight as ch5VPhoneAgent } from './ch5-vphone-agent';
 
 // ═══════════════════════════════════════════
 // Chapter 定義 — 主線任務的學習順序
@@ -47,6 +48,10 @@ export const CHAPTERS = [
     {
         id: 4, emoji: '🏆', title: '進階挑戰', subtitle: '把 AI 用在需要更深度思考的場景',
         articleIds: [401, 403, 405],
+    },
+    {
+        id: 5, emoji: '⚔️', title: '戰略演進', subtitle: '超越對話框，建立具備主權的代理人系統',
+        articleIds: [501],
     },
 ];
 
@@ -82,6 +87,8 @@ const mainQuest = [
     { ...aiNewsReader, level: 4 },
     { ...englishCoach, level: 4 },
     { ...ch4AiManager, level: 4 },
+    // Chapter 5: 戰略演進 (level: 5)
+    { ...ch5VPhoneAgent, level: 5 },
 ];
 
 // 支線文章 (level: -1 = 支線)

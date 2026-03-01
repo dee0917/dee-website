@@ -23,10 +23,12 @@ import { article as manusAiMeta } from './real-tech-manus-ai-meta';
 import { article as arxivSeeThrough3D } from './arxiv-2602-23359-seethrough3d';
 import { article as githubOpenFang } from './github-trending-openfang-agent-os';
 import { article as githubAIRI } from './github-trending-airi-digital-life';
+import { article as githubVPhone } from './github-trending-vphone-cli';
 import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
+    githubVPhone,       // 最新：iOS 虛擬化突破
     githubAIRI,         // 最新：數位生命專案
     githubOpenFang,     // 最新：GitHub Trending 爆款
     arxivSeeThrough3D,  // 最新：arXiv CVPR 2026 技術降維
