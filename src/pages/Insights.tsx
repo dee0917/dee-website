@@ -282,7 +282,8 @@ const Insights = () => {
 
         if (!done) setShowOnboarding(true);
         else {
-            setUnlockedChapter(parseInt(saved || '0') || 0);
+            const level = parseInt(saved || '0');
+            setUnlockedChapter(isNaN(level) ? 0 : level);
             if (mode === 'free') setViewMode('free');
             else setViewMode('adventure');
         }
@@ -296,7 +297,6 @@ const Insights = () => {
                     setCompletedIds([]);
                 }
             } catch(e) { 
-                console.error("Failed to parse completed IDs", e);
                 setCompletedIds([]); 
             }
         }
@@ -305,14 +305,12 @@ const Insights = () => {
 
     const allInsights = useMemo(() => INSIGHTS_LIST, []);
 
+    // 關鍵修復：監聽 viewMode，在冒險模式下強制初始化展開狀態
     useEffect(() => {
         if (viewMode === 'adventure') {
-            setExpandedChapters(prev => {
-                if (prev.size === 0) return new Set([unlockedChapter]);
-                return prev;
-            });
+            setExpandedChapters(new Set([unlockedChapter]));
         }
-    }, [unlockedChapter, viewMode]);
+    }, [viewMode, unlockedChapter]);
 
     const handleOnboardingComplete = (mode: 'guided' | 'free', chapter?: number) => {
         const ch = chapter || 0;
