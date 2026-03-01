@@ -71,6 +71,13 @@ const ArticleDetail = () => {
         if (article?.steps) {
             const isFree = localStorage.getItem('dee_view_preference') === 'free';
             setFreeMode(isFree);
+            
+            setQuizAnswer(null);
+            setQuizSubmitted(false);
+            setBadgeEarned(false);
+            setCopied(false);
+            setShowAiJumpModal(false);
+
             if (isFree) {
                 setStepsCompleted(new Array(article.steps.length).fill(true));
                 setCurrentStep(article.steps.length - 1);
@@ -78,15 +85,10 @@ const ArticleDetail = () => {
             } else {
                 setStepsCompleted(new Array(article.steps.length).fill(false));
                 setCurrentStep(0);
+                setTreasurePhase('locked');
             }
             stepRefs.current = new Array(article.steps.length).fill(null);
         }
-        setQuizAnswer(null);
-        setQuizSubmitted(false);
-        setBadgeEarned(false);
-        setCopied(false);
-        setTreasurePhase('locked');
-        setShowAiJumpModal(false);
     }, [article?.id, article?.steps?.length]);
 
     const fetchArticle = async (articleId: number) => {
