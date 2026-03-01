@@ -60,14 +60,11 @@ export const CHAPTERS = [
 // 主線順序表
 export const MAIN_QUEST_ORDER: number[] = CHAPTERS.flatMap(c => c.articleIds);
 
-// 支線任務 IDs (不計入主線進度)
-export const SIDE_QUEST_IDS: number[] = [304, 309, 307, 402, 404, 305, 2041]; // 2041 to avoid collision with new 204
-
 // ═══════════════════════════════════════════
-// 文章列表 — 主線 + 支線
+// 文章列表 — 基礎核心 + 戰略演進
 // ═══════════════════════════════════════════
 
-const mainQuest = [
+export const INSIGHTS_LIST = [
     // Chapter 0
     { ...ch0WhatIsAi, level: 0, id: 100 },
     { ...ch0FirstMessage, level: 0, id: 101 },
@@ -91,15 +88,3 @@ const mainQuest = [
     // Chapter 5 (Evolution)
     { ...ch1AiPhysicalization, level: 5, id: 205 },
 ];
-
-const sideQuests = [
-    { ...refusalMaster, level: -1, id: 304 },
-    { ...antiProcrastination, level: -1, id: 309 },
-    { ...stockAudit, level: -1, id: 307 },
-    { ...leadGenCover, level: -1, id: 402 },
-    { ...stockTrends, level: -1, id: 404 },
-    { ...parentHero, level: -1, id: 305 },
-    { ...seniorCoach, level: -1, id: 2041 },
-];
-
-export const INSIGHTS_LIST = [...mainQuest, ...sideQuests];

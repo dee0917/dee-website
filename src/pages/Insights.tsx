@@ -8,7 +8,7 @@ import {
     Compass, Map, Shield, Search, X
 } from 'lucide-react';
 import { INSIGHTS } from '../data/mock';
-import { CHAPTERS, MAIN_QUEST_ORDER, SIDE_QUEST_IDS } from '../data/insights';
+import { CHAPTERS, MAIN_QUEST_ORDER, INSIGHTS_LIST } from '../data/insights';
 import { ChatGPTLogo, ClaudeLogo, GeminiLogo } from '../components/AILogos';
 
 // ═══════════════════════════════════════════
@@ -317,9 +317,8 @@ const Insights = () => {
         setLoading(false);
     }, []);
 
-    const allInsights = useMemo(() => INSIGHTS.filter(i => i.category !== 'AI 新聞'), []);
-    const mainQuests = useMemo(() => allInsights.filter(i => MAIN_QUEST_ORDER.includes(i.id)), [allInsights]);
-    const sideQuests = useMemo(() => allInsights.filter(i => SIDE_QUEST_IDS.includes(i.id)), [allInsights]);
+    const allInsights = useMemo(() => INSIGHTS_LIST, []);
+    const mainQuests = useMemo(() => allInsights, [allInsights]);
 
     // Auto-expand and scroll to current chapter in adventure mode
     useEffect(() => {
@@ -375,7 +374,7 @@ const Insights = () => {
     };
 
     // Free mode filter & search
-    const filterTags = ['全部', '入門', '技巧', '實戰', '進階', '支線', '已完成', '未完成'];
+    const filterTags = ['全部', '啟航', '心法', '指令', '實戰', '躍遷', '演進', '已完成', '未完成'];
     
     const filteredInsights = useMemo(() => {
         return allInsights.filter(i => {
@@ -383,11 +382,12 @@ const Insights = () => {
             let tagMatch = true;
             if (freeFilter === '已完成') tagMatch = completedIds.includes(i.id);
             else if (freeFilter === '未完成') tagMatch = !completedIds.includes(i.id);
-            else if (freeFilter === '入門') tagMatch = i.category === '出發準備' || i.category === '入門心法';
-            else if (freeFilter === '技巧') tagMatch = i.category === '指令技巧';
+            else if (freeFilter === '啟航') tagMatch = i.category === '出發準備';
+            else if (freeFilter === '心法') tagMatch = i.category === '入門心法';
+            else if (freeFilter === '指令') tagMatch = i.category === '指令進化';
             else if (freeFilter === '實戰') tagMatch = i.category === '生活實戰';
-            else if (freeFilter === '進階') tagMatch = i.category === '進階挑戰';
-            else if (freeFilter === '支線') tagMatch = i.category === '支線任務';
+            else if (freeFilter === '躍遷') tagMatch = i.category === '職涯躍遷';
+            else if (freeFilter === '演進') tagMatch = i.category === '戰略演進';
 
             if (!tagMatch) return false;
 
@@ -529,23 +529,6 @@ const Insights = () => {
                                 />
                             );
                         })}
-                        {/* SIDE QUESTS IN ADVENTURE */}
-                        <div className="mt-20 pt-12 border-t border-white/5">
-                            <div className="mb-8 flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shadow-lg shadow-amber-500/5">
-                                    <Sparkles size={22} className="text-amber-400" />
-                                </div>
-                                <div>
-                                    <h2 className="text-xl font-black text-white">支線任務</h2>
-                                    <p className="text-zinc-500 text-xs mt-0.5">不受主線限制，隨時可以探索的特別篇</p>
-                                </div>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                                {sideQuests.map((item, i) => (
-                                    <InsightCard key={item.id} insight={item} idx={i} completed={completedIds.includes(item.id)} onTagClick={setSearchQuery} />
-                                ))}
-                            </div>
-                        </div>
                     </div>
                 ) : (
                     /* ═══════════ FREE MODE ═══════════ */

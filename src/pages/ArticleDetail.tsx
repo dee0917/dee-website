@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { api } from '../lib/supabase';
 import { INSIGHTS } from '../data/mock';
-import { MAIN_QUEST_ORDER, CHAPTERS, SIDE_QUEST_IDS } from '../data/insights';
+import { MAIN_QUEST_ORDER, CHAPTERS } from '../data/insights';
 import SEO from '../components/ui/SEO';
 import { ChatGPTLogo, ClaudeLogo, GeminiLogo } from '../components/AILogos';
 
@@ -215,7 +215,6 @@ const ArticleDetail = () => {
 
     const mainIndex = MAIN_QUEST_ORDER.indexOf(article.id);
     const isMainQuest = mainIndex !== -1;
-    const isSideQuest = SIDE_QUEST_IDS.includes(article.id);
     const nextArticleId = isMainQuest ? MAIN_QUEST_ORDER[mainIndex + 1] : null;
     const nextArticle = nextArticleId ? INSIGHTS.find(i => i.id === nextArticleId) : null;
     const isFinale = isMainQuest && mainIndex === MAIN_QUEST_ORDER.length - 1;

@@ -3,7 +3,7 @@ import { ArrowRight, Gamepad2, MessageSquare, Zap, Sparkles, Coffee, Rocket, Tro
 import { motion } from 'framer-motion';
 import SEO from '../components/ui/SEO';
 import Typewriter from '../components/ui/Typewriter';
-import { CHAPTERS, MAIN_QUEST_ORDER, SIDE_QUEST_IDS } from '../data/insights';
+import { CHAPTERS, MAIN_QUEST_ORDER } from '../data/insights';
 import { useEffect, useState } from 'react';
 
 const fadeUp = { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } };
@@ -22,7 +22,7 @@ const Home = () => {
         }
     }, []);
 
-    const totalArticles = MAIN_QUEST_ORDER.length + SIDE_QUEST_IDS.length;
+    const totalArticles = MAIN_QUEST_ORDER.length;
     const playerLevel = Math.floor(completedCount / 1.5) + 1;
     const xp = completedCount * 200;
 
@@ -152,14 +152,6 @@ const Home = () => {
                             ))}
                         </div>
                     </div>
-
-                    <motion.div {...fadeUp} className="text-center mt-12">
-                        <div className="inline-flex items-center gap-3 bg-white/[0.03] px-6 py-2 rounded-full border border-white/5">
-                            <span className="text-zinc-400 text-xs font-black uppercase tracking-widest">+ 🎲 {SIDE_QUEST_IDS.length} 篇支線任務</span>
-                            <span className="w-1 h-1 rounded-full bg-zinc-800" />
-                            <span className="text-zinc-500 text-xs font-medium">育兒、寵物、投資...隨時探索</span>
-                        </div>
-                    </motion.div>
                 </div>
             </section>
 
