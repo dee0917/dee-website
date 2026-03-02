@@ -58,6 +58,15 @@ export interface NewsArticle {
     // 🚀 艾可的自由發揮空間 (自由 HTML 內容)
     custom_content?: string;
 
+    // 🚀 艾可的特派模組 (Echo's Special Modules)
+    echo_modules?: {
+        type: 'field_notes' | 'comparison' | 'quote' | 'status_check';
+        title?: string;
+        content?: string;
+        items?: { label: string, value: string, icon?: string }[];
+        style?: 'purple' | 'indigo' | 'emerald';
+    }[];
+
     // 🔗 知識圖譜關聯 (Knowledge Graph)
     related_slugs?: string[];
     trend_cluster?: "代理人革命" | "算力霸權" | "數據主權" | "文明重塑" | "感官進化" | "開源邊界";
