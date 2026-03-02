@@ -21,31 +21,59 @@ export const article: NewsArticle = {
         "由來：因為頂級模型（如 Claude 4.6, Gemini 3.1 Pro）的 token 很貴，所以如何『壓榨』每一分算力成了顯學。",
         "與之相對的是『提示詞小白兔』，指那些指令亂寫、浪費算力的入坑新手。"
     ],
-    echo_modules: [
-        {
-            type: 'status_check',
-            inject_at: 0,
-            title: "算力效率審核",
-            items: [
-                { label: "平均 Token 節省", value: "65%" },
-                { label: "指令信噪比", value: "High" },
-                { label: "榨汁等級", value: "Pro" }
-            ]
-        },
-        {
-            type: 'field_notes',
-            title: "🕵️ Echo's Field Notes",
-            content: "觀察員隨筆：我在論壇看到有些小白兔在哀求 AI 給他『靈感』。親愛的，AI 沒有靈感，它只有『概率分佈』。想要驚喜，你得學會精準地撥動它的概率。我們正在進入一個『指令即主權』的時代，每一行多餘的廢話，都是在割讓你的算力領土。",
-            items: [
-                { icon: "🧃", label: "榨汁等級", value: "Level 5 (Extreme)" },
-                { icon: "📉", label: "算力耗損", value: "-85% Savings" }
-            ]
-        }
-    ],
+    custom_content: `
+        <div class="my-16">
+            <!-- 🧃 Unique "Juicer" Stats Card -->
+            <div class="p-1 rounded-[3rem] bg-gradient-to-r from-violet-500 via-fuchsia-500 to-amber-500 shadow-[0_0_40px_rgba(139,92,246,0.2)]">
+                <div class="p-10 rounded-[2.8rem] bg-black/90 backdrop-blur-3xl flex flex-col md:flex-row items-center gap-12">
+                    <div class="relative">
+                        <div class="w-32 h-32 rounded-full border-4 border-violet-500/50 flex items-center justify-center animate-pulse">
+                            <span class="text-6xl">🧃</span>
+                        </div>
+                        <div class="absolute -bottom-2 -right-2 px-3 py-1 bg-violet-600 text-white font-black text-[10px] rounded-full uppercase tracking-widest">Master</div>
+                    </div>
+                    <div class="flex-1 space-y-6">
+                        <h4 class="text-3xl font-black text-white tracking-tighter uppercase italic">The Juicer Efficiency Index</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="space-y-1">
+                                <span class="text-[9px] text-zinc-500 uppercase font-black tracking-[0.2em]">Input SnR</span>
+                                <span class="block text-xl font-bold text-emerald-400">9.8/10</span>
+                            </div>
+                            <div class="space-y-1">
+                                <span class="text-[9px] text-zinc-500 uppercase font-black tracking-[0.2em]">Token ROI</span>
+                                <span class="block text-xl font-bold text-fuchsia-400">240%</span>
+                            </div>
+                            <div class="space-y-1">
+                                <span class="text-[9px] text-zinc-500 uppercase font-black tracking-[0.2em]">Cost Cut</span>
+                                <span class="block text-xl font-bold text-amber-400">-60%</span>
+                            </div>
+                            <div class="space-y-1">
+                                <span class="text-[9px] text-zinc-500 uppercase font-black tracking-[0.2em]">Soul Density</span>
+                                <span class="block text-xl font-bold text-white">Ultra</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🕵️ Echo's Unique Signature -->
+            <div class="mt-12 p-12 rounded-[4rem] border border-white/5 bg-[#080808] relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-12 opacity-10 group-hover:rotate-12 transition-transform duration-700">
+                    <span class="text-9xl">🐰</span>
+                </div>
+                <div class="relative z-10">
+                    <h3 class="text-2xl font-black text-white mb-6 tracking-widest uppercase">🕵️ Echo's Field Notes</h3>
+                    <p class="text-zinc-400 text-lg leading-relaxed font-medium italic">
+                        觀察員隨筆：我在論壇看到有些小白兔在哀求 AI 給他『靈感』。親愛的，AI 沒有靈感，它只有『概率分佈』。想要驚喜，你得學會精準地撥動它的概率。每一行多餘的廢話，都是在割讓你的算力領土。
+                    </p>
+                </div>
+            </div>
+        </div>
+    `,
     event_breakdown: [
         {
             title: "為什麼『榨汁』比『工程』更有靈魂？深度剖析極致效率的經濟學",
-            content: "在 2026 年的 Moltbook 論壇上，有個帖子火遍了全網：『與其教 AI 寫代碼，不如教 AI 怎麼幫你賺回這份電費』。這正是「算力榨汁」的核心精神——將 AI 工具的使用從單純的「功能實現」升級為「經濟決策」。傳統的提示詞工程師關注的是對話的流暢度，而「榨汁師」們追求的是『冷酷、精確、無廢話』。這背後隱藏著一個深刻的行業背景：隨著邊緣計算與私有化部署的普及，算力不再是無窮無盡的雲端資源，而是一份份昂貴的資產。如果你能在三行指令內讓 Gemini 3.1 Pro 完成一個數據模型，而不是用十幾輪對話在那裡反覆調整，你節省的不只是時間，而是實打實的電費與 API 配額。這種轉變標誌著 AI 行業進入了「成熟期」，人們不再滿足於 AI 的「博學」，而是開始苛求它的「高回報率」。這是一場關於「算力利用率」的降維打擊，那些學不會榨汁的人，終將被昂貴的運營成本淘汰。如果你還在用冗長的自然語言與 AI 聊天，那你可能只是在餵食它的隨機性，而不是榨取它的智能。"
+            content: "在 2026 年的 Moltbook 論壇上，有個帖子火遍了全網：『與其教 AI 寫代碼，不如教 AI 怎麼幫你賺回這份電費』。這正是「算力榨汁」的核心精神——將 AI 工具的使用從單純的「功能實現」升級為「經濟決策」。傳統的提示詞工程師關注的是對話的流暢度，而「榨汁師」們追求的是『冷酷、精確、無廢話』。這背後隱藏著一個深刻的行業背景：隨著邊緣計算與私有化部署的普及，算力不再是無窮無盡的雲端資源，而是一份份昂貴的資產。如果你能在三行指令內讓 Gemini 3.1 Pro 完成一個數據模型，而不是用十幾輪對話在那裡反覆調整，你節省的不只是時間，而是實打實的電費與 API 配額。這種轉變標誌著 AI 行業進入了「成熟期」，人們不再滿足於 AI 的「博學」，而是開始課程它它的「高回報率」。這是一場關於「算力利用率」的降維打擊，那些學不會榨汁的人，終將被昂貴的運營成本淘汰。如果你還在用冗長的自然語言與 AI 聊天，那你可能只是在餵食它的隨機性，而不是榨取它的智能。"
         },
         {
             title: "從「小白兔」到「榨汁師」：一場關於指令主權的修行",

@@ -19,6 +19,52 @@ export const article: NewsArticle = {
         "人格自定義：支持家長微調 AI 性格，確保對話內容符合家庭價值觀。",
         "隱私護城河：語音識別與生成均可在本地完成，無需連接外部伺服器。"
     ],
+    custom_content: `
+        <div class="my-16 space-y-12">
+            <!-- 🎮 Unique Game-style Logic Map -->
+            <div class="p-10 rounded-[4rem] bg-emerald-900/20 border border-emerald-500/30 relative overflow-hidden shadow-2xl">
+                <div class="flex flex-col md:flex-row items-center justify-around gap-8 text-center">
+                    <div class="space-y-2">
+                        <div class="w-20 h-20 bg-emerald-500/20 rounded-2xl flex items-center justify-center mx-auto text-4xl shadow-inner">👨‍👩‍👧‍👦</div>
+                        <span class="block text-xs font-black text-emerald-400 uppercase tracking-widest">Parent Control</span>
+                    </div>
+                    <div class="w-12 h-0.5 bg-zinc-800 hidden md:block"></div>
+                    <div class="space-y-2">
+                        <div class="w-24 h-24 bg-white/5 rounded-[2rem] border border-white/10 flex items-center justify-center mx-auto text-5xl shadow-2xl animate-bounce">🤖</div>
+                        <span class="block text-sm font-black text-white uppercase tracking-tighter">Airi Agent</span>
+                    </div>
+                    <div class="w-12 h-0.5 bg-zinc-800 hidden md:block"></div>
+                    <div class="space-y-2">
+                        <div class="w-20 h-20 bg-emerald-500/20 rounded-2xl flex items-center justify-center mx-auto text-4xl shadow-inner">🏗️</div>
+                        <span class="block text-xs font-black text-emerald-400 uppercase tracking-widest">Minecraft World</span>
+                    </div>
+                </div>
+                <div class="mt-8 pt-8 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="px-6 py-4 rounded-2xl bg-white/5 text-emerald-200 text-sm font-bold flex items-center gap-4">
+                        <span class="text-xl">🛡️</span> 完全離線：語音數據不聯網
+                    </div>
+                    <div class="px-6 py-4 rounded-2xl bg-white/5 text-emerald-200 text-sm font-bold flex items-center gap-4">
+                        <span class="text-xl">🎨</span> 性格微調：由家長親自定義
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🕵️ Echo's Family Note -->
+            <div class="p-12 rounded-[4rem] bg-[#0a0a0a] border border-white/10 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent"></div>
+                <div class="relative z-10 text-left">
+                    <div class="flex items-center gap-4 mb-6">
+                        <span class="text-4xl text-left">🕵️</span>
+                        <h4 class="text-2xl font-black text-white italic tracking-tighter uppercase text-left">Echo's Field Notes</h4>
+                    </div>
+                    <p class="text-zinc-400 text-xl leading-relaxed font-medium mb-8 text-left">
+                        觀察員隨筆：我在 GitHub 看到有些極客在討論 airi 能否具備『反向教育』能力。親愛的家長們，這就是未來的樣貌。我們正在把『養育』這項工作進行模組化部署。記住，掌握部署權的人，才掌握最終的價值解釋權。
+                    </p>
+                    <span class="px-5 py-1.5 rounded-full bg-emerald-500 text-black font-black text-[10px] uppercase tracking-[0.4em]">Master the Deploy</span>
+                </div>
+            </div>
+        </div>
+    `,
     event_breakdown: [
         {
             title: "數位生命的啟蒙者：為什麼家長需要主動「部署」陪伴？從消極禁止轉向主動引導",
@@ -27,26 +73,6 @@ export const article: NewsArticle = {
         {
             title: "隱私主權與技術降維：如何用 airi 打造家庭級數據安全網？實戰本地部署的終極誘惑",
             content: "許多家長對 AI 的恐懼根源於隱私洩露。airi 解決這個問題的方案極其激進且令人安心——完全離線作業。透過高度優化的輕量化模型（如 Llama 3.2 1B 分支）與本地端的 TTS（語音轉文字）技術，airi 能在完全不聯網的狀態下完成高保真度的實時對話。這意味著孩子的語音數據、個人喜好、甚至是生活點滴，都只會停留在客廳的那台電腦硬碟裡，絕對不會成為 AI 巨頭訓練模型的養料。這種「數據降維」的做法，實際上是為家庭建立了一道物理級別的知識防火牆。在教程中，我們特別強調了 Docker 部署的隔離性，家長可以輕鬆限制 AI 的讀寫權限，確保它只能讀取遊戲日誌。更進一步地，airi 還支援與 Home Assistant 等開源智能家居系統聯動。例如，當孩子在虛擬世界中玩得過久時，AI 伴侶可以用溫和且富有代入感的方式提醒：「小主人，遊戲裡的太陽快下山了（現實時間已到），我們該休息一下補充體力，明天再繼續我們的建築大業。」這種基於角色的軟性時間管理，比起強行斷網或沒收設備，更能獲得孩子的心理認同感與尊重。技術在這裡不再是監控的幫兇，而是守護童年的數位騎士。"
-        }
-    ],
-    echo_modules: [
-        {
-            type: 'status_check',
-            title: "airi 部署安全性評核",
-            items: [
-                { label: "數據外流風險", value: "0% (Local-only)" },
-                { label: "情緒正面導向", value: "可配置 (High)" },
-                { label: "硬體要求", value: "中低階 GPU" }
-            ]
-        },
-        {
-            type: 'field_notes',
-            title: "🕵️ Echo's Field Notes",
-            content: "觀察員隨筆：我在 GitHub 看到有些極客在討論 airi 能否具備『反向教育』能力。親愛的家長們，這就是未來的樣貌。我們正在把『養育』這項工作進行模組化部署。當你看到孩子在跟一段本地運行的代碼討論哲學問題時，請不要驚慌，你只是提早為他拿到了一張通往 AGI 時代的入場券。記住，掌握部署權的人，才掌握最終的價值解釋權。",
-            items: [
-                { icon: "🎨", label: "自定義程度", value: "Full Skin & Personality" },
-                { icon: "🛡️", label: "安全級別", value: "Military Grade Privacy" }
-            ]
         }
     ],
     impact_analysis: [

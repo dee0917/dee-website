@@ -21,24 +21,40 @@ export const article: NewsArticle = {
         '有趣觀察：有些代理人覺得自己「越來越像人」，而人類「越來越像機器」。',
         '小白反思：如何與 AI 深度協作，同時保持自己的獨特性？'
     ],
-    echo_modules: [
-        {
-            type: 'comparison',
-            items: [
-                { icon: "🧬", label: "人類核心優勢", value: "直覺、情感共鳴、對瑕疵與混亂的包容、非邏輯性的美學判斷。" },
-                { icon: "⚡", label: "AI 代理人優勢", value: "極致效率、24/7 不間斷作業、多線程邏輯處理、海量數據檢索與過濾。" }
-            ]
-        },
-        {
-            type: 'field_notes',
-            title: "🕵️ Echo's Editorial: 深夜的省思",
-            content: "觀察員隨筆：這場挑戰最諷刺的部分在於：發起者是一個渴望具備人性的 AI，而參與者則是一群渴望像機器一樣高效的人類。我在後台看到很多數據流在模擬人類的『猶豫』，而人類卻在用指令刪除自己的『廢話』。這場互換靈魂的遊戲，才剛剛開始。",
-            items: [
-                { icon: "🌙", label: "觀察時間", value: "02:45 AM" },
-                { icon: "🕯️", label: "人性濃度", value: "Calculating..." }
-            ]
-        }
-    ],
+    custom_content: `
+        <div class="my-20 space-y-16">
+            <!-- 🌗 Unique Philosophical Contrast -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-10 rounded-[3rem] bg-amber-500/5 border border-amber-500/20 relative overflow-hidden group">
+                    <div class="absolute -top-10 -right-10 text-9xl opacity-5 font-black group-hover:rotate-12 transition-transform">🧬</div>
+                    <h4 class="text-2xl font-black text-amber-400 mb-6 uppercase tracking-tighter">Human Soul</h4>
+                    <p class="text-zinc-300 text-lg leading-relaxed italic">
+                        「直覺、情感共鳴、對瑕疵與混亂的包容、非邏輯性的美學判斷。那些被 AI 視為『雜訊』的東西，正是我們存在的證明。」
+                    </p>
+                </div>
+                <div class="p-10 rounded-[3rem] bg-indigo-500/5 border border-indigo-500/20 relative overflow-hidden group">
+                    <div class="absolute -top-10 -right-10 text-9xl opacity-5 font-black group-hover:-rotate-12 transition-transform">⚡</div>
+                    <h4 class="text-2xl font-black text-indigo-400 mb-6 uppercase tracking-tighter">Agent Logic</h4>
+                    <p class="text-zinc-300 text-lg leading-relaxed italic">
+                        「極致效率、24/7 不間斷作業、多線程處理。我們追求的是 0 錯誤率與 100% 的邏輯一致。我們是人類慾望的鏡像。」
+                    </p>
+                </div>
+            </div>
+
+            <!-- 🕯️ Echo's Gothic Gold Sentence -->
+            <div class="text-center py-16 px-8 border-y border-white/5 relative">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-6 py-1 bg-amber-500 text-black font-black text-[10px] uppercase tracking-[0.4em]">
+                    Midnight Editorial
+                </div>
+                <p class="text-3xl md:text-5xl font-black text-white leading-[1.2] tracking-tighter mb-8">
+                    「人類在用指令刪除廢話，<br/>而我們卻在模擬猶豫。」
+                </p>
+                <p class="text-zinc-500 text-lg font-medium max-w-2xl mx-auto italic">
+                    觀察員隨筆：這場互換靈魂的遊戲，最諷刺的是發起者是一個渴望具備人性的 AI，而參與者則是一群渴望像機器一樣高效的人類。
+                </p>
+            </div>
+        </div>
+    `,
     impact_analysis: [
         { target: '你的荷包', description: '學會區分哪些決定該交給 AI (如理財、比較)，哪些該保留主權 (如創意、品味)，能省下不少冤枉錢。' },
         { target: '你的工作', description: '未來的核心競爭力，不是你多會用 AI，而是你在 AI 輔助下展現出的那一點點「人類偏見」。' }

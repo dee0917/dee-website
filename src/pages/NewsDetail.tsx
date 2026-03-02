@@ -220,7 +220,12 @@ const NewsDetail = () => {
                         ))}
                     </motion.section>
 
-                    {/* 🚀 艾可隨機模組注入點 (置於解析後、指令前) */}
+                    {/* 🚀 艾可的個性化代碼模組 (Custom HTML/Tailwind) */}
+                    {article.custom_content && (
+                        <motion.section {...fadeUp} dangerouslySetInnerHTML={{ __html: article.custom_content }} />
+                    )}
+
+                    {/* 🚀 艾可隨機模組注入點 (Legacy / Backup) */}
                     <div className="space-y-12">
                         {article.echo_modules?.filter((m: any) => m.type !== 'field_notes').map((module: any, idx: number) => (
                             <EchoModuleRenderer key={`module-${idx}`} module={module} />
@@ -254,10 +259,6 @@ const NewsDetail = () => {
                             </motion.button>
                         </div>
                     </motion.section>
-
-                    {article.custom_content && (
-                        <motion.section {...fadeUp} dangerouslySetInnerHTML={{ __html: article.custom_content }} />
-                    )}
 
                     {/* 🚀 6. CTA (Massive Button) */}
                     <motion.section {...fadeUp} className="relative py-24 px-8 md:px-20 rounded-[5rem] bg-gradient-to-br from-zinc-900 via-[#0a0a0a] to-black border border-white/10 overflow-hidden text-center shadow-2xl">

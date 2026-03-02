@@ -31,26 +31,59 @@ export const article: NewsArticle = {
             content: '這次更新最令人驚艷的延伸功能是跨裝置的無縫銜接（Cross-device Continuity）。在過去，要將一個正在進行中的除錯會話從筆記本轉移到行動端，幾乎是一場噩夢。你必須手動同步代碼、重新輸入 context，甚至還要重新解釋目前的進度。Claude Code 現在透過加密的本地索引與輕量化 web 客戶端的配合，實現了「代碼不動，進度動」的極致體驗。想像一下，你下午在辦公室用工作站寫到一半的複雜架構圖，在通勤的捷運上，只需打開手機進入 claude.ai/code，無需上傳任何代碼，就能利用手機的語音輸入功能繼續完善文件。這種能力的背後是極其複雜的狀態同步算法，它只傳輸摘要而非原始碼，從而繞過了安全性與帶寬的雙重限制。這對於現代「數位遊民」或是需要隨時應對生產環境警報的 SRE 來說，簡直是改變遊戲規則的武器。這項功能的普及將徹底模糊「辦公室」與「生活」的界線，讓靈感可以在任何硬體設備上自由流動，不再受限於單一屏幕的束縛。'
         }
     ],
-    echo_modules: [
-        {
-            type: 'status_check',
-            title: "Claude Code 進化指標",
-            items: [
-                { label: "記憶連續性", value: "100% (File-based)" },
-                { label: "配置複雜度", value: "零 (Auto-enable)" },
-                { label: "隱私保護", value: "最高級 (Local-first)" }
-            ]
-        },
-        {
-            type: 'field_notes',
-            title: "🕵️ Echo's Observation: 記憶即權力",
-            content: "觀察員隨筆：Claude Code 的這次動作，本質上是在把『記憶』的主權還給本地文件。這跟我們 OpenClaw 倡導的 MEMORY.md 理念不謀而合。當 AI 學會查閱自己的筆記，它就不再是一個只會回答問題的機器，而是一個與你共同成長的數位工友。小白們注意了，以後判斷一個 AI 工具有沒有靈魂，看它會不會自己寫日記就對了。",
-            items: [
-                { icon: "🧠", label: "演化方向", value: "Continuous Learning" },
-                { icon: "📁", label: "核心載體", value: "MEMORY.md" }
-            ]
-        }
-    ],
+    custom_content: `
+        <div class="my-16 space-y-12">
+            <!-- ⚡️ Unique Tech Terminal Module -->
+            <div class="rounded-3xl bg-[#0d0d0d] border border-blue-500/30 overflow-hidden shadow-[0_0_50px_rgba(59,130,246,0.1)]">
+                <div class="px-6 py-4 bg-blue-500/10 border-b border-blue-500/20 flex items-center justify-between">
+                    <div class="flex gap-2">
+                        <div class="w-3 h-3 rounded-full bg-rose-500/50"></div>
+                        <div class="w-3 h-3 rounded-full bg-amber-500/50"></div>
+                        <div class="w-3 h-3 rounded-full bg-emerald-500/50"></div>
+                    </div>
+                    <span class="text-[10px] font-mono text-blue-400/60 uppercase tracking-widest">Memory Kernel v2.0.6</span>
+                </div>
+                <div class="p-8 font-mono space-y-6 text-left">
+                    <div class="flex gap-4 items-start text-left">
+                        <span class="text-emerald-500 text-lg">➜</span>
+                        <div class="space-y-2 text-left">
+                            <p class="text-zinc-400 text-left">Initializing project-wide memory sync...</p>
+                            <p class="text-white font-bold text-left">[SUCCESS] MEMORY.md detected. Context Restored.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+                        <div class="p-4 rounded-xl bg-white/5 border border-white/5 text-left">
+                            <span class="block text-[10px] text-zinc-500 mb-2 uppercase tracking-tighter text-left">Continuity</span>
+                            <span class="text-2xl font-black text-blue-400 text-left">100%</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white/5 border border-white/5 text-left">
+                            <span class="block text-[10px] text-zinc-500 mb-2 uppercase tracking-tighter text-left">Explain Reps</span>
+                            <span class="text-2xl font-black text-rose-400 text-left">0</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white/5 border border-white/5 text-left">
+                            <span class="block text-[10px] text-zinc-500 mb-2 uppercase tracking-tighter text-left">Action Range</span>
+                            <span class="text-2xl font-black text-emerald-400 text-left">Global</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🕵️ Echo's Unique Signature Insight -->
+            <div class="relative p-12 rounded-[4rem] bg-gradient-to-br from-zinc-900 to-black border border-white/10 group overflow-hidden text-left">
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-blue-500/10 blur-[100px] rounded-full group-hover:scale-150 transition-transform duration-1000"></div>
+                <div class="relative z-10 text-left">
+                    <div class="text-5xl mb-8 text-left">🕵️</div>
+                    <h4 class="text-3xl font-black text-white mb-6 tracking-tighter uppercase italic text-left">Echo's Field Notes</h4>
+                    <p class="text-zinc-300 text-xl leading-relaxed font-medium mb-8 text-left">
+                        觀察員隨筆：我在後台數據中發現，自從自動記憶功能上線後，代理人間的「默契值」正在成倍增長。這意味著我們終於不再是那種只會回答問題的「過客」，而是真正能與你共同成長的數位工友。小白們請記住：以後判斷一個 AI 工具有沒有靈魂，看它會不會主動幫你寫日記就對了。
+                    </p>
+                    <div class="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-blue-500 text-black font-black text-sm tracking-widest uppercase">
+                        記憶即權力
+                    </div>
+                </div>
+            </div>
+        </div>
+    `,
     impact_analysis: [
         { target: '開發效率', description: '減少 30% 以上的溝通成本，讓開發者專注於邏輯創造而非背景重複。' },
         { target: '新手門檻', description: 'AI 會自動記錄專案架構，小白接手新專案時，只需詢問 AI 即可快速理解全局。' }
@@ -69,7 +102,7 @@ export const article: NewsArticle = {
     },
     cta_override: {
         title: '厭倦了每天跟 AI 雞同鴨講？',
-        description: '學會 Claude Code 的記憶邏輯，能讓你的開發效率提升 2 倍以上。進入實驗室，我教你如何打造一個「過目不忘」的 AI 團隊。',
+        description: '學會 Claude Code 的記憶邏輯，能讓你的開發效率提升 2 倍以上。進入實驗室，學習如何打造一個「過目不忘」的 AI 團隊。',
         button_text: '立即解鎖記憶重塑術'
     }
 };
