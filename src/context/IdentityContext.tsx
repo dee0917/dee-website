@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
-export type UserPersona = 'general' | 'office' | 'merchant' | 'parent' | 'student' | 'slashie';
+import { UserPersona } from '../data/personas';
 
 interface IdentityContextType {
     persona: UserPersona;

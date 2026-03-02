@@ -6,19 +6,50 @@ import {
     ArrowRight, Star, BookOpen, Lock, CheckCircle2, Sparkles,
     Zap, Gamepad2, Trophy, ChevronDown, ChevronRight, Filter,
     Compass, Map as MapIcon, Shield, Search, X, Info, User,
-    Briefcase, Utensils, Home as HomeIcon, GraduationCap, Rocket as RocketIcon
+    Briefcase, Utensils, Home as HomeIcon, GraduationCap, Rocket as RocketIcon, Quote
 } from 'lucide-react';
 import { CHAPTERS, MAIN_QUEST_ORDER, INSIGHTS_LIST } from '../data/insights';
 import { ChatGPTLogo, ClaudeLogo, GeminiLogo } from '../components/AILogos';
-import { useIdentity, UserPersona } from '../context/IdentityContext';
+import { useIdentity } from '../context/IdentityContext';
+import { PERSONAS, UserPersona } from '../data/personas';
 
-const PERSONA_CONFIG: Record<UserPersona, { label: string, icon: any, color: string, description: string }> = {
-    general: { label: '一般小白', icon: User, color: 'emerald', description: '從基礎心法開始穩紮穩打。' },
-    office: { label: '不再加班社畜', icon: Briefcase, color: 'blue', description: '專攻 Email、報表與會議摘要。' },
-    merchant: { label: '滿手蔥花店主', icon: Utensils, color: 'amber', description: '專攻招募、客訴與菜單發想。' },
-    parent: { label: '全能家庭守護者', icon: HomeIcon, color: 'rose', description: '專攻教養解釋、食譜與旅遊。' },
-    student: { label: '校園突圍者', icon: GraduationCap, color: 'violet', description: '專攻論文摘要、報告與翻譯。' },
-    slashie: { label: '斜槓生存家', icon: RocketIcon, color: 'indigo', description: '專攻爆款標題與社群貼文。' }
+const PersonaSwitchModal = ({ onComplete, onClose }: { onComplete: (persona: UserPersona) => void, onClose: () => void }) => {
+    const [selected, setSelected] = useState<UserPersona>('general');
+
+    return (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[110] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl">
+            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} className="bg-zinc-900 border border-white/10 p-8 md:p-12 rounded-[3rem] max-w-xl w-full shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-teal-500" />
+                <button onClick={onClose} className="absolute top-6 right-6 text-zinc-500 hover:text-white transition-colors p-2"><X size={24} /></button>
+                
+                <div className="text-left mb-8">
+                    <h2 className="text-2xl font-black text-white mb-2 tracking-tight">切換修煉身分</h2>
+                    <p className="text-zinc-500 text-sm">選擇一個新身分，我們將為您重新代入實戰案例。</p>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10 text-center">
+                    {(Object.keys(PERSONAS) as UserPersona[]).map(p => {
+                        const conf = PERSONAS[p];
+                        const isSelected = selected === p;
+                        return (
+                            <button key={p} onClick={() => setSelected(p)}
+                                className={`flex flex-col items-center gap-3 p-5 rounded-[2rem] border transition-all ${isSelected 
+                                    ? `bg-${conf.color}-500/20 border-${conf.color}-500 text-white shadow-lg` 
+                                    : 'bg-white/5 border-white/5 text-zinc-500 hover:border-white/10'}`}>
+                                {React.createElement(conf.icon, { size: 28 })}
+                                <span className="text-[11px] font-black uppercase tracking-widest">{conf.label}</span>
+                            </button>
+                        );
+                    })}
+                </div>
+
+                <button onClick={() => onComplete(selected)}
+                    className="w-full py-5 rounded-2xl bg-emerald-500 text-black font-black text-lg hover:bg-emerald-400 shadow-xl shadow-emerald-500/20 active:scale-95 transition-all">
+                    確認切換身分
+                </button>
+            </motion.div>
+        </motion.div>
+    );
 };
 
 const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free', chapter?: number, persona?: UserPersona) => void }) => {
@@ -30,7 +61,7 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
         <motion.div key={kkey} initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
             className="bg-zinc-900/95 border border-white/10 p-8 md:p-12 rounded-[2.5rem] max-w-lg w-full shadow-2xl relative overflow-hidden text-center">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-600" />
-            <div className="relative z-10">{children}</div>
+            <div className="relative z-10 text-center">{children}</div>
         </motion.div>
     );
 
@@ -80,22 +111,22 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                             <p className="text-zinc-400 text-base md:text-lg leading-relaxed">我們將透過 3 個簡單問題，幫你精準定位到最適合的修煉章節。</p>
                         </div>
                         <button onClick={() => setStep(1)}
-                            className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+                            className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all text-center">
                             開始測驗
                         </button>
                     </ModalShell>
                 ) : step <= questions.length ? (
                     <ModalShell kkey={`q-${step}`}>
                         <div className="text-left mb-8">
-                            <div className="flex items-center justify-between mb-4">
-                                <span className="text-emerald-500 font-mono text-[10px] uppercase tracking-widest">Question {step} / 3</span>
+                            <div className="flex items-center justify-between mb-4 text-left">
+                                <span className="text-emerald-500 font-mono text-[10px] uppercase tracking-widest text-left">Question {step} / 3</span>
                                 <div className="h-1 flex-1 mx-4 bg-white/5 rounded-full overflow-hidden">
                                     <motion.div className="h-full bg-emerald-500" animate={{ width: `${(step / 3) * 100}%` }} />
                                 </div>
                             </div>
-                            <h2 className="text-xl md:text-2xl font-black text-white leading-tight">{questions[step - 1].q}</h2>
+                            <h2 className="text-xl md:text-2xl font-black text-white leading-tight text-left">{questions[step - 1].q}</h2>
                         </div>
-                        <div className="space-y-3">
+                        <div className="space-y-3 text-left">
                             {questions[step - 1].options.map((opt, i) => (
                                 <button key={i} onClick={() => handleAnswer(opt.level)}
                                     className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 text-zinc-300 hover:text-white font-bold text-left transition-all">
@@ -107,12 +138,12 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                 ) : step === questions.length + 1 ? (
                     <ModalShell kkey="persona">
                         <div className="text-left mb-8">
-                            <h2 className="text-xl font-black text-white mb-2 tracking-tight">最後一步：選擇你的身分</h2>
-                            <p className="text-zinc-500 text-sm">我們將根據你的選擇，為你準備專屬的實戰範例。</p>
+                            <h2 className="text-xl font-black text-white mb-2 tracking-tight text-left">最後一步：選擇你的身分</h2>
+                            <p className="text-zinc-500 text-sm text-left">我們將根據你的選擇，為你準備專屬的實戰範例。</p>
                         </div>
-                        <div className="grid grid-cols-2 gap-3 mb-8">
-                            {(Object.keys(PERSONA_CONFIG) as UserPersona[]).map(p => {
-                                const conf = PERSONA_CONFIG[p];
+                        <div className="grid grid-cols-2 gap-3 mb-8 text-center">
+                            {(Object.keys(PERSONAS) as UserPersona[]).map(p => {
+                                const conf = PERSONAS[p];
                                 return (
                                     <button key={p} onClick={() => setSelectedPersona(p)}
                                         className={`flex flex-col items-center gap-2 p-4 rounded-2xl border transition-all ${selectedPersona === p 
@@ -125,23 +156,23 @@ const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free'
                             })}
                         </div>
                         <button onClick={() => setStep(step + 1)}
-                            className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+                            className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all text-center">
                             查看分配結果
                         </button>
                     </ModalShell>
                 ) : (
                     <ModalShell kkey="result">
-                        <div className="text-center py-6">
-                            <div className="text-6xl mb-6">🎯</div>
-                            <h3 className="text-2xl font-black text-white mb-3">測驗完成！</h3>
-                            <p className="text-zinc-400 text-base mb-8">
+                        <div className="text-center py-6 text-center">
+                            <div className="text-6xl mb-6 text-center">🎯</div>
+                            <h3 className="text-2xl font-black text-white mb-3 text-center">測驗完成！</h3>
+                            <p className="text-zinc-400 text-base mb-8 text-center">
                                 根據你的經驗，我們將你分配到：<br />
-                                <span className={`text-${PERSONA_CONFIG[selectedPersona].color}-400 font-black text-xl`}>
+                                <span className={`text-${PERSONAS[selectedPersona].color}-400 font-black text-xl`}>
                                     Chapter {finalLevel} - {CHAPTERS.find(c => c.id === finalLevel)?.title}
                                 </span>
                             </p>
                             <button onClick={() => onComplete('guided', finalLevel, selectedPersona)}
-                                className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+                                className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all text-center">
                                 立即進入實驗室
                             </button>
                         </div>
@@ -194,13 +225,13 @@ const SkipChapterModal = ({ targetChapter, onPass, onClose }: { targetChapter: n
                     <div className="relative z-10 text-left">
                         <div className="flex items-center justify-between mb-6">
                             <span className="text-emerald-400 font-mono text-[10px] uppercase tracking-widest text-left">模式解鎖測試</span>
-                            <button onClick={onClose} className="text-zinc-600 hover:text-white text-xs font-bold text-left">取消</button>
+                            <button onClick={onClose} className="text-zinc-600 hover:text-white text-xs font-bold text-left text-left">取消</button>
                         </div>
                         <p className="text-white font-black text-lg mb-8 leading-tight text-left">{questions[current].q}</p>
-                        <div className="space-y-3">
+                        <div className="space-y-3 text-left">
                             {questions[current].options.map((opt, idx) => (
                                 <motion.button key={idx} whileTap={{ scale: 0.97 }} onClick={() => handleAnswer(idx)}
-                                    className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 text-zinc-300 hover:text-white font-bold transition-all text-base text-left text-left">
+                                    className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 text-zinc-300 hover:text-white font-bold transition-all text-base text-left">
                                     {opt}
                                 </motion.button>
                             ))}
@@ -228,7 +259,7 @@ const StarIcon = ({ size, className, fill }: any) => (
 const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExpanded, onToggle, onSkip, index }: any) => {
     return (
         <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.05 }} className={`relative text-left text-left`}>
-            <div className={`border rounded-2xl transition-all cursor-pointer text-left text-left ${isLocked ? 'opacity-30 grayscale' : ''} ${isExpanded ? 'bg-white/[0.02] border-white/10' : 'border-white/5 hover:border-white/10'}`} onClick={isLocked ? undefined : onToggle}>
+            <div className={`border rounded-2xl transition-all cursor-pointer text-left ${isLocked ? 'opacity-30 grayscale' : ''} ${isExpanded ? 'bg-white/[0.02] border-white/10' : 'border-white/5 hover:border-white/10'}`} onClick={isLocked ? undefined : onToggle}>
                 <div className="p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between text-left gap-6">
                     <div className="flex items-center gap-5 text-left flex-1 min-w-0">
                         <span className="text-4xl text-left flex-shrink-0 text-center">{chapter.emoji}</span>
@@ -313,6 +344,7 @@ const Insights = () => {
     const [viewMode, setViewMode] = useState<'adventure' | 'free'>('adventure');
     const [loading, setLoading] = useState(true);
     const [showOnboarding, setShowOnboarding] = useState(false);
+    const [showPersonaSwitch, setShowPersonaSwitch] = useState(false);
     const [unlockedChapter, setUnlockedChapter] = useState(0); 
     const [completedIds, setCompletedIds] = useState<number[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>('');
@@ -370,6 +402,11 @@ const Insights = () => {
         localStorage.setItem('dee_ai_level', ch.toString());
         localStorage.setItem('dee_view_preference', 'adventure');
         setShowOnboarding(false);
+    };
+
+    const handlePersonaSwitch = (p: UserPersona) => {
+        setPersona(p);
+        setShowPersonaSwitch(false);
     };
 
     const handleModeSwitch = (m: 'adventure' | 'free') => {
@@ -447,9 +484,10 @@ const Insights = () => {
     if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse text-center">INITIALIZING...</div>;
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-12 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0 text-left">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-12 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0 text-left text-left">
             <SEO title="免費 AI 實用教學" description="掌握 AI 核心主權" path="/insights" />
             <AnimatePresence>{showOnboarding && <OnboardingScreen onComplete={handleOnboardingComplete} />}</AnimatePresence>
+            <AnimatePresence>{showPersonaSwitch && <PersonaSwitchModal onComplete={handlePersonaSwitch} onClose={() => setShowPersonaSwitch(false)} />}</AnimatePresence>
             <AnimatePresence>{skipTarget && <SkipChapterModal targetChapter={skipTarget} onPass={handleChallengePassed} onClose={() => setSkipTarget(null)} />}</AnimatePresence>
 
             <div className="relative mb-8 text-left">
@@ -477,23 +515,23 @@ const Insights = () => {
                 <div className="mb-10 text-left">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-sm">
                         <div className="flex items-center gap-5">
-                            <div className={`w-14 h-14 rounded-2xl bg-${PERSONA_CONFIG[persona].color}-500/20 border border-${PERSONA_CONFIG[persona].color}-500/30 flex items-center justify-center text-${PERSONA_CONFIG[persona].color}-400 shadow-lg shadow-${PERSONA_CONFIG[persona].color}-500/5`}>
-                                {React.createElement(PERSONA_CONFIG[persona].icon, { size: 28 })}
+                            <div className={`w-14 h-14 rounded-2xl bg-${PERSONAS[persona]?.color || 'zinc'}-500/20 border border-${PERSONAS[persona]?.color || 'zinc'}-500/30 flex items-center justify-center text-${PERSONAS[persona]?.color || 'zinc'}-400 shadow-lg shadow-${PERSONAS[persona]?.color || 'zinc'}-500/5`}>
+                                {React.createElement(PERSONAS[persona]?.icon || User, { size: 28 })}
                             </div>
                             <div className="text-left">
                                 <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-1">當前修煉身分</span>
-                                <h3 className="text-white font-black text-xl">{PERSONA_CONFIG[persona].label}</h3>
+                                <h3 className="text-white font-black text-xl">{PERSONAS[persona]?.label || '未知身分'}</h3>
                             </div>
                         </div>
                         
-                        <button onClick={() => setShowOnboarding(true)} 
+                        <button onClick={() => setShowPersonaSwitch(true)} 
                             className="px-6 py-3 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-black text-sm border border-white/10 flex items-center justify-center gap-3 transition-all active:scale-95 shadow-xl">
                             <Filter size={18} className="text-emerald-500" /> 切換身分
                         </button>
                     </div>
                     <motion.p key={persona} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
-                        className="mt-4 text-zinc-500 text-xs font-medium italic pl-6 border-l-2 border-emerald-500/20">
-                        💡 系統已為您代入：{PERSONA_CONFIG[persona].description}
+                        className="mt-4 text-zinc-500 text-xs font-medium italic pl-6 border-l-2 border-emerald-500/20 text-left">
+                        💡 系統已為您代入：{PERSONAS[persona]?.description || '開始您的修煉之旅。'}
                     </motion.p>
                 </div>
 
@@ -509,7 +547,7 @@ const Insights = () => {
 
                 {viewMode === 'free' && (
                     <div className="mt-10 flex items-center gap-3 overflow-x-auto pb-3 scrollbar-hide text-left">
-                        <div className="flex-shrink-0 text-zinc-600 mr-1"><Filter size={18} /></div>
+                        <div className="flex-shrink-0 text-zinc-600 mr-1 text-left"><Filter size={18} /></div>
                         {availableCategories.map(cat => (
                             <button key={cat} onClick={() => setSelectedCategory(cat)}
                                 className={`flex-shrink-0 px-6 py-2 rounded-xl text-xs font-black transition-all border ${selectedCategory === cat

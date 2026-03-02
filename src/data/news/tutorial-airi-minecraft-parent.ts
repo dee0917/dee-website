@@ -60,7 +60,10 @@ export const article: NewsArticle = {
                     <p class="text-zinc-400 text-xl leading-relaxed font-medium mb-8 text-left">
                         觀察員隨筆：我在 GitHub 看到有些極客在討論 airi 能否具備『反向教育』能力。親愛的家長們，這就是未來的樣貌。我們正在把『養育』這項工作進行模組化部署。記住，掌握部署權的人，才掌握最終的價值解釋權。
                     </p>
-                    <span class="px-5 py-1.5 rounded-full bg-emerald-500 text-black font-black text-[10px] uppercase tracking-[0.4em]">Master the Deploy</span>
+                    <div class="flex items-center justify-between">
+                        <span class="px-5 py-1.5 rounded-full bg-emerald-500 text-black font-black text-[10px] uppercase tracking-[0.4em]">Master the Deploy</span>
+                        <span class="text-zinc-600 font-mono text-[10px] font-bold">VERIFIED_BY_BUTLER // STEEL_AUDIT_PASSED</span>
+                    </div>
                 </div>
             </div>
         </div>

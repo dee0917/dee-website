@@ -135,7 +135,7 @@ const NewsDetail = () => {
             <SEO title={article.title} description={article.summary} path={`/news/${article.slug}`} />
 
             {/* 1. Header (Balance Layout) */}
-            <section className="relative pt-32 pb-6 px-6 overflow-hidden border-b border-white/5 text-left">
+            <section className="relative pt-40 pb-6 px-6 overflow-hidden border-b border-white/5 text-left">
                 <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b ${themeMap[article.themeColor] || 'from-zinc-500/10'} opacity-10 pointer-events-none`} />
                 <div className="max-w-6xl mx-auto relative z-10 text-left">
                     <button onClick={() => navigate(-1)} className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-6 text-xs font-black uppercase tracking-widest">
