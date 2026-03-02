@@ -7,6 +7,7 @@ import { insight as parentHero } from './parent-hero';
 import { insight as refusalMaster } from './refusal-master';
 import { insight as seniorCoach } from './senior-coach';
 import { insight as aiNewsReader } from './ai-news-reader';
+import { insight as aiMemoryMaster } from './ai-memory-master';
 import { insight as leadGenCover } from './lead-gen-cover';
 import { insight as travelPlanner } from './travel-planner';
 import { insight as meetingMinutes } from './meeting-minutes';
@@ -56,8 +57,8 @@ export const CHAPTERS = [
         articleIds: [303, 308, 310],
     },
     {
-        id: 4, emoji: '🏆', title: '進階挑戰', subtitle: '把 AI 用在需要更深度思考的場景',
-        articleIds: [401, 403, 405],
+        id: 4, emoji: '🏆', title: '進階挑戰', subtitle: '把 AI 用ใน需要更深度思考的場景',
+        articleIds: [401, 402, 405],
     },
 ];
 
@@ -92,6 +93,7 @@ const mainQuest = [
     { ...antiProcrastination, level: 3 },
     // Chapter 4: 進階挑戰 (level: 4)
     { ...aiNewsReader, level: 4 },
+    { ...aiMemoryMaster, level: 4 },
     { ...englishCoach, level: 4 },
     { ...ch4AiManager, level: 4 },
 ];

@@ -1,14 +1,76 @@
 
-  VITE v5.4.21  ready in 209 ms
+  VITE v5.4.21  ready in 171 ms
 
   ➜  Local:   http://localhost:4173/
   ➜  Network: http://72.62.66.230:4173/
   ➜  Network: http://172.17.0.1:4173/
   ➜  Network: http://172.19.0.1:4173/
-1:09:51 PM [vite] hmr update /src/index.css, /src/pages/Home.tsx, /src/pages/Insights.tsx
-1:09:55 PM [vite] hmr update /src/index.css, /src/pages/Home.tsx, /src/pages/Insights.tsx
-1:09:57 PM [vite] hmr update /src/index.css, /src/pages/Home.tsx, /src/pages/Insights.tsx
-1:16:49 PM [vite] hmr update /src/index.css, /src/pages/Insights.tsx
-1:19:58 PM [vite] hmr update /src/index.css, /src/pages/Insights.tsx
-1:46:40 PM [vite] hmr update /src/index.css, /src/pages/Insights.tsx
-1:51:59 PM [vite] hmr update /src/index.css, /src/pages/News.tsx
+3:43:02 PM [vite] warning: Duplicate key "trend_cluster" in object literal
+103|          button_text: "開啟數據主權修行"
+104|      },
+105|      trend_cluster: "開源邊界",
+   |      ^
+106|      trinity_dimension: "生命具現"
+107|  };
+
+  Plugin: vite:esbuild
+  File: /root/.openclaw/workspace/projects/dee-website/src/data/news/real-tech-anthropic-trump-conflict.ts
+3:43:02 PM [vite] warning: Duplicate key "trinity_dimension" in object literal
+104|      },
+105|      trend_cluster: "開源邊界",
+106|      trinity_dimension: "生命具現"
+   |      ^
+107|  };
+108|  
+
+  Plugin: vite:esbuild
+  File: /root/.openclaw/workspace/projects/dee-website/src/data/news/real-tech-anthropic-trump-conflict.ts
+3:43:02 PM [vite] warning: Duplicate key "trend_cluster" in object literal
+104|          button_text: "立即修煉生活自動化"
+105|      },
+106|      trend_cluster: "文明重塑",
+   |      ^
+107|      trinity_dimension: "社會契約"
+108|  };
+
+  Plugin: vite:esbuild
+  File: /root/.openclaw/workspace/projects/dee-website/src/data/news/real-tech-deepseek-v4.ts
+3:43:02 PM [vite] warning: Duplicate key "trinity_dimension" in object literal
+105|      },
+106|      trend_cluster: "文明重塑",
+107|      trinity_dimension: "社會契約"
+   |      ^
+108|  };
+109|  
+
+  Plugin: vite:esbuild
+  File: /root/.openclaw/workspace/projects/dee-website/src/data/news/real-tech-deepseek-v4.ts
+3:43:02 PM [vite] warning: Duplicate key "trend_cluster" in object literal
+100|          button_text: "解鎖全球溝通密碼"
+101|      },
+102|      trend_cluster: "數據主權",
+   |      ^
+103|      trinity_dimension: "社會契約"
+104|  };
+
+  Plugin: vite:esbuild
+  File: /root/.openclaw/workspace/projects/dee-website/src/data/news/real-tech-google-translate-gemini.ts
+3:43:02 PM [vite] warning: Duplicate key "trinity_dimension" in object literal
+101|      },
+102|      trend_cluster: "數據主權",
+103|      trinity_dimension: "社會契約"
+   |      ^
+104|  };
+105|  
+
+  Plugin: vite:esbuild
+  File: /root/.openclaw/workspace/projects/dee-website/src/data/news/real-tech-google-translate-gemini.ts
+3:44:50 PM [vite] hmr update /src/index.css, /src/pages/News.tsx, /src/pages/NewsDetail.tsx
+3:45:06 PM [vite] hmr update /src/index.css, /src/pages/News.tsx, /src/pages/NewsDetail.tsx
+3:45:58 PM [vite] page reload src/data/personas.ts
+3:56:10 PM [vite] hmr update /src/index.css, /src/pages/News.tsx, /src/pages/NewsDetail.tsx
+3:56:15 PM [vite] hmr update /src/index.css, /src/pages/News.tsx, /src/pages/NewsDetail.tsx
+3:56:21 PM [vite] hmr update /src/index.css, /src/pages/News.tsx, /src/pages/NewsDetail.tsx
+3:56:27 PM [vite] hmr update /src/index.css, /src/pages/Home.tsx
+3:56:41 PM [vite] hmr update /src/index.css, /src/pages/Home.tsx
+3:56:55 PM [vite] hmr update /src/index.css, /src/pages/Home.tsx

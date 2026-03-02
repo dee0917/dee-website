@@ -37,6 +37,13 @@ export const PERSONAS = {
         description: '專攻用 AI 處理掛號、傳長輩圖與修照片。',
         special_prompt: "我是一位想跟上時代的長輩。請像我最孝順的晚輩一樣，用完全沒有科技術語、最有耐心的話，教我怎麼用 AI 幫生活省事。"
     },
+    non_tech_senior: {
+        label: '科技畏難長輩',
+        icon: User,
+        color: 'amber',
+        description: '對科技有畏難情緒，需要最直覺的大字體與生活化關懷。',
+        special_prompt: "我對新科技感到很害怕，總是擔心點錯會弄壞東西。請用最溫柔、最白話的方式跟我說話，把我當成完全不懂電腦的長輩，多用生活中的例子來比喻 AI 功能。"
+    },
     craftsman: { 
         label: '不想被遺忘的職人', 
         icon: Quote, 

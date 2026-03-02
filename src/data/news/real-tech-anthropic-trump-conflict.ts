@@ -112,6 +112,4 @@ export const article: NewsArticle = {
         description: "進入實驗室，學習如何建立『不被封殺』的本地 AI 架構。掌握主權，才是 AGI 時代唯一的生存法則。",
         button_text: "開啟數據主權修行"
     },
-    trend_cluster: "開源邊界",
-    trinity_dimension: "社會契約"
 };

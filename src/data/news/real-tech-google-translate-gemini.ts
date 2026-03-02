@@ -107,6 +107,4 @@ export const article: NewsArticle = {
         description: "技術會迭代，但跨文化溝通的戰略眼光是你的資產。進入實驗室，學會如何將 AI 調教成你專屬的全球溝通助理。",
         button_text: "解鎖全球溝通密碼"
     },
-    trend_cluster: "數據主權",
-    trinity_dimension: "社會契約"
 };

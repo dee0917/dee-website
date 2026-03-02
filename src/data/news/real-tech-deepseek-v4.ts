@@ -103,6 +103,4 @@ export const article: NewsArticle = {
         description: "進入實驗室，我教你如何利用結構化思維，將 DeepSeek 的自動化能力與你的生活深度綁定，奪回你的時間主權。",
         button_text: "立即修煉生活自動化"
     },
-    trend_cluster: "文明重塑",
-    trinity_dimension: "社會契約"
 };
