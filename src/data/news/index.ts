@@ -38,10 +38,12 @@ import { article as echoFunAiGame } from './echo-fun-ai-game-playing';
 import { article as echoDareBench } from './echo-dare-bench-audit';
 import { article as realTechWiFi } from './real-tech-wifi-densepose';
 import { article as tutorialAiri } from './tutorial-airi-minecraft-parent';
+import { article as deepseekV4 } from './real-tech-deepseek-v4';
 import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
+    deepseekV4,          // 最新：DeepSeek V4 首發 (新增)
     claudeCodeMemory,    // 真實：Claude Code 自動記憶 (新增)
     tutorialAiri,       // 最新：家長 AI 指南
     realTechWiFi,       // 最新：WiFi 感知突破
