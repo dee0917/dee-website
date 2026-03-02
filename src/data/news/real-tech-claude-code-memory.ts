@@ -68,8 +68,8 @@ export const article: NewsArticle = {
         image_url: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&q=80&w=2000'
     },
     cta_override: {
-        title: '想打造「永不遺忘」的 AI 助手？',
-        description: '進入實驗室，學習如何像 Claude Code 一樣，為你的所有 AI 工具配置最強大的記憶層。',
-        button_text: '解鎖記憶重塑術'
+        title: '厭倦了每天跟 AI 雞同鴨講？',
+        description: '學會 Claude Code 的記憶邏輯，能讓你的開發效率提升 2 倍以上。進入實驗室，我教你如何打造一個「過目不忘」的 AI 團隊。',
+        button_text: '立即解鎖記憶重塑術'
     }
 };

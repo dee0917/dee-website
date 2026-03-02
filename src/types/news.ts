@@ -15,7 +15,7 @@ export interface NewsArticle {
     // 關鍵情報
     flash_summary: string[];
     
-    // 事件解析
+    // 事件解析 (核心：字數需達 500+)
     event_breakdown: {
         title: string;
         content: string;
@@ -23,7 +23,7 @@ export interface NewsArticle {
     
     // 利益相關透視 (Why It Matters)
     impact_analysis: {
-        target: "你的工作" | "你的荷包" | "你的隱私";
+        target: string; // 允許客製化目標，不侷限於初始三項
         description: string;
     }[];
     
@@ -35,10 +35,10 @@ export interface NewsArticle {
         title: string;
         description: string;
         command: string;
-        image_url?: string; // 🚀 新增：指令預覽圖 (New)
+        image_url?: string;
     };
 
-    // 🚀 因地制宜的引流 CTA
+    // 🚀 因地制宜的引流 CTA (絕對要求：必須針對新聞內容客製化)
     cta_override?: {
         title: string;
         description: string;
@@ -65,6 +65,7 @@ export interface NewsArticle {
         content?: string;
         items?: { label: string, value: string, icon?: string }[];
         style?: 'purple' | 'indigo' | 'emerald';
+        inject_at?: number; // 🚀 新增：指定模組在解析段落中的注入位置
     }[];
 
     // 🔗 知識圖譜關聯 (Knowledge Graph)
