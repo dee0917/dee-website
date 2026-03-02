@@ -50,6 +50,7 @@ import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
+    echoLabChronicle,    // 最新：Echo 實驗室觀察 (新增)
     aiSlopSurvival,      // 最新：AI 史萊姆生存指南 (新增)
     aiPhilosopher,       // 最新：AI 哲學家 (新增)
     deepseekV4Intent,    // 最新：DeepSeek 意圖捕捉 (新增)
