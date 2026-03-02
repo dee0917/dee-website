@@ -493,48 +493,71 @@ const ArticleDetail = () => {
             
             <AnimatePresence>
                 {showAiJumpModal && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/95 backdrop-blur-2xl">
-                        <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} 
-                            className="bg-zinc-900 border border-white/10 p-8 md:p-12 rounded-[3rem] max-w-lg w-full shadow-2xl relative overflow-hidden">
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[110] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl">
+                        <motion.div initial={{ scale: 0.85, y: 30, opacity: 0 }} animate={{ scale: 1, y: 0, opacity: 1 }} exit={{ scale: 0.85, y: 30, opacity: 0 }} 
+                            className="bg-zinc-900 border border-white/20 p-6 md:p-8 rounded-[2.5rem] max-w-sm w-full shadow-[0_0_100px_rgba(16,185,129,0.1)] relative overflow-hidden ring-1 ring-white/10">
                             
-                            {/* Premium Background Glow */}
-                            <div className="absolute -top-24 -left-24 w-64 h-64 bg-emerald-500/10 blur-[100px] rounded-full" />
-                            <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-blue-500/10 blur-[100px] rounded-full" />
+                            {/* Gorgeous Animated Background */}
+                            <motion.div 
+                                animate={{ 
+                                    scale: [1, 1.2, 1],
+                                    rotate: [0, 90, 0],
+                                    opacity: [0.1, 0.2, 0.1]
+                                }}
+                                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                                className="absolute -top-32 -left-32 w-64 h-64 bg-emerald-500/30 blur-[80px] rounded-full pointer-events-none" 
+                            />
+                            <motion.div 
+                                animate={{ 
+                                    scale: [1.2, 1, 1.2],
+                                    rotate: [0, -90, 0],
+                                    opacity: [0.05, 0.15, 0.05]
+                                }}
+                                transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                                className="absolute -bottom-32 -right-32 w-64 h-64 bg-blue-500/30 blur-[80px] rounded-full pointer-events-none" 
+                            />
 
-                            <button onClick={() => setShowAiJumpModal(false)} className="absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors">
-                                <X size={28} />
+                            {/* Accessible Close Button - Moved Down & Larger Hit Area */}
+                            <button onClick={() => setShowAiJumpModal(false)} 
+                                className="absolute top-4 right-4 z-20 p-3 rounded-full bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white transition-all active:scale-90 border border-white/5 shadow-xl">
+                                <X size={20} strokeWidth={3} />
                             </button>
 
-                            <div className="text-center mb-12 relative z-10">
-                                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", damping: 12 }}
-                                    className="w-20 h-20 bg-emerald-500 text-black rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-xl shadow-emerald-500/20">
-                                    <Check size={40} strokeWidth={3} />
+                            <div className="text-center mb-8 relative z-10">
+                                <motion.div initial={{ scale: 0, rotate: -45 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: "spring", damping: 12, delay: 0.2 }}
+                                    className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-600 text-black rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-[0_0_40px_rgba(16,185,129,0.3)]">
+                                    <Check size={32} strokeWidth={4} />
                                 </motion.div>
-                                <h3 className="text-3xl md:text-4xl font-black text-white mb-3 tracking-tighter">指令已成功複製！</h3>
-                                <p className="text-zinc-500 text-lg font-medium">請選擇您想前往並貼上的 AI 平台：</p>
+                                <h3 className="text-2xl font-black text-white mb-2 tracking-tighter">指令已複製！</h3>
+                                <p className="text-zinc-400 text-sm font-bold uppercase tracking-widest opacity-60">Select Platform</p>
                             </div>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 relative z-10">
+                            <div className="grid grid-cols-1 gap-3 relative z-10">
                                 {[
-                                    { name: 'ChatGPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com', color: 'hover:border-[#10a37f]/50', glow: 'group-hover:shadow-[#10a37f]/10' },
-                                    { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai', color: 'hover:border-[#D97757]/50', glow: 'group-hover:shadow-[#D97757]/10' },
-                                    { name: 'Gemini', logo: GeminiLogo, app: 'googlegemini://', web: 'https://gemini.google.com', color: 'hover:border-[#1C7DEB]/50', glow: 'group-hover:shadow-[#1C7DEB]/10' }
+                                    { name: 'ChatGPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com', color: 'hover:border-[#10a37f]/50', iconColor: 'text-[#10a37f]' },
+                                    { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai', color: 'hover:border-[#D97757]/50', iconColor: 'text-[#D97757]' },
+                                    { name: 'Gemini', logo: GeminiLogo, app: 'googlegemini://', web: 'https://gemini.google.com', color: 'hover:border-[#1C7DEB]/50', iconColor: 'text-[#1C7DEB]' }
                                 ].map((ai, i) => (
-                                    <a key={i} href={ai.web} target="_blank" rel="noopener noreferrer" 
+                                    <motion.a key={i} href={ai.web} target="_blank" rel="noopener noreferrer" 
+                                        whileHover={{ x: 5, backgroundColor: 'rgba(255,255,255,0.05)' }}
+                                        whileTap={{ scale: 0.98 }}
                                         onClick={(e) => { 
                                             e.preventDefault(); 
                                             window.location.href = ai.app; 
                                             setTimeout(() => { window.open(ai.web, '_blank'); setShowAiJumpModal(false); }, 1500); 
                                         }} 
-                                        className={`flex flex-col items-center gap-4 p-6 rounded-[2rem] bg-white/[0.03] border border-white/5 transition-all group shadow-xl hover:-translate-y-1 ${ai.color} ${ai.glow}`}>
-                                        <ai.logo size={40} />
-                                        <span className="text-white font-black text-xs uppercase tracking-widest">{ai.name}</span>
-                                    </a>
+                                        className={`flex items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/5 transition-all group shadow-lg ${ai.color}`}>
+                                        <div className="flex items-center gap-4">
+                                            <ai.logo size={28} />
+                                            <span className="text-white font-black text-sm uppercase tracking-widest">{ai.name}</span>
+                                        </div>
+                                        <ArrowRight size={16} className={`opacity-0 group-hover:opacity-100 transition-all ${ai.iconColor}`} />
+                                    </motion.a>
                                 ))}
                             </div>
 
-                            <div className="mt-12 pt-8 border-t border-white/5 text-center">
-                                <p className="text-zinc-600 text-[10px] font-black uppercase tracking-[0.4em]">直接前往 App 或 網頁版貼上即可</p>
+                            <div className="mt-8 pt-6 border-t border-white/5 text-center relative z-10">
+                                <p className="text-zinc-500 text-[9px] font-black uppercase tracking-[0.4em]">可以直接在 App 內貼上使用</p>
                             </div>
                         </motion.div>
                     </motion.div>
