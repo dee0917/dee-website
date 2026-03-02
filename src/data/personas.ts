@@ -1,4 +1,4 @@
-import { User, Briefcase, Utensils, Home as HomeIcon, GraduationCap, Rocket as RocketIcon, Quote, Shield, Baby, Database } from 'lucide-react';
+import { User, Briefcase, Utensils, Home as HomeIcon, GraduationCap, Rocket as RocketIcon, Quote, Shield, Baby, Database, UserCheck } from 'lucide-react';
 
 export const PERSONAS = {
     general: { label: '一般小白', icon: User, color: 'emerald', description: '從基礎心法開始穩紮穩打。' },
@@ -36,11 +36,11 @@ export const PERSONAS = {
         special_prompt: "我是一個非常在意隱私的人，不相信任何雲端大廠。請教我如何把 AI 鎖在自己的電腦裡跑，實現數據徹底脫鉤的祕技。"
     },
     non_tech_senior: {
-        label: '數位補課歐巴桑/歐吉桑',
-        icon: User,
+        label: '數位補課長輩',
+        icon: UserCheck,
         color: 'orange',
-        description: '專攻用 AI 處理掛號、傳長輩圖與修照片。',
-        special_prompt: "我是一位想跟上時代的長輩。請像我最孝順的晚輩一樣，用完全沒有科技術語、最有耐心的話，教我怎麼用 AI 幫生活省事。"
+        description: '專攻用 AI 處理掛號、傳長輩圖、修復記憶。',
+        special_prompt: "我是一位對新科技有畏難情緒的長輩，渴望解決生活瑣事（健康、修復記憶）。請像我最孝順的晚輩一樣，用完全沒有科技術語、最有耐心、大字體風格且直覺的話，教我怎麼用 AI 幫生活省事。"
     }
 };
 

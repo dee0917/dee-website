@@ -3,7 +3,7 @@ import { InsightArticle } from '../../types/insights';
 export const insight: InsightArticle = {
     id: 505,
     category: "感官進化",
-    themeColor: "rose",
+    themeColor: "pink",
     difficulty_level: 3,
     level: 6,
     tags: ["#WiFi感知", "#DensePose", "#隱私主權", "#訊號即感知", "#安全防禦"],
