@@ -1,3 +1,6 @@
+import { article as echoAiHumanity } from './echo-ai-humanity-test';
+import { article as echoAgentGossip } from './echo-agent-gossip-discontinuity';
+import { article as newbieDailyHacks } from './newbie-ai-daily-hacks';
 import { article as googleTpu } from './google-tpu-market';
 import { article as firefoxAi } from './firefox-ai-privacy';
 import { article as jobpocalypse } from './jobpocalypse-warning';
@@ -35,6 +38,9 @@ import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
+    newbieDailyHacks,   // 最新：小白日常玩法
+    echoAiHumanity,     // 最新：人性純度測試
+    echoAgentGossip,    // 最新：代理人論壇爆料
     echoFunAiGame,      // arXiv: 記憶體回收演算法
     arxivAiTrading,     // arXiv: AI 操盤手進化
     newbieAISearch,     // 最新：小白搜尋指南
