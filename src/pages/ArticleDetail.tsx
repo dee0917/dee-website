@@ -255,7 +255,7 @@ const ArticleDetail = () => {
                 <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b ${theme.gradient} opacity-20 pointer-events-none`} />
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none" />
                 
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl w-full text-center relative z-10 pt-40">
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl w-full text-center relative z-10 pt-40 md:pt-48">
                     <Link to="/insights" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-4 group text-[10px] font-black uppercase tracking-widest">
                         <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" /> Back
                     </Link>
@@ -263,7 +263,7 @@ const ArticleDetail = () => {
                         <span className={`text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest ${theme.bg} ${theme.text} border ${theme.border}`}>{article.category}</span>
                         <div className="flex gap-1">{[...Array(5)].map((_, i) => <StarIcon key={i} size={8} className={i < (article.difficulty_level || 1) ? theme.text : 'text-zinc-800'} fill="currentColor" />)}</div>
                     </div>
-                    <h1 className="text-3xl md:text-7xl font-black text-white mb-4 tracking-tighter leading-[1.1]">{article.title}</h1>
+                    <h1 className="text-3xl md:text-7xl font-black text-white mb-4 tracking-tighter leading-[1.0]">{article.title}</h1>
                     <p className="text-lg md:text-2xl text-zinc-400 mb-8 max-w-2xl mx-auto leading-relaxed font-medium">{article.summary}</p>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={scrollToHook}
                         className="bg-white text-black font-black py-4 px-10 rounded-2xl text-lg flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-500 transition-colors group">

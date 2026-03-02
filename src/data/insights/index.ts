@@ -29,6 +29,7 @@ import { insight as ch5WiFiDensePose } from './ch5-wifi-densepose';
 import { insight as ch5LogicVerification } from './ch5-logic-verification';
 import { insight as ch5MarkdownSovereignty } from './ch5-markdown-sovereignty';
 import { insight as ch5MultiAgentSwarms } from './ch5-multi-agent-swarms';
+import { insight as ch5SlopDefense } from './ch5-slop-defense';
 
 // ═══════════════════════════════════════════
 // Chapter 定義 — 主線任務的學習順序 (僅限 Ch 0-4)
@@ -97,6 +98,7 @@ const sideQuests = [
     { ...ch5WiFiDensePose, level: -1, category: "戰略演進" },
     { ...ch5MarkdownSovereignty, level: -1, category: "戰略演進" },
     { ...ch5MultiAgentSwarms, level: -1, category: "戰略演進" },
+    { ...ch5SlopDefense, level: -1, category: "戰略演進" },
     { ...ch1AiPhysicalization, level: -1 },
     { ...travelPlanner, level: -1 },
     { ...meetingMinutes, level: -1 },
