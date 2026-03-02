@@ -1,4 +1,4 @@
-import { User, Briefcase, Utensils, Home as HomeIcon, Baby, Quote } from 'lucide-react';
+import { User, Briefcase, Utensils, Home as HomeIcon, Baby, Quote, ShieldCheck } from 'lucide-react';
 
 /**
  * 🚨 核心族群精簡版 (Core 6)
@@ -43,6 +43,13 @@ export const PERSONAS = {
         color: 'indigo', 
         description: '將一輩子的好手藝數位化，傳承給下一代。',
         special_prompt: "我現在是一位擁有多年經驗的職人。請將 AI 視為一名勤奮且具備無限記憶的『學徒』，教導我如何將腦中的經驗轉化為數位世界的資產。請用最親切、無技術門檻的語言與我交談。"
+    },
+    sovereign: {
+        label: '數據領主 (Data Sovereign)',
+        icon: ShieldCheck,
+        color: 'teal',
+        description: '追求極致隱私與數據主權的專業用戶。',
+        special_prompt: "我是一名極度重視數位主權與數據隱私的『數據領主』。請以去中心化、端到端加密、與隱私保護為核心前提，為我提供 AI 應用建議。請避開所有大型中心化雲端的資料收集陷阱，專注於 Local LLM 與開源解決方案。"
     }
 };
 
