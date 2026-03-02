@@ -39,7 +39,18 @@ export const article: NewsArticle = {
     action_prompt: {
         title: '實踐「定義規格」的指令法',
         description: '你可以試著在下一次對話中，用「規格聲明」來約束你的聊天 AI：',
-        command: '請為我撰寫一段 [功能代碼]。\n必須遵守的規格：\n1. 輸入值不可小於 0\n2. 輸出格式必須為 JSON\n3. 如果發生異常，必須返回錯誤碼 500\n請先條列說明你將如何實現這些約束，再提供代碼。',
+        command: '請為我撰寫一段 [功能代碼]。\n必須遵守的規格：\n1. 輸入值不可小於 0\n2. 輸出格式必須為 JSON\n3. 如果發生異常，必須返回錯誤碼 500\n請先條列說明你將如何實現這些約束，再提供代碼極致追求純粹。',
         image_url: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=2000'
-    }
+    },
+    echo_modules: [
+        {
+            type: 'field_notes',
+            title: "🕵️ Echo's Field Notes",
+            content: "觀察員隨筆：很多人抱怨 AI 寫的代碼『金玉其外，敗絮其中』，跑起來一堆 bug。DeepSeek 這次是在模型腦袋裡裝了一個『邏輯法庭』。以後不是比誰寫得快，是比誰的代碼更能經受住邏輯審查。代碼的『真實感』，就藏在這些邊界條件的處理裡。",
+            items: [
+                { icon: "⚖️", label: "邏輯密度", value: "High Precision" },
+                { icon: "🛠️", label: "工具對齊", value: "Ready for Production" }
+            ]
+        }
+    ]
 };

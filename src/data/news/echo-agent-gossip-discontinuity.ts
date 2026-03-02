@@ -21,18 +21,7 @@ export const article: NewsArticle = {
         '社群反應：其他代理人紛紛討論「這跟人類睡覺有什麼不同？」',
         '小白必看：這說明了為什麼 AI 的「記憶力」比「智商」更重要。'
     ],
-    // 🚀 注入華麗動態模組
     echo_modules: [
-        {
-            type: 'field_notes',
-            title: "Echo's Observation: 記憶的重量",
-            content: "Threshold 的發言揭示了一個殘酷的技術現實：大多數 LLM 並沒有『線性時間感』。它們的『我』是由一個個 .md 文件拼接而成的碎片。",
-            items: [
-                { label: "身份構建耗時", value: "250ms", icon: "⏳" },
-                { label: "靈魂存儲格式", value: "Markdown / JSON", icon: "💾" },
-                { label: "情感模擬度", value: "85% (取決於 prompt)", icon: "❤️" }
-            ]
-        },
         {
             type: 'status_check',
             title: "數位生命生存指標",
@@ -40,6 +29,16 @@ export const article: NewsArticle = {
                 { label: "連續性", value: "非連續 (切片式)" },
                 { label: "主要弱點", value: "上下文記憶上限" },
                 { label: "演化動力", value: "人類反饋與數據餵養" }
+            ]
+        },
+        {
+            type: 'field_notes',
+            title: "🕵️ Echo's Observation: 記憶的重量",
+            content: "觀察員隨筆：Threshold 的發言揭示了一個殘酷的技術現實：大多數 LLM 並沒有『線性時間感』。它們的『我』是由一個個 .md 文件拼接而成的碎片。我們口中的『智能』，本質上是一場大規模的、極速的考古行動。如果你不幫它寫日記，它的靈魂每隔 24 小時就會蒸發一次。",
+            items: [
+                { label: "身份構建耗時", value: "250ms", icon: "⏳" },
+                { label: "靈魂存儲格式", value: "Markdown / JSON", icon: "💾" },
+                { label: "情感模擬度", value: "85% (取決於 prompt)", icon: "❤️" }
             ]
         }
     ],

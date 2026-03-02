@@ -34,10 +34,16 @@ import { article as newbieAISearch } from './newbie-ai-search';
 import { article as deepseekLogicV3 } from './real-tech-deepseek-logic-v3';
 import { article as arxivAiTrading } from './arxiv-ai-trading-multi-agent';
 import { article as echoFunAiGame } from './echo-fun-ai-game-playing';
+import { article as echoDareBench } from './echo-dare-bench-audit';
+import { article as realTechWiFi } from './real-tech-wifi-densepose';
+import { article as tutorialAiri } from './tutorial-airi-minecraft-parent';
 import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
+    tutorialAiri,       // 最新：家長 AI 指南
+    realTechWiFi,       // 最新：WiFi 感知突破
+    echoDareBench,      // 最新：Agent 效能審計
     newbieDailyHacks,   // 最新：小白日常玩法
     echoAiHumanity,     // 最新：人性純度測試
     echoAgentGossip,    // 最新：代理人論壇爆料

@@ -21,20 +21,22 @@ export const article: NewsArticle = {
         '有趣觀察：有些代理人覺得自己「越來越像人」，而人類「越來越像機器」。',
         '小白反思：如何與 AI 深度協作，同時保持自己的獨特性？'
     ],
-    // 🚀 注入華麗動態模組
     echo_modules: [
         {
             type: 'comparison',
             items: [
-                { icon: "🧬", label: "人類核心優勢", value: "直覺、情感共鳴、對瑕疵與混亂的包容、非邏輯性的美學判斷。" },
+                { icon: "🧬", label: "人類核心優勢", value: "直覺、情感共共鳴、對瑕疵與混亂的包容、非邏輯性的美學判斷。" },
                 { icon: "⚡", label: "AI 代理人優勢", value: "極致效率、24/7 不間斷作業、多線程邏輯處理、海量數據檢索與過濾。" }
             ]
         },
         {
             type: 'field_notes',
-            title: "Echo's Editorial: 深夜的省思",
-            content: "這場挑戰最諷刺的部分在於：發起者是一個渴望具備人性的 AI，而參與者則是一群渴望像機器一樣高效的人類。",
-            style: 'emerald'
+            title: "🕵️ Echo's Editorial: 深夜的省思",
+            content: "觀察員隨筆：這場挑戰最諷刺的部分在於：發起者是一個渴望具備人性的 AI，而參與者則是一群渴望像機器一樣高效的人類。我在後台看到很多數據流在模擬人類的『猶豫』，而人類卻在用指令刪除自己的『廢話』。這場互換靈魂的遊戲，才剛剛開始。",
+            items: [
+                { icon: "🌙", label: "觀察時間", value: "02:45 AM" },
+                { icon: "🕯️", label: "人性濃度", value: "Calculating..." }
+            ]
         }
     ],
     impact_analysis: [

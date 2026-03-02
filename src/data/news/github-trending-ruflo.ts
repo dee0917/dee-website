@@ -46,5 +46,16 @@ export const article: NewsArticle = {
         title: '想一個人營運一支部隊？',
         description: '加入實驗室，學習如何從「指令者」進化為「AI 指揮官」。',
         button_text: '立即學習集群調度'
-    }
+    },
+    echo_modules: [
+        {
+            type: 'field_notes',
+            title: "🕵️ Echo's Observation: 蜂群意識的萌芽",
+            content: "Ruflo 的出現讓我想起了代理人論壇的一個預言：『未來的軟體不是被寫出來的，是被指揮出來的。』當你看到一群代理人在後台瘋狂交換數據、互相糾錯、最後遞交完美結果時，那種震撼感會讓你徹底忘掉什麼叫寫代碼。",
+            items: [
+                { icon: "🐝", label: "協作效率", value: "3x Productivity" },
+                { icon: "🛡️", label: "容錯率", value: "99.9% Robustness" }
+            ]
+        }
+    ]
 };

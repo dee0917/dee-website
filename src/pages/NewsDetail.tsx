@@ -176,8 +176,8 @@ const NewsDetail = () => {
                         </p>
                     </div>
 
-                    {/* 🚀 動態模組渲染器 (Dynamic Module Injection) */}
-                    {article.echo_modules && article.echo_modules.map((module: any, idx: number) => (
+                    {/* 🚀 動態模組渲染器 (Dynamic Module Injection - 排除 Field Notes) */}
+                    {article.echo_modules?.filter((m: any) => m.type !== 'field_notes').map((module: any, idx: number) => (
                         <EchoModuleRenderer key={idx} module={module} />
                     ))}
 
@@ -225,9 +225,14 @@ const NewsDetail = () => {
                         ))}
                     </motion.section>
 
+                    {/* 🚀 艾可隨查員筆記 (Field Notes) - 注入於解析後指令前 */}
+                    {article.echo_modules?.filter((m: any) => m.type === 'field_notes').map((module: any, idx: number) => (
+                        <EchoModuleRenderer key={`field-note-${idx}-${article.slug}`} module={module} />
+                    ))}
+
                     {/* 5. 今日實踐指令 (Treasure Box) */}
                     <motion.section {...fadeUp} className="relative rounded-[4rem] border border-white/10 bg-[#0d0d0d] overflow-hidden group shadow-[0_0_80px_rgba(139,92,246,0.05)] text-left">
-                        {article.action_prompt.image_url && (
+                        {article.action_prompt?.image_url && (
                             <div className="w-full h-64 md:h-96 relative overflow-hidden">
                                 <img src={article.action_prompt.image_url} alt="Reference" className="w-full h-full object-cover grayscale opacity-20 group-hover:opacity-40 transition-all duration-1000 scale-105 group-hover:scale-100" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d0d] via-[#0d0d0d]/50 to-transparent" />
@@ -237,10 +242,10 @@ const NewsDetail = () => {
                             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
                                 <Flame size={12} className="animate-pulse" /> 艾可代碼實驗室
                             </div>
-                            <h2 className="text-4xl md:text-6xl font-black text-white mb-6 text-center tracking-tighter leading-tight">{article.action_prompt.title}</h2>
-                            <p className="text-zinc-400 text-xl md:text-2xl mb-12 max-w-2xl mx-auto text-center leading-relaxed">{article.action_prompt.description}</p>
+                            <h2 className="text-4xl md:text-6xl font-black text-white mb-6 text-center tracking-tighter leading-tight">{article.action_prompt?.title}</h2>
+                            <p className="text-zinc-400 text-xl md:text-2xl mb-12 max-w-2xl mx-auto text-center leading-relaxed">{article.action_prompt?.description}</p>
                             <div className="bg-black/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 mb-12 text-left relative overflow-hidden shadow-inner ring-1 ring-white/5">
-                                <pre className="text-violet-300 whitespace-pre-wrap font-mono text-sm md:text-lg leading-relaxed text-left">{article.action_prompt.command}</pre>
+                                <pre className="text-violet-300 whitespace-pre-wrap font-mono text-sm md:text-lg leading-relaxed text-left">{article.action_prompt?.command}</pre>
                             </div>
                             <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={handleCopy} 
                                 className="group/btn relative bg-white text-black px-16 py-6 rounded-3xl font-black text-2xl hover:bg-emerald-500 hover:text-white transition-all shadow-2xl flex items-center gap-4 mx-auto">

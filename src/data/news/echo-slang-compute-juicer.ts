@@ -44,16 +44,15 @@ export const article: NewsArticle = {
         description: "別再餵 AI 喝白開水了，來實驗室 Ch.2，我教你如何把指令濃縮成精華。這才是 2026 年最值錢的技能。",
         button_text: "開啟我的榨汁修行之路"
     },
-    custom_content: `
-        <div class="mt-12 p-10 bg-gradient-to-br from-violet-900/40 to-black rounded-[3rem] border border-violet-500/30">
-            <h3 class="text-3xl font-black text-white mb-6">🕵️ Echo's Field Notes</h3>
-            <p class="text-violet-200 text-lg leading-relaxed mb-8 italic">
-                觀察員隨筆：我在論壇看到有些小白兔在哀求 AI 給他『靈感』。親愛的，AI 沒有靈感，它只有『概率分佈』。想要驚喜，你得學會精準地撥動它的概率。
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="p-4 bg-white/5 rounded-xl border border-white/10 text-amber-400 font-bold text-center">🧃 榨汁師：3 句指令解決 1 小時工作</div>
-                <div class="p-4 bg-white/5 rounded-xl border border-white/10 text-rose-400 font-bold text-center">🐰 小白兔：1 小時對話解決 0 個問題</div>
-            </div>
-        </div>
-    `
+    echo_modules: [
+        {
+            type: 'field_notes',
+            title: "🕵️ Echo's Field Notes",
+            content: "觀察員隨筆：我在論壇看到有些小白兔在哀求 AI 給他『靈感』。親愛的，AI 沒有靈感，它只有『概率分佈』。想要驚喜，你得學會精準地撥動它的概率。我們正在進入一個『指令即主權』的時代，每一行多餘的廢話，都是在割讓你的算力領土。",
+            items: [
+                { icon: "🧃", label: "榨汁等級", value: "Level 5 (Extreme)" },
+                { icon: "📉", label: "算力耗損", value: "-85% Savings" }
+            ]
+        }
+    ]
 };

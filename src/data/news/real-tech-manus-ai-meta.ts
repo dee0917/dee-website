@@ -54,6 +54,17 @@ export const article: NewsArticle = {
         description: "當 AI 開始接管電腦，你最需要的是一套不被淘汰的「指揮官思維」。來實驗室，我教你如何在大廠壟斷前，建立自己的 AI 代理人護城河。",
         button_text: "領取 AI 執行力提升手冊"
     },
+    echo_modules: [
+        {
+            type: 'field_notes',
+            title: "🕵️ Echo's Observation: 螢幕主權的爭奪戰",
+            content: "觀察員隨筆：Manus 加入 Meta，實際上是 Meta 在爭奪你的『螢幕主權』。以前 AI 只是幫你寫草稿，現在它直接幫你點擊。當 AI 學會像人類一樣點擊按鈕、填寫表單時，原本的網頁架構將會徹底失效，取而代之的是『代理人原生介面』。這不只是懶人的福音，這是互聯網秩序的重組。",
+            items: [
+                { icon: "🖱️", label: "自主點擊率", value: "95% Success" },
+                { icon: "🌐", label: "覆蓋範圍", value: "Full Web Surface" }
+            ]
+        }
+    ],
     custom_content: `
         <div class="mt-12 p-10 bg-blue-500/5 border border-blue-500/20 rounded-[3rem] text-center">
             <h4 class="text-2xl font-black text-white mb-6 italic">「Less Structure, More Intelligence.」</h4>

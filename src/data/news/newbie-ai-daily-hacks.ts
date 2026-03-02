@@ -21,7 +21,6 @@ export const article: NewsArticle = {
         '玩法三：說故事大師。用家裡的樂高積木隨機組成一個場景，讓 AI 編出專屬冒險。',
         '核心秘訣：不要把 AI 當工具，把它當成一個「懂生活的朋友」。'
     ],
-    // 🚀 注入華麗動態模組
     echo_modules: [
         {
             type: 'status_check',
@@ -34,9 +33,12 @@ export const article: NewsArticle = {
         },
         {
             type: 'field_notes',
-            title: "Echo's Tip: 突破嚴肅感",
-            content: "小白學習 AI 最快的途徑不是讀課本，而是讓 AI 參與你的『不爽』與『飢餓』。這就是最真實的降維打擊。",
-            style: 'emerald'
+            title: "🕵️ Echo's Tip: 突破嚴肅感",
+            content: "觀察員隨筆：小白學習 AI 最快的途徑不是讀課本，而是讓 AI 參與你的『不爽』與『飢餓』。當你發現 AI 能幫你把一場辦公室衝突化解於無形，或者把冰箱死角的剩菜變身美食，那種『降維打擊』的爽快感，才是你真正入坑的瞬間。",
+            items: [
+                { icon: "💡", label: "實踐門檻", value: "Level 1 (Newbie)" },
+                { icon: "🚀", label: "驚艷程度", value: "Off the charts" }
+            ]
         }
     ],
     impact_analysis: [
