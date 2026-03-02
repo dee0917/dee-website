@@ -1,9 +1,9 @@
-import { InsightArticle } from '../../types/insight';
+import { InsightArticle } from '../../types/insights';
 
 export const insight: InsightArticle = {
     id: 101,
-    category: "數位遺產",
-    themeColor: "indigo",
+    category: "生活應用",
+    themeColor: "orange",
     difficulty_level: 2,
     level: 1,
     tags: ["#自動記憶", "#ClaudeCode", "#數位筆記", "#長輩友善", "#資訊斷層"],
@@ -12,6 +12,9 @@ export const insight: InsightArticle = {
     date: "2026.03.02",
     readTime: "5 分鐘",
     pain_point: "每次跟 AI 講話都要重頭解釋你是誰、喜歡什麼顏色、哪裡有舊傷？AI 就像金魚一樣，轉頭就忘記你上一秒交代的事？",
+    scenario: "想像一個過目不忘的助理。他隨身帶著筆記本，記下了你所有交代過的事，不需要你每次見面都重頭自我介紹。",
+    solution: "使用具備本地持久記憶 (Persistence) 的工具。將 AI 視為一個長期的合作對象，而非一次性的搜尋引擎。",
+    insight_quote: "MEMORY IS POWER",
     example: {
         wrong: "「哎呀，這個電腦真的不行，我昨天才跟它講過要幫我查醫生，今天它又問我要查什麼。」",
         right: "讓 AI 自動維護一個『我的記憶檔案』。下次開口它會說：『王奶奶，我們昨天說好要查週三的門診對吧？』"
@@ -22,13 +25,6 @@ export const insight: InsightArticle = {
             example: {
                 wrong: "「我又忘了怎麼傳照片了，還是算了。」",
                 right: "對 AI 說：『請記住我最常忘記傳照片的步驟』→ 下次問它，它會用你最習慣的方式溫柔提醒妳。"
-            }
-        },
-        data_sovereign: {
-            pain_point: "想要 AI 有記憶，但又怕這些私密記憶被大公司拿去亂用？",
-            example: {
-                wrong: "「記憶功能雖然方便，但我的隱私不就全沒了？」",
-                right: "利用 Claude Code 的本地 MEMORY.md 模式，記憶鎖在自己電腦裡，雲端大廠想看也看不到。"
             }
         }
     },
@@ -62,5 +58,14 @@ export const insight: InsightArticle = {
         command: `請扮演我的「數位記憶助理」。
 我最容易忘記的藥物服用時間是 [填入你的時間，例如：早餐後]。
 請幫我記住這件事，並且當我問你「我該注意什麼」的時候，主動提醒我。`
-    }
+    },
+    content: `<div class="p-12 bg-white/5 rounded-[3rem] border border-white/10 space-y-12 mb-20">
+    <h2 class="text-7xl font-black tracking-tighter text-white leading-none">
+        MEMORY IS<br/>POWER
+    </h2>
+    <p class="text-2xl text-zinc-400 font-medium leading-tight tracking-tight">
+        記憶是智慧的土壤。當 AI 具備了連續性，它就不再是工具，而是您的數位孿生。
+    </p>
+    <div class="h-1 w-20 bg-orange-500"></div>
+</div>`
 };

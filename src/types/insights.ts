@@ -34,5 +34,6 @@ export interface InsightArticle {
     description: string;
     command: string;
   };
+  persona_overrides?: Record<string, any>;
   content: string;
 }
