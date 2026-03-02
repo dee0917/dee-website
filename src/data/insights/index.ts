@@ -7,7 +7,6 @@ import { insight as parentHero } from './parent-hero';
 import { insight as refusalMaster } from './refusal-master';
 import { insight as seniorCoach } from './senior-coach';
 import { insight as aiNewsReader } from './ai-news-reader';
-import { insight as aiMemoryMaster } from './ai-memory-master';
 import { insight as leadGenCover } from './lead-gen-cover';
 import { insight as travelPlanner } from './travel-planner';
 import { insight as meetingMinutes } from './meeting-minutes';
@@ -18,7 +17,6 @@ import { insight as mealPlanner } from './meal-planner';
 import { insight as antiProcrastination } from './anti-procrastination';
 import { insight as petTranslator } from './pet-translator';
 import { insight as ch0WhatIsAi } from './ch0-what-is-ai';
-import { insight as seniorMemoryGuide } from './senior-memory-guide';
 import { insight as ch0FirstMessage } from './ch0-first-message';
 import { insight as ch0AiTemper } from './ch0-ai-temper';
 import { article as ch1AiInstructions } from './ch1-ai-instructions';
@@ -31,11 +29,6 @@ import { insight as ch5WiFiDensePose } from './ch5-wifi-densepose';
 import { insight as ch5LogicVerification } from './ch5-logic-verification';
 import { insight as ch5MarkdownSovereignty } from './ch5-markdown-sovereignty';
 import { insight as ch5MultiAgentSwarms } from './ch5-multi-agent-swarms';
-import { insight as ch5SlopDefense } from './ch5-slop-defense';
-import { insight as ch1AiMemorySovereignty } from './ch1-ai-memory-sovereignty';
-import { insight as ch2WiFiDensePosePrivacy } from './ch2-wifi-densepose-privacy';
-import { insight as ch5DeepSeekV4Auto } from './ch5-deepseek-v4-auto';
-import { insight as ch5AiMemoryClaudeCode } from './ch5-ai-memory-claude-code';
 
 // ═══════════════════════════════════════════
 // Chapter 定義 — 主線任務的學習順序 (僅限 Ch 0-4)
@@ -58,8 +51,8 @@ export const CHAPTERS = [
         articleIds: [303, 308, 310],
     },
     {
-        id: 4, emoji: '🏆', title: '進階挑戰', subtitle: '把 AI 用ใน需要更深度思考的場景',
-        articleIds: [401, 402, 405],
+        id: 4, emoji: '🏆', title: '進階挑戰', subtitle: '把 AI 用在需要更深度思考的場景',
+        articleIds: [401, 403, 405],
     },
 ];
 
@@ -67,7 +60,7 @@ export const CHAPTERS = [
 export const MAIN_QUEST_ORDER: number[] = CHAPTERS.flatMap(c => c.articleIds);
 
 // 戰略演進與其餘支線 IDs (Chapter 5+ 轉化為自由學習庫)
-export const SIDE_QUEST_IDS: number[] = [506, 504, 505, 501, 502, 503, 205, 305, 306, 304, 309, 307, 402, 404, 312, 302];
+export const SIDE_QUEST_IDS: number[] = [501, 502, 503, 504, 505, 205, 305, 306, 304, 309, 307, 402, 404, 312, 302];
 
 // ═══════════════════════════════════════════
 // 文章列表 — 主線 + 支線
@@ -77,7 +70,6 @@ export const SIDE_QUEST_IDS: number[] = [506, 504, 505, 501, 502, 503, 205, 305,
 const mainQuest = [
     // Chapter 0: 出發準備 (level: 0)
     { ...ch0WhatIsAi, level: 0 },
-    { ...seniorMemoryGuide, level: 0 },
     { ...ch0FirstMessage, level: 0 },
     { ...ch0AiTemper, level: 0 },
     // Chapter 1: 認識 AI (level: 1)
@@ -94,23 +86,17 @@ const mainQuest = [
     { ...antiProcrastination, level: 3 },
     // Chapter 4: 進階挑戰 (level: 4)
     { ...aiNewsReader, level: 4 },
-    { ...aiMemoryMaster, level: 4 },
     { ...englishCoach, level: 4 },
     { ...ch4AiManager, level: 4 },
 ];
 
 // 自由學習庫 (level: -1 = 戰略演進與支線)
 const sideQuests = [
-    { ...ch5DeepSeekV4Auto, level: -1, category: "戰略演進" },
-    { ...ch5AiMemoryClaudeCode, level: -1, category: "戰略演進" },
-    { ...ch1AiMemorySovereignty, level: -1, category: "戰略演進" },
-    { ...ch2WiFiDensePosePrivacy, level: -1, category: "戰略演進" },
     { ...ch5VPhoneAgent, level: -1, category: "戰略演進" },
     { ...ch5LogicVerification, level: -1, category: "戰略演進" },
     { ...ch5WiFiDensePose, level: -1, category: "戰略演進" },
     { ...ch5MarkdownSovereignty, level: -1, category: "戰略演進" },
     { ...ch5MultiAgentSwarms, level: -1, category: "戰略演進" },
-    { ...ch5SlopDefense, level: -1, category: "戰略演進" },
     { ...ch1AiPhysicalization, level: -1 },
     { ...travelPlanner, level: -1 },
     { ...meetingMinutes, level: -1 },
