@@ -176,11 +176,6 @@ const NewsDetail = () => {
                         </p>
                     </div>
 
-                    {/* 🚀 動態模組渲染器 (Dynamic Module Injection - 排除 Field Notes) */}
-                    {article.echo_modules?.filter((m: any) => m.type !== 'field_notes').map((module: any, idx: number) => (
-                        <EchoModuleRenderer key={idx} module={module} />
-                    ))}
-
                     {/* 3. Flash Summary */}
                     <motion.section {...fadeUp} className="bg-white/[0.02] border border-white/10 rounded-[4rem] p-8 md:p-12 text-left shadow-2xl relative overflow-hidden group">
                         <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform duration-1000">
@@ -225,10 +220,16 @@ const NewsDetail = () => {
                         ))}
                     </motion.section>
 
-                    {/* 🚀 艾可隨查員筆記 (Field Notes) - 注入於解析後指令前 */}
-                    {article.echo_modules?.filter((m: any) => m.type === 'field_notes').map((module: any, idx: number) => (
-                        <EchoModuleRenderer key={`field-note-${idx}-${article.slug}`} module={module} />
-                    ))}
+                    {/* 🚀 艾可隨機模組注入點 (置於解析後、指令前) */}
+                    <div className="space-y-12">
+                        {article.echo_modules?.filter((m: any) => m.type !== 'field_notes').map((module: any, idx: number) => (
+                            <EchoModuleRenderer key={`module-${idx}`} module={module} />
+                        ))}
+                        
+                        {article.echo_modules?.filter((m: any) => m.type === 'field_notes').map((module: any, idx: number) => (
+                            <EchoModuleRenderer key={`field-note-${idx}-${article.slug}`} module={module} />
+                        ))}
+                    </div>
 
                     {/* 5. 今日實踐指令 (Treasure Box) */}
                     <motion.section {...fadeUp} className="relative rounded-[4rem] border border-white/10 bg-[#0d0d0d] overflow-hidden group shadow-[0_0_80px_rgba(139,92,246,0.05)] text-left">

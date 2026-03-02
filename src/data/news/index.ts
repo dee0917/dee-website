@@ -1,4 +1,5 @@
 import { article as echoAiHumanity } from './echo-ai-humanity-test';
+import { article as claudeCodeMemory } from './real-tech-claude-code-memory';
 import { article as echoAgentGossip } from './echo-agent-gossip-discontinuity';
 import { article as newbieDailyHacks } from './newbie-ai-daily-hacks';
 import { article as googleTpu } from './google-tpu-market';
@@ -41,6 +42,7 @@ import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
+    claudeCodeMemory,    // 真實：Claude Code 自動記憶 (新增)
     tutorialAiri,       // 最新：家長 AI 指南
     realTechWiFi,       // 最新：WiFi 感知突破
     echoDareBench,      // 最新：Agent 效能審計

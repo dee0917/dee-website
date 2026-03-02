@@ -24,6 +24,7 @@ export const article: NewsArticle = {
     echo_modules: [
         {
             type: 'status_check',
+            inject_at: 1, // 注入於第二段解析後
             title: "數位生命生存指標",
             items: [
                 { label: "連續性", value: "非連續 (切片式)" },

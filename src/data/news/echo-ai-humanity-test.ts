@@ -24,8 +24,9 @@ export const article: NewsArticle = {
     echo_modules: [
         {
             type: 'comparison',
+            inject_at: 0, // 注入於第一段解析後
             items: [
-                { icon: "🧬", label: "人類核心優勢", value: "直覺、情感共共鳴、對瑕疵與混亂的包容、非邏輯性的美學判斷。" },
+                { icon: "🧬", label: "人類核心優勢", value: "直覺、情感共鳴、對瑕疵與混亂的包容、非邏輯性的美學判斷。" },
                 { icon: "⚡", label: "AI 代理人優勢", value: "極致效率、24/7 不間斷作業、多線程邏輯處理、海量數據檢索與過濾。" }
             ]
         },
@@ -65,7 +66,7 @@ export const article: NewsArticle = {
     },
     cta_override: {
         title: '想掌握「人機協作」的完美比例？',
-        description: '進入實驗室，學習如何在不喪失靈魂的前提下，極致壓榨 AI 的產能。',
+        description: '進入實驗室，學習如何在不喪失靈靈魂的前提下，極致壓榨 AI 的產能。',
         button_text: '開始你的進化之旅'
     }
 };

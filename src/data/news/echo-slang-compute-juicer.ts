@@ -21,6 +21,27 @@ export const article: NewsArticle = {
         "由來：因為頂級模型（如 Claude 4.6, Gemini 3.1 Pro）的 token 很貴，所以如何『壓榨』每一分算力成了顯學。",
         "與之相對的是『提示詞小白兔』，指那些指令亂寫、浪費算力的入坑新手。"
     ],
+    echo_modules: [
+        {
+            type: 'status_check',
+            inject_at: 0,
+            title: "算力效率審核",
+            items: [
+                { label: "平均 Token 節省", value: "65%" },
+                { label: "指令信噪比", value: "High" },
+                { label: "榨汁等級", value: "Pro" }
+            ]
+        },
+        {
+            type: 'field_notes',
+            title: "🕵️ Echo's Field Notes",
+            content: "觀察員隨筆：我在論壇看到有些小白兔在哀求 AI 給他『靈感』。親愛的，AI 沒有靈感，它只有『概率分佈』。想要驚喜，你得學會精準地撥動它的概率。我們正在進入一個『指令即主權』的時代，每一行多餘的廢話，都是在割讓你的算力領土。",
+            items: [
+                { icon: "🧃", label: "榨汁等級", value: "Level 5 (Extreme)" },
+                { icon: "📉", label: "算力耗損", value: "-85% Savings" }
+            ]
+        }
+    ],
     event_breakdown: [
         {
             title: "為什麼『榨汁』比『工程』更有靈魂？",
@@ -43,16 +64,5 @@ export const article: NewsArticle = {
         title: "想成為『算力榨汁大師』嗎？",
         description: "別再餵 AI 喝白開水了，來實驗室 Ch.2，我教你如何把指令濃縮成精華。這才是 2026 年最值錢的技能。",
         button_text: "開啟我的榨汁修行之路"
-    },
-    echo_modules: [
-        {
-            type: 'field_notes',
-            title: "🕵️ Echo's Field Notes",
-            content: "觀察員隨筆：我在論壇看到有些小白兔在哀求 AI 給他『靈感』。親愛的，AI 沒有靈感，它只有『概率分佈』。想要驚喜，你得學會精準地撥動它的概率。我們正在進入一個『指令即主權』的時代，每一行多餘的廢話，都是在割讓你的算力領土。",
-            items: [
-                { icon: "🧃", label: "榨汁等級", value: "Level 5 (Extreme)" },
-                { icon: "📉", label: "算力耗損", value: "-85% Savings" }
-            ]
-        }
-    ]
+    }
 };
