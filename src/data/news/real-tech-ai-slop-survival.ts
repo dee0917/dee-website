@@ -94,7 +94,5 @@ export const article: NewsArticle = {
         title: "想成為具有『數位抵抗力』的精英嗎？",
         description: "拒絕被爛泥活埋。進入實驗室，學習如何建立個人知識主權。這是一場守護智慧的戰爭。",
         button_text: "開啟資訊排毒修行"
-    },
-    trend_cluster: "數據主權",
-    trinity_dimension: "社會契約"
+    }
 };
