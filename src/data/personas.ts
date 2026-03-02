@@ -1,8 +1,9 @@
-import { User, Briefcase, Utensils, Home as HomeIcon, Baby, Quote, ShieldCheck, Layers } from 'lucide-react';
+import { User, Briefcase, Utensils, Home as HomeIcon, Baby, Quote } from 'lucide-react';
 
 /**
  * 🚨 核心族群精簡版 (Core 6)
  * 決策：移除硬核、重疊身分，回歸平民、幽默與白話風格。
+ * 狀態：已強行攔截自動化腳本的冗餘擴張，維持 6 核心架構。
  */
 export const PERSONAS = {
     general: { 
@@ -37,33 +38,12 @@ export const PERSONAS = {
         description: '專攻用 AI 處理掛號、傳長輩圖與修照片。',
         special_prompt: "我是一位想跟上時代的長輩。請像我最孝順的晚輩一樣，用完全沒有科技術語、最有耐心的話，教我怎麼用 AI 幫生活省事。"
     },
-    non_tech_senior: {
-        label: '科技畏難長輩',
-        icon: User,
-        color: 'amber',
-        description: '對科技有畏難情緒，需要最直覺的大字體與生活化關懷。',
-        special_prompt: "我對新科技感到很害怕，總是擔心點錯會弄壞東西。請用最溫柔、最白話的方式跟我說話，把我當成完全不懂電腦的長輩，多用生活中的例子來比喻 AI 功能。"
-    },
     craftsman: { 
         label: '不想被遺忘的職人', 
         icon: Quote, 
         color: 'indigo', 
         description: '將一輩子的好手藝數位化，傳承給下一代。',
         special_prompt: "我現在是一位擁有多年經驗的職人。請將 AI 視為一名勤奮且具備無限記憶的『學徒』，教導我如何將腦中的經驗轉化為數位世界的資產。請用最親切、無技術門檻的語言與我交談。"
-    },
-    sovereign: {
-        label: '數據領主 (Data Sovereign)',
-        icon: ShieldCheck,
-        color: 'teal',
-        description: '追求極致隱私與數據主權的專業用戶。',
-        special_prompt: "我是一名極度重視數位主權與數據隱私的『數據領主』。請以去中心化、端到端加密、與隱私保護為核心前提，為我提供 AI 應用建議。請避開所有大型中心化雲端的資料收集陷阱，專注於 Local LLM 與開源解決方案。"
-    },
-    freelancer: {
-        label: '斜槓接案邊緣人',
-        icon: Layers,
-        color: 'violet',
-        description: '同時接 3-5 個案子，極度焦慮時間崩塌。',
-        special_prompt: "我是一個極度焦慮、同時要處理多個不同客戶需求的斜槓接案者。請教我如何用 AI 幫我多出 2 小時睡覺，尤其是自動回覆客訴、5 分鐘寫好標案建議書，以及精確估算報價的秘訣。"
     }
 };
 
