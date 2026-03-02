@@ -234,21 +234,48 @@ const NewsDetail = () => {
 
             <AnimatePresence>
                 {showAiJumpModal && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl text-center">
-                        <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-zinc-900 border border-white/10 p-10 rounded-[2.5rem] max-w-sm w-full shadow-2xl relative text-center">
-                            <button onClick={() => setShowAiJumpModal(false)} className="absolute top-6 right-6 text-zinc-500 hover:text-white"><X size={24} /></button>
-                            <h3 className="text-2xl font-black text-white mb-8 tracking-tighter text-center">指令已複製！</h3>
-                            <div className="flex justify-center gap-4">
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/95 backdrop-blur-2xl">
+                        <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} 
+                            className="bg-zinc-900 border border-white/10 p-8 md:p-12 rounded-[3rem] max-w-lg w-full shadow-2xl relative overflow-hidden">
+                            
+                            {/* Premium Background Glow */}
+                            <div className="absolute -top-24 -left-24 w-64 h-64 bg-emerald-500/10 blur-[100px] rounded-full" />
+                            <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-blue-500/10 blur-[100px] rounded-full" />
+
+                            <button onClick={() => setShowAiJumpModal(false)} className="absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors">
+                                <X size={28} />
+                            </button>
+
+                            <div className="text-center mb-12 relative z-10">
+                                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", damping: 12 }}
+                                    className="w-20 h-20 bg-emerald-500 text-black rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-xl shadow-emerald-500/20">
+                                    <Check size={40} strokeWidth={3} />
+                                </motion.div>
+                                <h3 className="text-3xl md:text-4xl font-black text-white mb-3 tracking-tighter">指令已成功複製！</h3>
+                                <p className="text-zinc-500 text-lg font-medium">請選擇您想前往並貼上的 AI 平台：</p>
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 relative z-10">
                                 {[
-                                    { name: 'GPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com' },
-                                    { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai' },
-                                    { name: 'Gemini', logo: GeminiLogo, app: 'googlegemini://', web: 'https://gemini.google.com' }
+                                    { name: 'ChatGPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com', color: 'hover:border-[#10a37f]/50', glow: 'group-hover:shadow-[#10a37f]/10' },
+                                    { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai', color: 'hover:border-[#D97757]/50', glow: 'group-hover:shadow-[#D97757]/10' },
+                                    { name: 'Gemini', logo: GeminiLogo, app: 'googlegemini://', web: 'https://gemini.google.com', color: 'hover:border-[#1C7DEB]/50', glow: 'group-hover:shadow-[#1C7DEB]/10' }
                                 ].map((ai, i) => (
-                                    <a key={i} href={ai.web} target="_blank" rel="noopener noreferrer" onClick={(e) => { e.preventDefault(); window.location.href = ai.app; setTimeout(() => { window.open(ai.web, '_blank'); setShowAiJumpModal(false); }, 2500); }} className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/10 transition-all flex-1 text-center">
-                                        <ai.logo size={32} />
-                                        <span className="text-white font-black text-[10px] uppercase tracking-widest text-center">{ai.name}</span>
+                                    <a key={i} href={ai.web} target="_blank" rel="noopener noreferrer" 
+                                        onClick={(e) => { 
+                                            e.preventDefault(); 
+                                            window.location.href = ai.app; 
+                                            setTimeout(() => { window.open(ai.web, '_blank'); setShowAiJumpModal(false); }, 1500); 
+                                        }} 
+                                        className={`flex flex-col items-center gap-4 p-6 rounded-[2rem] bg-white/[0.03] border border-white/5 transition-all group shadow-xl hover:-translate-y-1 ${ai.color} ${ai.glow}`}>
+                                        <ai.logo size={40} />
+                                        <span className="text-white font-black text-xs uppercase tracking-widest">{ai.name}</span>
                                     </a>
                                 ))}
+                            </div>
+
+                            <div className="mt-12 pt-8 border-t border-white/5 text-center">
+                                <p className="text-zinc-600 text-[10px] font-black uppercase tracking-[0.4em]">直接前往 App 或 網頁版貼上即可</p>
                             </div>
                         </motion.div>
                     </motion.div>
