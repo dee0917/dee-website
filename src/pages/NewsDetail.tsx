@@ -273,26 +273,31 @@ const NewsDetail = () => {
                                 <p className="text-zinc-400 text-sm font-bold uppercase tracking-widest opacity-60">Select Platform</p>
                             </div>
 
-                            <div className="grid grid-cols-1 gap-3 relative z-10">
+                            <div className="grid grid-cols-3 gap-3 relative z-10">
                                 {[
-                                    { name: 'ChatGPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com', color: 'hover:border-[#10a37f]/50', iconColor: 'text-[#10a37f]' },
-                                    { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai', color: 'hover:border-[#D97757]/50', iconColor: 'text-[#D97757]' },
-                                    { name: 'Gemini', logo: GeminiLogo, app: 'googlegemini://', web: 'https://gemini.google.com', color: 'hover:border-[#1C7DEB]/50', iconColor: 'text-[#1C7DEB]' }
+                                    { name: 'GPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com', color: 'hover:border-[#10a37f]/50', iconColor: 'text-[#10a37f]', bg: 'group-hover:bg-[#10a37f]/10' },
+                                    { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai', color: 'hover:border-[#D97757]/50', iconColor: 'text-[#D97757]', bg: 'group-hover:bg-[#D97757]/10' },
+                                    { name: 'Gemini', logo: GeminiLogo, app: 'googlegemini://', web: 'https://gemini.google.com', color: 'hover:border-[#1C7DEB]/50', iconColor: 'text-[#1C7DEB]', bg: 'group-hover:bg-[#1C7DEB]/10' }
                                 ].map((ai, i) => (
                                     <motion.a key={i} href={ai.web} target="_blank" rel="noopener noreferrer" 
-                                        whileHover={{ x: 5, backgroundColor: 'rgba(255,255,255,0.05)' }}
-                                        whileTap={{ scale: 0.98 }}
+                                        initial={{ opacity: 0, scale: 0.5 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: 0.3 + i * 0.1, type: "spring", damping: 12 }}
+                                        whileHover={{ scale: 1.05, y: -5 }}
+                                        whileTap={{ scale: 0.95 }}
                                         onClick={(e) => { 
                                             e.preventDefault(); 
                                             window.location.href = ai.app; 
                                             setTimeout(() => { window.open(ai.web, '_blank'); setShowAiJumpModal(false); }, 1500); 
                                         }} 
-                                        className={`flex items-center justify-between p-4 rounded-2xl bg-white/[0.03] border border-white/5 transition-all group shadow-lg ${ai.color}`}>
-                                        <div className="flex items-center gap-4">
-                                            <ai.logo size={28} />
-                                            <span className="text-white font-black text-sm uppercase tracking-widest">{ai.name}</span>
+                                        className={`flex flex-col items-center justify-center aspect-square rounded-[2rem] bg-white/[0.03] border border-white/5 transition-all group shadow-lg relative overflow-hidden ${ai.color}`}>
+                                        <div className={`absolute inset-0 transition-colors duration-500 ${ai.bg}`} />
+                                        <div className="relative z-10 flex flex-col items-center gap-3">
+                                            <motion.div whileHover={{ rotate: [0, -10, 10, 0] }} transition={{ duration: 0.5 }}>
+                                                <ai.logo size={32} />
+                                            </motion.div>
+                                            <span className="text-white font-black text-[10px] uppercase tracking-tighter">{ai.name}</span>
                                         </div>
-                                        <ArrowRight size={16} className={`opacity-0 group-hover:opacity-100 transition-all ${ai.iconColor}`} />
                                     </motion.a>
                                 ))}
                             </div>
