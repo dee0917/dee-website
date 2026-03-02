@@ -17,6 +17,7 @@ import { insight as mealPlanner } from './meal-planner';
 import { insight as antiProcrastination } from './anti-procrastination';
 import { insight as petTranslator } from './pet-translator';
 import { insight as ch0WhatIsAi } from './ch0-what-is-ai';
+import { insight as seniorMemoryGuide } from './senior-memory-guide';
 import { insight as ch0FirstMessage } from './ch0-first-message';
 import { insight as ch0AiTemper } from './ch0-ai-temper';
 import { article as ch1AiInstructions } from './ch1-ai-instructions';
@@ -74,6 +75,7 @@ export const SIDE_QUEST_IDS: number[] = [506, 504, 505, 501, 502, 503, 205, 305,
 const mainQuest = [
     // Chapter 0: 出發準備 (level: 0)
     { ...ch0WhatIsAi, level: 0 },
+    { ...seniorMemoryGuide, level: 0 },
     { ...ch0FirstMessage, level: 0 },
     { ...ch0AiTemper, level: 0 },
     // Chapter 1: 認識 AI (level: 1)
