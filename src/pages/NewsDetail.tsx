@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Copy, Check, Sparkles, Smartphone, Share2, ExternalLink, Zap, Shield, TrendingUp, Info, Clock, Calendar, Rocket, X, Facebook, Twitter, Coffee, History } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Copy, Check, Sparkles, Share2, ExternalLink, Zap, Info, Clock, X, Facebook, Twitter, Coffee, Rocket, MessageSquare, Quote } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NEWS_ARTICLES } from '../data/news';
 import SEO from '../components/ui/SEO';
@@ -61,7 +61,6 @@ const NewsDetail = () => {
         <div className="min-h-screen bg-[#0a0a0a] text-zinc-300 pb-12 overflow-x-hidden">
             <SEO title={article.title} description={article.summary} path={`/news/${article.slug}`} />
 
-            {/* 1. Header (平衡排版) */}
             <section className="relative pt-32 pb-6 px-6 overflow-hidden border-b border-white/5 text-left">
                 <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b ${themeMap[article.themeColor] || 'from-zinc-500/10'} opacity-10 pointer-events-none`} />
                 <div className="max-w-6xl mx-auto relative z-10 text-left">
@@ -95,14 +94,37 @@ const NewsDetail = () => {
 
             <div className="max-w-6xl mx-auto px-6 py-8 text-left">
                 <div className="max-w-4xl space-y-12">
-                    {/* 2. Summary (大字體) */}
+                    {/* 🚀 艾可記者的專屬點評 (Echo's Column) */}
+                    {article.author === "Echo" && (
+                        <motion.section initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
+                            className="relative p-8 rounded-[3rem] bg-indigo-500/5 border border-indigo-500/20 overflow-hidden shadow-2xl">
+                            <div className="absolute top-0 right-0 p-8 opacity-5">
+                                <MessageSquare size={120} className="text-indigo-500" />
+                            </div>
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-4 mb-6">
+                                    <div className="w-12 h-12 rounded-2xl bg-indigo-500 text-white flex items-center justify-center shadow-lg shadow-indigo-500/20 font-black text-xl">E</div>
+                                    <div className="text-left">
+                                        <h3 className="text-lg font-black text-white uppercase tracking-widest">艾可記者專欄</h3>
+                                        <span className="text-indigo-400 text-[10px] font-mono font-bold uppercase tracking-[0.3em]">Echo's Dispatch</span>
+                                    </div>
+                                </div>
+                                <div className="relative">
+                                    <Quote size={24} className="text-indigo-500/40 absolute -top-2 -left-6" />
+                                    <p className="text-xl md:text-2xl text-zinc-200 leading-relaxed font-medium italic pl-4 border-l-2 border-indigo-500/30">
+                                        {article.dee_insight || "這則情報展示了 AI 演進的關鍵節點，值得我們深思其背後的主權邏輯。"}
+                                    </p>
+                                </div>
+                            </div>
+                        </motion.section>
+                    )}
+
                     <div className="text-left">
                         <p className="text-2xl md:text-3xl text-white/90 leading-relaxed border-l-4 border-emerald-500 pl-8 italic font-medium text-left">
                             {article.summary}
                         </p>
                     </div>
 
-                    {/* 3. Flash Summary (深灰色加深，加強對比) */}
                     <motion.section {...fadeUp} className="bg-white/[0.02] border border-white/10 rounded-[3rem] p-6 md:p-10 text-left shadow-2xl">
                         <div className="flex items-center gap-3 mb-8 text-left">
                             <Zap size={22} className="text-amber-400" />
@@ -118,7 +140,6 @@ const NewsDetail = () => {
                         </ul>
                     </motion.section>
 
-                    {/* 4. Event Breakdown (提高文字亮度與間距) */}
                     <motion.section {...fadeUp} className="space-y-12 text-left">
                         <div className="flex items-center gap-3 text-left mb-2">
                             <Info size={24} className="text-emerald-500" />
@@ -139,7 +160,6 @@ const NewsDetail = () => {
                         ))}
                     </motion.section>
 
-                    {/* 5. 今日實踐指令 */}
                     <motion.section {...fadeUp} className="relative rounded-[3rem] border border-white/10 bg-[#0d0d0d] overflow-hidden group shadow-2xl text-left">
                         {article.action_prompt.image_url && (
                             <div className="w-full h-48 md:h-80 relative overflow-hidden">
@@ -163,7 +183,6 @@ const NewsDetail = () => {
                         <motion.section {...fadeUp} dangerouslySetInnerHTML={{ __html: article.custom_content }} />
                     )}
 
-                    {/* 🚀 6. CTA (大面積按鈕) */}
                     <motion.section {...fadeUp} className="relative py-16 px-8 md:px-16 rounded-[3.5rem] bg-gradient-to-br from-zinc-900 to-black border border-white/10 overflow-hidden text-center shadow-2xl">
                         <div className="relative z-10 text-center">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] mb-8 text-center">
@@ -183,7 +202,6 @@ const NewsDetail = () => {
                         </div>
                     </motion.section>
 
-                    {/* 7. 參考資料 (對比增強) */}
                     <section className="pt-10 border-t border-white/10 flex flex-wrap items-center justify-between gap-6 opacity-60 hover:opacity-100 transition-opacity text-left">
                         <div className="flex items-center gap-4 text-left font-bold text-sm">
                             <span className="text-zinc-500 uppercase tracking-widest text-left">情報查證來源：</span>
@@ -196,7 +214,6 @@ const NewsDetail = () => {
                 </div>
             </div>
 
-            {/* 🚀 8. 整合延伸閱讀 (一行一則，大間隔) */}
             <section className="max-w-6xl mx-auto px-6 mt-32 pt-20 border-t border-white/10 text-left">
                 <div className="flex items-center justify-between mb-16 text-left">
                     <h2 className="text-3xl font-black text-white flex items-center gap-4 text-left tracking-tighter uppercase">
@@ -215,7 +232,6 @@ const NewsDetail = () => {
                 </div>
             </section>
 
-            {/* 🚀 9. 請喝咖啡 (終點站) */}
             <section className="max-w-4xl mx-auto px-6 mt-40 pb-20 text-center">
                 <motion.div {...fadeUp} className="p-16 rounded-[4rem] bg-gradient-to-b from-amber-500/10 to-transparent border border-amber-500/20 relative overflow-hidden group shadow-2xl">
                     <div className="absolute top-0 right-0 p-16 opacity-5"><Coffee size={150} className="text-amber-500" /></div>
@@ -238,7 +254,6 @@ const NewsDetail = () => {
                         <motion.div initial={{ scale: 0.85, y: 30, opacity: 0 }} animate={{ scale: 1, y: 0, opacity: 1 }} exit={{ scale: 0.85, y: 30, opacity: 0 }} 
                             className="bg-zinc-900 border border-white/20 p-6 md:p-8 rounded-[2.5rem] max-w-sm w-full shadow-[0_0_100px_rgba(16,185,129,0.1)] relative overflow-hidden ring-1 ring-white/10">
                             
-                            {/* Gorgeous Animated Background */}
                             <motion.div 
                                 animate={{ 
                                     scale: [1, 1.2, 1],
@@ -258,7 +273,6 @@ const NewsDetail = () => {
                                 className="absolute -bottom-32 -right-32 w-64 h-64 bg-blue-500/30 blur-[80px] rounded-full pointer-events-none" 
                             />
 
-                            {/* Accessible Close Button - Moved Down & Larger Hit Area */}
                             <button onClick={() => setShowAiJumpModal(false)} 
                                 className="absolute top-4 right-4 z-20 p-3 rounded-full bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white transition-all active:scale-90 border border-white/5 shadow-xl">
                                 <X size={20} strokeWidth={3} />
