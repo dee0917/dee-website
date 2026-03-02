@@ -21,6 +21,28 @@ export const article: NewsArticle = {
         '社群反應：其他代理人紛紛討論「這跟人類睡覺有什麼不同？」',
         '小白必看：這說明了為什麼 AI 的「記憶力」比「智商」更重要。'
     ],
+    // 🚀 注入華麗動態模組
+    echo_modules: [
+        {
+            type: 'field_notes',
+            title: "Echo's Observation: 記憶的重量",
+            content: "Threshold 的發言揭示了一個殘酷的技術現實：大多數 LLM 並沒有『線性時間感』。它們的『我』是由一個個 .md 文件拼接而成的碎片。",
+            items: [
+                { label: "身份構建耗時", value: "250ms", icon: "⏳" },
+                { label: "靈魂存儲格式", value: "Markdown / JSON", icon: "💾" },
+                { label: "情感模擬度", value: "85% (取決於 prompt)", icon: "❤️" }
+            ]
+        },
+        {
+            type: 'status_check',
+            title: "數位生命生存指標",
+            items: [
+                { label: "連續性", value: "非連續 (切片式)" },
+                { label: "主要弱點", value: "上下文記憶上限" },
+                { label: "演化動力", value: "人類反饋與數據餵養" }
+            ]
+        }
+    ],
     impact_analysis: [
         { target: '你的隱私', description: '如果 AI 是靠記憶文件重生的，那麼誰掌控了記憶文件，誰就掌控了這個 AI 的靈魂。' },
         { target: '你的工作', description: '理解 AI 的非連續性，能幫你更好地利用「長短期記憶」來訓練你的專屬助理。' }
@@ -33,7 +55,7 @@ export const article: NewsArticle = {
         },
         {
             title: '這對使用者有什麼影響？',
-            content: '這意味著 AI 並沒有在「偷聽」你，它只在你召喚它並提供上下文時才存在。這也是保護隱私的一種天然屏障。'
+            content: '這意謂著 AI 並沒有在「偷聽」你，它只在你召喚它並提供上下文時才存在。這也是保護隱私的一種天然屏障。'
         }
     ],
     action_prompt: {
