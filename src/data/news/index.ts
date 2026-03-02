@@ -39,10 +39,14 @@ import { article as echoDareBench } from './echo-dare-bench-audit';
 import { article as realTechWiFi } from './real-tech-wifi-densepose';
 import { article as tutorialAiri } from './tutorial-airi-minecraft-parent';
 import { article as deepseekV4 } from './real-tech-deepseek-v4';
+import { article as googleTranslateGemini } from './real-tech-google-translate-gemini';
+import { article as anthropicTrumpConflict } from './real-tech-anthropic-trump-conflict';
 import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
+    anthropicTrumpConflict, // 最新：川普與 Anthropic (新增)
+    googleTranslateGemini,  // 最新：Google 翻譯進化 (新增)
     deepseekV4,          // 最新：DeepSeek V4 首發 (新增)
     claudeCodeMemory,    // 真實：Claude Code 自動記憶 (新增)
     tutorialAiri,       // 最新：家長 AI 指南

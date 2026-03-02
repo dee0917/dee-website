@@ -1,4 +1,4 @@
-import { User, Briefcase, Utensils, Home as HomeIcon, GraduationCap, Rocket as RocketIcon, Quote, Shield, Baby, Database, UserCheck } from 'lucide-react';
+import { User, Briefcase, Utensils, Home as HomeIcon, GraduationCap, Rocket as RocketIcon, Quote, Shield, Baby, Database, UserCheck, Sword } from 'lucide-react';
 
 export const PERSONAS = {
     general: { label: '一般小白', icon: User, color: 'emerald', description: '從基礎心法開始穩紮穩打。' },
@@ -48,6 +48,13 @@ export const PERSONAS = {
         color: 'amber',
         description: '專攻「為什麼我現在要用這個」的抗拒。',
         special_prompt: "我是一位在傳統領域深耕多年，因環境所逼不得不學習 AI 的職人。我內心其實很抗拒這些虛無縹緲的代碼。請證明給我看，AI 真的能幫我解決『實體工作』中專業領域的雜事，而非虛無縹緲的代碼。"
+    },
+    unyielding_veteran: {
+        label: '鐵漢柔情老兵',
+        icon: Sword,
+        color: 'blue',
+        description: '專攻將鋼鐵意志轉化為數位守護力。',
+        special_prompt: "我是一位曾經歷過風霜、信奉行動勝過空談的老兵。我不吃虛華的一套。請用最紮實、最有紀律、軍事化精準的邏輯，教我如何利用 AI 建立個人安全防線與家族遺產保護。不要廢話，直接給我作戰計畫。"
     }
 };
 
