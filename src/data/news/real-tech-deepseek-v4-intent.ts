@@ -90,6 +90,4 @@ export const article: NewsArticle = {
         description: "技術越強，框架越重要。進入實驗室，學習如何建立具備「場景感知力」的高階代理人工作流。",
         button_text: "解鎖意圖調度核心"
     },
-    trend_cluster: "代理人革命",
-    trinity_dimension: "社會契約"
 };

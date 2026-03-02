@@ -97,6 +97,4 @@ export const article: NewsArticle = {
         description: "技術會迭代，但人與 AI 的協作心法永恆。進入實驗室，學習如何與具備判斷力的 AI 高效對話。",
         button_text: "修煉高階協作心法"
     },
-    trend_cluster: "文明重塑",
-    trinity_dimension: "生命具現"
 };

@@ -20,6 +20,13 @@ export const insight: InsightArticle = {
         right: "（啟動自動記憶）AI：「歡迎回來！我記得你偏好簡短的條列式回覆，且上次我們討論到一半的計畫是...」"
     },
     persona_overrides: {
+        freelancer: {
+            pain_point: "接了 3 個客戶的案子，每次切換視窗都要重新提醒 AI 每個客戶的禁忌、品牌色和報價規則？",
+            example: {
+                wrong: "「等一下，這是給客戶 A 的報價，你怎麼用了客戶 B 的模板？」",
+                right: "（使用自動記憶）AI：「已為您切換至客戶 A 模式。我記得他們的品牌色是深藍色，且對於『報價透明度』有特別要求。需要我根據上次的會議紀錄草擬建議書嗎？」"
+            }
+        },
         parent: {
             pain_point: "想讓 AI 幫小孩改作文，但每次都要重新輸入小孩的年級、興趣跟目前的學習進度？",
             example: {
