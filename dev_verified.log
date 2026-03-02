@@ -1,0 +1,12 @@
+
+  VITE v5.4.21  ready in 209 ms
+
+  ➜  Local:   http://localhost:4173/
+  ➜  Network: http://72.62.66.230:4173/
+  ➜  Network: http://172.17.0.1:4173/
+  ➜  Network: http://172.19.0.1:4173/
+1:09:51 PM [vite] hmr update /src/index.css, /src/pages/Home.tsx, /src/pages/Insights.tsx
+1:09:55 PM [vite] hmr update /src/index.css, /src/pages/Home.tsx, /src/pages/Insights.tsx
+1:09:57 PM [vite] hmr update /src/index.css, /src/pages/Home.tsx, /src/pages/Insights.tsx
+1:16:49 PM [vite] hmr update /src/index.css, /src/pages/Insights.tsx
+1:19:58 PM [vite] hmr update /src/index.css, /src/pages/Insights.tsx

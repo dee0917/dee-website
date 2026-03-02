@@ -5,7 +5,9 @@ import path from 'path'
 export default defineConfig({
   plugins: [react()],
   server: {
-    allowedHosts: 'all'
+    allowedHosts: true,
+    port: 4173,
+    host: true
   },
   preview: {
     allowedHosts: true

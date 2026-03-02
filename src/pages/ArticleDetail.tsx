@@ -263,7 +263,7 @@ const ArticleDetail = () => {
                         <span className={`text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest ${theme.bg} ${theme.text} border ${theme.border}`}>{article.category}</span>
                         <div className="flex gap-1">{[...Array(5)].map((_, i) => <StarIcon key={i} size={8} className={i < (article.difficulty_level || 1) ? theme.text : 'text-zinc-800'} fill="currentColor" />)}</div>
                     </div>
-                    <h1 className="text-3xl md:text-7xl font-black text-white mb-4 tracking-tighter leading-[1.0]">{article.title}</h1>
+                    <h1 className="text-3xl md:text-7xl font-black text-white mb-4 tracking-tighter leading-[0.9]">{article.title}</h1>
                     <p className="text-lg md:text-2xl text-zinc-400 mb-8 max-w-2xl mx-auto leading-relaxed font-medium">{article.summary}</p>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={scrollToHook}
                         className="bg-white text-black font-black py-4 px-10 rounded-2xl text-lg flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-500 transition-colors group">
@@ -314,11 +314,12 @@ const ArticleDetail = () => {
                             const isDone = stepsCompleted[idx];
                             const isActive = idx === currentStep;
                             const isFuture = idx > currentStep;
+                            const isLocked = !freeMode && isFuture;
                             return (
                                 <motion.div key={idx} ref={el => stepRefs.current[idx] = el}
                                     initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                                    className={`relative rounded-[2rem] border p-5 md:p-8 transition-all duration-500 overflow-hidden ${isDone ? 'bg-white/[0.01] border-emerald-500/20' : isActive ? 'bg-zinc-900 border-white/20 shadow-2xl scale-[1.01]' : 'border-white/5 opacity-10 pointer-events-none'}`}>
-                                    <div className="flex flex-col md:flex-row items-start gap-6">
+                                    className={`relative rounded-[2rem] border p-5 md:p-8 transition-all duration-500 overflow-hidden ${isDone ? 'bg-white/[0.01] border-emerald-500/20' : isActive ? 'bg-zinc-900 border-white/20 shadow-2xl scale-[1.01]' : 'border-white/5 opacity-10'}`}>
+                                    <div className={`flex flex-col md:flex-row items-start gap-6 ${isLocked ? 'blur-sm grayscale pointer-events-none' : ''}`}>
                                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-lg font-black transition-all duration-500 ${isDone ? 'bg-emerald-500 text-black' : isActive ? 'bg-white text-black' : 'bg-white/5 text-zinc-700'}`}>
                                             {isDone ? '✓' : idx + 1}
                                         </div>
@@ -348,8 +349,8 @@ const ArticleDetail = () => {
                                             )}
                                         </div>
                                     </div>
-                                    {isFuture && (
-                                        <div className="absolute inset-0 z-10 bg-black/60 backdrop-blur-[4px] flex items-center justify-center pointer-events-none">
+                                    {isLocked && (
+                                        <div className="absolute inset-0 z-10 bg-black/40 backdrop-blur-[2px] flex items-center justify-center pointer-events-none">
                                             <Lock size={24} className="text-emerald-500/20" />
                                         </div>
                                     )}

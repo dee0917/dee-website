@@ -32,6 +32,7 @@ import { insight as ch5MultiAgentSwarms } from './ch5-multi-agent-swarms';
 import { insight as ch5SlopDefense } from './ch5-slop-defense';
 import { insight as ch1AiMemorySovereignty } from './ch1-ai-memory-sovereignty';
 import { insight as ch2WiFiDensePosePrivacy } from './ch2-wifi-densepose-privacy';
+import { insight as ch5DeepSeekV4Auto } from './ch5-deepseek-v4-auto';
 
 // ═══════════════════════════════════════════
 // Chapter 定義 — 主線任務的學習順序 (僅限 Ch 0-4)
@@ -63,7 +64,7 @@ export const CHAPTERS = [
 export const MAIN_QUEST_ORDER: number[] = CHAPTERS.flatMap(c => c.articleIds);
 
 // 戰略演進與其餘支線 IDs (Chapter 5+ 轉化為自由學習庫)
-export const SIDE_QUEST_IDS: number[] = [504, 505, 501, 502, 503, 205, 305, 306, 304, 309, 307, 402, 404, 312, 302];
+export const SIDE_QUEST_IDS: number[] = [506, 504, 505, 501, 502, 503, 205, 305, 306, 304, 309, 307, 402, 404, 312, 302];
 
 // ═══════════════════════════════════════════
 // 文章列表 — 主線 + 支線
@@ -95,6 +96,7 @@ const mainQuest = [
 
 // 自由學習庫 (level: -1 = 戰略演進與支線)
 const sideQuests = [
+    { ...ch5DeepSeekV4Auto, level: -1, category: "戰略演進" },
     { ...ch1AiMemorySovereignty, level: -1, category: "戰略演進" },
     { ...ch2WiFiDensePosePrivacy, level: -1, category: "戰略演進" },
     { ...ch5VPhoneAgent, level: -1, category: "戰略演進" },

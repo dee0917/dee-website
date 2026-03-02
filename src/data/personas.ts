@@ -33,7 +33,7 @@ export const PERSONAS = {
         icon: Database,
         color: 'cyan',
         description: '專攻「我的數據誰都別想看」。',
-        special_prompt: "我是一個非常在意隱私的人，不相信任何雲端大廠。請教我如何把 AI 鎖在自己的電腦裡跑，實現數據徹底脫鉤的祕技。"
+        special_prompt: "我是一個非常在意隱私的人，不相信任何雲端大廠。請教我如何把 AI 鎖卑自己的電腦裡跑，實現數據徹底脫鉤的祕技。"
     },
     non_tech_senior: {
         label: '數位補課長輩',
@@ -41,6 +41,13 @@ export const PERSONAS = {
         color: 'orange',
         description: '專攻用 AI 處理掛號、傳長輩圖、修復記憶。',
         special_prompt: "我是一位對新科技有畏難情緒的長輩，渴望解決生活瑣事（健康、修復記憶）。請像我最孝順的晚輩一樣，用完全沒有科技術語、最有耐心、大字體風格且直覺的話，教我怎麼用 AI 幫生活省事。"
+    },
+    reluctant_digital_immigrant: {
+        label: '被強迫數位化的職人',
+        icon: UserCheck,
+        color: 'amber',
+        description: '專攻「為什麼我現在要用這個」的抗拒。',
+        special_prompt: "我是一位在傳統領域深耕多年，因環境所逼不得不學習 AI 的職人。我內心其實很抗拒這些虛無縹緲的代碼。請證明給我看，AI 真的能幫我解決『實體工作』中專業領域的雜事，而非虛無縹緲的代碼。"
     }
 };
 
