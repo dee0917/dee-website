@@ -1,598 +1,211 @@
-import SEO from '../components/ui/SEO';
 import React, { useState, useEffect, useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-    ArrowRight, Star, BookOpen, Lock, CheckCircle2, Sparkles,
-    Zap, Gamepad2, Trophy, ChevronDown, ChevronRight, Filter,
-    Compass, Map as MapIcon, Shield, Search, X, Info, User,
-    Briefcase, Utensils, Home as HomeIcon, GraduationCap, Rocket as RocketIcon, Quote
+import { 
+    ArrowRight, Zap, Clock, Shield, TrendingUp, Filter, Star, Info, 
+    MessageCircle, Sparkles, Coffee, AlertTriangle, X, History, 
+    GitMerge, ChevronRight, User, Briefcase, Utensils, Baby, Quote, Home as HomeIcon
 } from 'lucide-react';
 import { CHAPTERS, MAIN_QUEST_ORDER, INSIGHTS_LIST } from '../data/insights';
-import { ChatGPTLogo, ClaudeLogo, GeminiLogo } from '../components/AILogos';
+import SEO from '../components/ui/SEO';
 import { useIdentity } from '../context/IdentityContext';
 import { PERSONAS, UserPersona } from '../data/personas';
 
-const PersonaSwitchModal = ({ onComplete, onClose }: { onComplete: (persona: UserPersona) => void, onClose: () => void }) => {
-    const [selected, setSelected] = useState<UserPersona>('general');
+const Insights = () => {
+    const { persona, setPersona } = useIdentity();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
+    
+    const [loading, setLoading] = useState(true);
+    const [showPersonaSwitch, setShowPersonaSwitch] = useState(false);
+    const [completedIds, setCompletedIds] = useState<number[]>([]);
+
+    useEffect(() => {
+        const comp = localStorage.getItem('dee_ai_completed');
+        if (comp) {
+            try { setCompletedIds(JSON.parse(comp)); } catch(e) { setCompletedIds([]); }
+        }
+        setLoading(false);
+    }, []);
+
+    const handlePersonaChange = (p: UserPersona) => {
+        setPersona(p);
+        setShowPersonaSwitch(false);
+    };
+
+    if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white animate-pulse font-mono text-xs tracking-widest">INITIALIZING_QUESTS...</div>;
+
+    const currentPersona = PERSONAS[persona] || PERSONAS.general;
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[110] flex items-center justify-center px-6 bg-black/90 backdrop-blur-xl">
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} className="bg-zinc-900 border border-white/10 p-8 md:p-12 rounded-[3rem] max-w-xl w-full shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-teal-500" />
-                <button onClick={onClose} className="absolute top-6 right-6 text-zinc-500 hover:text-white transition-colors p-2"><X size={24} /></button>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-40 pb-20 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0">
+            <SEO title="AI 生活實驗室 - 互動修煉地圖" description="選擇你的數位身分，開啟因材施教的 AI 冒險之旅。" path="/insights" />
+            
+            <AnimatePresence>
+                {showPersonaSwitch && (
+                    <PersonaSwitchModal 
+                        current={persona} 
+                        onSelect={handlePersonaChange} 
+                        onClose={() => setShowPersonaSwitch(false)} 
+                    />
+                )}
+            </AnimatePresence>
+
+            <div className="mb-20">
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-10">
+                    <div className="max-w-2xl space-y-6">
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shadow-lg shadow-emerald-500/5">
+                                <TrendingUp size={24} className="text-emerald-400" />
+                            </div>
+                            <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter italic uppercase">Quest Map</h1>
+                        </div>
+                        <p className="text-xl md:text-2xl text-zinc-400 font-medium leading-relaxed">
+                            歡迎來到數位實驗室。這不是枯燥的課程，而是根據您的身分動態生成的 <span className="text-white border-b-2 border-emerald-500">實戰關卡</span>。
+                        </p>
+                    </div>
+
+                    {/* 🚀 Active Persona Card */}
+                    <motion.div whileHover={{ scale: 1.02 }} onClick={() => setShowPersonaSwitch(true)}
+                        className={`cursor-pointer group relative p-8 rounded-[3rem] bg-gradient-to-br from-${currentPersona.color}-500/10 to-transparent border border-${currentPersona.color}-500/20 backdrop-blur-xl shadow-2xl min-w-[320px]`}
+                    >
+                        <div className="flex items-center gap-6">
+                            <div className={`w-16 h-16 rounded-2xl bg-${currentPersona.color}-500 text-black flex items-center justify-center shadow-xl`}>
+                                {React.createElement(currentPersona.icon, { size: 32 })}
+                            </div>
+                            <div className="text-left">
+                                <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-1">Active Identity</span>
+                                <h3 className="text-2xl font-black text-white">{currentPersona.label}</h3>
+                            </div>
+                        </div>
+                        <div className="mt-6 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-zinc-500">
+                            <span>Change Role</span>
+                            <ChevronRight size={14} className="group-hover:translate-x-2 transition-transform" />
+                        </div>
+                    </motion.div>
+                </div>
+            </div>
+
+            {/* 🎮 Duolingo Style Interactive Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {CHAPTERS.map((chapter, cIdx) => (
+                    <div key={chapter.id} className="space-y-8">
+                        <div className="flex items-center gap-4 px-4">
+                            <span className="text-emerald-500 font-black font-mono text-lg">0{chapter.id + 1}</span>
+                            <h2 className="text-2xl font-black text-white uppercase tracking-tighter">{chapter.title}</h2>
+                        </div>
+
+                        <div className="space-y-4">
+                            {chapter.articleIds.map((articleId) => {
+                                const article = INSIGHTS_LIST.find(a => a.id === articleId);
+                                if (!article) return null;
+                                const isDone = completedIds.includes(articleId);
+
+                                return (
+                                    <Link key={articleId} to={`/insights/${articleId}`} className="block group">
+                                        <motion.div whileHover={{ x: 10 }} 
+                                            className={`p-6 rounded-[2.5rem] border transition-all relative overflow-hidden ${isDone ? 'bg-emerald-500/5 border-emerald-500/20' : 'bg-white/[0.02] border-white/5 hover:border-white/10'}`}
+                                        >
+                                            <div className="flex items-center justify-between gap-4">
+                                                <div className="flex-1 min-w-0">
+                                                    <h3 className={`text-lg font-black leading-tight mb-1 truncate ${isDone ? 'text-emerald-400' : 'text-white group-hover:text-emerald-300'}`}>{article.title}</h3>
+                                                    <p className="text-xs text-zinc-500 font-medium uppercase tracking-widest">{article.category} // {article.readTime}</p>
+                                                </div>
+                                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${isDone ? 'bg-emerald-500 text-black' : 'bg-zinc-900 text-zinc-700 group-hover:text-emerald-500'}`}>
+                                                    {isDone ? <Check size={20} strokeWidth={4} /> : <Zap size={18} />}
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* 🛡️ Advanced Strategy Section */}
+            <div className="mt-32 pt-20 border-t border-white/5">
+                <div className="flex items-center gap-4 mb-12">
+                    <span className="text-amber-500 font-black font-mono text-lg">EXT</span>
+                    <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter italic">Strategic Evolutions</h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {INSIGHTS_LIST.filter(a => a.level === -1).map((article, i) => (
+                        <Link key={article.id} to={`/insights/${article.id}`} className="group">
+                             <div className="p-10 rounded-[3rem] bg-gradient-to-br from-zinc-900 to-black border border-white/5 group-hover:border-amber-500/30 transition-all shadow-2xl relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity">
+                                    <Sparkles size={120} />
+                                </div>
+                                <div className="relative z-10 space-y-4">
+                                    <span className="text-[10px] font-black text-amber-500 uppercase tracking-[0.4em]">{article.category}</span>
+                                    <h3 className="text-2xl md:text-3xl font-black text-white group-hover:text-amber-400 transition-colors tracking-tight">{article.title}</h3>
+                                    <p className="text-zinc-500 text-lg leading-relaxed line-clamp-2">{article.summary}</p>
+                                    <div className="pt-4 flex items-center gap-2 text-white font-black text-xs uppercase tracking-widest group-hover:gap-4 transition-all">
+                                        進入深度修行 <ArrowRight size={18} className="text-amber-500" />
+                                    </div>
+                                </div>
+                             </div>
+                        </Link>
+                    ))}
+                </div>
+            </div>
+        </motion.div>
+    );
+};
+
+const PersonaSwitchModal = ({ current, onSelect, onClose }: { current: string, onSelect: (p: UserPersona) => void, onClose: () => void }) => {
+    return (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[110] flex items-center justify-center px-6 bg-black/95 backdrop-blur-2xl">
+            <motion.div initial={{ scale: 0.9, y: 30 }} animate={{ scale: 1, y: 0 }} className="bg-[#0c0c0c] border border-white/10 p-10 md:p-16 rounded-[4rem] max-w-4xl w-full shadow-[0_0_100px_rgba(0,0,0,1)] relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-indigo-500" />
+                <button onClick={onClose} className="absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors p-3 bg-white/5 rounded-full"><X size={24} /></button>
                 
-                <div className="text-left mb-8">
-                    <h2 className="text-2xl font-black text-white mb-2 tracking-tight">切換修煉身分</h2>
-                    <p className="text-zinc-500 text-sm">選擇一個新身分，我們將為您重新代入實戰案例。</p>
+                <div className="text-center mb-16 space-y-4">
+                    <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter uppercase italic">Select Path</h2>
+                    <p className="text-zinc-500 font-bold uppercase tracking-widest text-sm">解鎖專屬您的 AI 修煉劇本</p>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10 text-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {(Object.keys(PERSONAS) as UserPersona[]).map(p => {
                         const conf = PERSONAS[p];
-                        const isSelected = selected === p;
+                        const isSelected = current === p;
                         return (
-                            <button key={p} onClick={() => setSelected(p)}
-                                className={`flex flex-col items-center gap-3 p-5 rounded-[2rem] border transition-all ${isSelected 
-                                    ? `bg-${conf.color}-500/20 border-${conf.color}-500 text-white shadow-lg` 
-                                    : 'bg-white/5 border-white/5 text-zinc-500 hover:border-white/10'}`}>
-                                {React.createElement(conf.icon, { size: 28 })}
-                                <span className="text-[11px] font-black uppercase tracking-widest">{conf.label}</span>
+                            <button key={p} onClick={() => onSelect(p)}
+                                className={`flex flex-col items-start p-8 rounded-[2.5rem] border transition-all text-left relative overflow-hidden group ${isSelected 
+                                    ? `bg-${conf.color}-500/10 border-${conf.color}-500/50 shadow-[0_0_40px_rgba(0,0,0,0.5)]` 
+                                    : 'bg-white/[0.02] border-white/5 hover:border-white/10 hover:bg-white/[0.05]'}`}
+                            >
+                                <div className={`w-14 h-14 rounded-2xl mb-6 flex items-center justify-center transition-transform group-hover:scale-110 ${isSelected ? `bg-${conf.color}-500 text-black shadow-lg` : 'bg-zinc-900 text-zinc-500'}`}>
+                                    {React.createElement(conf.icon, { size: 28 })}
+                                </div>
+                                <h3 className={`text-xl font-black mb-2 ${isSelected ? 'text-white' : 'text-zinc-300'}`}>{conf.label}</h3>
+                                <p className="text-xs text-zinc-500 leading-relaxed font-medium">{conf.description}</p>
+                                
+                                {isSelected && (
+                                    <div className={`absolute top-4 right-4 text-${conf.color}-500`}>
+                                        <Star size={16} fill="currentColor" />
+                                    </div>
+                                )}
                             </button>
                         );
                     })}
                 </div>
 
-                <button onClick={() => onComplete(selected)}
-                    className="w-full py-5 rounded-2xl bg-emerald-500 text-black font-black text-lg hover:bg-emerald-400 shadow-xl shadow-emerald-500/20 active:scale-95 transition-all">
-                    確認切換身分
-                </button>
-            </motion.div>
-        </motion.div>
-    );
-};
-
-const OnboardingScreen = ({ onComplete }: { onComplete: (mode: 'guided' | 'free', chapter?: number, persona?: UserPersona) => void }) => {
-    const [step, setStep] = useState(0);
-    const [selectedPersona, setSelectedPersona] = useState<UserPersona>('general');
-    const [score, setScore] = useState(0);
-
-    const ModalShell = ({ children, kkey }: { children: React.ReactNode; kkey: string }) => (
-        <motion.div key={kkey} initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-zinc-900/95 border border-white/10 p-8 md:p-12 rounded-[2.5rem] max-w-lg w-full shadow-2xl relative overflow-hidden text-center">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-600" />
-            <div className="relative z-10 text-center">{children}</div>
-        </motion.div>
-    );
-
-    const questions = [
-        {
-            q: "你以前有跟 ChatGPT、Claude 或 Gemini 聊過天嗎？",
-            options: [
-                { text: "完全沒有，我是第一次嘗試", level: 0 },
-                { text: "有試過幾次，但不知道怎麼深入", level: 1 },
-                { text: "經常使用，想學點進階的黑科技", level: 2 }
-            ]
-        },
-        {
-            q: "你知道 AI 也有脾氣（隨機性），且需要給範例才能穩定嗎？",
-            options: [
-                { text: "不知道，難怪它每次回得都不一樣", level: 0 },
-                { text: "聽過，但不太會操作範例格式", level: 1 },
-                { text: "知道，我已經會用 One-shot 技巧了", level: 2 }
-            ]
-        },
-        {
-            q: "你知道什麼是「誠實約束」，如何防止 AI 一本正經胡說八道嗎？",
-            options: [
-                { text: "完全不知道，我以為它說的都是真的", level: 0 },
-                { text: "有聽過，知道要叫它不要編造", level: 1 },
-                { text: "知道，我會要求它列出參考來源並校對", level: 2 }
-            ]
-        }
-    ];
-
-    const handleAnswer = (levelValue: number) => {
-        const newScore = score + levelValue;
-        setScore(newScore);
-        setStep(step + 1);
-    };
-
-    const finalLevel = Math.min(Math.floor(score / 1.5), 2);
-
-    return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/95 backdrop-blur-2xl text-center">
-            <AnimatePresence mode="wait">
-                {step === 0 ? (
-                    <ModalShell kkey="welcome">
-                        <div className="text-center mb-10">
-                            <div className="text-6xl mb-6">👋</div>
-                            <h2 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-tight">歡迎參加入學測驗</h2>
-                            <p className="text-zinc-400 text-base md:text-lg leading-relaxed">我們將透過 3 個簡單問題，幫你精準定位到最適合的修煉章節。</p>
-                        </div>
-                        <button onClick={() => setStep(1)}
-                            className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all text-center">
-                            開始測驗
-                        </button>
-                    </ModalShell>
-                ) : step <= questions.length ? (
-                    <ModalShell kkey={`q-${step}`}>
-                        <div className="text-left mb-8">
-                            <div className="flex items-center justify-between mb-4 text-left">
-                                <span className="text-emerald-500 font-mono text-[10px] uppercase tracking-widest text-left">Question {step} / 3</span>
-                                <div className="h-1 flex-1 mx-4 bg-white/5 rounded-full overflow-hidden">
-                                    <motion.div className="h-full bg-emerald-500" animate={{ width: `${(step / 3) * 100}%` }} />
-                                </div>
-                            </div>
-                            <h2 className="text-xl md:text-2xl font-black text-white leading-tight text-left">{questions[step - 1].q}</h2>
-                        </div>
-                        <div className="space-y-3 text-left">
-                            {questions[step - 1].options.map((opt, i) => (
-                                <button key={i} onClick={() => handleAnswer(opt.level)}
-                                    className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 text-zinc-300 hover:text-white font-bold text-left transition-all">
-                                    {opt.text}
-                                </button>
-                            ))}
-                        </div>
-                    </ModalShell>
-                ) : step === questions.length + 1 ? (
-                    <ModalShell kkey="persona">
-                        <div className="text-left mb-8">
-                            <h2 className="text-xl font-black text-white mb-2 tracking-tight text-left">最後一步：選擇你的身分</h2>
-                            <p className="text-zinc-500 text-sm text-left">我們將根據你的選擇，為你準備專屬的實戰範例。</p>
-                        </div>
-                        <div className="grid grid-cols-2 gap-3 mb-8 text-center">
-                            {(Object.keys(PERSONAS) as UserPersona[]).map(p => {
-                                const conf = PERSONAS[p];
-                                return (
-                                    <button key={p} onClick={() => setSelectedPersona(p)}
-                                        className={`flex flex-col items-center gap-2 p-4 rounded-2xl border transition-all ${selectedPersona === p 
-                                            ? `bg-${conf.color}-500/20 border-${conf.color}-500 text-white shadow-lg` 
-                                            : 'bg-white/5 border-white/5 text-zinc-500 hover:border-white/20'}`}>
-                                        {React.createElement(conf.icon, { size: 24 })}
-                                        <span className="text-xs font-black">{conf.label}</span>
-                                    </button>
-                                );
-                            })}
-                        </div>
-                        <button onClick={() => setStep(step + 1)}
-                            className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all text-center">
-                            查看分配結果
-                        </button>
-                    </ModalShell>
-                ) : (
-                    <ModalShell kkey="result">
-                        <div className="text-center py-6 text-center">
-                            <div className="text-6xl mb-6 text-center">🎯</div>
-                            <h3 className="text-2xl font-black text-white mb-3 text-center">測驗完成！</h3>
-                            <p className="text-zinc-400 text-base mb-8 text-center">
-                                根據你的經驗，我們將你分配到：<br />
-                                <span className={`text-${PERSONAS[selectedPersona].color}-400 font-black text-xl`}>
-                                    Chapter {finalLevel} - {CHAPTERS.find(c => c.id === finalLevel)?.title}
-                                </span>
-                            </p>
-                            <button onClick={() => onComplete('guided', finalLevel, selectedPersona)}
-                                className="w-full py-5 px-6 rounded-2xl bg-emerald-500 text-black font-black text-lg flex items-center justify-center gap-3 hover:bg-emerald-400 shadow-lg shadow-emerald-500/20 active:scale-95 transition-all text-center">
-                                立即進入實驗室
-                            </button>
-                        </div>
-                    </ModalShell>
-                )}
-            </AnimatePresence>
-        </motion.div>
-    );
-};
-
-const SkipChapterModal = ({ targetChapter, onPass, onClose }: { targetChapter: number; onPass: (chapterId: number) => void; onClose: () => void }) => {
-    const [current, setCurrent] = useState(0);
-    const [score, setScore] = useState(0);
-    const [finished, setFinished] = useState(false);
-
-    const quizzes: Record<number, { q: string; options: string[]; answer: number }[]> = {
-        999: [
-            { q: "為什麼在 Dee's Lab 中，我們強調要一步步學習？", options: ["增加網頁停留時間", "緩慢釋放多巴胺，讓大腦對學習成癮", "技術限制", "為了賣更多咖啡"], answer: 1 },
-            { q: "在自由模式下，你可以？", options: ["直接複製所有指令", "跳過所有課程", "隨意挑選感興趣的文章，但仍需一步步完成才能解開寶箱", "不用註冊"], answer: 2 },
-            { q: "AI 實體化的核心意義在於？", options: ["AI 變得比較帥", "AI 具備了系統主權與物理/虛擬世界的行動力", "取代人類滑手機", "讓電腦跑更快"], answer: 1 },
-            { q: "下列何者是正確的 AI 心法？", options: ["把 AI 當成超級 Google", "把 AI 當成一名具備專業知識的實習生", "AI 永遠不會出錯", "不需要給 AI 任何背景資訊"], answer: 1 },
-            { q: "當 AI 出現「幻覺」時，最好的做法是？", options: ["辱罵 AI", "關掉重開", "提供具體證據並要求複核，或加入誠實約束指令", "盲目相信它的回答"], answer: 2 },
-        ]
-    };
-
-    const questions = quizzes[targetChapter] || quizzes[999];
-
-    const handleAnswer = (idx: number) => {
-        const newScore = score + (idx === questions[current].answer ? 1 : 0);
-        setScore(newScore);
-        if (current < questions.length - 1) setCurrent(current + 1);
-        else { 
-            setFinished(true); 
-            if (newScore >= 4) {
-                setTimeout(() => {
-                    onPass(targetChapter);
-                    onClose();
-                }, 1500);
-            } 
-        }
-    };
-
-    return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/80 backdrop-blur-md">
-            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-zinc-900 border border-white/10 p-8 md:p-10 rounded-[2.5rem] max-w-md w-full shadow-2xl relative overflow-hidden text-center text-center">
-                <div className="absolute top-0 left-0 w-full h-1 bg-zinc-800">
-                    <motion.div className="h-full bg-emerald-500" animate={{ width: `${((current + 1) / questions.length) * 100}%` }} />
+                <div className="mt-16 p-8 rounded-3xl bg-emerald-500/5 border border-emerald-500/10 text-center">
+                    <p className="text-emerald-500/70 text-xs font-bold uppercase tracking-[0.2em] leading-relaxed">
+                        切換身分後，教學內容將即時根據您的痛點重新轉譯。<br/>無需重複測驗，直達核心戰略。
+                    </p>
                 </div>
-                {!finished ? (
-                    <div className="relative z-10 text-left">
-                        <div className="flex items-center justify-between mb-6">
-                            <span className="text-emerald-400 font-mono text-[10px] uppercase tracking-widest text-left">模式解鎖測試</span>
-                            <button onClick={onClose} className="text-zinc-600 hover:text-white text-xs font-bold text-left text-left">取消</button>
-                        </div>
-                        <p className="text-white font-black text-lg mb-8 leading-tight text-left">{questions[current].q}</p>
-                        <div className="space-y-3 text-left">
-                            {questions[current].options.map((opt, idx) => (
-                                <motion.button key={idx} whileTap={{ scale: 0.97 }} onClick={() => handleAnswer(idx)}
-                                    className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-emerald-500/10 text-zinc-300 hover:text-white font-bold transition-all text-base text-left">
-                                    {opt}
-                                </motion.button>
-                            ))}
-                        </div>
-                    </div>
-                ) : (
-                    <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center py-6 text-center">
-                        <div className="text-6xl mb-6 text-center">{score >= 4 ? '🎉' : '💪'}</div>
-                        <h3 className="text-2xl font-black text-white mb-3 text-center">{score >= 4 ? '驗證通過！' : '驗證失敗！'}</h3>
-                        <p className="text-zinc-400 text-base mb-8 text-center">{score >= 4 ? `正在寫入權限...` : `答對 ${score}/5，至少需要 4 題正確。`}</p>
-                        {score < 4 && <button onClick={onClose} className="bg-white/10 text-white font-bold py-3 px-8 rounded-2xl hover:bg-white/20 transition-all text-center">返回修煉</button>}
-                    </motion.div>
-                )}
             </motion.div>
         </motion.div>
     );
 };
 
-const StarIcon = ({ size, className, fill }: any) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill={fill} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+const Check = ({ size, strokeWidth }: any) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth || 2} strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
     </svg>
 );
-
-const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExpanded, onToggle, onSkip, index }: any) => {
-    return (
-        <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.05 }} className={`relative text-left text-left`}>
-            <div className={`border rounded-2xl transition-all cursor-pointer text-left ${isLocked ? 'opacity-30 grayscale' : ''} ${isExpanded ? 'bg-white/[0.02] border-white/10' : 'border-white/5 hover:border-white/10'}`} onClick={isLocked ? undefined : onToggle}>
-                <div className="p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between text-left gap-6">
-                    <div className="flex items-center gap-5 text-left flex-1 min-w-0">
-                        <span className="text-4xl text-left flex-shrink-0 text-center">{chapter.emoji}</span>
-                        <div className="text-left min-w-0 flex-1">
-                            <h2 className="text-2xl md:text-3xl font-black text-white text-left tracking-tighter truncate">{chapter.title}</h2>
-                            <p className="text-zinc-500 text-xs md:text-sm text-left font-bold uppercase tracking-widest mt-1 truncate">{chapter.subtitle}</p>
-                        </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-4 text-left">
-                        {isLocked ? (
-                            <button onClick={(e) => { e.stopPropagation(); onSkip(); }} className="bg-amber-500 text-black px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-amber-400 transition-all flex items-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 text-left">
-                                <Zap size={12} fill="currentColor" /> 跳級測驗
-                            </button>
-                        ) : (
-                            <div className="flex items-center gap-3 text-left">
-                                {isComplete && <CheckCircle2 size={20} className="text-emerald-500" />}
-                                <ChevronDown size={18} className={`transition-transform text-zinc-600 flex-shrink-0 ${isExpanded ? 'rotate-180' : ''}`} />
-                            </div>
-                        )}
-                    </div>
-                </div>
-                <AnimatePresence>
-                    {isExpanded && !isLocked && (
-                        <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden border-t border-white/5 text-left">
-                            <div className="p-4 space-y-2 text-left">
-                                {items.map((item: any, i: number) => {
-                                    const isDone = completedIds.includes(item.id);
-                                    return (
-                                        <Link key={item.id} to={`/insights/${item.id}`} className={`flex items-center gap-6 p-6 md:p-8 rounded-[2.5rem] transition-all text-left border border-transparent group ${isDone ? 'bg-emerald-500/5 border-emerald-500/10' : 'hover:bg-zinc-900/80 hover:border-white/20'}`}>
-                                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-lg font-black flex-shrink-0 text-left ${isDone ? 'bg-emerald-500 text-black shadow-lg' : 'bg-zinc-800 text-zinc-500'}`}>{isDone ? '✓' : i + 1}</div>
-                                            <div className="flex-1 text-left min-w-0 text-left">
-                                                <h4 className="text-2xl md:text-3xl font-black text-white text-left tracking-tighter truncate group-hover:text-emerald-400 transition-colors">{item.title}</h4>
-                                                <p className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] mt-2">狀態: {isDone ? '已完成' : '準備修煉'}</p>
-                                            </div>
-                                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-700 group-hover:text-emerald-500 group-hover:bg-emerald-500/10 transition-all">
-                                                <ChevronRight size={22} />
-                                            </div>
-                                        </Link>
-                                    );
-                                })}
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-        </motion.div>
-    );
-};
-
-const InsightCard = ({ insight, idx, completed }: any) => {
-    return (
-        <Link to={`/insights/${insight.id}`} className="block h-full text-left">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.03 }} viewport={{ once: true }}
-                className={`bg-[#0c0c0c] border p-6 md:p-8 rounded-[2.5rem] h-full flex flex-col transition-all text-left shadow-xl ${completed ? 'border-emerald-500/40 shadow-[0_0_30px_rgba(16,185,129,0.05)]' : 'border-white/[0.06] hover:bg-zinc-900/80 hover:border-white/20'}`}>
-                <div className="flex justify-between items-center mb-4 text-left">
-                    <span className="text-[10px] font-black px-3 py-1 rounded bg-white/5 text-zinc-500 uppercase tracking-widest text-left">{insight.category}</span>
-                    <span className="text-[11px] text-zinc-500 font-mono font-bold">{insight.date || '2026.03.01'}</span>
-                </div>
-                <h4 className="text-2xl md:text-3xl font-black text-white mb-4 line-clamp-2 leading-tight tracking-tighter group-hover:text-emerald-300 transition-colors text-left">
-                    {insight.title}
-                </h4>
-                <p className="text-zinc-400 text-base md:text-lg line-clamp-2 leading-relaxed text-left font-medium mb-8">
-                    {insight.summary}
-                </p>
-
-                <div className="mt-auto pt-6 border-t border-white/[0.05] flex items-center justify-between text-left">
-                    <div className="flex items-center gap-6">
-                        <span className="flex items-center gap-2 text-xs text-zinc-500 font-bold text-left uppercase tracking-widest"><Star size={14} className="text-emerald-500" /> 等級 {insight.difficulty_level || 1}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-white font-black text-xs uppercase tracking-widest group-hover:gap-4 transition-all">
-                        進入修煉 <ArrowRight size={18} className="text-emerald-500" />
-                    </div>
-                </div>
-            </motion.div>
-        </Link>
-    );
-};
-
-const Insights = () => {
-    const { persona, setPersona } = useIdentity();
-    const [viewMode, setViewMode] = useState<'adventure' | 'free'>('adventure');
-    const [loading, setLoading] = useState(true);
-    const [showOnboarding, setShowOnboarding] = useState(false);
-    const [showPersonaSwitch, setShowPersonaSwitch] = useState(false);
-    const [unlockedChapter, setUnlockedChapter] = useState(0); 
-    const [completedIds, setCompletedIds] = useState<number[]>([]);
-    const [searchQuery, setSearchQuery] = useState<string>('');
-    const [expandedChapters, setExpandedChapters] = useState<Set<number>>(new Set());
-    const [skipTarget, setSkipTarget] = useState<number | null>(null);
-    const [remountKey, setRemountKey] = useState(0);
-    const [selectedCategory, setSelectedCategory] = useState<string>('全部');
-
-    const viewKey = `${viewMode}-${remountKey}-${unlockedChapter}-${selectedCategory}`;
-
-    useEffect(() => {
-        const done = localStorage.getItem('dee_onboarding_done');
-        const saved = localStorage.getItem('dee_ai_level');
-        const mode = localStorage.getItem('dee_view_preference');
-        const comp = localStorage.getItem('dee_ai_completed');
-
-        if (!done) setShowOnboarding(true);
-        else {
-            const level = parseInt(saved || '0');
-            setUnlockedChapter(isNaN(level) ? 0 : level);
-            if (mode === 'free') setViewMode('free');
-            else setViewMode('adventure');
-        }
-        
-        if (comp) {
-            try { 
-                const parsed = JSON.parse(comp);
-                if (Array.isArray(parsed)) {
-                    setCompletedIds(parsed.map(id => typeof id === 'string' ? parseInt(id) : id).filter(id => !isNaN(id)));
-                } else {
-                    setCompletedIds([]);
-                }
-            } catch(e) { 
-                setCompletedIds([]); 
-            }
-        }
-        setLoading(false);
-    }, []);
-
-    const allInsights = useMemo(() => INSIGHTS_LIST, []);
-
-    useEffect(() => {
-        if (viewMode === 'adventure') {
-            setExpandedChapters(new Set([unlockedChapter]));
-        }
-    }, [viewMode, unlockedChapter]);
-
-    const handleOnboardingComplete = (mode: 'guided' | 'free', chapter?: number, p?: UserPersona) => {
-        const ch = chapter || 0;
-        const personaToSet = p || 'general';
-        setUnlockedChapter(ch);
-        setViewMode('adventure');
-        setPersona(personaToSet);
-        localStorage.setItem('dee_onboarding_done', 'true');
-        localStorage.setItem('dee_ai_level', ch.toString());
-        localStorage.setItem('dee_view_preference', 'adventure');
-        setShowOnboarding(false);
-    };
-
-    const handlePersonaSwitch = (p: UserPersona) => {
-        setPersona(p);
-        setShowPersonaSwitch(false);
-    };
-
-    const handleModeSwitch = (m: 'adventure' | 'free') => {
-        if (m === 'free') {
-            const isElite = localStorage.getItem('dee_elite_status') === 'true';
-            const totalMain = MAIN_QUEST_ORDER.length;
-            const doneMain = completedIds.filter(id => MAIN_QUEST_ORDER.includes(id)).length;
-            
-            if (!isElite && doneMain < totalMain) {
-                setSkipTarget(999);
-                return;
-            }
-        }
-        
-        setRemountKey(prev => prev + 1);
-        setExpandedChapters(new Set(m === 'adventure' ? [unlockedChapter] : []));
-        setViewMode(m);
-        localStorage.setItem('dee_view_preference', m);
-    };
-
-    const handleChallengePassed = (targetId: number) => {
-        setRemountKey(prev => prev + 1);
-        if (targetId === 999) {
-            setViewMode('free');
-            localStorage.setItem('dee_view_preference', 'free');
-            localStorage.setItem('dee_elite_status', 'true');
-        } else {
-            setUnlockedChapter(targetId);
-            localStorage.setItem('dee_ai_level', targetId.toString());
-            setExpandedChapters(new Set([targetId]));
-        }
-        setSkipTarget(null);
-    };
-
-    const toggleChapter = (id: number) => {
-        setExpandedChapters(prev => {
-            const next = new Set(prev);
-            if (next.has(id)) {
-                next.delete(id);
-            } else {
-                next.add(id);
-            }
-            return next;
-        });
-    };
-
-    const filteredInsights = useMemo(() => {
-        let items = allInsights;
-        if (viewMode === 'free') {
-            items = items.filter(i => !MAIN_QUEST_ORDER.includes(i.id));
-        }
-        if (selectedCategory !== '全部') {
-            items = items.filter(i => i.category === selectedCategory);
-        }
-        if (!searchQuery || searchQuery.trim() === '') return items;
-        const q = searchQuery.toLowerCase();
-        return items.filter(i => (i.title + i.summary + i.category).toLowerCase().includes(q));
-    }, [allInsights, searchQuery, viewMode, selectedCategory]);
-
-    const availableCategories = useMemo(() => {
-        const cats = new Set(['全部']);
-        const pool = viewMode === 'free' 
-            ? allInsights.filter(i => !MAIN_QUEST_ORDER.includes(i.id))
-            : allInsights;
-        pool.forEach(i => cats.add(i.category));
-        return Array.from(cats);
-    }, [allInsights, viewMode]);
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [viewMode]);
-
-    const progressPct = allInsights.length > 0 ? completedIds.length / allInsights.length : 0;
-
-    if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse text-center">INITIALIZING...</div>;
-
-    return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-12 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0 text-left text-left">
-            <SEO title="免費 AI 實用教學" description="掌握 AI 核心主權" path="/insights" />
-            <AnimatePresence>{showOnboarding && <OnboardingScreen onComplete={handleOnboardingComplete} />}</AnimatePresence>
-            <AnimatePresence>{showPersonaSwitch && <PersonaSwitchModal onComplete={handlePersonaSwitch} onClose={() => setShowPersonaSwitch(false)} />}</AnimatePresence>
-            <AnimatePresence>{skipTarget && <SkipChapterModal targetChapter={skipTarget} onPass={handleChallengePassed} onClose={() => setSkipTarget(null)} />}</AnimatePresence>
-
-            <div className="relative mb-8 text-left">
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-10 text-left">
-                    <div className="flex items-center gap-5 text-left">
-                        <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shadow-lg shadow-emerald-500/5">
-                            <MapIcon size={24} className="text-emerald-400 text-left" />
-                        </div>
-                        <div className="text-left">
-                            <h1 className="text-3xl font-black text-white tracking-tighter">AI 修煉地圖</h1>
-                            <span className="text-emerald-500/60 font-mono text-[10px] tracking-[0.4em] uppercase block">進化矩陣 2.0</span>
-                        </div>
-                    </div>
-                    <div className="bg-black/40 p-1.5 rounded-2xl border border-white/[0.08] flex items-center shadow-inner text-left">
-                        <button onClick={() => handleModeSwitch('adventure')} className={`px-6 py-2.5 rounded-xl text-xs font-black transition-all ${viewMode === 'adventure' ? 'bg-emerald-500 text-black shadow-lg scale-105' : 'text-zinc-500 hover:text-white'} text-left`}>冒險</button>
-                        <button onClick={() => handleModeSwitch('free')} className={`px-6 py-2.5 rounded-xl text-xs font-black transition-all ${viewMode === 'free' ? 'bg-emerald-500 text-black shadow-lg scale-105' : 'text-zinc-500 hover:text-white'} text-left`}>自由</button>
-                    </div>
-                </div>
-
-                <p className="text-zinc-400 text-lg max-w-2xl mb-8 leading-relaxed text-left">
-                    不只是教學，更是靈魂的重塑。透過 15 篇必修與無限支線，掌握 <span className="text-white">AI 核心主權</span>。
-                </p>
-
-                {/* 🚀 身分切換簡化區塊 */}
-                <div className="mb-10 text-left">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-sm">
-                        <div className="flex items-center gap-5">
-                            <div className={`w-14 h-14 rounded-2xl bg-${PERSONAS[persona]?.color || 'zinc'}-500/20 border border-${PERSONAS[persona]?.color || 'zinc'}-500/30 flex items-center justify-center text-${PERSONAS[persona]?.color || 'zinc'}-400 shadow-lg shadow-${PERSONAS[persona]?.color || 'zinc'}-500/5`}>
-                                {React.createElement(PERSONAS[persona]?.icon || User, { size: 28 })}
-                            </div>
-                            <div className="text-left">
-                                <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-1">當前修煉身分</span>
-                                <h3 className="text-white font-black text-xl">{PERSONAS[persona]?.label || '未知身分'}</h3>
-                            </div>
-                        </div>
-                        
-                        <button onClick={() => setShowPersonaSwitch(true)} 
-                            className="px-6 py-3 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-black text-sm border border-white/10 flex items-center justify-center gap-3 transition-all active:scale-95 shadow-xl">
-                            <Filter size={18} className="text-emerald-500" /> 切換身分
-                        </button>
-                    </div>
-                    <motion.p key={persona} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
-                        className="mt-4 text-zinc-500 text-xs font-medium italic pl-6 border-l-2 border-emerald-500/20 text-left">
-                        💡 系統已為您代入：{PERSONAS[persona]?.description || '開始您的修煉之旅。'}
-                    </motion.p>
-                </div>
-
-                <div className="relative z-10 text-left">
-                    <div className="flex items-center justify-between mb-3 text-left">
-                        <span className="text-zinc-500 text-[10px] font-black uppercase tracking-widest text-left">修煉進度</span>
-                        <span className="text-emerald-400 text-xs font-black font-mono text-left">{Math.round(progressPct * 100)}%</span>
-                    </div>
-                    <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden border border-white/5 text-left">
-                        <motion.div className="h-full bg-emerald-500 text-left" initial={{ width: 0 }} animate={{ width: `${progressPct * 100}%` }} transition={{ duration: 1, ease: "easeOut" }} />
-                    </div>
-                </div>
-
-                {viewMode === 'free' && (
-                    <div className="mt-10 flex items-center gap-3 overflow-x-auto pb-3 scrollbar-hide text-left">
-                        <div className="flex-shrink-0 text-zinc-600 mr-1 text-left"><Filter size={18} /></div>
-                        {availableCategories.map(cat => (
-                            <button key={cat} onClick={() => setSelectedCategory(cat)}
-                                className={`flex-shrink-0 px-6 py-2 rounded-xl text-xs font-black transition-all border ${selectedCategory === cat
-                                    ? `bg-emerald-500 text-black border-emerald-500 shadow-lg scale-105`
-                                    : 'bg-white/[0.03] border-white/[0.08] text-zinc-400 hover:text-white hover:bg-white/5'
-                                }`}>
-                                {cat}
-                            </button>
-                        ))}
-                    </div>
-                )}
-            </div>
-
-            <div key={viewKey} className="relative z-10 text-left">
-                {viewMode === 'adventure' ? (
-                    <div className="space-y-6 text-left">
-                        {CHAPTERS && CHAPTERS.length > 0 ? CHAPTERS.map((chapter, ci) => {
-                            try {
-                                if (!chapter || !chapter.articleIds) return null;
-                                const items = chapter.articleIds.map(id => allInsights.find(i => i && i.id === id)).filter(Boolean);
-                                const done = items.filter(i => completedIds.includes(i!.id)).length;
-                                const isLocked = chapter.id > unlockedChapter;
-                                const isComplete = items.length > 0 && done >= items.length;
-                                return (
-                                    <ChapterNode key={`${viewKey}-ch-${chapter.id}`} chapter={chapter} items={items as any[]} completedIds={completedIds} isLocked={isLocked} isComplete={isComplete} isExpanded={expandedChapters.has(chapter.id)} onToggle={() => toggleChapter(chapter.id)} onSkip={() => setSkipTarget(chapter.id)} index={ci} />
-                                );
-                            } catch (e) {
-                                return null;
-                            }
-                        }) : (
-                            <div className="text-zinc-500 text-center py-20 font-bold uppercase tracking-[0.2em]">地圖資料缺失...</div>
-                        )}
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-1 gap-6 text-left">
-                        {filteredInsights && filteredInsights.length > 0 ? filteredInsights.map((item, i) => (
-                            <InsightCard key={`${viewKey}-item-${item.id}`} insight={item} idx={i} completed={completedIds.includes(item.id)} />
-                        )) : (
-                            <div className="text-zinc-500 text-center py-20 font-bold uppercase tracking-[0.2em]">修煉庫暫無內容...</div>
-                        )}
-                    </div>
-                )}
-            </div>
-        </motion.div>
-    );
-};
 
 export default Insights;
