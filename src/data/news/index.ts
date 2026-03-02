@@ -43,10 +43,14 @@ import { article as openclawTopsReact } from './real-tech-openclaw-tops-react';
 import { article as claudeCoworkVM } from './real-tech-claude-cowork-vm';
 import { article as anthropicTrumpConflict } from './real-tech-anthropic-trump-conflict';
 import { article as googleTranslateGemini } from './real-tech-google-translate-gemini';
+import { article as deepseekV4Intent } from './real-tech-deepseek-v4-intent';
+import { article as aiPhilosopher } from './echo-observation-ai-philosopher';
 import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
+    aiPhilosopher,       // 最新：AI 哲學家 (新增)
+    deepseekV4Intent,    // 最新：DeepSeek 意圖捕捉 (新增)
     claudeCoworkVM,      // 最新：Claude VM 事件 (新增)
     openclawTopsReact,   // 最新：OpenClaw 登頂 (新增)
     anthropicTrumpConflict, // 最新：川普與 Anthropic (新增)
