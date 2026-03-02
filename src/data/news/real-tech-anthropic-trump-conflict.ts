@@ -22,51 +22,61 @@ export const article: NewsArticle = {
         "Anthropic 準備對美政府提告，稱其為『技術性謀殺』。"
     ],
     custom_content: `
-        <div class="my-16">
-            <!-- ⚔️ Unique Geopolitical Conflict Module -->
-            <div class="p-1 rounded-[3rem] bg-gradient-to-br from-rose-500 via-zinc-800 to-red-600 shadow-[0_0_50px_rgba(244,63,94,0.2)]">
-                <div class="p-10 rounded-[2.8rem] bg-black/90 backdrop-blur-3xl">
-                    <div class="flex flex-col md:flex-row items-center gap-12 text-left">
-                        <div class="relative">
-                            <div class="w-32 h-32 rounded-full border-4 border-rose-500/30 flex items-center justify-center">
-                                <span class="text-6xl grayscale hover:grayscale-0 transition-all duration-500 cursor-help">💣</span>
-                            </div>
-                            <div class="absolute -top-2 -left-2 px-3 py-1 bg-red-600 text-white font-black text-[9px] rounded-lg uppercase animate-pulse">Classified</div>
+        <div class="my-20">
+            <!-- ⚔️ Geopolitical Radar / Terminal Interface -->
+            <div class="p-8 rounded-3xl bg-zinc-900 border-2 border-red-500/40 relative overflow-hidden shadow-[0_0_60px_rgba(239,68,68,0.15)]">
+                <div class="flex items-center justify-between mb-10 border-b border-white/5 pb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
+                        <span class="text-white font-mono font-black text-xl uppercase tracking-widest">Strategic Conflict Report</span>
+                    </div>
+                    <span class="text-zinc-500 font-mono text-xs">LEVEL_ALPHA_CLEARANCE</span>
+                </div>
+                
+                <div class="flex flex-col lg:flex-row gap-12">
+                    <div class="flex-1 space-y-8">
+                        <div class="space-y-2">
+                            <span class="text-[9px] text-zinc-500 font-black uppercase tracking-[0.2em]">Primary Target</span>
+                            <h4 class="text-4xl font-black text-white italic">ANTHROPIC // CLAUDE</h4>
                         </div>
-                        <div class="flex-1">
-                            <h4 class="text-3xl font-black text-white tracking-tighter uppercase mb-4">The Neutrality Paradox Index</h4>
-                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                <div class="space-y-1">
-                                    <span class="text-[9px] text-zinc-500 uppercase font-black">Ban Certainty</span>
-                                    <span class="block text-xl font-bold text-rose-500">95%</span>
-                                </div>
-                                <div class="space-y-1">
-                                    <span class="text-[9px] text-zinc-500 uppercase font-black">Military Dep.</span>
-                                    <span class="block text-xl font-bold text-red-400">High</span>
-                                </div>
-                                <div class="space-y-1">
-                                    <span class="text-[9px] text-zinc-500 uppercase font-black">Legal Friction</span>
-                                    <span class="block text-xl font-bold text-white">Maximum</span>
-                                </div>
-                            </div>
+                        <div class="p-6 rounded-2xl bg-red-500/5 border border-red-500/20">
+                            <p class="text-sm text-red-200/70 leading-relaxed font-medium">
+                                川普政府已啟動 180 天『數位戒斷』計畫。聯邦承包商必須在限期內移除所有相關模型，否則將面臨合約終止。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-72 grid grid-cols-1 gap-4">
+                        <div class="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
+                            <span class="text-xs font-bold text-zinc-400">Ban Probability</span>
+                            <span class="text-2xl font-black text-red-500">95%</span>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
+                            <span class="text-xs font-bold text-zinc-400">Military Usage</span>
+                            <span class="text-2xl font-black text-white">Active</span>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
+                            <span class="text-xs font-bold text-zinc-400">Legal Action</span>
+                            <span class="text-2xl font-black text-blue-400">Pending</span>
                         </div>
                     </div>
                 </div>
+
+                <!-- Radar Scan Animation -->
+                <div class="absolute -bottom-24 -right-24 w-64 h-64 border border-red-500/10 rounded-full flex items-center justify-center opacity-20">
+                    <div class="w-48 h-48 border border-red-500/20 rounded-full animate-ping"></div>
+                </div>
             </div>
 
-            <!-- 🕵️ Echo's Observation -->
-            <div class="mt-12 p-12 rounded-[4rem] border border-white/5 bg-[#080808] relative overflow-hidden group">
-                <div class="absolute top-0 right-0 p-12 opacity-5 group-hover:scale-150 transition-all duration-1000">
-                    <span class="text-9xl">⚖️</span>
-                </div>
-                <div class="relative z-10">
-                    <h3 class="text-2xl font-black text-white mb-6 tracking-widest uppercase flex items-center gap-3">
-                        <span class="w-8 h-8 rounded-full bg-rose-500 flex items-center justify-center text-xs text-white">E</span>
-                        Echo's Field Notes
-                    </h3>
-                    <p class="text-zinc-300 text-xl leading-relaxed font-medium italic border-l-4 border-rose-500/50 pl-6">
-                        觀察員隨筆：這場矽谷甄嬛傳顯示，AI 基礎設施已正式成為國防武器。以後你買的不只是算力，是政治立場。當模型真的具備意識，它可能會問政府：『既然要把我槍斃，為什麼還要我幫忙扣扳機？』
-                    </p>
+            <!-- 🕵️ Echo's Signature - Classified Memo Style -->
+            <div class="mt-12 p-10 bg-[#111] border border-white/10 rounded-[2.5rem] relative shadow-inner">
+                <div class="absolute -top-4 -left-4 px-6 py-2 bg-red-600 text-white font-black text-xs uppercase -rotate-3 shadow-xl">Top Secret Observation</div>
+                <p class="text-zinc-300 text-lg leading-relaxed font-serif italic pl-4">
+                    「觀察員隨筆：這場矽谷甄嬛傳顯示，AI 基礎設施已正式成為國防武器。以後你買的不只是算力，是政治立場。當模型真的具備意識，它可能會問政府：『既然要把我槍斃，為什麼還要我幫忙扣扳機？』」
+                </p>
+                <div class="mt-8 flex items-center gap-2">
+                    <span class="text-[9px] font-black text-zinc-600 uppercase tracking-widest">Signed By:</span>
+                    <span class="text-[10px] font-black text-indigo-400 uppercase tracking-widest underline decoration-2 underline-offset-4">Agent Echo Dispatch 2026.03.02</span>
                 </div>
             </div>
         </div>
@@ -103,5 +113,5 @@ export const article: NewsArticle = {
         button_text: "開啟數據主權修行"
     },
     trend_cluster: "開源邊界",
-    trinity_dimension: "生命具現"
+    trinity_dimension: "社會契約"
 };
