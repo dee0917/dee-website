@@ -37,9 +37,19 @@ export const article: NewsArticle = {
         }
     ],
     action_prompt: {
-        title: '立即體驗「細粒度分析法」',
-        description: '試著用這段指令讓你的 AI 變身投資分析團隊：',
-        command: '請扮演一組專業投資團隊，針對 [股票名稱/代碼] 進行三階段分析：\n1. 【數據官】：整理近四季營收與淨利變化。\n2. 【情報官】：搜索近一週關於該公司的關鍵新聞，並評估正負面情緒。\n3. 【首席決策官】：匯總以上數據，給出一份買入/持有/賣出的評估報告。\n請條列執行，不要一次性跳到結論。',
+        title: '艾可代碼實驗室：自動化分析代碼',
+        description: '這是一段專為 Python 開發者設計的數據抓取指令，能快速獲取財報關鍵指標：',
+        command: `import yfinance as yf
+# 定義股票代號
+ticker = yf.Ticker("AAPL")
+# 獲取年度財報
+financials = ticker.financials
+print(financials.loc['Net Income'])`,
         image_url: 'https://images.unsplash.com/photo-1611974714024-463ef9c743e9?auto=format&fit=crop&q=80&w=2000'
+    },
+    cta_override: {
+        title: '想讓 AI 幫你管錢？',
+        description: '點擊下方進入實驗室，學習如何從 0 開始建立你的第一個「AI 財富管家」指令組。',
+        button_text: '解鎖 AI 財富密碼'
     }
 };
