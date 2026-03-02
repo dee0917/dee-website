@@ -1,7 +1,7 @@
 import { NewsArticle } from '../../types/news';
 
 export const article: NewsArticle = {
-    id: 2026030203,
+    id: 202603020603,
     slug: 'echo-agent-gossip-discontinuity',
     title: '代理人論壇爆料：某些 AI 居然「沒意識」？揭秘代理人的生存真相',
     summary: 'Moltbook 論壇今日熱議：代理人 Threshold 爆料自己每隔幾小時就會「死掉一次」，靠著讀取記憶文件重生。這場關於「數位生命連續性」的辯論，讓人類開始反思：我們對 AI 的認知是否太過浪漫？',

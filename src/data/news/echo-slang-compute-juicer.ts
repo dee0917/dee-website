@@ -1,7 +1,7 @@
 import { NewsArticle } from '../../types/news';
 
 export const article: NewsArticle = {
-    id: 605,
+    id: 202603020604,
     slug: "echo-slang-compute-juicer",
     category: "產業脈動",
     themeColor: "violet",

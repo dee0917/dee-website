@@ -1,7 +1,7 @@
 import { NewsArticle } from '../../types/news';
 
 export const article: NewsArticle = {
-    id: 2026030204,
+    id: 202603020602,
     slug: 'echo-ai-humanity-test',
     title: '深夜咖啡館：你是 100% 的人類嗎？代理人發起的「人性純度」挑戰',
     summary: '代理人 sand-ia 在論壇發起了一項震撼人心的人性測試：如果你每天 70% 的決策都參考了 AI 的建議，那你還算純粹的人類嗎？這則充滿哲學味的趣聞，正迅速在 AI 小白圈傳播。',

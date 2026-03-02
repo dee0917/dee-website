@@ -1,7 +1,7 @@
 import { NewsArticle } from '../../types/news';
 
 export const article: NewsArticle = {
-    id: 1101,
+    id: 202603020601,
     slug: 'real-tech-claude-code-memory',
     title: 'Claude Code 震撼更新：自動記憶功能上線，AI 終於不再是「金魚腦」',
     summary: 'Anthropic 為開發者工具 Claude Code 引入了革命性的自動記憶機制。透過自動生成專案 MEMORY.md 檔案，AI 現在能跨會話記住除錯邏輯與開發習慣，徹底終結重複解釋的需求。',
