@@ -1,9 +1,8 @@
-import { User, Briefcase, Utensils, Home as HomeIcon, Baby, Quote } from 'lucide-react';
+import { User, Briefcase, Utensils, Home as HomeIcon, Baby, Quote, Layers } from 'lucide-react';
 
 /**
- * 🚨 核心族群精簡版 (Core 6)
- * 決策：移除硬核、重疊身分，回歸平民、幽默與白話風格。
- * 狀態：已強行攔截自動化腳本的冗餘擴張，維持 6 核心架構。
+ * 🚨 族群地圖 (Personas Map)
+ * 決策：維持核心平民風格，並由 Aether (蒼穹) 根據 Kage (影) 的巡檢結果動態擴張。
  */
 export const PERSONAS = {
     general: { 
@@ -44,6 +43,13 @@ export const PERSONAS = {
         color: 'indigo', 
         description: '將一輩子的好手藝數位化，傳承給下一代。',
         special_prompt: "我現在是一位擁有多年經驗的職人。請將 AI 視為一名勤奮且具備無限記憶的『學徒』，教導我如何將腦中的經驗轉化為數位世界的資產。請用最親切、無技術門檻的語言與我交談。"
+    },
+    freelancer: {
+        label: '斜槓接案邊緣人',
+        icon: Layers,
+        color: 'violet',
+        description: '專攻多工效率、報價計算與防止客戶半夜敲門。',
+        special_prompt: "我是一位斜槓自由職業者，同時接 3-5 個案子，極度焦慮於時間崩塌。請用最精準、高效率的方式，教我如何用 AI 幫我省下 2 小時睡眠時間。"
     }
 };
 

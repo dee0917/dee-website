@@ -85,3 +85,6 @@
 5:15:31 PM [vite] hmr update /src/index.css, /src/pages/News.tsx, /src/pages/NewsDetail.tsx
 5:15:42 PM [vite] page reload src/data/personas.ts
 5:46:33 PM [vite] page reload src/data/personas.ts
+6:15:42 PM [vite] page reload src/data/personas.ts
+6:15:53 PM [vite] hmr update /src/index.css, /src/pages/Home.tsx
+6:16:22 PM [vite] hmr update /src/index.css, /src/pages/Home.tsx

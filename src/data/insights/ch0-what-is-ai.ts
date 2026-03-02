@@ -4,7 +4,7 @@ export const insight = {
     themeColor: "teal",
     difficulty_level: 1,
     level: 0,
-    tags: ["#什麼是AI", "#註冊教學", "#常用工具比較", "#新手懶人包", "#零基礎入門", "#ChatGPT", "#Claude", "#Gemini"],
+    tags: ["#什麼是AI", "#註冊教學", "#常用工具比較", "#新手懶人包", "#零基礎入門", "#ChatGPT", "#Claude", "#Gemini", "#DeepSeekV4", "#意圖補完"],
     title: "ChatGPT、Claude、Gemini 是什麼？3 分鐘搞懂三大聊天 AI",
     summary: "聽大家都在說 AI，但到底該用哪一個？這篇用最白話的方式，帶你認識目前最熱門的三個聊天 AI，找到最適合你的那一個。",
     date: "2026.01.01",
@@ -51,11 +51,11 @@ export const insight = {
                 right: "打開 Claude → 「請像我最孝順的孫子一樣，教我怎麼在網路上掛號」→ AI 慢慢講給妳聽，還會誇獎妳。"
             }
         },
-        slashie: {
-            pain_point: "一人創業心好累，想標題、寫腳本、回訊息全部自己來，一天 24 小時根本不夠用？",
+        freelancer: {
+            pain_point: "同時接 3 個案子，腦袋快爆炸？客戶半夜敲門要改圖，你卻還在手動對齊報價單？",
             example: {
                 wrong: "「AI 產出的東西沒靈魂，我還是自己熬夜想好了。」",
-                right: "打開 ChatGPT → 「給我 10 個關於數位遊牧的短影音爆款標題」→ 靈感瞬間爆發。"
+                right: "打開 DeepSeek V4 → 「根據我剛貼的報價單，直接生成給客戶的回覆和下一步計畫」→ 意圖自動補完，早睡兩小時。"
             }
         }
     },
