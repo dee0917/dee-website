@@ -1,17 +1,17 @@
 import { InsightArticle } from '../../types/insights';
 
 export const insight: InsightArticle = {
-    id: 507,
+    id: 512,
     category: "戰略演進",
     themeColor: "purple",
     difficulty_level: 2,
     level: -1,
-    tags: ["#自動記憶", "#ClaudeCode", "#數位工藝", "#小白教學", "#記憶主權"],
-    title: "讓 AI 記住你的「老毛病」：解密 Claude Code 自動記憶術",
+    tags: ["#自動記憶", "#ClaudeCode", "#數位工藝", "#記憶主權"],
+    title: "跨越遺忘曲線：Claude Code 的自動記憶進化",
     summary: "為什麼 AI 總是前一秒說好，下一秒就忘？這篇教你如何利用最新的「自動記憶」技術，讓 AI 變成一個越用越懂你的數位老戰友。",
     date: "2026.03.02",
     readTime: "4 分鐘",
-    pain_point: "每次跟 AI 說話都要從頭解釋？昨天教過它的東西，今天又要重講一遍？覺得 AI 雖然聰明，但就像個沒有過去的陌生人？",
+    pain_point: "每次跟 AI 說話都要從頭解釋？昨天教過它的東西，今天又要重講一遍？",
     scenario: "當你正在進行多天連續的寫作或開發計畫時。",
     solution: "利用 MEMORY.md 或本地持久化機制，強迫 AI 在對話開始前先閱讀「前情提要」。",
     insight_quote: "真正強大的 AI，是你可以隨時讓它「忘記」的 AI。",
@@ -46,17 +46,12 @@ export const insight: InsightArticle = {
         {
             title: "什麼是「自動記憶」？(The MEMORY.md Logic)",
             body: "想像 AI 身上帶著一本隨身筆記。每當你們解決了一個難題、建立了一個習慣，它就會偷偷記下來。下次你找它時，它先翻翻筆記，就什麼都想起來了。",
-            dee_tip: "在開發者世界這叫持久化，但在生活中，這叫「默默契」。"
+            dee_tip: "在開發者世界這叫持久化，但在生活中，這叫「默契」。"
         },
         {
             title: "跨裝置接續：從電腦到手機的無縫傳送",
             body: "你在電腦上教 AI 的事，打開手機它依然記得。這不是魔法，而是透過輕量化的同步技術，讓 AI 的靈魂可以跟著你走，不再被鎖在單一螢幕裡。",
             dee_tip: "就像看 Netflix，換台裝置看，進度條還是在那裡。"
-        },
-        {
-            title: "記憶主權：你才是記憶的主人",
-            body: "最新的技術讓記憶儲存在「你自己的地盤」（例如本地文件）。你可以隨時查看 AI 記了什麼，不滿意就擦掉。不再是雲端大公司掌控你的數據，而是你掌控 AI 的腦袋。",
-            dee_tip: "真正強大的 AI，是你可以隨時讓它「忘記」的 AI。"
         }
     ],
     quiz: {
@@ -74,10 +69,7 @@ export const insight: InsightArticle = {
     practice_kit: {
         title: "實戰演練：建立你的第一個「記憶點」",
         description: "現在就對你的 AI 說這段話，測試它的記憶潛力：",
-        command: `請扮演我的「生活紀錄員」。
-1. 我想告訴你一個我的偏好：[例如：我不喜歡吃香菜 / 我寫信喜歡用英文開頭]。
-2. 請你記住這個偏好，並回覆我：「已記錄，下次我會注意 [你的偏好]」。
-3. 請問，如果我明天問你『我最討厭什麼？』，你會怎麼回答？`
+        command: `請扮演我的「生活紀錄員」。`
     },
-    content: "自動記憶技術的核心在於將短期對話上下文 (Short-term context) 轉化為長期文件存儲 (Long-term storage)。這不僅減少了 token 消耗，更重要的是建立了一個具備「穩定人格」的助理環境。透過 MEMORY.md，用戶可以手動編輯 AI 的記憶，實現了數據主權的物理化落地。"
+    content: "自動記憶技術的核心在於將短期對話上下文轉化為長期文件存儲。這不僅減少了 token 消耗，更重要的是建立了一個具備「穩定人格」的助理環境。"
 };

@@ -263,7 +263,7 @@ const ArticleDetail = () => {
                         <span className={`text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest ${theme.bg} ${theme.text} border ${theme.border}`}>{article.category}</span>
                         <div className="flex gap-1">{[...Array(5)].map((_, i) => <StarIcon key={i} size={8} className={i < (article.difficulty_level || 1) ? theme.text : 'text-zinc-800'} fill="currentColor" />)}</div>
                     </div>
-                    <h1 className="text-3xl md:text-8xl font-black text-white mb-4 tracking-tighter leading-[0.8]">{article.title}</h1>
+                    <h1 className="text-3xl md:text-9xl font-black text-white mb-4 tracking-tighter leading-[0.7]">{article.title}</h1>
                     <p className="text-lg md:text-2xl text-zinc-400 mb-8 max-w-2xl mx-auto leading-relaxed font-medium">{article.summary}</p>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={scrollToHook}
                         className="bg-white text-black font-black py-4 px-10 rounded-2xl text-lg flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-500 transition-colors group">
@@ -315,6 +315,7 @@ const ArticleDetail = () => {
                             const isActive = idx === currentStep;
                             const isFuture = idx > currentStep;
                             const isLocked = !freeMode && isFuture;
+                            if (isLocked) return null; // 嚴格課程鎖定：不顯示未來步驟
                             return (
                                 <motion.div key={idx} ref={el => stepRefs.current[idx] = el}
                                     initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}

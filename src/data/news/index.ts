@@ -41,6 +41,8 @@ import { article as tutorialAiri } from './tutorial-airi-minecraft-parent';
 import { article as deepseekV4 } from './real-tech-deepseek-v4';
 import { article as openclawTopsReact } from './real-tech-openclaw-tops-react';
 import { article as claudeCoworkVM } from './real-tech-claude-cowork-vm';
+import { article as anthropicTrumpConflict } from './real-tech-anthropic-trump-conflict';
+import { article as googleTranslateGemini } from './real-tech-google-translate-gemini';
 import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容

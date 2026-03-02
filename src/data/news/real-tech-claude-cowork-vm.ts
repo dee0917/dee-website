@@ -93,7 +93,5 @@ export const article: NewsArticle = {
         title: "想在 AI 時代奪回主機主權嗎？",
         description: "不要讓你的電腦成為 AI 巨頭的殖民地。進入實驗室，學習如何建立具備主權的代理人執行環境。",
         button_text: "修煉主機安全主權"
-    },
-    trend_cluster: "開源邊界",
-    trinity_dimension: "生命具現"
+    }
 };

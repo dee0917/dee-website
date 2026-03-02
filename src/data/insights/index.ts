@@ -35,6 +35,7 @@ import { insight as ch5SlopDefense } from './ch5-slop-defense';
 import { insight as ch1AiMemorySovereignty } from './ch1-ai-memory-sovereignty';
 import { insight as ch2WiFiDensePosePrivacy } from './ch2-wifi-densepose-privacy';
 import { insight as ch5DeepSeekV4Auto } from './ch5-deepseek-v4-auto';
+import { insight as ch5AiMemoryClaudeCode } from './ch5-ai-memory-claude-code';
 
 // ═══════════════════════════════════════════
 // Chapter 定義 — 主線任務的學習順序 (僅限 Ch 0-4)
@@ -101,6 +102,7 @@ const mainQuest = [
 // 自由學習庫 (level: -1 = 戰略演進與支線)
 const sideQuests = [
     { ...ch5DeepSeekV4Auto, level: -1, category: "戰略演進" },
+    { ...ch5AiMemoryClaudeCode, level: -1, category: "戰略演進" },
     { ...ch1AiMemorySovereignty, level: -1, category: "戰略演進" },
     { ...ch2WiFiDensePosePrivacy, level: -1, category: "戰略演進" },
     { ...ch5VPhoneAgent, level: -1, category: "戰略演進" },
