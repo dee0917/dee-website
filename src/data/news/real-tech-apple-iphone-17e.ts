@@ -33,11 +33,11 @@ export const article: NewsArticle = {
                         <div class="flex-1">
                             <h4 class="text-4xl font-black text-white italic uppercase tracking-tighter mb-4">iPhone 17e // AI_HUB</h4>
                             <div class="grid grid-cols-2 gap-4">
-                                <div class="bg-white/5 p-4 rounded-xl border border-white/5">
+                                <div class="bg-white/5 p-4 rounded-xl border border-white/5 text-left">
                                     <span class="text-[9px] text-zinc-500 uppercase font-black">Price</span>
                                     <div class="text-2xl font-bold text-amber-400">$599</div>
                                 </div>
-                                <div class="bg-white/5 p-4 rounded-xl border border-white/5">
+                                <div class="bg-white/5 p-4 rounded-xl border border-white/5 text-left">
                                     <span class="text-[9px] text-zinc-500 uppercase font-black">AI Power</span>
                                     <div class="text-2xl font-bold text-white">Full Agent</div>
                                 </div>
@@ -65,7 +65,5 @@ export const article: NewsArticle = {
         title: "體驗「一條龍代理」指令",
         description: "試著模擬 17e 的執行邏輯，對你的 AI 下達一個複合任務：",
         command: "幫我讀取本週所有關於 [主題] 的郵件，在 Google 搜尋該產品的評價，並幫我寫一封總結信轉發給我的團隊成員，最後在日曆上標註追蹤時間。"
-    },
-    trend_cluster: "代理人革命",
-    trinity_dimension: "算力物權"
+    }
 };
