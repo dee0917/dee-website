@@ -1,5 +1,7 @@
-import { article as echoPentagon } from './echo-pentagon-anthropic-openai';
+import { article as appleRevolut } from './real-tech-apple-revolut-infrastructure';
+import { article as echoPentagonWar } from './echo-pentagon-war-department';
 import { article as appleIphone17e } from './real-tech-apple-iphone-17e';
+import { article as echoPentagon } from './echo-pentagon-anthropic-openai';
 import { article as echoJuicerV2 } from './echo-slang-compute-juicer-v2';
 import { article as geminiLiveOverlay } from './real-tech-google-gemini-live-overlay';
 import { article as echoAiHumanity } from './echo-ai-humanity-test';
@@ -55,8 +57,10 @@ import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
-    appleIphone17e,      // 最新：iPhone 17e 普及機 (新增)
-    echoPentagon,        // 最新：五角大廈宮鬥 (新增)
+    appleRevolut,        // 最新：AI 標準配備時代 (新增)
+    echoPentagonWar,     // 最新：國防部雲端化 (新增)
+    appleIphone17e,      // 最新：iPhone 17e 普及機
+    echoPentagon,        // 最新：五角大廈宮鬥
     echoJuicerV2,        // 最新：算力榨汁機 (Echo)
     geminiLiveOverlay,   // 最新：Gemini 3.5 視覺翻譯 (Aether)
     deepseekV4Distill,   // 最新：意圖壓縮 (新增)
