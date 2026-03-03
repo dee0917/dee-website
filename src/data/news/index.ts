@@ -1,3 +1,5 @@
+import { article as echoJuicerV2 } from './echo-slang-compute-juicer-v2';
+import { article as geminiLiveOverlay } from './real-tech-google-gemini-live-overlay';
 import { article as echoAiHumanity } from './echo-ai-humanity-test';
 import { article as claudeCodeMemory } from './real-tech-claude-code-memory';
 import { article as echoAgentGossip } from './echo-agent-gossip-discontinuity';
@@ -51,6 +53,8 @@ import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
+    echoJuicerV2,        // 最新：算力榨汁機 (Echo)
+    geminiLiveOverlay,   // 最新：Gemini 3.5 視覺翻譯 (Aether)
     deepseekV4Distill,   // 最新：DeepSeek 意圖壓縮 (新增)
     echoLabChronicle,    // 最新：Echo 實驗室觀察 (新增)
     aiSlopSurvival,      // 最新：AI 史萊姆生存指南 (新增)
