@@ -87,7 +87,5 @@ export const article: NewsArticle = {
         title: "測試你的「對話溫感」",
         description: "想知道你的指令是否被收了情感稅？讓 AI 幫你測測：",
         command: "我接下來要給你一段我的常用指令。請以『情感對齊專家』的身份，分析這段話的情緒溫度。如果我是對著一個極端敏感的 Agent 說這話，它會給我加成還是扣分？請提供 3 個『省錢版』的修辭建議。"
-    },
-    trend_cluster: "文明重塑",
-    trinity_dimension: "社會契約"
+    }
 };

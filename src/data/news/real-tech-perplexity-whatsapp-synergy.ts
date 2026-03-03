@@ -29,7 +29,7 @@ export const article: NewsArticle = {
                     <div class="relative z-10 flex flex-col gap-10 text-left">
                         <div class="flex items-center justify-between">
                             <div class="space-y-1">
-                                <h4 class="text-4xl font-black text-white italic tracking-tighter">OMNI SEARCH</h4>
+                                <h4 class="text-4xl font-black text-white tracking-tighter">OMNI SEARCH</h4>
                                 <p class="text-emerald-500 font-mono text-[10px] tracking-[0.4em]">PERPLEXITY_WHATSAPP_LINK // 2026</p>
                             </div>
                             <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
@@ -85,7 +85,5 @@ export const article: NewsArticle = {
         title: "體驗「視覺代勞」",
         description: "試著模擬全家桶搜尋的邏輯，下達一個複合式目標：",
         command: "我剛傳了一張 [物品/食材] 的照片給你。請幫我：1. 識別其成分與潛在健康風險。2. 找出目前全台網路商城最便宜的購買連結。3. 推薦 2 個能利用此物品解決 [具體問題] 的實戰妙招。"
-    },
-    trend_cluster: "代理人革命",
-    trinity_dimension: "社會契約"
+    }
 };
