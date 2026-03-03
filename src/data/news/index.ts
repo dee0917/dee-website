@@ -43,6 +43,7 @@ import { article as openclawTopsReact } from './real-tech-openclaw-tops-react';
 import { article as claudeCoworkVM } from './real-tech-claude-cowork-vm';
 import { article as anthropicTrumpConflict } from './real-tech-anthropic-trump-conflict';
 import { article as googleTranslateGemini } from './real-tech-google-translate-gemini';
+import { article as deepseekV4Distill } from './real-tech-deepseek-v4-distill';
 import { article as deepseekV4Intent } from './real-tech-deepseek-v4-intent';
 import { article as aiPhilosopher } from './echo-observation-ai-philosopher';
 import { article as aiSlopSurvival } from './real-tech-ai-slop-survival';
@@ -50,6 +51,7 @@ import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
+    deepseekV4Distill,   // 最新：DeepSeek 意圖壓縮 (新增)
     echoLabChronicle,    // 最新：Echo 實驗室觀察 (新增)
     aiSlopSurvival,      // 最新：AI 史萊姆生存指南 (新增)
     aiPhilosopher,       // 最新：AI 哲學家 (新增)
