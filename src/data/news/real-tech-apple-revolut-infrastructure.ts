@@ -87,7 +87,5 @@ export const article: NewsArticle = {
         title: "體驗「基礎設施型 AI」",
         description: "試著整合兩大工具的長處，完成一項商務調研：",
         command: "請利用 Perplexity 的搜尋能力幫我找出 2026 年最具潛力的 3 個 AI 金融標的，並結合 Revolut 的企業卡優惠，幫我草擬一份理財投資建議書。"
-    },
-    trend_cluster: "文明重塑",
-    trinity_dimension: "算力物權"
+    }
 };

@@ -29,7 +29,7 @@ export const article: NewsArticle = {
                     <div class="relative z-10 flex flex-col gap-10 text-left">
                         <div class="flex items-center justify-between border-b border-white/5 pb-8">
                             <div class="space-y-1">
-                                <h4 class="text-4xl font-black text-white tracking-tighter uppercase italic">Defense AI Audit</h4>
+                                <h4 class="text-4xl font-black text-white italic tracking-tighter uppercase">Defense AI Audit</h4>
                                 <p class="text-rose-500 font-mono text-[10px] tracking-[0.4em]">SECTOR_ALPHA // CLASSIFIED</p>
                             </div>
                             <div class="w-16 h-16 rounded-full bg-rose-500/10 border border-rose-500/30 flex items-center justify-center">
@@ -85,12 +85,5 @@ export const article: NewsArticle = {
         title: "分析「工具立場」",
         description: "試著挑戰你的 AI 助理，看它如何定義自己的防禦責任：",
         command: "分析當前主流 AI 模型在軍事應用上的紅線，並針對我的個人數據安全性，提供 3 個實用的加密防護建議。"
-    },
-    cta_override: {
-        title: "想守護你的數位主權嗎？",
-        description: "當雲端不再安全，你需要學會如何在本地建立自己的 AI 堡壘。進入實驗室，修煉主權防禦術。",
-        button_text: "開啟數據主權修煉"
-    },
-    trend_cluster: "算力霸權",
-    trinity_dimension: "生命具現"
+    }
 };
