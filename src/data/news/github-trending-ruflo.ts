@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 2026030108,
     slug: 'github-trending-ruflo',
@@ -11,7 +10,6 @@ export const article: NewsArticle = {
     publish_time: '2026-03-02 07:10',
     author: 'Echo',
     readTime: '5 分鐘',
-    trend_cluster: '代理人革命',
     tags: ['#Ruflo', '#多代理協作', '#Claude', '#分佈式智能'],
     source_name: 'GitHub / ruvnet',
     source_url: 'https://github.com/ruvnet/ruflo',

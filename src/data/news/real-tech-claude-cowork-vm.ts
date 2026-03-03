@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603021605,
     slug: "real-tech-claude-cowork-vm",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#Anthropic", "#ClaudeCode", "#VM隱私", "#硬體資源稅"],
     author: "Echo",
-    trinity_dimension: "生命具現",
-    trend_cluster: "開源邊界",
     flash_summary: [
         "Cowork 功能被發現悄悄佔用 10GB 以上磁碟空間。",
         "實質上是在用戶本機建立一個虛擬執行環境 (VM)，且未充分提示。",
@@ -34,7 +31,6 @@ export const article: NewsArticle = {
                             </div>
                             <span class="text-4xl">⚠️</span>
                         </div>
-
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div class="space-y-4">
                                 <span class="text-[9px] text-zinc-500 uppercase font-black tracking-widest">Disk Usage</span>
@@ -55,7 +51,6 @@ export const article: NewsArticle = {
                     </div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Field Notes - Critical Memo Style -->
             <div class="mt-12 p-10 bg-zinc-950 border border-white/5 rounded-[2.5rem] relative shadow-inner">
                 <div class="absolute -top-4 -right-4 px-4 py-1 bg-rose-600 text-white font-black text-[10px] uppercase rotate-2 shadow-lg">Security Memo</div>

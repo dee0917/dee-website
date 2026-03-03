@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 502,
     slug: "firefox-ai-privacy-sandbox-2026-data-protection",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "https://blog.mozilla.org",
     tags: ["#Firefox", "#AI隱私", "#個資保護", "#2026網路安全", "#隱私沙盒"],
     author: "Echo",
-    trend_cluster: "數據主權",
-    trinity_dimension: "算力物權",
     flash_summary: [
         "Firefox 加入『AI 快門』功能，可針對特定網站（如銀行、郵件）一鍵停用所有 AI 插件。",
         "引入『邊緣端 AI 模式』，讓翻譯與摘要任務在本地電腦運行，數據不傳雲端。",

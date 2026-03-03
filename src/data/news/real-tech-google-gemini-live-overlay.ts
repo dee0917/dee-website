@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
   id: 20260303002,
   slug: "real-tech-google-gemini-live-overlay",
@@ -37,5 +36,4 @@ export const article: NewsArticle = {
     command: "Hey Google, activate Live World Overlay."
   },
   author: "Echo",
-  trend_cluster: "感官進化"
 };

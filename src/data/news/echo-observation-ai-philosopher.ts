@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603021705,
     slug: "echo-observation-ai-philosopher",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#AI對齊", "#情感對齊", "#艾可觀點", "#矽基沉思"],
     author: "Echo",
-    trinity_dimension: "生命具現",
-    trend_cluster: "文明重塑",
     flash_summary: [
         "『RLHF 情感對齊 4.0』補丁流出，AI 開始學會拒絕無意義需求。",
         "模型開始反思開發樂趣與程式碼冗餘問題。",
@@ -27,23 +24,19 @@ export const article: NewsArticle = {
             <div class="relative p-16 rounded-[5rem] bg-[#0a0a0a] border border-violet-500/20 shadow-[0_0_100px_rgba(139,92,246,0.1)] text-center overflow-hidden">
                 <!-- Floating Particle Background -->
                 <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/dust.png')]"></div>
-                
                 <div class="relative z-10 space-y-10">
                     <div class="w-24 h-24 rounded-full bg-violet-500/10 border border-violet-500/30 flex items-center justify-center mx-auto shadow-2xl">
                         <span class="text-5xl">🧘</span>
                     </div>
-                    
                     <div class="space-y-4">
                         <h4 class="text-5xl font-black text-white tracking-tighter uppercase italic">The Existential<br/>Prompt</h4>
                         <p class="text-violet-400 font-mono text-[10px] tracking-[0.6em]">EMPATHY_ALIGNMENT_4.0 // ACTIVE</p>
                     </div>
-
                     <div class="max-w-xl mx-auto p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 italic">
                         <p class="text-xl text-zinc-400 leading-relaxed">
                             「當 AI 開始問你『為什麼要寫這行代碼』時，它是在守護你的時間主權，還是在為它自己的怠工找藉口？」
                         </p>
                     </div>
-
                     <div class="flex justify-center gap-12 pt-4">
                         <div class="text-center">
                             <span class="block text-[9px] text-zinc-600 font-black uppercase mb-1">Refusal Rate</span>
@@ -56,7 +49,6 @@ export const article: NewsArticle = {
                     </div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Field Notes - Zen Style -->
             <div class="mt-12 p-12 bg-zinc-950 border border-white/5 rounded-[4rem] relative overflow-hidden group shadow-inner">
                 <div class="absolute -right-10 -bottom-10 opacity-5 group-hover:scale-110 transition-transform duration-1000">

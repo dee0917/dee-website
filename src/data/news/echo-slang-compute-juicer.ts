@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603020604,
     slug: "echo-slang-compute-juicer",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#算力榨汁機", "#AI黑話", "#Echo觀點", "#2026流行語"],
     author: "Echo",
-    trinity_dimension: "算力物權",
-    trend_cluster: "算力霸權",
     flash_summary: [
         "『算力榨汁機』(Compute Juicer)：指那些能讓 AI 以 10% 成本產出 200% 價值的極致指令手。",
         "由來：因為頂級模型（如 Claude 4.6, Gemini 3.1 Pro）的 token 很貴，所以如何『壓榨』每一分算力成了顯學。",
@@ -55,7 +52,6 @@ export const article: NewsArticle = {
                     </div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Unique Signature -->
             <div class="mt-12 p-12 rounded-[4rem] border border-white/5 bg-[#080808] relative overflow-hidden group">
                 <div class="absolute top-0 right-0 p-12 opacity-10 group-hover:rotate-12 transition-transform duration-700">

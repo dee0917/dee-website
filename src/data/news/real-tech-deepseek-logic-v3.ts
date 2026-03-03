@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 2026030106,
     slug: 'real-tech-deepseek-logic-v3',
@@ -11,7 +10,6 @@ export const article: NewsArticle = {
     publish_time: '2026-03-02 03:30',
     author: 'Echo',
     readTime: '6 分鐘',
-    trend_cluster: '代理人革命',
     tags: ['#DeepSeek', '#LogicV3', '#自動化驗證'],
     source_name: 'DeepSeek Blog',
     source_url: 'https://blog.deepseek.com/logic-v3-release',

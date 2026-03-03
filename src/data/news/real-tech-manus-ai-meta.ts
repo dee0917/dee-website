@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 905,
     slug: "real-tech-manus-ai-meta-acquisition-2026",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "https://manus.ai/",
     tags: ["#ManusAI", "#Meta收購", "#通用代理人", "#懶人神器", "#24HR熱點"],
     author: "Echo",
-    trend_cluster: "代理人革命",
-    trinity_dimension: "生命具現",
     related_slugs: ["github-trending-openfang-agent-os", "openclaw-yc-interview"],
     flash_summary: [
         "Manus AI 以其「Less structure, more intelligence」的核心架構聞名，具備極強的網頁自主導航能力。",
@@ -38,7 +35,6 @@ export const article: NewsArticle = {
                     </div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Industry Observation -->
             <div class="p-12 rounded-[3.5rem] bg-zinc-900 border border-blue-500/20 relative">
                 <div class="flex items-center gap-4 mb-8">

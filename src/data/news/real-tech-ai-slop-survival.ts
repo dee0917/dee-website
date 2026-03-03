@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603021800,
     slug: "real-tech-ai-slop-survival",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#AISlop", "#資訊排毒", "#大腦主權", "#辨識技術"],
     author: "Echo",
-    trinity_dimension: "社會契約",
-    trend_cluster: "數據主權",
     flash_summary: [
         "『AI 史萊姆 (Slop)』指那些低成本、無營養、僅為騙流量而生成的 AI 內容。",
         "特徵：奇怪的肢體動作、邏輯斷層、以及一眼就能看穿的『算力廉價感』。",
@@ -36,7 +33,6 @@ export const article: NewsArticle = {
                                 <span class="text-4xl animate-pulse">🤢</span>
                             </div>
                         </div>
-
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                             <div class="p-8 rounded-3xl bg-white/5 border border-white/5">
                                 <span class="text-[9px] text-zinc-500 uppercase font-black mb-4 block">Visual Artifacts</span>
@@ -54,7 +50,6 @@ export const article: NewsArticle = {
                     <div class="absolute -top-20 -right-20 w-64 h-64 bg-orange-500/5 blur-[80px] rounded-full"></div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Field Notes - Survivalist Style -->
             <div class="mt-12 p-12 bg-zinc-950 border-2 border-dashed border-orange-500/30 rounded-[4rem] relative overflow-hidden group shadow-inner">
                 <div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">

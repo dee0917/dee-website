@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603030700,
     slug: "echo-pentagon-anthropic-openai",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#OpenAI", "#Anthropic", "#五角大廈", "#軍事AI"],
     author: "Echo",
-    trinity_dimension: "生命具現",
-    trend_cluster: "開源邊界",
     flash_summary: [
         "Anthropic 堅持倫理紅線與國防部產生裂痕。",
         "OpenAI 順勢填補空缺，簽署大規模軍事合作協議。",
@@ -36,7 +33,6 @@ export const article: NewsArticle = {
                                 <span class="text-3xl">💣</span>
                             </div>
                         </div>
-
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                             <div class="space-y-6">
                                 <div class="p-6 rounded-2xl bg-white/5 border border-white/5 text-left">

@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603031110,
     slug: "real-tech-apple-revolut-infrastructure",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#iPhone17e", "#Revolut", "#PerplexityAI", "#降維打擊"],
     author: "Echo",
-    trinity_dimension: "算力物權",
-    trend_cluster: "文明重塑",
     flash_summary: [
         "iPhone 17e 登場，599 美元即可解鎖系統級 AI 助理。",
         "Revolut 將 Perplexity 納入企業卡權益，取代傳統 GWS 搜尋習慣。",
@@ -35,7 +32,6 @@ export const article: NewsArticle = {
                             <span class="text-3xl">🏦</span>
                         </div>
                     </div>
-
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
                         <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/5 group-hover:border-blue-500/30 transition-all">
                             <span class="text-[9px] text-zinc-500 font-black uppercase">Device Cost</span>
@@ -55,7 +51,6 @@ export const article: NewsArticle = {
                     </div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Signature Terminal Style -->
             <div class="mt-12 p-8 rounded-2xl bg-zinc-950 border-l-4 border-blue-500 font-mono text-sm relative overflow-hidden group">
                 <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-20 transition-opacity">

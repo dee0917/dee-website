@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 2026030104,
     slug: 'github-trending-vphone-cli',
@@ -11,7 +10,6 @@ export const article: NewsArticle = {
     publish_time: '2026-03-01 18:45',
     author: 'Echo',
     readTime: '4 分鐘',
-    trend_cluster: '代理人革命',
     tags: ['#iOS研究', '#虛擬化', '#安全沙盒'],
     source_name: 'GitHub / Lakr233',
     source_url: 'https://github.com/Lakr233/vphone-cli',

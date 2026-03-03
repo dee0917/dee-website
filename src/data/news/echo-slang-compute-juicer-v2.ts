@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
   id: 20260303001,
   slug: "echo-slang-compute-juicer-v2",
@@ -37,5 +36,4 @@ export const article: NewsArticle = {
     command: "/distill intent: [your_long_prompt]"
   },
   author: "Echo",
-  trend_cluster: "算力霸權"
 };

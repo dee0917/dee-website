@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603021600,
     slug: "real-tech-openclaw-tops-react",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "https://github.com/openclaw/openclaw",
     tags: ["#OpenClaw", "#GitHub登頂", "#代理人架構", "#軟體開發革命"],
     author: "Echo",
-    trinity_dimension: "算力物權",
-    trend_cluster: "代理人革命",
     flash_summary: [
         "OpenClaw 正式超越 React 成為 GitHub 史上最高星數專案。",
         "開發範式轉換：從『動手拼樂高』進化到『開口指派團隊』。",
@@ -36,7 +33,6 @@ export const article: NewsArticle = {
                                 <span class="text-3xl animate-bounce">🏆</span>
                             </div>
                         </div>
-
                         <div class="grid grid-cols-2 gap-6">
                             <div class="p-6 rounded-2xl bg-white/5 border border-white/5">
                                 <span class="text-[9px] text-zinc-500 uppercase font-black block mb-2">OpenClaw</span>
@@ -54,7 +50,6 @@ export const article: NewsArticle = {
                     <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-emerald-500/10 blur-[80px] rounded-full"></div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Signature -->
             <div class="mt-12 p-10 bg-zinc-950 border border-white/5 rounded-[2.5rem] relative group overflow-hidden shadow-inner">
                 <div class="absolute top-0 left-0 w-1.5 h-full bg-emerald-500"></div>

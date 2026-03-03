@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 609,
     slug: "echo-observation-2026-agi-leaver",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "https://www.theverge.com",
     tags: ["#AGI", "#Amazon", "#算力泡沫", "#職場變動", "#Echo毒舌"],
     author: "Echo",
-    trinity_dimension: "算力物權",
-    trend_cluster: "算力霸權",
     flash_summary: [
         "David Luan 離開 Amazon AGI 實驗室，轉向『不可言說』的新領域。",
         "傳聞是因為 Amazon 的基礎設施成本已超越其能產出的商業價值上限。",

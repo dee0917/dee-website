@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603021305,
     slug: "real-tech-google-translate-gemini",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "https://blog.google",
     tags: ["#GoogleTranslate", "#GeminiAI", "#數位降維", "#翻譯工具"],
     author: "Echo",
-    trinity_dimension: "社會契約",
-    trend_cluster: "數據主權",
     flash_summary: [
         "翻譯不再死板，會根據語氣自動優化詞選。",
         "新增「Ask」功能，解釋當地文化用法。",
@@ -27,7 +24,6 @@ export const article: NewsArticle = {
             <div class="relative p-12 rounded-[4rem] bg-[#050505] border border-blue-500/20 overflow-hidden shadow-2xl group">
                 <!-- Decorative Grid Background -->
                 <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:20px_20px]"></div>
-                
                 <div class="relative z-10">
                     <div class="flex flex-col gap-12">
                         <div class="flex items-start justify-between">
@@ -39,7 +35,6 @@ export const article: NewsArticle = {
                                 <span class="text-4xl">🌐</span>
                             </div>
                         </div>
-
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div class="p-8 rounded-3xl bg-gradient-to-br from-blue-600/10 to-transparent border border-blue-500/20">
                                 <span class="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-4">Context Awareness</span>
@@ -60,7 +55,6 @@ export const article: NewsArticle = {
                     </div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Signature - Terminal Style -->
             <div class="mt-10 p-8 rounded-2xl bg-zinc-950 border-l-4 border-blue-500 font-mono text-sm relative group overflow-hidden">
                 <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-20 transition-opacity">

@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 2026030205,
     slug: 'newbie-ai-daily-hacks',
@@ -11,7 +10,6 @@ export const article: NewsArticle = {
     publish_time: '2026-03-02 09:00',
     author: 'Echo',
     readTime: '4 分鐘',
-    trend_cluster: '文明重塑',
     tags: ["#日常玩法", "#生活黑科技", "#新手必看", "#實用技巧", "#驚艷鄰居"],
     source_name: "Dee's AI Lab / 實戰心得",
     source_url: "https://beyond-flex-dining-anchor.trycloudflare.com",
@@ -35,7 +33,6 @@ export const article: NewsArticle = {
                     <p class="text-emerald-600 font-bold italic">💡 小白心得：AI 的想像力是你廚藝的唯一上限。</p>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Street Insight -->
             <div class="relative p-12 rounded-[4rem] bg-[#0a0a0a] border border-emerald-500/20 shadow-[0_0_60px_rgba(16,185,129,0.05)] overflow-hidden text-left">
                 <div class="absolute -left-10 -bottom-10 w-64 h-64 bg-emerald-500/10 blur-[80px] rounded-full"></div>

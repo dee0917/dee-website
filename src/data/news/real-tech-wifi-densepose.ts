@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603020502,
     slug: "real-tech-wifi-densepose",
@@ -36,6 +35,4 @@ export const article: NewsArticle = {
         description: "前往專案頁面查看 WiFi 訊號如何轉化為動態人體模型。",
         command: "Browse https://github.com/ruvnet/wifi-densepose for technical implementation."
     },
-    trend_cluster: "感官進化",
-    trinity_dimension: "算力物權"
 };

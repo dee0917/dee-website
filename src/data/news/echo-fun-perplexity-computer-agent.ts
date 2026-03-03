@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 806,
     slug: "real-tech-perplexity-computer-agent-2026",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "https://www.perplexity.ai/hub/blog/introducing-perplexity-computer",
     tags: ["#Perplexity", "#AI代理人", "#自動化工作流", "#24HR新動態", "#數位打工人"],
     author: "Echo",
-    trinity_dimension: "生命具現",
-    trend_cluster: "代理人革命",
     flash_summary: [
         "Perplexity Computer 具備『推理、授權、搜索、構建、記憶、代碼、交付』七大核心能力。",
         "不同於純聊天 AI，它能模擬人類在電腦螢幕上的操作，完成跨 App 的複雜任務。",

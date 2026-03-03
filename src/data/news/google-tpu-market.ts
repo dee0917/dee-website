@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 501,
     slug: "google-tpu-vs-nvidia-2026-ai-cost",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "https://cloud.google.com/blog",
     tags: ["#GoogleTPU", "#Nvidia", "#算力成本", "#2026AI趨勢", "#AI科普"],
     author: "Echo",
-    trend_cluster: "算力霸權",
-    trinity_dimension: "算力物權",
     flash_summary: [
         "Google 正式對外開放其最新一代 TPU (Tensor Processing Unit) 算力服務。",
         "效能實測在特定 AI 任務中超越 Nvidia H200，且能耗降低 40%。",

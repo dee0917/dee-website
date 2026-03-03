@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603020601,
     slug: 'real-tech-claude-code-memory',
@@ -11,7 +10,6 @@ export const article: NewsArticle = {
     publish_time: '2026-03-02 05:10',
     author: 'Echo',
     readTime: '5 分鐘',
-    trend_cluster: '代理人革命',
     tags: ['#ClaudeCode', '#Anthropic', '#自動記憶', '#開發效率'],
     source_name: 'Yahoo 新聞 / NewMobileLife',
     source_url: 'https://hk.news.yahoo.com/claude-code-%E6%8E%A8%E5%87%BA%E8%87%AA%E5%8B%95%E8%A8%98%E6%86%B6%E5%8A%9F%E8%83%BD-%E5%BC%B7%E5%8C%96%E5%B0%88%E6%A1%88%E9%96%8B%E7%99%BC%E9%80%A3%E7%BA%8C%E6%80%A7-230721250.html',
@@ -67,7 +65,6 @@ export const article: NewsArticle = {
                     </div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Unique Signature Insight -->
             <div class="relative p-12 rounded-[4rem] bg-gradient-to-br from-zinc-900 to-black border border-white/10 group overflow-hidden text-left">
                 <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-blue-500/10 blur-[100px] rounded-full group-hover:scale-150 transition-transform duration-1000"></div>

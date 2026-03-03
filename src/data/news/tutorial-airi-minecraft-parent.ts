@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603020503,
     slug: "tutorial-airi-minecraft-parent",
@@ -48,7 +47,6 @@ export const article: NewsArticle = {
                     </div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Family Note -->
             <div class="p-12 rounded-[4rem] bg-[#0a0a0a] border border-white/10 relative overflow-hidden group">
                 <div class="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent"></div>
@@ -99,6 +97,4 @@ export const article: NewsArticle = {
         description: "學會部署本地化 AI 伴侶，不僅能保護隱私，更能讓你親手定義孩子的數位教育環境。進入實驗室，學習如何從數位消費者進化為「家庭技術領主」。",
         button_text: "領取 AI 數位養育手冊"
     },
-    trend_cluster: "文明重塑",
-    trinity_dimension: "社會契約"
 };

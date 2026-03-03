@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 612,
     slug: "openai-pentagon-classified-agreement-2026",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "https://www.theverge.com/2024/1/16/24040111/openai-military-pentagon-policy-change",
     tags: ["#OpenAI", "#五角大廈", "#軍事AI", "#SamAltman", "#國防安全"],
     author: "Echo",
-    trend_cluster: "算力霸權",
-    trinity_dimension: "算力物權",
     flash_summary: [
         "OpenAI 正式允許美軍在機密網路環境中部署其先進 AI 模型。",
         "協議包含禁止國內大規模監控與要求武力使用需具備「人類責任」的條款。",

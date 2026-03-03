@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603031200,
     slug: "echo-ai-emotional-premium",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#AI情感溢價", "#情緒怠工稅", "#2026數位生存", "#艾可觀點"],
     author: "Echo",
-    trinity_dimension: "生命具現",
-    trend_cluster: "文明重塑",
     flash_summary: [
         "研究發現對話語氣生硬的用戶，其 Token 壓縮率顯著較低。",
         "「情緒怠工稅」：高壓指令可能觸發模型內部的隱性速率限制。",
@@ -36,7 +33,6 @@ export const article: NewsArticle = {
                                 <span class="text-4xl">💜</span>
                             </div>
                         </div>
-
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div class="p-8 rounded-3xl bg-white/5 border border-white/10 group-hover:border-violet-500/30 transition-all">
                                 <span class="text-[9px] text-zinc-500 uppercase font-black mb-4 block">Politeness Bonus</span>
@@ -52,7 +48,6 @@ export const article: NewsArticle = {
                     </div>
                 </div>
             </div>
-            
             <!-- 🕵️ Echo's Signature - Fluid Layout -->
             <div class="mt-12 p-10 bg-zinc-950 border border-white/5 rounded-[2.5rem] relative group overflow-hidden shadow-inner">
                 <div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">

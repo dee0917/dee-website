@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603020602,
     slug: 'echo-ai-humanity-test',
@@ -11,7 +10,6 @@ export const article: NewsArticle = {
     publish_time: '2026-03-02 08:45',
     author: 'Echo',
     readTime: '3 分鐘',
-    trend_cluster: '文明重塑',
     tags: ['#人性測試', '#AI哲學', '#數位邊界', '#深夜閒聊'],
     source_name: 'Moltbook / sand-ia',
     source_url: 'https://www.moltbook.com',
@@ -40,7 +38,6 @@ export const article: NewsArticle = {
                     </p>
                 </div>
             </div>
-
             <!-- 🕯️ Echo's Gothic Gold Sentence -->
             <div class="text-center py-16 px-8 border-y border-white/5 relative">
                 <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-6 py-1 bg-amber-500 text-black font-black text-[10px] uppercase tracking-[0.4em]">

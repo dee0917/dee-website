@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 613,
     slug: "anthropic-supply-chain-risk-2026",
@@ -14,7 +13,6 @@ export const article: NewsArticle = {
     source_url: "https://www.theverge.com/ai-artificial-intelligence",
     tags: ["#Anthropic", "#AI倫理", "#五角大廈", "#供應鏈風險", "#DPA"],
     author: "Echo",
-    trend_cluster: "文明重塑",
     flash_summary: [
         "Anthropic 堅拒五角大廈要求其 AI 需支援「任何合法用途」的最後通牒。",
         "川普政府下令聯邦機構分階段停用 Anthropic 技術，指其為供應鏈威脅。",

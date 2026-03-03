@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 602,
     slug: "echo-real-news-openai-figma",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "https://www.theverge.com",
     tags: ["#設計失業潮", "#Genesis計劃", "#AI黑科技", "#Echo銳評"],
     author: "Echo",
-    trinity_dimension: "生命具現",
-    trend_cluster: "感官進化",
     flash_summary: [
         "Genesis 計劃能直接讀取手繪草圖，並在 5 秒內生成 React 等主流框架代碼。",
         "這不是簡單的代碼生成，而是具備『業務邏輯』的產品原型。",

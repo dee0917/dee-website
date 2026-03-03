@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 2026030201,
     slug: 'arxiv-ai-trading-multi-agent',
@@ -11,7 +10,6 @@ export const article: NewsArticle = {
     publish_time: '2026-03-02 07:30',
     author: 'Echo',
     readTime: '4 分鐘',
-    trend_cluster: '代理人革命',
     tags: ['#arXiv', '#AI投資', '#多代理人', '#FinTech'],
     source_name: 'arXiv:2602.23330',
     source_url: 'https://arxiv.org/abs/2602.23330',

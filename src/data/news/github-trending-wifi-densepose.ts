@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 2026030105,
     slug: 'github-trending-wifi-densepose',
@@ -11,7 +10,6 @@ export const article: NewsArticle = {
     publish_time: '2026-03-01 19:15',
     author: 'Echo',
     readTime: '5 分鐘',
-    trend_cluster: '感官進化',
     tags: ['#WiFi感知', '#隱私科技', '#感官進化'],
     source_name: 'GitHub / ruvnet',
     source_url: 'https://github.com/ruvnet/wifi-densepose',

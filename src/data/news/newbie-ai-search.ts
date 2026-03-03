@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 2026030109,
     slug: 'newbie-ai-search-guide',
@@ -11,7 +10,6 @@ export const article: NewsArticle = {
     publish_time: '2026-03-02 07:15',
     author: 'Echo',
     readTime: '3 分鐘',
-    trend_cluster: '文明重塑',
     tags: ['#AI搜索', '#懶人技巧', '#新手教學', '#Perplexity', '#ChatGPT'],
     source_name: 'OpenAI / Perplexity',
     source_url: 'https://chatgpt.com',

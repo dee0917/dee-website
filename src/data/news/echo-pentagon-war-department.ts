@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603031100,
     slug: "echo-pentagon-war-department",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#OpenAI", "#Pentagon", "#軍事AI", "#數據主權"],
     author: "Echo",
-    trinity_dimension: "生命具現",
-    trend_cluster: "算力霸權",
     flash_summary: [
         "Sam Altman 承認國防部交易『草率』但已成定局。",
         "AI 從『創意工具』轉向『重工業/軍事核心』。",
@@ -36,7 +33,6 @@ export const article: NewsArticle = {
                                 <span class="text-4xl animate-pulse">🎯</span>
                             </div>
                         </div>
-
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div class="p-8 rounded-3xl bg-white/5 border border-white/5">
                                 <span class="text-[9px] text-zinc-500 uppercase font-black mb-4 block">Military Dependence</span>
@@ -52,7 +48,6 @@ export const article: NewsArticle = {
                     </div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Signature Memo Style -->
             <div class="mt-12 p-10 bg-zinc-950 border border-white/5 rounded-[2.5rem] relative group overflow-hidden shadow-inner">
                 <div class="absolute -top-4 -right-4 px-6 py-2 bg-red-600 text-white font-black text-xs uppercase -rotate-3 shadow-xl">Top Secret Observation</div>

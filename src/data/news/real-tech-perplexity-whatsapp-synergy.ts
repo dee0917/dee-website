@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603031210,
     slug: "real-tech-perplexity-whatsapp-synergy",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#Perplexity", "#Meta", "#降維打擊", "#全家桶搜尋"],
     author: "Echo",
-    trinity_dimension: "社會契約",
-    trend_cluster: "代理人革命",
     flash_summary: [
         "通訊軟體即搜尋框：直接傳送圖片即可觸發全球 RAG 檢索。",
         "視覺辨識升級：整合 Gemini 2.0 邏輯，辨識精度達亞硝酸鹽/農藥殘留等級。",
@@ -36,7 +33,6 @@ export const article: NewsArticle = {
                                 <span class="text-3xl animate-bounce">📸</span>
                             </div>
                         </div>
-
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div class="bg-white/5 p-8 rounded-3xl border border-white/10 group-hover:border-emerald-500/30 transition-all">
                                 <span class="text-[9px] text-zinc-500 uppercase font-black block mb-4">Response Speed</span>
@@ -52,7 +48,6 @@ export const article: NewsArticle = {
                     </div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Field Notes -->
             <div class="mt-12 p-10 bg-zinc-950 border border-white/5 rounded-[2.5rem] relative group overflow-hidden shadow-inner">
                 <div class="absolute top-0 left-0 w-1.5 h-full bg-emerald-500"></div>

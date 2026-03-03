@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603020501,
     slug: "echo-dare-bench-audit",
@@ -48,6 +47,4 @@ export const article: NewsArticle = {
             content: "強化學習的勝利：Qwen3-4B 的崛起預示著『小而精』的模型時代到來。"
         }
     ],
-    trend_cluster: "代理人革命",
-    trinity_dimension: "生命具現"
 };

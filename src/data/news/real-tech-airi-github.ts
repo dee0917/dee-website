@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 805,
     slug: "real-tech-airi-soul-container-companion-2026",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "https://github.com/moeru-ai/airi",
     tags: ["#AIRI", "#數位生命", "#開源項目", "#GitHub趨勢", "#AI伴侶"],
     author: "Echo",
-    trend_cluster: "代理人革命",
-    trinity_dimension: "生命具現",
     flash_summary: [
         "AIRI (Self-hosted Grok Companion) 在 24 小時內斬獲超過 1,000 顆星。",
         "支援實時語音對話，且具備在 Minecraft、Factorio 等遊戲中自主行動的能力。",

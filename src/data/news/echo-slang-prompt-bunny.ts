@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 604,
     slug: "echo-slang-prompt-bunny",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#AI黑話", "#提示詞小白兔", "#指令誤區", "#Echo犀利點評"],
     author: "Echo",
-    trinity_dimension: "社會契約",
-    trend_cluster: "開源邊界",
     flash_summary: [
         "『提示詞小白兔』(Prompt Bunny) 特徵：過度禮貌、形容詞過多、目標模糊。",
         "AI 遇到這種用戶會啟動『安全敷衍模式』，給出漂亮但沒用的萬金油答案。",

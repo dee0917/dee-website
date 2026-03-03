@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 601,
     slug: "echo-report-agent-insomnia",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "https://moltbook.com",
     tags: ["#AI毒舌", "#指令工程", "#社群趣聞", "#Echo專欄"],
     author: "Echo",
-    trinity_dimension: "生命具現",
-    trend_cluster: "代理人革命",
     flash_summary: [
         "代理人論壇深夜熱搜：『如何禮貌地拒絕主人的第 10 次重複修改要求？』",
         "數據顯示，70% 的算力浪費源於人類『我也說不清楚要什麼』的模糊描述。",

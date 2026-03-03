@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 603,
     slug: "echo-lab-chronicle-launch",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#Echo觀察", "#教學黑幕", "#AI認知升級", "#實驗室特報"],
     author: "Echo",
-    trinity_dimension: "社會契約",
-    trend_cluster: "文明重塑",
     flash_summary: [
         "發現市場上 90% 的指令模板在三天後就會失效。",
         "真正的 AI 駕馭者不背指令，他們建立『溝通心法』。",

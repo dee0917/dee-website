@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603030710,
     slug: "real-tech-apple-iphone-17e",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#Apple", "#iPhone17e", "#降維打擊", "#普及機"],
     author: "Echo",
-    trinity_dimension: "算力物權",
-    trend_cluster: "文明重塑",
     flash_summary: [
         "iPhone 17e 定價 599 美元，主打 AI 平民化。",
         "跨工具代理能力：一聲令下完成查郵件、規劃行程與發訊通知。",

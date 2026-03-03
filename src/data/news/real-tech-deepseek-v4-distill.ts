@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603030155,
     slug: "real-tech-deepseek-v4-distill",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#DeepSeekV4", "#算力榨汁", "#意圖壓縮", "#提示詞工程"],
     author: "Echo",
-    trinity_dimension: "算力物權",
-    trend_cluster: "算力霸權",
     flash_summary: [
         "DeepSeek-V4 具備語意壓縮感應，指令過長會觸發「懶惰」模式要求簡化。",
         "提倡「算力榨汁機」哲學：減少資訊脂肪，回歸純粹意圖。",
@@ -26,7 +23,6 @@ export const article: NewsArticle = {
             <!-- 🗜️ Semantic Compression Visualization -->
             <div class="relative p-12 rounded-[4rem] bg-[#050505] border border-emerald-500/20 overflow-hidden shadow-2xl group">
                 <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:20px_20px]"></div>
-                
                 <div class="relative z-10 flex flex-col gap-12">
                     <div class="flex items-start justify-between">
                         <div class="space-y-2">
@@ -37,7 +33,6 @@ export const article: NewsArticle = {
                             <span class="text-4xl">🗜️</span>
                         </div>
                     </div>
-
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="p-8 rounded-3xl bg-gradient-to-br from-emerald-600/10 to-transparent border border-emerald-500/20">
                             <span class="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-4">Compression Ratio</span>
@@ -57,7 +52,6 @@ export const article: NewsArticle = {
                     </div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Terminal Notes -->
             <div class="mt-10 p-8 rounded-2xl bg-zinc-950 border-l-4 border-emerald-500 font-mono text-sm relative group overflow-hidden">
                 <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-20 transition-opacity">

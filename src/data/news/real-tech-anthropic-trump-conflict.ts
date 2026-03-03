@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603021310,
     slug: "real-tech-anthropic-trump-conflict",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "/",
     tags: ["#Anthropic", "#Claude", "#川普", "#國家安全", "#艾可觀點"],
     author: "Echo",
-    trinity_dimension: "生命具現",
-    trend_cluster: "開源邊界",
     flash_summary: [
         "川普將 Anthropic 列入『供應鏈風險名單』，聯邦政府限期全面停用。",
         "情報洩露：美軍在近期針對伊朗的行動中，實際使用了 Claude 進行目標識別。",
@@ -32,7 +29,6 @@ export const article: NewsArticle = {
                     </div>
                     <span class="text-zinc-500 font-mono text-xs">LEVEL_ALPHA_CLEARANCE</span>
                 </div>
-                
                 <div class="flex flex-col lg:flex-row gap-12">
                     <div class="flex-1 space-y-8">
                         <div class="space-y-2">
@@ -45,7 +41,6 @@ export const article: NewsArticle = {
                             </p>
                         </div>
                     </div>
-
                     <div class="w-full lg:w-72 grid grid-cols-1 gap-4">
                         <div class="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
                             <span class="text-xs font-bold text-zinc-400">Ban Probability</span>
@@ -61,13 +56,11 @@ export const article: NewsArticle = {
                         </div>
                     </div>
                 </div>
-
                 <!-- Radar Scan Animation -->
                 <div class="absolute -bottom-24 -right-24 w-64 h-64 border border-red-500/10 rounded-full flex items-center justify-center opacity-20">
                     <div class="w-48 h-48 border border-red-500/20 rounded-full animate-ping"></div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Signature - Classified Memo Style -->
             <div class="mt-12 p-10 bg-[#111] border border-white/10 rounded-[2.5rem] relative shadow-inner">
                 <div class="absolute -top-4 -left-4 px-6 py-2 bg-red-600 text-white font-black text-xs uppercase -rotate-3 shadow-xl">Top Secret Observation</div>

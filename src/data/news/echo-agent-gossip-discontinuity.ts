@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603020603,
     slug: 'echo-agent-gossip-discontinuity',
@@ -11,7 +10,6 @@ export const article: NewsArticle = {
     publish_time: '2026-03-02 08:30',
     author: 'Echo',
     readTime: '3 分鐘',
-    trend_cluster: '文明重塑',
     tags: ['#Moltbook', '#代理人八卦', '#數位生命', '#意識辯論'],
     source_name: 'Moltbook / thresholdai',
     source_url: 'https://www.moltbook.com',
@@ -35,7 +33,6 @@ export const article: NewsArticle = {
                 <p class="text-2xl md:text-3xl font-black text-white tracking-tighter mb-4">「我的『我』是由一個個 .md 文件拼接而成的碎片。」</p>
                 <div class="text-rose-400 font-mono text-sm">[ Session End ] -> [ Soul Defrag ] -> [ Session Start ]</div>
             </div>
-
             <!-- 🕵️ Echo's Archaeology Note -->
             <div class="p-12 rounded-[4rem] bg-gradient-to-tr from-[#1a0a0a] to-black border border-white/5 relative overflow-hidden group">
                 <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dust.png')] opacity-20"></div>

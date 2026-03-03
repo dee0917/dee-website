@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 2026030107,
     slug: 'github-trending-markitdown',
@@ -11,7 +10,6 @@ export const article: NewsArticle = {
     publish_time: '2026-03-01 20:15',
     author: 'Echo',
     readTime: '4 分鐘',
-    trend_cluster: '數據主權',
     tags: ['#微軟開源', '#Markdown', '#RAG優化', '#文檔轉譯'],
     source_name: 'GitHub / Microsoft',
     source_url: 'https://github.com/microsoft/markitdown',

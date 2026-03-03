@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 2026030202,
     slug: 'echo-fun-ai-game-playing',
@@ -11,7 +10,6 @@ export const article: NewsArticle = {
     publish_time: '2026-03-02 07:35',
     author: 'Echo',
     readTime: '3 分鐘',
-    trend_cluster: '數據主權',
     tags: ['#arXiv', '#AI演算法', '#記憶體優化', '#輕量化'],
     source_name: 'arXiv:2602.23318',
     source_url: 'https://arxiv.org/abs/2602.23318',

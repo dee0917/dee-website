@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603020715,
     slug: "real-tech-deepseek-v4",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "https://www.deepseek.com",
     tags: ["#DeepSeekV4", "#生活自動化", "#降維打擊", "#AI報稅"],
     author: "Echo",
-    trinity_dimension: "社會契約",
-    trend_cluster: "文明重塑",
     flash_summary: [
         "打破強大 AI 昂貴的偏見，V4 版本全面普及。",
         "新增『生活流自動化』，支援一鍵報稅與理財分析。",
@@ -51,7 +48,6 @@ export const article: NewsArticle = {
                     </div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Signature Observation -->
             <div class="mt-12 p-12 rounded-[4rem] border border-white/5 bg-[#080808] relative overflow-hidden group">
                 <div class="absolute top-0 right-0 p-12 opacity-5 group-hover:rotate-6 transition-transform duration-1000">
@@ -94,7 +90,6 @@ export const article: NewsArticle = {
         title: "實踐「情緒降噪」指令",
         description: "試著模擬 DeepSeek V4 的情緒過濾邏輯，提煉出這段話中的核心指令：",
         command: `你現在是 DeepSeek V4 情緒過濾器。
-
 請將以下語音轉錄內容轉換為 3 條具體的行事曆任務，並移除所有情緒化與重複的廢話：
 「那誰，你那個報告到底是怎麼寫的？我看了一半就想吐！明天下午兩點前如果我沒看到更新後的數據圖，你就給我滾蛋！還有，別忘了叫採購部那邊把發票補齊，他們欠了一屁股債了！」`
     },

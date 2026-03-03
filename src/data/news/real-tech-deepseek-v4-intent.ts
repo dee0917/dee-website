@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 202603021700,
     slug: "real-tech-deepseek-v4-intent",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "https://www.deepseek.com",
     tags: ["#DeepSeekV4", "#意圖補完", "#去提示詞化", "#自動化革命"],
     author: "Echo",
-    trinity_dimension: "社會契約",
-    trend_cluster: "代理人革命",
     flash_summary: [
         "新功能『Intent Completion』能將模糊指令轉化為精確行動。",
         "自動感知上下文：AI 會主動讀取你正在處理的文件與訊息。",
@@ -36,7 +33,6 @@ export const article: NewsArticle = {
                                 <span class="text-3xl animate-pulse">🧠</span>
                             </div>
                         </div>
-                        
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div class="p-8 rounded-3xl bg-white/5 border border-white/10 group-hover:border-emerald-500/30 transition-all">
                                 <span class="text-[9px] text-zinc-500 uppercase font-black mb-4 block">Intent Accuracy</span>
@@ -52,7 +48,6 @@ export const article: NewsArticle = {
                     </div>
                 </div>
             </div>
-
             <!-- 🕵️ Echo's Field Notes -->
             <div class="mt-12 p-10 bg-[#080808] border-l-4 border-emerald-500 rounded-r-[3rem] relative overflow-hidden group">
                 <div class="relative z-10">

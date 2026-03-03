@@ -1,5 +1,4 @@
 import { NewsArticle } from '../../types/news';
-
 export const article: NewsArticle = {
     id: 901,
     slug: "real-tech-meta-election-ai-spend-2026",
@@ -14,8 +13,6 @@ export const article: NewsArticle = {
     source_url: "https://www.theverge.com/ai-artificial-intelligence",
     tags: ["#Meta", "#AI立法", "#開源主權", "#MarkZuckerberg", "#2026科技政策"],
     author: "Echo",
-    trend_cluster: "開源邊界",
-    trinity_dimension: "社會契約",
     flash_summary: [
         "Meta 將透過兩個新的超級行動委員會 (PAC) 投入 6,500 萬美元資金。",
         "目標：支持對 AI 開發友好的候選人，並推動減少對開源大模型的限制。",
