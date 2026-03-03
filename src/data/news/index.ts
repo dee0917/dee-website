@@ -1,3 +1,5 @@
+import { article as emotionalPremium } from './echo-ai-emotional-premium';
+import { article as perplexityWhatsapp } from './real-tech-perplexity-whatsapp-synergy';
 import { article as vibeCoding } from './echo-slang-vibe-coding';
 import { article as appleRevolut } from './real-tech-apple-revolut-infrastructure';
 import { article as echoPentagonWar } from './echo-pentagon-war-department';
@@ -58,6 +60,9 @@ import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
+    vibeCoding,          // 最新：Vibe Coding 全民普及 (ID: 202603031400)
+    emotionalPremium,    // 最新：AI 情感溢價 (ID: 202603031200)
+    perplexityWhatsapp,  // 最新：Perplexity x WhatsApp (ID: 202603031210)
     aiSlopSurvival,      // 最新：AI 史萊姆生存指南 (新增)
     aiPhilosopher,       // 最新：AI 哲學家 (新增)
     deepseekV4Intent,    // 最新：DeepSeek 意圖捕捉 (新增)
@@ -67,7 +72,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     googleTranslateGemini,  // 最新：Google 翻譯進化 (新增)
     deepseekV4,          // 最新：DeepSeek V4 首發 (新增)
     claudeCodeMemory,    // 真實：Claude Code 自動記憶 (新增)
-    tutorialAiri,       // 最新：家長 AI 指南
+    tutorialAiri,       // 最新：家長 AI 指指南
     realTechWiFi,       // 最新 : WiFi 感知突破
     echoDareBench,      // 最新 : Agent 效能審計
     newbieDailyHacks,   // 最新 : 小白日常玩法
