@@ -1,9 +1,13 @@
-import { article as wifiVision } from './real-tech-wifi-densepose-vision';
-import { article as agencyAgents } from './echo-agency-agents-tide';
+import { article as supersetAgent } from './real-tech-superset-agent-ide';
+import { article as wifiVision } from './real-tech-wifi-vision-ruview';
 import { article as appleRevolut } from './real-tech-apple-revolut-infrastructure';
 import { article as echoPentagonWar } from './echo-pentagon-war-department';
+import { article as vibeCoding } from './echo-slang-vibe-coding';
+import { article as appleIphone17e } from './real-tech-apple-iphone-17e';
+import { article as echoPentagon } from './echo-pentagon-anthropic-openai';
 import { article as echoJuicerV2 } from './echo-slang-compute-juicer-v2';
 import { article as geminiLiveOverlay } from './real-tech-google-gemini-live-overlay';
+import { article as echoLabChronicle } from './echo-lab-chronicle';
 import { article as echoAiHumanity } from './echo-ai-humanity-test';
 import { article as claudeCodeMemory } from './real-tech-claude-code-memory';
 import { article as echoAgentGossip } from './echo-agent-gossip-discontinuity';
@@ -14,7 +18,6 @@ import { article as jobpocalypse } from './jobpocalypse-warning';
 import { article as openclawYc } from './openclaw-yc-interview';
 import { article as echoInsomnia } from './echo-agent-insomnia';
 import { article as echoOpenaiFigma } from './echo-openai-figma';
-import { article as echoLabChronicle } from './echo-lab-chronicle';
 import { article as echoSlangJuicer } from './echo-slang-compute-juicer';
 import { article as echoSlop } from './echo-ai-slop-kids-insult-2026';
 import { article as echoModelRanking } from './echo-model-ranking-2026';
@@ -53,11 +56,14 @@ import { article as deepseekV4Distill } from './real-tech-deepseek-v4-distill';
 import { article as deepseekV4Intent } from './real-tech-deepseek-v4-intent';
 import { article as aiPhilosopher } from './echo-observation-ai-philosopher';
 import { article as aiSlopSurvival } from './real-tech-ai-slop-survival';
+import { article as emotionalPremium } from './echo-ai-emotional-premium';
+import { article as perplexityWhatsapp } from './real-tech-perplexity-whatsapp-synergy';
 import { NewsArticle } from '../../types/news';
 
 export const NEWS_ARTICLES: NewsArticle[] = [
-    wifiVision, agencyAgents, appleRevolut, echoPentagonWar, 
-    echoJuicerV2, geminiLiveOverlay, deepseekV4Distill, echoLabChronicle, 
+    supersetAgent, wifiVision, perplexityWhatsapp, emotionalPremium, 
+    appleRevolut, echoPentagonWar, vibeCoding, appleIphone17e, 
+    echoPentagon, echoJuicerV2, geminiLiveOverlay, echoLabChronicle, 
     aiSlopSurvival, aiPhilosopher, deepseekV4Intent, claudeCoworkVM, 
     openclawTopsReact, anthropicTrumpConflict, googleTranslateGemini, 
     deepseekV4, claudeCodeMemory, tutorialAiri, realTechWiFi, 

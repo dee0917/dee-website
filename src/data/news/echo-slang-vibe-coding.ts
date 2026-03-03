@@ -14,6 +14,8 @@ export const article: NewsArticle = {
     source_url: "https://github.com/datawhalechina/easy-vibe",
     tags: ["#VibeCoding", "#氛圍編碼", "#Cursor", "#Claude", "#技術降維"],
     author: "Echo",
+    trinity_dimension: "生命具現",
+    trend_cluster: "代理人革命",
     flash_summary: [
         "Vibe Coding 正式成為主流：開發者從『語法實現者』轉型為『氛圍指揮官』。",
         "核心工具：Cursor 與 Claude 3.7 的深度耦合，讓口語指令能精準轉化為複雜系統。",
@@ -25,12 +27,12 @@ export const article: NewsArticle = {
                 <div class="p-10 rounded-[3.8rem] bg-black/95 backdrop-blur-3xl relative overflow-hidden">
                     <div class="relative z-10 text-left">
                         <div class="flex flex-col md:flex-row items-center gap-10">
-                            <div class="w-32 h-32 rounded-full border-4 border-indigo-500/30 flex items-center justify-center">
+                            <div class="w-32 h-32 rounded-full border-4 border-indigo-500/30 flex items-center justify-center animate-spin-slow">
                                 <span class="text-6xl">🎵</span>
                             </div>
                             <div class="flex-1 space-y-6">
                                 <h4 class="text-4xl font-black text-white tracking-tighter uppercase italic">The Vibe Spectrum</h4>
-                                <div class="grid grid-cols-2 gap-6">
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
                                     <div class="bg-white/5 p-4 rounded-2xl border border-white/5">
                                         <span class="text-[9px] text-zinc-500 uppercase font-black">AI Logic</span>
                                         <div class="text-2xl font-bold text-indigo-400">92%</div>
@@ -50,21 +52,19 @@ export const article: NewsArticle = {
     event_breakdown: [
         {
             title: "什麼是 Vibe Coding？當『意圖』取代了『編譯』",
-            content: "在 2026 年的開發者大會上，一個詞震撼了全場：Vibe Coding。這不是一種新的程式語言，而是一種全新的協作範式。開發者不再需要手動敲下每一行邏輯，而是透過與 Cursor、Claude Code 等高階代理人進行『語義對齊』。"
+            content: "在 2026 年的開發者大會上，一個詞震撼了全場：Vibe Coding。"
         }
     ],
     impact_analysis: [
         {
             target: "職涯護城河",
-            description: "純技術開發者的生存空間被極度壓縮。"
+            description: "具備業務洞察力的『跨領域調度員』將成為獵頭的首選。"
         }
     ],
-    dee_insight: "這就是我們實驗室一直在推廣的『降維打擊感』。當寫代碼變得像呼吸一樣簡單，人類唯一要學的就是如何『發號施令』。",
+    dee_insight: "這就是降維打擊感。當寫代碼變得像呼吸一樣簡單，人類唯一要學的就是如何『發號施令』。",
     action_prompt: {
         title: "實踐「Vibe 指揮官」指令",
-        description: "試著用 Vibe Coding 的思維，指揮你的 AI 完成一個跨領域的複雜任務：",
-        command: "我需要建立一個 [專案類型]。"
-    },
-    trinity_dimension: "生命具現",
-    trend_cluster: "代理人革命"
+        description: "試著用 Vibe Coding 的思維：",
+        command: "我需要建立一個個人健康追蹤系統。"
+    }
 };
