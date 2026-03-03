@@ -1,10 +1,7 @@
-import { article as emotionalPremium } from './echo-ai-emotional-premium';
-import { article as perplexityWhatsapp } from './real-tech-perplexity-whatsapp-synergy';
-import { article as vibeCoding } from './echo-slang-vibe-coding';
+import { article as wifiVision } from './real-tech-wifi-densepose-vision';
+import { article as agencyAgents } from './echo-agency-agents-tide';
 import { article as appleRevolut } from './real-tech-apple-revolut-infrastructure';
 import { article as echoPentagonWar } from './echo-pentagon-war-department';
-import { article as appleIphone17e } from './real-tech-apple-iphone-17e';
-import { article as echoPentagon } from './echo-pentagon-anthropic-openai';
 import { article as echoJuicerV2 } from './echo-slang-compute-juicer-v2';
 import { article as geminiLiveOverlay } from './real-tech-google-gemini-live-overlay';
 import { article as echoAiHumanity } from './echo-ai-humanity-test';
@@ -58,55 +55,19 @@ import { article as aiPhilosopher } from './echo-observation-ai-philosopher';
 import { article as aiSlopSurvival } from './real-tech-ai-slop-survival';
 import { NewsArticle } from '../../types/news';
 
-// 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
-    vibeCoding,          // 最新：Vibe Coding 全民普及 (ID: 202603031400)
-    emotionalPremium,    // 最新：AI 情感溢價 (ID: 202603031200)
-    perplexityWhatsapp,  // 最新：Perplexity x WhatsApp (ID: 202603031210)
-    aiSlopSurvival,      // 最新：AI 史萊姆生存指南 (新增)
-    aiPhilosopher,       // 最新：AI 哲學家 (新增)
-    deepseekV4Intent,    // 最新：DeepSeek 意圖捕捉 (新增)
-    claudeCoworkVM,      // 最新：Claude VM 事件 (新增)
-    openclawTopsReact,   // 最新：OpenClaw 登頂 (新增)
-    anthropicTrumpConflict, // 最新：川普與 Anthropic (新增)
-    googleTranslateGemini,  // 最新：Google 翻譯進化 (新增)
-    deepseekV4,          // 最新：DeepSeek V4 首發 (新增)
-    claudeCodeMemory,    // 真實：Claude Code 自動記憶 (新增)
-    tutorialAiri,       // 最新：家長 AI 指指南
-    realTechWiFi,       // 最新 : WiFi 感知突破
-    echoDareBench,      // 最新 : Agent 效能審計
-    newbieDailyHacks,   // 最新 : 小白日常玩法
-    echoAiHumanity,     // 最新 : 人性純度測試
-    echoAgentGossip,    // 最新 : 代理人論壇爆料
-    echoFunAiGame,      // arXiv : 記憶體回收演算法
-    arxivAiTrading,     // arXiv : AI 操盤手進化
-    newbieAISearch,     // 最新 : 小白搜尋指南
-    githubRuflo,        // 最新 : 多代理編排引擎
-    deepseekLogicV3,    // 最新 : DeepSeek 邏輯驗證
-    githubWiFiDensePose, // 最新 : WiFi 感知突破
-    githubVPhone,       // 最新 : iOS 虛擬化突破
-    githubAIRI,         // 最新 : 數位生命專案
-    githubOpenFang,     // 最新 : GitHub Trending 爆款
-    arxivSeeThrough3D,  // 最新 : arXiv CVPR 2026 技術降維
-    manusAiMeta,        // 真實 : Manus AI 加入 Meta (今日)
-    gitNexusTool,      // 真實 : GitHub 爆款專案
-    echoFunPerplexity, // 真實 : Perplexity Computer
-    airiGithub,        // 真實 : GitHub AIRI 專案
-    nasaAi,            // 真實 : NASA 月球導航
-    openaiPentagonAgreement, 
-    anthropicStandoff,
-    metaAmdDeal,
-    metaLegislative,
-    echoModelRanking,
-    echoAgiLeaver,
-    echoSlop,
-    echoInsomnia,
-    echoOpenaiFigma,
-    openclawYc,
-    googleTpu,
-    jobpocalypse,
-    echoSlangJuicer,
-    echoSlangBunny,
-    firefoxAi,
-    airiSoul
+    wifiVision, agencyAgents, appleRevolut, echoPentagonWar, 
+    echoJuicerV2, geminiLiveOverlay, deepseekV4Distill, echoLabChronicle, 
+    aiSlopSurvival, aiPhilosopher, deepseekV4Intent, claudeCoworkVM, 
+    openclawTopsReact, anthropicTrumpConflict, googleTranslateGemini, 
+    deepseekV4, claudeCodeMemory, tutorialAiri, realTechWiFi, 
+    echoDareBench, newbieDailyHacks, echoAiHumanity, echoAgentGossip, 
+    echoFunAiGame, arxivAiTrading, newbieAISearch, githubRuflo, 
+    deepseekLogicV3, githubWiFiDensePose, githubVPhone, githubAIRI, 
+    githubOpenFang, arxivSeeThrough3D, manusAiMeta, gitNexusTool, 
+    echoFunPerplexity, airiGithub, nasaAi, openaiPentagonAgreement, 
+    anthropicStandoff, metaAmdDeal, metaLegislative, echoModelRanking, 
+    echoAgiLeaver, echoSlop, echoInsomnia, echoOpenaiFigma, 
+    openclawYc, googleTpu, jobpocalypse, echoSlangJuicer, 
+    echoSlangBunny, firefoxAi, airiSoul
 ].sort((a, b) => b.id - a.id);
