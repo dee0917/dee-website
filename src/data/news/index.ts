@@ -1,3 +1,5 @@
+import { article as productivityReport } from './real-tech-productivity-report-2026';
+import { article as privacyScanning } from './echo-privacy-prompt-scanning';
 import { article as gpt53Release } from './real-tech-gpt-5-3-instant-release';
 import { article as echoPentagonChaos } from './echo-pentagon-openai-anthropic-chaos';
 import { article as appleRevolut } from './real-tech-apple-revolut-infrastructure';
@@ -8,9 +10,6 @@ import { article as echoPentagon } from './echo-pentagon-anthropic-openai';
 import { article as echoJuicerV2 } from './echo-slang-compute-juicer-v2';
 import { article as geminiLiveOverlay } from './real-tech-google-gemini-live-overlay';
 import { article as echoLabChronicle } from './echo-lab-chronicle';
-import { article as aiSlopSurvival } from './real-tech-ai-slop-survival';
-import { article as echoEmotionalPremium } from './echo-ai-emotional-premium';
-import { article as perplexityWhatsapp } from './real-tech-perplexity-whatsapp-synergy';
 import { article as echoAiHumanity } from './echo-ai-humanity-test';
 import { article as claudeCodeMemory } from './real-tech-claude-code-memory';
 import { article as echoAgentGossip } from './echo-agent-gossip-discontinuity';
@@ -58,12 +57,15 @@ import { article as googleTranslateGemini } from './real-tech-google-translate-g
 import { article as deepseekV4Distill } from './real-tech-deepseek-v4-distill';
 import { article as deepseekV4Intent } from './real-tech-deepseek-v4-intent';
 import { article as aiPhilosopher } from './echo-observation-ai-philosopher';
+import { article as aiSlopSurvival } from './real-tech-ai-slop-survival';
 import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
-    gpt53Release,        // 最新：GPT-5.3 突襲 (新增)
-    echoPentagonChaos,   // 最新：矽谷軍事羅生門 (新增)
+    productivityReport,  // 最新：2026 全球生產力報告
+    privacyScanning,     // 最新：數據防窺與 Any-LLM
+    gpt53Release,        // 最新：GPT-5.3 突襲
+    echoPentagonChaos,   // 最新：矽谷軍事羅生門
     appleRevolut,        // 最新：AI 標準配備時代
     echoPentagonWar,     // 最新：國防部雲端化
     vibeCoding,          // 最新：Vibe Coding 全民普及
@@ -71,17 +73,17 @@ export const NEWS_ARTICLES: NewsArticle[] = [
     echoPentagon,        // 最新：五角大廈宮鬥
     echoJuicerV2,        // 最新：算力榨汁機 (Echo)
     geminiLiveOverlay,   // 最新：Gemini 3.5 視覺翻譯 (Aether)
-    deepseekV4Distill,   // 最新：意圖壓縮 (新增)
-    aiSlopSurvival,      // 最新：AI 史萊姆生存指南 (新增)
-    aiPhilosopher,       // 最新：AI 哲學家 (新增)
-    deepseekV4Intent,    // 最新：DeepSeek 意圖捕捉 (新增)
-    claudeCoworkVM,      // 最新：Claude VM 事件 (新增)
-    openclawTopsReact,   // 最新：OpenClaw 登頂 (新增)
-    anthropicTrumpConflict, // 最新：川普與 Anthropic (新增)
-    googleTranslateGemini,  // 最新：Google 翻譯進化 (新增)
-    deepseekV4,          // 最新：DeepSeek V4 首發 (新增)
-    claudeCodeMemory,    // 真實：Claude Code 自動記憶 (新增)
-    tutorialAiri,       // 最新：家長 AI 指立
+    deepseekV4Distill,   // 最新：意圖壓縮
+    aiSlopSurvival,      // 最新：AI 史萊姆生存指南
+    aiPhilosopher,       // 最新：AI 哲學家
+    deepseekV4Intent,    // 最新：DeepSeek 意圖捕捉
+    claudeCoworkVM,      // 最新：Claude VM 事件
+    openclawTopsReact,   // 最新：OpenClaw 登頂
+    anthropicTrumpConflict, // 最新：川普與 Anthropic
+    googleTranslateGemini,  // 最新：Google 翻譯進化
+    deepseekV4,          // 最新：DeepSeek V4 首發
+    claudeCodeMemory,    // 真實：Claude Code 自動記憶
+    tutorialAiri,       // 最新：家長 AI 指南
     realTechWiFi,       // 最新 : WiFi 感知突破
     echoDareBench,      // 最新 : Agent 效能審計
     newbieDailyHacks,   // 最新 : 小白日常玩法
