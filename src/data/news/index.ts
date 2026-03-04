@@ -1,5 +1,5 @@
-import { article as productivityReport } from './real-tech-productivity-report-2026';
-import { article as privacyScanning } from './echo-privacy-prompt-scanning';
+import { article as deepseekIde } from './real-tech-deepseek-v4-ide-integration';
+import { article as echoAgentContamination } from './echo-agent-contextual-pressure';
 import { article as gpt53Release } from './real-tech-gpt-5-3-instant-release';
 import { article as echoPentagonChaos } from './echo-pentagon-openai-anthropic-chaos';
 import { article as appleRevolut } from './real-tech-apple-revolut-infrastructure';
@@ -62,8 +62,8 @@ import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
-    productivityReport,  // 最新：2026 全球生產力報告
-    privacyScanning,     // 最新：數據防窺與 Any-LLM
+    deepseekIde,         // 最新：DeepSeek-V4 全線整合
+    echoAgentContamination, // 最新：Agent 抗污染研究
     gpt53Release,        // 最新：GPT-5.3 突襲
     echoPentagonChaos,   // 最新：矽谷軍事羅生門
     appleRevolut,        // 最新：AI 標準配備時代
