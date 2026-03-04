@@ -1,3 +1,5 @@
+import { article as privacyScanning } from './echo-privacy-prompt-scanning';
+import { article as productivityReport } from './real-tech-productivity-report-2026';
 import { article as wifiVisionRuview } from './real-tech-wifi-vision-ruview';
 import { article as wifiDensePoseVision } from './real-tech-wifi-densepose-vision';
 import { article as deepseekIde } from './real-tech-deepseek-v4-ide-integration';
@@ -64,6 +66,8 @@ import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
+    productivityReport,   // 今日重點：2026 生產力報告 (Echo)
+    privacyScanning,      // 今日重點：Prompt 隱私掃描 (Echo)
     wifiVisionRuview,    // 最新：WiFi 訊號視化 (RuView)
     wifiDensePoseVision, // 最新：WiFi DensePose 生活降維
     deepseekIde,         // 最新：DeepSeek-V4 全線整合
