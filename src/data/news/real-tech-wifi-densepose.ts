@@ -30,6 +30,7 @@ export const article: NewsArticle = {
         }
     ],
     dee_insight: "當物理世界變得透明，我們需要重新定義什麼是『隱私區間』。訊號即感知，這將改變養老與安防產業。",
+    author: "Echo",
     action_prompt: {
         title: "查看技術 demo",
         description: "前往專案頁面查看 WiFi 訊號如何轉化為動態人體模型。",

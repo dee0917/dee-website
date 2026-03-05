@@ -87,6 +87,7 @@ export const article: NewsArticle = {
         }
     ],
     dee_insight: "AI 陪伴不再是科幻，家長應主動掌握數位生命的引導權，而非將孩子留給未知的演算法推薦。airi 的爆火證明了，真正高級的技術是讓家長擁有『選擇不聯網』的權利。",
+    author: "Echo",
     action_prompt: {
         title: "部署 airi 指令寶箱",
         description: "克隆專案並使用 Docker 快速啟動本地環境，開啟孩子的數位陪伴之旅：",

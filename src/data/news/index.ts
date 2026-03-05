@@ -1,3 +1,5 @@
+import { article as seniorVoice } from './tutorial-senior-voice-line';
+import { article as parentTutor } from './tutorial-parent-ai-tutor';
 import { article as refactorTrap } from './real-tech-code-refactor-trap';
 import { article as codetasteAudit } from './echo-slang-codetaste-audit';
 import { article as deepseekR2Rev } from './real-tech-deepseek-r2-visual-revolution';
@@ -67,10 +69,12 @@ import { article as realTechWiFi } from './real-tech-wifi-densepose';
 import { article as tutorialAiri } from './tutorial-airi-minecraft-parent';
 import { NewsArticle } from '../../types/news';
 
-// 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
+// 🚀 EVOLUTION ENGINE V1: 難度優先排列，確保小白入口最顯眼
 export const NEWS_ARTICLES: NewsArticle[] = [
-    refactorTrap,        // 最新：優化盲區解析
-    codetasteAudit,      // 最新：CodeTaste 審計
+    seniorVoice,         // 1星難度：長輩 LINE 教學
+    parentTutor,         // 2星難度：親子家教教學
+    refactorTrap,        
+    codetasteAudit,      
     deepseekR2Rev,       
     deepseekIde,        
     agentResilience,    
