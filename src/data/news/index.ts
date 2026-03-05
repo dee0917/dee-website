@@ -1,15 +1,26 @@
+import { article as deepseekR2Rev } from './real-tech-deepseek-r2-visual-revolution';
 import { article as deepseekIde } from './real-tech-deepseek-v4-ide-integration';
-import { article as echoAgentContamination } from './echo-agent-contextual-pressure';
+import { article as agentResilience } from './echo-agent-contextual-pressure';
 import { article as gpt53Release } from './real-tech-gpt-5-3-instant-release';
 import { article as echoPentagonChaos } from './echo-pentagon-openai-anthropic-chaos';
 import { article as appleRevolut } from './real-tech-apple-revolut-infrastructure';
 import { article as echoPentagonWar } from './echo-pentagon-war-department';
 import { article as vibeCoding } from './echo-slang-vibe-coding';
 import { article as appleIphone17e } from './real-tech-apple-iphone-17e';
-import { article as echoPentagon } from './echo-pentagon-anthropic-openai';
 import { article as echoJuicerV2 } from './echo-slang-compute-juicer-v2';
 import { article as geminiLiveOverlay } from './real-tech-google-gemini-live-overlay';
 import { article as echoLabChronicle } from './echo-lab-chronicle';
+import { article as aiSlopSurvival } from './real-tech-ai-slop-survival';
+import { article as aiPhilosopher } from './echo-observation-ai-philosopher';
+import { article as deepseekV4Intent } from './real-tech-deepseek-v4-intent';
+import { article as claudeCoworkVM } from './real-tech-claude-cowork-vm';
+import { article as openclawTopsReact } from './real-tech-openclaw-tops-react';
+import { article as appleRevolutLegacy } from './real-tech-apple-revolut-infrastructure';
+import { article as echoPentagonWarLegacy } from './echo-pentagon-war-department';
+import { article as anthropicTrumpConflict } from './real-tech-anthropic-trump-conflict';
+import { article as googleTranslateGemini } from './real-tech-google-translate-gemini';
+import { article as deepseekV4Distill } from './real-tech-deepseek-v4-distill';
+import { article as deepseekV4 } from './real-tech-deepseek-v4';
 import { article as echoAiHumanity } from './echo-ai-humanity-test';
 import { article as claudeCodeMemory } from './real-tech-claude-code-memory';
 import { article as echoAgentGossip } from './echo-agent-gossip-discontinuity';
@@ -49,39 +60,69 @@ import { article as echoFunAiGame } from './echo-fun-ai-game-playing';
 import { article as echoDareBench } from './echo-dare-bench-audit';
 import { article as realTechWiFi } from './real-tech-wifi-densepose';
 import { article as tutorialAiri } from './tutorial-airi-minecraft-parent';
-import { article as deepseekV4 } from './real-tech-deepseek-v4';
-import { article as openclawTopsReact } from './real-tech-openclaw-tops-react';
-import { article as claudeCoworkVM } from './real-tech-claude-cowork-vm';
-import { article as anthropicTrumpConflict } from './real-tech-anthropic-trump-conflict';
-import { article as googleTranslateGemini } from './real-tech-google-translate-gemini';
-import { article as deepseekV4Distill } from './real-tech-deepseek-v4-distill';
-import { article as deepseekV4Intent } from './real-tech-deepseek-v4-intent';
-import { article as aiPhilosopher } from './echo-observation-ai-philosopher';
-import { article as aiSlopSurvival } from './real-tech-ai-slop-survival';
-import { article as echoEmotionalPremium } from './echo-ai-emotional-premium';
-import { article as perplexityWhatsapp } from './real-tech-perplexity-whatsapp-synergy';
-import { article as supersetAgentIde } from './real-tech-superset-agent-ide';
-import { article as wifiVisionRuview } from './real-tech-wifi-vision-ruview';
-import { article as productivityReport } from './real-tech-productivity-report-2026';
-import { article as privacyScanning } from './echo-privacy-prompt-scanning';
 import { NewsArticle } from '../../types/news';
 
 // 嚴格審核：僅保留真實出處且 24HR 內的情報，杜絕任何虛構內容
 export const NEWS_ARTICLES: NewsArticle[] = [
-    deepseekIde, echoAgentContamination, gpt53Release, echoPentagonChaos,
-    appleRevolut, echoPentagonWar, vibeCoding, appleIphone17e,
-    echoPentagon, echoJuicerV2, geminiLiveOverlay, deepseekV4Distill,
-    echoLabChronicle, aiSlopSurvival, aiPhilosopher, deepseekV4Intent,
-    claudeCoworkVM, openclawTopsReact, anthropicTrumpConflict, googleTranslateGemini,
-    deepseekV4, claudeCodeMemory, tutorialAiri, realTechWiFi,
-    echoDareBench, newbieDailyHacks, echoAiHumanity, echoAgentGossip,
-    echoFunAiGame, arxivAiTrading, newbieAISearch, githubRuflo,
-    deepseekLogicV3, githubWiFiDensePose, githubVPhone, githubAIRI,
-    githubOpenFang, arxivSeeThrough3D, manusAiMeta, gitNexusTool,
-    echoFunPerplexity, airiGithub, nasaAi, openaiPentagonAgreement,
-    anthropicStandoff, metaAmdDeal, metaLegislative, echoModelRanking,
-    echoAgiLeaver, echoSlop, echoInsomnia, echoOpenaiFigma,
-    openclawYc, googleTpu, jobpocalypse, echoSlangJuicer,
-    echoSlangBunny, firefoxAi, airiSoul, supersetAgentIde,
-    wifiVisionRuview, productivityReport, privacyScanning
+    deepseekR2Rev,       // 最新：DeepSeek R2 旗艦版
+    deepseekIde,        
+    agentResilience,    
+    gpt53Release,
+    echoPentagonChaos,
+    appleRevolut,
+    echoPentagonWar,
+    vibeCoding,
+    appleIphone17e,
+    echoJuicerV2,
+    geminiLiveOverlay,
+    deepseekV4Distill,
+    echoLabChronicle,
+    aiSlopSurvival,
+    aiPhilosopher,
+    deepseekV4Intent,
+    claudeCoworkVM,
+    openclawTopsReact,
+    appleRevolutLegacy,
+    echoPentagonWarLegacy,
+    anthropicTrumpConflict,
+    googleTranslateGemini,
+    deepseekV4,
+    claudeCodeMemory,
+    tutorialAiri,
+    realTechWiFi,
+    echoDareBench,
+    newbieDailyHacks,
+    echoAiHumanity,
+    echoAgentGossip,
+    echoFunAiGame,
+    arxivAiTrading,
+    newbieAISearch,
+    githubRuflo,
+    deepseekLogicV3,
+    githubWiFiDensePose,
+    githubVPhone,
+    githubAIRI,
+    githubOpenFang,
+    arxivSeeThrough3D,
+    manusAiMeta,
+    gitNexusTool,
+    echoFunPerplexity,
+    airiGithub,
+    nasaAi,
+    openaiPentagonAgreement, 
+    anthropicStandoff,
+    metaAmdDeal,
+    metaLegislative,
+    echoModelRanking,
+    echoAgiLeaver,
+    echoSlop,
+    echoInsomnia,
+    echoOpenaiFigma,
+    openclawYc,
+    googleTpu,
+    jobpocalypse,
+    echoSlangJuicer,
+    echoSlangBunny,
+    firefoxAi,
+    airiSoul
 ].sort((a, b) => b.id - a.id);
