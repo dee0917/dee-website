@@ -39,6 +39,7 @@ const ArticleDetail = () => {
     const [showAiJumpModal, setShowAiJumpModal] = useState(false);
     const [quizAnswer, setQuizAnswer] = useState<number | null>(null);
     const [quizSubmitted, setQuizSubmitted] = useState(false);
+    const [badgeGlow, setBadgeGlow] = useState(false);
     
     // 🎮 Practice Mode State
     const [isPracticeMode, setIsPracticeMode] = useState(false);
@@ -89,10 +90,11 @@ const ArticleDetail = () => {
             const finalData = localArticle ? { ...dbData, ...localArticle } : dbData;
             setArticle(finalData);
             
+            // Initializing Practice Mode with context-aware guidance
             setMessages([
                 { 
                     role: 'ai', 
-                    text: `我是您的 AI 助教。本關實踐目標：\n「${finalData.practice_kit?.title}」\n\n任務描述：${finalData.practice_kit?.description}\n\n請直接在下方輸入您的操作計畫（例如：我會搜尋...或是點擊...）。如果您感到困惑，可以隨便輸入一個字，我會給您具體的正確方向！` 
+                    text: `我是您的 AI 助教。本關實踐目標：\n「${finalData.practice_kit?.title}」\n\n具體任務：${finalData.practice_kit?.description}\n\n這關需要獲得我兩次的認可。請告訴我，您的第一步實體操作會是什麼？（例如：我會搜尋...）` 
                 }
             ]);
 
@@ -127,18 +129,27 @@ const ArticleDetail = () => {
             const result = await judgeUserResponse(
                 article?.title || '', 
                 text, 
-                `${article?.practice_kit?.description} (歷史提示：${historyContext})`
+                `${article?.practice_kit?.description} (歷史紀錄：${historyContext})`
             );
             
             setMessages(prev => [...prev, { role: 'ai', text: result.feedback }] as any);
             setPreviousResponses(prev => [...prev, result.feedback]);
-            if (result.hint) setCurrentHint(result.hint);
-
+            
             if (result.passed) {
-                setPracticeStep(prev => prev + 1);
+                const nextStepCount = practiceStep + 1;
+                setPracticeStep(nextStepCount);
                 setFailCount(0);
                 setShowHint(false);
-                if (practiceStep >= 1) { 
+                
+                if (nextStepCount < 2) {
+                    // 🌟 關鍵修正：給出明確的下一步引導
+                    setTimeout(() => {
+                        setMessages(prev => [...prev, { 
+                            role: 'ai', 
+                            text: `✨ 第一階段認可達成！\n\n【下一步引導】：現在你已經知道如何開始了，請接著說明：你會如何下達具體的『指令』來完成任務？（你可以參考右側任務手冊中的建議內容喔！）` 
+                        }] as any);
+                    }, 800);
+                } else {
                     triggerSuccess();
                 }
             } else {
@@ -154,11 +165,25 @@ const ArticleDetail = () => {
     };
 
     const triggerSuccess = () => {
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-        setTreasurePhase('revealed');
+        // 恢復原版：奢華的寶箱與噴花動畫
+        setTreasurePhase('falling');
         setTimeout(() => {
+            setTreasurePhase('impact');
+            confetti({ particleCount: 60, spread: 45, origin: { y: 0.6 }, colors: ['#10b981', '#ffffff'] });
+        }, 800);
+        setTimeout(() => {
+            setTreasurePhase('exploding');
+            confetti({ particleCount: 250, spread: 160, origin: { y: 0.5 } });
+        }, 1500);
+        setTimeout(() => {
+            setTreasurePhase('revealed');
             treasureRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
+        }, 2200);
+
+        setMessages(prev => [...prev, { 
+            role: 'ai', 
+            text: `🎉 恭喜！修行大圓滿！\n\n我已經幫您開啟了下方的【指令寶箱】。這是您應得的祕術，請領取後繼續點擊底部的【修行勳章】來完成本課錄。` 
+        }] as any);
     };
 
     const handleClaimCommand = () => {
@@ -170,6 +195,7 @@ const ArticleDetail = () => {
 
     const handleEarnBadge = () => {
         setBadgeEarned(true);
+        setBadgeGlow(true);
         if (article?.id) {
             const savedCompleted = localStorage.getItem('dee_ai_completed');
             let completed = savedCompleted ? JSON.parse(savedCompleted) : [];
@@ -178,6 +204,7 @@ const ArticleDetail = () => {
                 localStorage.setItem('dee_ai_completed', JSON.stringify(completed));
             }
         }
+        setTimeout(() => setBadgeGlow(false), 3000);
     };
 
     const scrollToHook = () => {
@@ -227,7 +254,6 @@ const ArticleDetail = () => {
 
     const themeClasses = getColorClasses(article.themeColor || 'emerald');
     const hasSteps = article.steps && article.steps.length > 0;
-    const hasQuiz = article.quiz && article.quiz.question;
     const allStepsDone = stepsCompleted.every(s => s === true);
 
     return (
@@ -237,7 +263,7 @@ const ArticleDetail = () => {
             <section className="relative min-h-[90vh] flex flex-col items-center justify-center px-6 overflow-hidden pt-32">
                 <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b ${themeClasses.gradient} opacity-20 pointer-events-none`} />
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl w-full text-center relative z-10">
-                    <Link to="/insights" className="inline-flex items-center gap-2 text-zinc-600 hover:text-white mb-10 text-[10px] font-black tracking-[0.4em]">
+                    <Link to="/insights" className="self-start inline-flex items-center gap-2 text-zinc-600 hover:text-white mb-10 text-[10px] font-black tracking-[0.4em]">
                         <ArrowLeft size={14} /> 返回地圖
                     </Link>
                     <div className="flex items-center justify-center gap-4 mb-6">
@@ -247,8 +273,8 @@ const ArticleDetail = () => {
                     <h1 className="text-4xl md:text-7xl font-black text-white mb-12 tracking-tight leading-tight">{article.title}</h1>
                     
                     <div className="flex items-center justify-center gap-4 bg-white/5 p-1.5 rounded-2xl border border-white/10 w-fit mx-auto mb-16 shadow-2xl">
-                        <button onClick={() => setIsPracticeMode(false)} className={`px-8 py-3 rounded-xl text-xs font-black transition-all ${!isPracticeMode ? 'bg-white text-black shadow-lg' : 'text-zinc-500'}`}>文章閱讀</button>
-                        <button onClick={() => setIsPracticeMode(true)} className={`px-8 py-3 rounded-xl text-xs font-black transition-all ${isPracticeMode ? 'bg-emerald-500 text-black shadow-lg' : 'text-zinc-500'} flex items-center gap-2`}>
+                        <button onClick={() => setIsPracticeMode(false)} className={`px-8 py-3 rounded-2xl text-xs font-black transition-all ${!isPracticeMode ? 'bg-white text-black shadow-lg' : 'text-zinc-500'}`}>文章閱讀</button>
+                        <button onClick={() => setIsPracticeMode(true)} className={`px-8 py-3 rounded-2xl text-xs font-black transition-all ${isPracticeMode ? 'bg-emerald-500 text-black shadow-lg' : 'text-zinc-500'} flex items-center gap-2`}>
                             <Flame size={14} /> 互動演練
                         </button>
                     </div>
@@ -260,19 +286,19 @@ const ArticleDetail = () => {
                                     <div className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center text-black shadow-lg shadow-emerald-500/20">
                                         <BrainCircuit size={20} />
                                     </div>
-                                    <div>
+                                    <div className="text-left">
                                         <span className="text-[10px] font-black text-emerald-500/60 uppercase tracking-widest block">判官審核中</span>
                                         <h4 className="text-white font-black text-sm uppercase tracking-tighter">修行進度 ({practiceStep}/2)</h4>
                                     </div>
                                 </div>
-                                <div className="flex gap-1.5">
+                                <div className="flex gap-1.5 bg-black/40 p-2 rounded-xl">
                                     {[...Array(2)].map((_, i) => (
-                                        <div key={i} className={`w-3 h-3 rounded-full ${i < practiceStep ? 'bg-emerald-500' : 'bg-zinc-800'}`} />
+                                        <Star key={i} size={14} className={i < practiceStep ? 'text-emerald-400 fill-emerald-400' : 'text-zinc-800'} />
                                     ))}
                                 </div>
                             </div>
 
-                            <div className="h-[400px] overflow-y-auto p-10 space-y-8 text-left scrollbar-hide">
+                            <div className="h-[400px] overflow-y-auto p-10 space-y-8 text-left scrollbar-hide bg-gradient-to-b from-transparent to-emerald-950/10">
                                 {messages.map((m, i) => (
                                     <div key={i} className={`flex ${m.role === 'ai' ? 'justify-start' : 'justify-end'}`}>
                                         <div className={`max-w-[85%] p-6 rounded-[2.2rem] text-base leading-relaxed ${
@@ -286,7 +312,7 @@ const ArticleDetail = () => {
                                     <div className="flex justify-start">
                                         <div className="bg-zinc-900 p-5 rounded-2xl rounded-tl-none border border-white/5 flex items-center gap-4">
                                             <div className="flex gap-1"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce" /><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce delay-75" /><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce delay-150" /></div>
-                                            <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">助教正在審核中...</span>
+                                            <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">助教正在審核邏輯...</span>
                                         </div>
                                     </div>
                                 )}
@@ -307,13 +333,13 @@ const ArticleDetail = () => {
                                 )}
                             </AnimatePresence>
 
-                            <div className="p-8 bg-black/40 border-t border-white/5">
+                            <div className="p-8 bg-black/60 border-t border-white/5">
                                 <div className="relative group">
                                     <textarea 
                                         value={userInput}
                                         onChange={(e) => setUserInput(e.target.value)}
                                         onKeyDown={handleKeyDown}
-                                        placeholder="輸入具體操作動作（Enter 發送）..."
+                                        placeholder="在此輸入您的操作計畫（Enter 發送）..."
                                         className="w-full bg-white/[0.03] border border-white/10 rounded-[2.2rem] p-6 pr-20 text-white focus:border-emerald-500/50 outline-none resize-none h-24 transition-all group-hover:border-white/20"
                                     />
                                     <button onClick={handleSendMessage} disabled={!userInput.trim() || isJudging}
@@ -334,9 +360,10 @@ const ArticleDetail = () => {
                         </>
                     )}
                 </motion.div>
+                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-20"><ChevronDown size={32} /></div>
             </section>
 
-            {/* 🎯 Content Section */}
+            {/* 🎯 Content & Guide Sidebar */}
             <section className="py-32 px-6 max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                     <div className="lg:col-span-8 space-y-32">
@@ -347,13 +374,13 @@ const ArticleDetail = () => {
                                 <p className="text-zinc-400 text-xl leading-relaxed">{article.pain_point}</p>
                             </motion.div>
                             <div className="grid md:grid-cols-2 gap-8 text-left">
-                                <motion.div {...fadeUp} className="bg-white/[0.02] border border-white/5 rounded-[3rem] p-10 relative overflow-hidden group">
-                                    <div className="text-white/5 text-9xl font-black absolute -right-6 -bottom-6 rotate-12 text-left">❌</div>
+                                <motion.div {...fadeUp} className="bg-white/[0.02] border border-white/5 rounded-[3rem] p-10 relative overflow-hidden group text-left">
+                                    <div className="text-white/5 text-9xl font-black absolute -right-6 -bottom-6 rotate-12">❌</div>
                                     <p className="text-zinc-400 text-lg leading-relaxed relative z-10">{article.example?.wrong}</p>
                                 </motion.div>
-                                <motion.div {...fadeUp} transition={{ delay: 0.1 }} className="bg-emerald-500/[0.03] border border-emerald-500/20 rounded-[3rem] p-10 relative overflow-hidden group shadow-[0_0_50px_rgba(16,185,129,0.05)]">
+                                <motion.div {...fadeUp} transition={{ delay: 0.1 }} className="bg-emerald-500/[0.03] border border-emerald-500/20 rounded-[3rem] p-10 relative overflow-hidden group shadow-[0_0_50px_rgba(16,185,129,0.05)] text-left">
                                     <div className="text-emerald-500/10 text-9xl font-black absolute -right-6 -bottom-6 -rotate-12">✅</div>
-                                    <p className="text-white text-lg leading-relaxed font-bold relative z-10 text-left">{article.example?.right}</p>
+                                    <p className="text-white text-lg leading-relaxed font-bold relative z-10">{article.example?.right}</p>
                                 </motion.div>
                             </div>
                         </div>
@@ -362,7 +389,7 @@ const ArticleDetail = () => {
                             <div id="steps" className="space-y-12 text-left">
                                 <div className="text-left mb-16">
                                     <span className="transition-label">實戰演練</span>
-                                    <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight italic">跟著路徑走</h2>
+                                    <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight italic text-left">跟著路徑走</h2>
                                 </div>
                                 {article.steps.map((step: any, idx: number) => {
                                     const isDone = stepsCompleted[idx];
@@ -394,47 +421,108 @@ const ArticleDetail = () => {
 
                     <div className="lg:col-span-4 sticky top-40 space-y-8">
                         <div className="bg-zinc-900 border border-white/10 rounded-[3rem] p-10 text-left shadow-2xl relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent pointer-events-none" />
                             <h3 className="text-xl font-black text-white mb-8 flex items-center gap-3">
                                 <Target className="text-emerald-500" size={24} /> 當前任務手冊
                             </h3>
                             <div className="space-y-6 mb-10">
-                                <div className="p-6 rounded-[2rem] bg-white/[0.03] border border-white/5">
+                                <div className="p-6 rounded-[2rem] bg-white/[0.03] border border-white/5 shadow-inner">
                                     <p className="text-[10px] font-black text-emerald-500 uppercase tracking-widest mb-3">正確操作方向</p>
                                     <p className="text-zinc-200 text-base leading-relaxed font-bold italic">
                                         「{article.practice_kit?.description}」
                                     </p>
                                 </div>
                                 <div className="p-6 rounded-[2rem] bg-white/[0.03] border border-white/5">
-                                    <p className="text-[10px] font-black text-amber-500 uppercase tracking-widest mb-3">關鍵動作詞</p>
-                                    <p className="text-zinc-500 text-xs font-mono">搜尋、開啟、下載、加入好友...</p>
+                                    <p className="text-[10px] font-black text-amber-500 uppercase tracking-widest mb-3">關鍵動作關鍵字</p>
+                                    <p className="text-zinc-500 text-xs font-mono">搜尋、開啟、加入好友...</p>
                                 </div>
                             </div>
 
                             <div className={`mt-10 pt-10 border-t border-white/10 text-center ${treasurePhase === 'revealed' ? 'opacity-100' : 'opacity-30'}`} ref={treasureRef}>
-                                <div className="text-8xl mb-8">{treasurePhase === 'revealed' ? '🔓' : '🔒'}</div>
-                                {treasurePhase === 'revealed' ? (
-                                    <button onClick={handleClaimCommand} className="w-full py-6 rounded-[2rem] bg-emerald-500 text-black font-black text-sm uppercase tracking-widest shadow-2xl hover:scale-105 transition-all">
-                                        領取修行寶箱
-                                    </button>
-                                ) : (
-                                    <p className="text-xs text-zinc-600 font-black uppercase tracking-widest text-center">需通過助教邏輯判定</p>
-                                )}
+                                {/* Original Reward UI Animations */}
+                                <AnimatePresence mode="wait">
+                                    {treasurePhase === 'locked' && (
+                                        <motion.div key="locked" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center gap-4">
+                                            <div className="text-8xl grayscale">🔒</div>
+                                            <p className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest">請先通過助教邏輯判定</p>
+                                        </motion.div>
+                                    )}
+                                    {treasurePhase === 'falling' && (
+                                        <motion.div key="falling" initial={{ y: -200, rotate: -20 }} animate={{ y: 0, rotate: 0 }} transition={{ type: "spring", damping: 10 }} className="text-8xl">🎁</motion.div>
+                                    )}
+                                    {treasurePhase === 'impact' && (
+                                        <motion.div key="impact" animate={{ scale: [1, 1.2, 1] }} className="text-8xl">🎁</motion.div>
+                                    )}
+                                    {treasurePhase === 'exploding' && (
+                                        <motion.div key="exploding" animate={{ scale: [1, 2, 0], opacity: [1, 1, 0] }} className="text-8xl">💥</motion.div>
+                                    )}
+                                    {treasurePhase === 'revealed' && (
+                                        <motion.div key="revealed" initial={{ scale: 0.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex flex-col items-center gap-6 w-full">
+                                            <div className="text-8xl">🔓</div>
+                                            <button onClick={handleClaimCommand} className="w-full py-6 rounded-[2rem] bg-emerald-500 text-black font-black text-sm uppercase tracking-widest shadow-[0_0_30px_rgba(16,185,129,0.4)] hover:scale-105 transition-all">
+                                                領取修行寶箱
+                                            </button>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
+            {/* Achievement Badge Section (Reverted to High-end version) */}
+            <section className="py-40 px-5 md:px-6 text-center border-t border-white/5" ref={rewardRef}>
+                <motion.div {...fadeUp} className="max-w-xl mx-auto">
+                    {badgeEarned ? (
+                        <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", damping: 10 }}>
+                            <div className="inline-block bg-zinc-900 border-2 border-emerald-500/40 rounded-[4rem] p-12 md:p-20 shadow-2xl relative overflow-hidden">
+                                {badgeGlow && (
+                                    <>
+                                        <motion.div initial={{ scale: 0, opacity: 0.6 }} animate={{ scale: 3, opacity: 0 }} transition={{ duration: 1.5 }} className="absolute inset-0 m-auto w-32 h-32 rounded-full border-4 border-amber-400 pointer-events-none" />
+                                        <motion.div initial={{ scale: 0, opacity: 0.4 }} animate={{ scale: 4, opacity: 0 }} transition={{ duration: 1.5, delay: 0.3 }} className="absolute inset-0 m-auto w-32 h-32 rounded-full border-4 border-amber-300 pointer-events-none" />
+                                    </>
+                                )}
+                                <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.4)]" />
+                                <motion.p animate={{ scale: [1, 1.1, 1], rotate: [0, -5, 5, 0] }} transition={{ duration: 3, repeat: Infinity }} className="text-9xl mb-12 text-center">🏆</motion.p>
+                                <p className="text-emerald-500 font-black text-sm tracking-[0.8em] mb-6 uppercase opacity-60">Quest Mastered</p>
+                                <p className="text-white text-3xl md:text-5xl font-black mb-12 tracking-tight">{article.skill_badge || article.title}</p>
+                            </div>
+                        </motion.div>
+                    ) : (
+                        <motion.button whileTap={{ scale: 0.95 }} onClick={handleEarnBadge} disabled={treasurePhase !== 'revealed'}
+                            className="bg-emerald-500 text-black font-black py-8 px-16 rounded-[2.5rem] text-2xl shadow-2xl hover:scale-105 transition-all disabled:opacity-20 disabled:grayscale btn-glow">
+                            🏆 領取修行勳章
+                        </motion.button>
+                    )}
+                </motion.div>
+            </section>
+
             <AnimatePresence>
                 {showAiJumpModal && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/95 backdrop-blur-3xl">
-                        <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-zinc-900 border border-white/10 p-12 rounded-[4rem] max-w-sm w-full shadow-2xl text-center">
-                            <div className="w-20 h-20 bg-emerald-500/10 rounded-3xl flex items-center justify-center mx-auto mb-8">
-                                <Check className="text-emerald-400" size={40} />
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/95 backdrop-blur-2xl">
+                        <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-zinc-900 border border-white/10 p-10 rounded-[3rem] max-w-sm w-full shadow-2xl relative overflow-hidden text-center">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-blue-500" />
+                            <button onClick={() => setShowAiJumpModal(false)} className="absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors"><X size={28} /></button>
+                            <div className="text-center mb-10">
+                                <div className="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-center">
+                                    <Smartphone className="text-emerald-400" size={32} />
+                                </div>
+                                <h3 className="text-2xl font-black text-white mb-3 tracking-tight">指令已複製！</h3>
+                                <p className="text-zinc-500 text-sm font-medium">修行成功，請至工具貼上。</p>
                             </div>
-                            <h3 className="text-2xl font-black text-white mb-2">指令已複製！</h3>
-                            <p className="text-zinc-500 mb-10 text-center">修行成功，請至工具貼上。</p>
-                            <button onClick={() => setShowAiJumpModal(false)} className="w-full py-5 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10">關閉</button>
+                            <div className="grid grid-cols-3 gap-4">
+                                {[
+                                    { name: 'GPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com' },
+                                    { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai' },
+                                    { name: 'Gemini', logo: GeminiLogo, app: 'googlegemini://', web: 'https://gemini.google.com' }
+                                ].map((ai, i) => (
+                                    <a key={i} href={ai.web} target="_blank" rel="noopener noreferrer" className={`flex flex-col items-center gap-3 p-4 rounded-2xl bg-white/[0.03] border border-white/5 transition-all group hover:bg-emerald-500/10 hover:border-emerald-500/30`}>
+                                        <ai.logo size={32} />
+                                        <span className="text-white font-black text-[10px] uppercase tracking-tighter">{ai.name}</span>
+                                    </a>
+                                ))}
+                            </div>
                         </motion.div>
                     </motion.div>
                 )}
