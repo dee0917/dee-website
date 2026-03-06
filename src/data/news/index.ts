@@ -1,3 +1,5 @@
+import { article as khojBrain } from './tutorial-khoj-ai-second-brain';
+import { article as deepseekV4IntentBlackhole } from './real-tech-deepseek-v4-intent-blackhole';
 import { article as seniorVoice } from './tutorial-senior-voice-line';
 import { article as parentTutor } from './tutorial-parent-ai-tutor';
 import { article as refactorTrap } from './real-tech-code-refactor-trap';
@@ -71,6 +73,8 @@ import { NewsArticle } from '../../types/news';
 
 // 🚀 EVOLUTION ENGINE V1: 難度優先排列，確保小白入口最顯眼
 export const NEWS_ARTICLES: NewsArticle[] = [
+    khojBrain,           // 1星難度：私有大腦教學
+    deepseekV4IntentBlackhole, // 2星難度：DeepSeek-V4 自動化
     seniorVoice,         // 1星難度：長輩 LINE 教學
     parentTutor,         // 2星難度：親子家教教學
     refactorTrap,        
