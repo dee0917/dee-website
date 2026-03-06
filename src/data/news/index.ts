@@ -77,12 +77,12 @@ import { NewsArticle } from '../../types/news';
 // 🚀 EVOLUTION ENGINE V1: 難度優先排列，確保小白入口最顯眼
 export const NEWS_ARTICLES: NewsArticle[] = [
     seniorChatAi,        // 蒼穹轉譯：長輩 AI 對比
-    openaiOperatorMerchant, // 2星難度：店主 OpenAI Operator
+    openaiOperatorMerchant, // 店主 OpenAI Operator
     aiSkillSop,          // 最新：AI 技能管理 SOP
-    khojBrain,           // 1星難度：私有大腦教學
-    deepseekV4IntentBlackhole, // 2星難度：DeepSeek-V4 自動化
-    seniorVoice,         // 1星難度：長輩 LINE 教學
-    parentTutor,         // 2星難度：親子家教教學
+    khojBrain,           // 私有大腦教學
+    deepseekV4IntentBlackhole, // DeepSeek-V4 自動化
+    seniorVoice,         // 長輩 LINE 教學
+    parentTutor,         // 親子家教教學
     refactorTrap,        
     codetasteAudit,      
     deepseekR2Rev,       
