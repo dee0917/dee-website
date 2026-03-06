@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Copy, Check, ChevronDown, Lock, Sparkles, MousePointer2, Smartphone, Gamepad2, X } from 'lucide-react';
+import { 
+    ArrowLeft, ArrowRight, Copy, Check, ChevronDown, Lock, Sparkles, 
+    MousePointer2, Smartphone, Gamepad2, X, Target, Send, Flame
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { api } from '../lib/supabase';
@@ -8,6 +11,8 @@ import { INSIGHTS } from '../data/mock';
 import { MAIN_QUEST_ORDER, CHAPTERS, SIDE_QUEST_IDS } from '../data/insights';
 import SEO from '../components/ui/SEO';
 import { ChatGPTLogo, ClaudeLogo, GeminiLogo } from '../components/AILogos';
+import { useIdentity } from '../context/IdentityContext';
+import { judgeUserResponse } from '../lib/khojJudge';
 import DifficultyStars from '../components/ui/DifficultyStars';
 
 const fadeUp = {
@@ -33,6 +38,11 @@ const ArticleDetail = () => {
     const [rippleStep, setRippleStep] = useState<number | null>(null);
     const [showAiJumpModal, setShowAiJumpModal] = useState(false);
     
+    const [isPracticeMode, setIsPracticeMode] = useState(false);
+    const [messages, setMessages] = useState<{role: 'ai' | 'user', text: string}[]>([]);
+    const [userInput, setUserInput] = useState('');
+    const [practiceStep, setPracticeStep] = useState(0);
+
     // Refs
     const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
     const treasureRef = useRef<HTMLDivElement>(null);
@@ -65,8 +75,45 @@ const ArticleDetail = () => {
     }, []);
 
     useEffect(() => {
-        if (id) fetchArticle(parseInt(id));
+        if (id) {
+            fetchArticle(parseInt(id));
+            setMessages([
+                { role: 'ai', text: `您好！我是您的 AI 導師。在這一關，我們將模擬真實場景。準備好了嗎？` }
+            ]);
+        }
     }, [id]);
+
+    const handleSendMessage = async () => {
+        if (!userInput.trim()) return;
+        const newMessages = [...messages, { role: 'user', text: userInput }];
+        setMessages(newMessages as any);
+        setUserInput('');
+        
+        // 使用 Khoj 判官進行邏輯審核
+        const result = await judgeUserResponse(article?.title || '未知任務', userInput);
+        
+        setMessages(prev => [...prev, { 
+            role: 'ai', 
+            text: result.feedback 
+        }] as any);
+
+        if (result.passed) {
+            setPracticeStep(prev => prev + 1);
+            if (practiceStep >= 1) { // 兩次通過即成功
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+                setTreasurePhase('falling');
+                setTimeout(() => {
+                    setTreasurePhase('impact');
+                }, 700);
+                setTimeout(() => {
+                    setTreasurePhase('exploding');
+                }, 1300);
+                setTimeout(() => {
+                    setTreasurePhase('revealed');
+                }, 2100);
+            }
+        }
+    };
 
     useEffect(() => {
         if (article?.steps) {
@@ -246,12 +293,59 @@ const ArticleDetail = () => {
                         <span className={`text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest ${theme.bg} ${theme.text} border ${theme.border}`}>{article.category}</span>
                         <DifficultyStars level={article.difficulty_level || 1} />
                     </div>
-                    <h1 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tight leading-[1.1]">{article.title}</h1>
-                    <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed">{article.summary}</p>
-                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={scrollToHook}
-                        className="bg-white text-black font-black py-5 px-10 rounded-2xl text-lg flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-500 transition-colors group">
-                        <Gamepad2 size={24} /> 開始修煉 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                    </motion.button>
+
+                    {isPracticeMode ? (
+                        /* 🎮 互動演練介面 (置頂) */
+                        <div className="w-full max-w-2xl mx-auto mt-12 bg-zinc-900/50 border border-white/10 rounded-[3rem] overflow-hidden shadow-2xl">
+                             <div className="bg-white/5 px-8 py-4 flex items-center justify-between border-b border-white/5">
+                                <div className="flex items-center gap-4">
+                                    <Target size={18} className="text-emerald-500" />
+                                    <span className="text-xs font-black text-white uppercase tracking-widest">目標：獲得判官認可 ({practiceStep}/2)</span>
+                                </div>
+                            </div>
+                            <div className="h-[300px] overflow-y-auto p-8 space-y-6 text-left">
+                                {messages.map((m, i) => (
+                                    <div key={i} className={`flex ${m.role === 'ai' ? 'justify-start' : 'justify-end'}`}>
+                                        <div className={`max-w-[85%] p-4 rounded-2xl text-base ${m.role === 'ai' ? 'bg-white/5 text-zinc-300' : 'bg-emerald-500 text-black font-bold'}`}>
+                                            {m.text}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="p-6 bg-black/40 border-t border-white/5">
+                                <div className="relative">
+                                    <textarea 
+                                        value={userInput}
+                                        onChange={(e) => setUserInput(e.target.value)}
+                                        placeholder="輸入操作想法，等待判官審核..."
+                                        className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 pr-14 text-white focus:border-emerald-500 outline-none resize-none h-24"
+                                    />
+                                    <button onClick={handleSendMessage} className="absolute bottom-3 right-3 p-3 bg-emerald-500 text-black rounded-xl hover:bg-emerald-400">
+                                        <Send size={18} />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        /* 📖 經典模式標題內容 */
+                        <>
+                            <h1 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tight leading-[1.1]">{article.title}</h1>
+                            
+                            {/* 🚀 模式切換器 */}
+                            <div className="flex items-center justify-center gap-4 bg-white/5 p-1.5 rounded-2xl border border-white/10 w-fit mx-auto mb-12">
+                                <button onClick={() => setIsPracticeMode(false)} className={`px-6 py-2 rounded-xl text-xs font-black transition-all ${!isPracticeMode ? 'bg-white text-black shadow-lg' : 'text-zinc-500 hover:text-white'}`}>經典模式</button>
+                                <button onClick={() => setIsPracticeMode(true)} className={`px-6 py-2 rounded-xl text-xs font-black transition-all ${isPracticeMode ? 'bg-emerald-500 text-black shadow-lg' : 'text-zinc-500 hover:text-white'} flex items-center gap-2`}>
+                                    <Flame size={14} /> 互動演練 (Beta)
+                                </button>
+                            </div>
+
+                            <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed">{article.summary}</p>
+                            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={scrollToHook}
+                                className="bg-white text-black font-black py-5 px-10 rounded-2xl text-lg flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-500 transition-colors group">
+                                <Gamepad2 size={24} /> 開始修煉 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                            </motion.button>
+                        </>
+                    )}
                 </motion.div>
 
                 <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-20"><ChevronDown size={32} /></div>
