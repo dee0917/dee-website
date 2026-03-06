@@ -10,6 +10,7 @@ import { CHAPTERS, MAIN_QUEST_ORDER, INSIGHTS_LIST } from '../data/insights';
 import SEO from '../components/ui/SEO';
 import { useIdentity } from '../context/IdentityContext';
 import { PERSONAS, UserPersona } from '../data/personas';
+import DifficultyStars from '../components/ui/DifficultyStars';
 
 const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExpanded, onToggle, index }: any) => {
     return (
@@ -81,7 +82,7 @@ const InsightCard = ({ insight, idx, completed }: any) => {
                     {insight.summary}
                 </p>
                 <div className="mt-auto pt-6 border-t border-white/[0.05] flex items-center justify-between">
-                    <span className="flex items-center gap-2 text-xs text-zinc-500 font-bold uppercase tracking-widest"><Star size={14} className="text-emerald-500" /> 等級 {insight.difficulty_level || 1}</span>
+                    <DifficultyStars level={insight.difficulty_level || 1} />
                     <div className="flex items-center gap-2 text-white font-black text-xs uppercase tracking-widest group-hover:gap-4 transition-all">
                         進入修煉 <ArrowRight size={18} className="text-emerald-500" />
                     </div>

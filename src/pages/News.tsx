@@ -10,6 +10,7 @@ import { NEWS_ARTICLES } from '../data/news';
 import { useMemo, useState, useEffect } from 'react';
 import { PERSONAS, UserPersona } from '../data/personas';
 import { useIdentity } from '../context/IdentityContext';
+import DifficultyStars from '../components/ui/DifficultyStars';
 
 // 確保字串完全匹配
 const CAT_ALL = "全部";
@@ -224,9 +225,7 @@ const NewsCard = ({ article, idx }: any) => {
                         </span>
                         {article.author === "Echo" && <span className="text-[10px] font-bold text-indigo-500/80 uppercase tracking-tight">🕵️ Echo Dispatch</span>}
                         {article.difficulty && (
-                            <span className="text-[10px] font-black px-3 py-1 rounded-lg uppercase tracking-widest text-emerald-400 bg-emerald-500/5">
-                                {article.difficulty} 星
-                            </span>
+                            <DifficultyStars level={article.difficulty} />
                         )}
                     </div>
                     <span className="text-[11px] text-zinc-500 font-mono font-bold">{article.date}</span>

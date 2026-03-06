@@ -8,6 +8,7 @@ import { INSIGHTS } from '../data/mock';
 import { MAIN_QUEST_ORDER, CHAPTERS, SIDE_QUEST_IDS } from '../data/insights';
 import SEO from '../components/ui/SEO';
 import { ChatGPTLogo, ClaudeLogo, GeminiLogo } from '../components/AILogos';
+import DifficultyStars from '../components/ui/DifficultyStars';
 
 const fadeUp = {
     initial: { opacity: 0, y: 40 },
@@ -241,9 +242,9 @@ const ArticleDetail = () => {
                     <Link to="/insights" className="inline-flex items-center gap-2 text-zinc-500 hover:text-white transition-colors mb-12 group">
                         <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> 離開修煉
                     </Link>
-                    <div className="flex items-center justify-center gap-3 mb-6">
+                    <div className="flex items-center justify-center gap-4 mb-6">
                         <span className={`text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest ${theme.bg} ${theme.text} border ${theme.border}`}>{article.category}</span>
-                        <div className="flex gap-1">{[...Array(5)].map((_, i) => <StarIcon key={i} size={10} className={i < (article.difficulty_level || 1) ? theme.text : 'text-zinc-800'} fill="currentColor" />)}</div>
+                        <DifficultyStars level={article.difficulty_level || 1} />
                     </div>
                     <h1 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tight leading-[1.1]">{article.title}</h1>
                     <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed">{article.summary}</p>
