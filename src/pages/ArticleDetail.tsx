@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { 
     ArrowLeft, ArrowRight, Copy, Check, ChevronDown, Lock, Sparkles, 
-    MousePointer2, Smartphone, Gamepad2, X, Target, Send, Flame
+    MousePointer2, Smartphone, Gamepad2, X, Target, Send, Flame,
+    Terminal, BrainCircuit, ShieldCheck, HelpCircle
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
@@ -38,10 +39,12 @@ const ArticleDetail = () => {
     const [rippleStep, setRippleStep] = useState<number | null>(null);
     const [showAiJumpModal, setShowAiJumpModal] = useState(false);
     
+    // Practice Mode State
     const [isPracticeMode, setIsPracticeMode] = useState(false);
     const [messages, setMessages] = useState<{role: 'ai' | 'user', text: string}[]>([]);
     const [userInput, setUserInput] = useState('');
     const [practiceStep, setPracticeStep] = useState(0);
+    const [isJudging, setIsJudging] = useState(false);
 
     // Refs
     const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -49,6 +52,17 @@ const ArticleDetail = () => {
     const quizRef = useRef<HTMLDivElement>(null);
     const rewardRef = useRef<HTMLDivElement>(null);
     const hookRef = useRef<HTMLDivElement>(null);
+    const chatEndRef = useRef<HTMLDivElement>(null);
+
+    const scrollToBottom = () => {
+        chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    useEffect(() => {
+        if (isPracticeMode) {
+            scrollToBottom();
+        }
+    }, [messages, isJudging]);
 
     const getColorClasses = (themeColor: string) => {
         const colors: Record<string, any> = {
@@ -75,43 +89,70 @@ const ArticleDetail = () => {
     }, []);
 
     useEffect(() => {
-        if (id) {
-            fetchArticle(parseInt(id));
-            setMessages([
-                { role: 'ai', text: `您好！我是您的 AI 導師。在這一關，我們將模擬真實場景。準備好了嗎？` }
-            ]);
-        }
+        if (id) fetchArticle(parseInt(id));
     }, [id]);
 
+    const fetchArticle = async (articleId: number) => {
+        try {
+            setLoading(true);
+            const localArticle = INSIGHTS.find(i => i.id === articleId);
+            const dbData = await api.getInsightById(articleId);
+            const finalData = localArticle ? { ...dbData, ...localArticle } : dbData;
+            setArticle(finalData);
+            
+            // Initialize Practice Mode with dynamic welcome
+            setMessages([
+                { role: 'ai', text: `您好！我是您的 AI 修煉導師。在這一個關卡中，我們的任務是：\n\n「${finalData.practice_kit?.title || '完成實戰演練'}」\n\n${finalData.practice_kit?.description || '請根據課程內容，嘗試與我進行模擬對話。'}\n\n準備好開始了嗎？請告訴我您打算如何操作？` }
+            ]);
+        } catch (e) {
+            setArticle(null);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSendMessage();
+        }
+    };
+
     const handleSendMessage = async () => {
-        if (!userInput.trim()) return;
+        if (!userInput.trim() || isJudging) return;
+        
         const newMessages = [...messages, { role: 'user', text: userInput }];
         setMessages(newMessages as any);
+        const savedInput = userInput;
         setUserInput('');
+        setIsJudging(true);
         
-        // 使用 Khoj 判官進行邏輯審核
-        const result = await judgeUserResponse(article?.title || '未知任務', userInput);
-        
-        setMessages(prev => [...prev, { 
-            role: 'ai', 
-            text: result.feedback 
-        }] as any);
+        try {
+            // 使用 Khoj 判官進行邏輯審核
+            const result = await judgeUserResponse(article?.title || '未知任務', savedInput);
+            
+            setMessages(prev => [...prev, { 
+                role: 'ai', 
+                text: result.feedback 
+            }] as any);
 
-        if (result.passed) {
-            setPracticeStep(prev => prev + 1);
-            if (practiceStep >= 1) { // 兩次通過即成功
-                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-                setTreasurePhase('falling');
-                setTimeout(() => {
-                    setTreasurePhase('impact');
-                }, 700);
-                setTimeout(() => {
-                    setTreasurePhase('exploding');
-                }, 1300);
-                setTimeout(() => {
-                    setTreasurePhase('revealed');
-                }, 2100);
+            if (result.passed) {
+                setPracticeStep(prev => prev + 1);
+                if (practiceStep >= 1) { // 兩次通過即成功
+                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+                    setTreasurePhase('falling');
+                    setTimeout(() => setTreasurePhase('impact'), 700);
+                    setTimeout(() => setTreasurePhase('exploding'), 1300);
+                    setTimeout(() => setTreasurePhase('revealed'), 2100);
+                }
             }
+        } catch (error) {
+            setMessages(prev => [...prev, { 
+                role: 'ai', 
+                text: "抱歉，判官系統暫時連線不穩定，請再試一次。" 
+            }] as any);
+        } finally {
+            setIsJudging(false);
         }
     };
 
@@ -136,16 +177,6 @@ const ArticleDetail = () => {
         setTreasurePhase('locked');
         setShowAiJumpModal(false);
     }, [article?.id, article?.steps?.length]);
-
-    const fetchArticle = async (articleId: number) => {
-        setLoading(true);
-        const localArticle = INSIGHTS.find(i => i.id === articleId);
-        const dbData = await api.getInsightById(articleId);
-        if (localArticle) setArticle({ ...dbData, ...localArticle });
-        else if (dbData) setArticle(dbData);
-        else setArticle(null);
-        setLoading(false);
-    };
 
     const handleClaimCommand = () => {
         if (article?.practice_kit?.command) {
@@ -295,34 +326,96 @@ const ArticleDetail = () => {
                     </div>
 
                     {isPracticeMode ? (
-                        /* 🎮 互動演練介面 (置頂) */
-                        <div className="w-full max-w-2xl mx-auto mt-12 bg-zinc-900/50 border border-white/10 rounded-[3rem] overflow-hidden shadow-2xl">
-                             <div className="bg-white/5 px-8 py-4 flex items-center justify-between border-b border-white/5">
+                        /* 🎮 互動演練介面 (置頂、優化版) */
+                        <div className="w-full max-w-2xl mx-auto mt-12 bg-zinc-900/80 backdrop-blur-2xl border border-white/10 rounded-[3.5rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.5)]">
+                             {/* Header / Objective Bar */}
+                             <div className="bg-emerald-500/10 px-10 py-6 flex flex-col md:flex-row md:items-center justify-between border-b border-white/5 gap-4">
                                 <div className="flex items-center gap-4">
-                                    <Target size={18} className="text-emerald-500" />
-                                    <span className="text-xs font-black text-white uppercase tracking-widest">目標：獲得判官認可 ({practiceStep}/2)</span>
+                                    <div className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center text-black">
+                                        <Target size={20} />
+                                    </div>
+                                    <div className="text-left">
+                                        <span className="text-[10px] font-black text-emerald-500/60 uppercase tracking-widest block">當前修煉目標</span>
+                                        <h4 className="text-white font-black text-sm uppercase tracking-tighter">{article.practice_kit?.title || '邏輯一致性測試'}</h4>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-3 bg-black/40 px-4 py-2 rounded-2xl border border-white/5">
+                                    <div className="flex gap-1">
+                                        {[...Array(2)].map((_, i) => (
+                                            <StarIcon key={i} size={12} className={i < practiceStep ? 'text-emerald-400' : 'text-zinc-800'} fill="currentColor" />
+                                        ))}
+                                    </div>
+                                    <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">判官認可度</span>
                                 </div>
                             </div>
-                            <div className="h-[300px] overflow-y-auto p-8 space-y-6 text-left">
+
+                            {/* Task Hint Card */}
+                            <div className="px-10 py-4 bg-white/[0.02] border-b border-white/5 text-left">
+                                <p className="text-xs text-zinc-500 leading-relaxed flex items-center gap-2">
+                                    <HelpCircle size={12} className="text-emerald-500" />
+                                    <span className="font-medium italic">提示：請用最白話的方式，描述您要執行的「實體操作路徑」。</span>
+                                </p>
+                            </div>
+
+                            {/* Chat Area */}
+                            <div className="h-[350px] overflow-y-auto p-10 space-y-8 text-left scrollbar-hide bg-gradient-to-b from-transparent to-black/20">
                                 {messages.map((m, i) => (
-                                    <div key={i} className={`flex ${m.role === 'ai' ? 'justify-start' : 'justify-end'}`}>
-                                        <div className={`max-w-[85%] p-4 rounded-2xl text-base ${m.role === 'ai' ? 'bg-white/5 text-zinc-300' : 'bg-emerald-500 text-black font-bold'}`}>
-                                            {m.text}
+                                    <motion.div key={i} initial={{ opacity: 0, x: m.role === 'ai' ? -10 : 10 }} animate={{ opacity: 1, x: 0 }}
+                                        className={`flex ${m.role === 'ai' ? 'justify-start' : 'justify-end'}`}
+                                    >
+                                        <div className={`max-w-[85%] p-6 rounded-[2rem] text-base leading-relaxed ${
+                                            m.role === 'ai' 
+                                            ? 'bg-zinc-800/50 text-zinc-200 rounded-tl-none border border-white/5' 
+                                            : 'bg-emerald-500 text-black font-black rounded-tr-none shadow-xl shadow-emerald-500/10'
+                                        }`}>
+                                            {m.text.split('\n').map((line, li) => <p key={li}>{line}</p>)}
+                                        </div>
+                                    </motion.div>
+                                ))}
+                                {isJudging && (
+                                    <div className="flex justify-start">
+                                        <div className="bg-zinc-800/50 p-4 rounded-2xl rounded-tl-none border border-white/5 flex items-center gap-3">
+                                            <div className="flex gap-1">
+                                                <motion.div animate={{ opacity: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1 }} className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+                                                <motion.div animate={{ opacity: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1, delay: 0.2 }} className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+                                                <motion.div animate={{ opacity: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1, delay: 0.4 }} className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+                                            </div>
+                                            <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">判官正在審核您的邏輯...</span>
                                         </div>
                                     </div>
-                                ))}
+                                )}
+                                <div ref={chatEndRef} />
                             </div>
-                            <div className="p-6 bg-black/40 border-t border-white/5">
-                                <div className="relative">
+
+                            {/* Input Area */}
+                            <div className="p-8 bg-black/60 border-t border-white/5">
+                                <div className="relative group">
                                     <textarea 
                                         value={userInput}
                                         onChange={(e) => setUserInput(e.target.value)}
-                                        placeholder="輸入操作想法，等待判官審核..."
-                                        className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 pr-14 text-white focus:border-emerald-500 outline-none resize-none h-24"
+                                        onKeyDown={handleKeyDown}
+                                        placeholder="在此輸入您的操作計畫（Enter 發送，Shift+Enter 換行）"
+                                        className="w-full bg-white/[0.03] border border-white/10 rounded-[2rem] p-6 pr-20 text-white placeholder:text-zinc-600 focus:border-emerald-500/50 outline-none resize-none h-28 transition-all group-hover:border-white/20"
                                     />
-                                    <button onClick={handleSendMessage} className="absolute bottom-3 right-3 p-3 bg-emerald-500 text-black rounded-xl hover:bg-emerald-400">
-                                        <Send size={18} />
+                                    <button 
+                                        onClick={handleSendMessage} 
+                                        disabled={!userInput.trim() || isJudging}
+                                        className={`absolute bottom-5 right-5 p-4 rounded-2xl transition-all ${
+                                            userInput.trim() && !isJudging 
+                                            ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/20 scale-100 hover:bg-emerald-400' 
+                                            : 'bg-zinc-800 text-zinc-500 scale-90 opacity-50'
+                                        }`}
+                                    >
+                                        <Send size={20} />
                                     </button>
+                                </div>
+                                <div className="mt-4 flex items-center justify-center gap-6 opacity-40">
+                                    <div className="flex items-center gap-1.5 text-[9px] font-black text-zinc-500 uppercase tracking-widest">
+                                        <Terminal size={10} /> Powered by Khoj Judge
+                                    </div>
+                                    <div className="flex items-center gap-1.5 text-[9px] font-black text-zinc-500 uppercase tracking-widest">
+                                        <ShieldCheck size={10} /> Secure Sandbox
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -447,7 +540,7 @@ const ArticleDetail = () => {
                         <div className="flex flex-col items-center gap-12 py-20 grayscale opacity-30">
                             <div className="text-9xl">🎁</div>
                             <h2 className="text-2xl font-black text-white uppercase tracking-[0.5em]">Treasure Locked</h2>
-                            <p className="text-zinc-500">完成所有步驟以開啟寶箱</p>
+                            <p className="text-zinc-500">完成互動演練或所有步驟以開啟寶箱</p>
                         </div>
                     )}
 
