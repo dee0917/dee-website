@@ -42,6 +42,7 @@ const ArticleDetail = () => {
     const [practiceStep, setPracticeStep] = useState(0);
     const [isJudging, setIsJudging] = useState(false);
     const [currentHint, setCurrentHint] = useState('');
+    const [previousResponses, setPreviousResponses] = useState<string[]>([]);
 
     const chatEndRef = useRef<HTMLDivElement>(null);
 
@@ -99,13 +100,16 @@ const ArticleDetail = () => {
         setIsJudging(true);
         
         try {
+            // 將過往的回覆歷史傳給判官，避免重複
+            const historyContext = previousResponses.slice(-3).join('|');
             const result = await judgeUserResponse(
                 article?.title || '', 
                 text, 
-                article?.practice_kit?.description || ''
+                `${article?.practice_kit?.description} (已給過的建議：${historyContext})`
             );
             
             setMessages(prev => [...prev, { role: 'ai', text: result.feedback }] as any);
+            setPreviousResponses(prev => [...prev, result.feedback]);
             if (result.hint) setCurrentHint(result.hint);
 
             if (result.passed) {
