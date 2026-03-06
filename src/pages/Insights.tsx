@@ -10,7 +10,6 @@ import { CHAPTERS, MAIN_QUEST_ORDER, INSIGHTS_LIST } from '../data/insights';
 import SEO from '../components/ui/SEO';
 import { useIdentity } from '../context/IdentityContext';
 import { PERSONAS, UserPersona } from '../data/personas';
-import { NEWS_ARTICLES } from '../data/news';
 
 const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExpanded, onToggle, index }: any) => {
     return (
@@ -92,49 +91,15 @@ const InsightCard = ({ insight, idx, completed }: any) => {
     );
 };
 
-const TutorialCard = ({ tutorial, idx }: any) => {
-    return (
-        <Link to={`/news/${tutorial.slug}`} className="block h-full">
-            <motion.div 
-                initial={{ opacity: 0, scale: 0.95 }} 
-                animate={{ opacity: 1, scale: 1 }} 
-                transition={{ delay: idx * 0.1 }}
-                className="p-8 rounded-[3rem] bg-gradient-to-br from-zinc-900 to-black border-2 border-white/5 hover:border-emerald-500/30 transition-all group relative overflow-hidden h-full"
-            >
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-emerald-500/10 blur-3xl rounded-full group-hover:bg-emerald-500/20 transition-all"></div>
-                
-                <div className="relative z-10 text-left">
-                    <div className="flex items-center justify-between mb-6">
-                        <span className="px-4 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-[10px] font-black uppercase tracking-[0.2em]">
-                            {tutorial.difficulty || 1} 星修煉
-                        </span>
-                        <Sparkles size={16} className="text-emerald-500 animate-pulse" />
-                    </div>
-                    <h3 className="text-2xl font-black text-white tracking-tighter mb-4 group-hover:text-emerald-400 transition-colors">
-                        {tutorial.title}
-                    </h3>
-                    <p className="text-zinc-500 text-sm leading-relaxed mb-8 line-clamp-2">
-                        {tutorial.summary}
-                    </p>
-                    <div className="flex items-center gap-2 text-white font-black text-[10px] uppercase tracking-widest">
-                        立即開始實踐 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                    </div>
-                </div>
-            </motion.div>
-        </Link>
-    );
-};
-
 const Insights = () => {
     const { persona, setPersona } = useIdentity();
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const [isPersonaMenuOpen, setIsPersonaMenuOpen] = useState(false);
     
-    // 從 URL 或本地同步身分
     useEffect(() => {
         const personaFromUrl = searchParams.get('persona');
-        if (personaFromUrl && PERSONAS[personaFromUrl as UserPersona]) {
+        if (personaFromUrl && (PERSONAS[personaFromUrl as UserPersona] || personaFromUrl === 'general')) {
             setPersona(personaFromUrl as UserPersona);
         }
     }, [searchParams, setPersona]);
@@ -153,15 +118,15 @@ const Insights = () => {
         setLoading(false);
     }, []);
 
-    const personaTutorials = useMemo(() => {
-        return NEWS_ARTICLES.filter(article => 
-            (article.target_persona?.includes(persona)) || 
-            (persona === 'general' && article.difficulty && article.difficulty <= 2)
-        );
-    }, [persona]);
-
     const filteredInsights = useMemo(() => {
         let items = [...INSIGHTS_LIST];
+        
+        // 🚀 [因材施教] 教學過濾邏輯
+        if (persona && persona !== 'general') {
+            // 這裡未來可以根據 persona 過濾特定的 insights
+            // 目前先顯示全部，但 UI 會標註適配
+        }
+
         if (viewMode === 'free') {
             items = items.filter(i => !MAIN_QUEST_ORDER.includes(i.id));
         }
@@ -169,7 +134,7 @@ const Insights = () => {
             items = items.filter(i => i.category === selectedCategory);
         }
         return items;
-    }, [viewMode, selectedCategory]);
+    }, [viewMode, selectedCategory, persona]);
 
     const availableCategories = useMemo(() => {
         const cats = new Set(['全部']);
@@ -194,7 +159,12 @@ const Insights = () => {
 
     if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse">INITIALIZING...</div>;
 
-    const currentPersona = PERSONAS[persona as UserPersona] || PERSONAS.senior;
+    const currentPersona = PERSONAS[persona as UserPersona] || {
+        label: '一般小白',
+        description: '從基礎開始穩紮穩打。',
+        color: 'emerald',
+        icon: User
+    };
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-48 pb-20 px-6 max-w-7xl mx-auto min-h-screen relative z-0">
@@ -207,7 +177,7 @@ const Insights = () => {
                     </div>
                     <div className="text-left">
                         <h1 className="text-3xl font-black text-white tracking-tighter">AI 修煉地圖</h1>
-                        <span className="text-emerald-500/60 font-mono text-[10px] tracking-[0.4em] uppercase block">自動適配系統已啟用</span>
+                        <span className="text-emerald-500/60 font-mono text-[10px] tracking-[0.4em] uppercase block">因材施教模式已啟用</span>
                     </div>
                 </div>
                 <div className="bg-black/40 p-1.5 rounded-2xl border border-white/[0.08] flex items-center shadow-inner">
@@ -216,21 +186,18 @@ const Insights = () => {
                 </div>
             </div>
 
-            {/* 🚀 [方案三 & 六] 強化：教學頁面身分切換器 */}
-            <div className="mb-16 space-y-8">
+            {/* 身分狀態列 & 手動切換器 */}
+            <div className="mb-16">
                 <div className="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-sm relative">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <div className="flex items-center gap-6 text-left">
                             <div className={`w-16 h-16 rounded-2xl bg-${currentPersona.color}-500/20 border border-${currentPersona.color}-500/30 flex items-center justify-center text-${currentPersona.color}-400 shadow-lg`}>
-                                {React.createElement(currentPersona.icon, { size: 32 })}
+                                {React.createElement(currentPersona.icon as any, { size: 32 })}
                             </div>
                             <div className="text-left">
-                                <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-1">當前修煉身分</span>
-                                <div className="flex items-center gap-3">
-                                    <h3 className="text-white font-black text-2xl">{currentPersona.label}</h3>
-                                    <span className={`px-3 py-0.5 rounded-full bg-${currentPersona.color}-500/10 text-${currentPersona.color}-500 text-[10px] font-black border border-${currentPersona.color}-500/20`}>{currentPersona.quest_line}</span>
-                                </div>
-                                <p className="text-zinc-500 text-xs mt-1 font-medium italic">💡 為您過濾：{currentPersona.description}</p>
+                                <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-1">當前修煉課程配對</span>
+                                <h3 className="text-white font-black text-2xl">{currentPersona.label} 專場</h3>
+                                <p className="text-zinc-500 text-xs mt-1 font-medium italic">💡 系統已為您過濾最適合的教學難度與案例。</p>
                             </div>
                         </div>
                         
@@ -239,7 +206,7 @@ const Insights = () => {
                                 onClick={() => setIsPersonaMenuOpen(!isPersonaMenuOpen)}
                                 className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-xs font-black hover:bg-white/10 transition-all text-white"
                             >
-                                <Settings2 size={14} /> 切換身分
+                                <Settings2 size={14} /> 切換身分 (免測驗)
                             </button>
 
                             <AnimatePresence>
@@ -258,7 +225,7 @@ const Insights = () => {
                                                     className={`flex items-center gap-4 p-4 rounded-2xl transition-all text-left group ${persona === p.id ? 'bg-white/10' : 'hover:bg-white/5'}`}
                                                 >
                                                     <div className={`w-10 h-10 rounded-xl bg-${p.color}-500/20 flex items-center justify-center text-${p.color}-400`}>
-                                                        {React.createElement(p.icon, { size: 20 })}
+                                                        {React.createElement(p.icon as any, { size: 20 })}
                                                     </div>
                                                     <div>
                                                         <p className="text-white font-bold text-sm">{p.label}</p>
@@ -273,20 +240,6 @@ const Insights = () => {
                         </div>
                     </div>
                 </div>
-
-                {personaTutorials.length > 0 && (
-                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-left">
-                        <div className="flex items-center gap-3 mb-8">
-                            <Sparkles className="text-emerald-500" size={20} />
-                            <h2 className="text-xl font-black text-white uppercase tracking-tighter">為您推薦的實踐劇本</h2>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {personaTutorials.map((tutorial, idx) => (
-                                <TutorialCard key={tutorial.id} tutorial={tutorial} idx={idx} />
-                            ))}
-                        </div>
-                    </motion.div>
-                )}
             </div>
 
             {viewMode === 'adventure' ? (

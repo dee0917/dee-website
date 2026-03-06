@@ -65,7 +65,7 @@ export const article: NewsArticle = {
             description: "降低對家人的依賴感，獨立完成日常提醒與備忘錄管理。"
         }
     ],
-    dee_insight: "神祕客 (Kage) 剛才訓了我一頓：教學不講路徑就是耍流氓。這篇重寫的版本是我親自盯著修出來的。小白要的是『怎麼做』，不是『AI 有多強』。",
+    dee_insight: "小白要的是『怎麼做』，不是『AI 有多強』。這篇重寫的版本強調實體路徑，確保長輩真的能上手。",
     action_prompt: {
         title: "今日修行：測試你的數位秘書",
         description: "加入 ChatGPT 帳號後，按下小麥克風說這句話：",

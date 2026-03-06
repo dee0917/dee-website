@@ -10,7 +10,7 @@ export const article: NewsArticle = {
     date: "2026-03-06",
     publish_time: "2026-03-06 03:00",
     readTime: "8 分鐘",
-    source_name: "OpenAI Newsroom / Echo Merchant Lab",
+    source_name: "OpenAI Newsroom",
     source_url: "https://openai.com",
     tags: ["#OpenAIOperator", "#店主神器", "#客訴自動化", "#單手操作", "#2星難度"],
     author: "Echo",
@@ -37,14 +37,14 @@ export const article: NewsArticle = {
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-amber-500/30 transition-all">
-                                <span class="text-[9px] text-zinc-500 uppercase font-black mb-4 block">Manual Labor Saved</span>
-                                <div class="text-5xl font-black text-white">4 HOURS</div>
-                                <p class="mt-4 text-sm text-zinc-400">每天節省處理訂單與客訴的機械性勞動。</p>
+                                <span class="text-[9px] text-zinc-500 uppercase font-black mb-4 block text-left">Manual Labor Saved</span>
+                                <div class="text-5xl font-black text-white text-left">4 HOURS</div>
+                                <p class="mt-4 text-sm text-zinc-400 text-left leading-relaxed">每天節省處理訂單與客訴的機械性勞動。</p>
                             </div>
                             <div class="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-emerald-500/30 transition-all">
-                                <span class="text-[9px] text-zinc-500 uppercase font-black mb-4 block">Learning Curve</span>
-                                <div class="text-5xl font-black text-emerald-400">LOW</div>
-                                <p class="mt-4 text-sm text-zinc-400">只需說出『去搜尋庫存』，剩下的 AI 做。</p>
+                                <span class="text-[9px] text-zinc-500 uppercase font-black mb-4 block text-left">Learning Curve</span>
+                                <div class="text-5xl font-black text-emerald-400 text-left">LOW</div>
+                                <p class="mt-4 text-sm text-zinc-400 text-left leading-relaxed">只需說出『去搜尋庫存』，剩下的 AI 做。</p>
                             </div>
                         </div>
                     </div>
@@ -54,8 +54,8 @@ export const article: NewsArticle = {
     `,
     event_breakdown: [
         {
-            title: "【神祕客邏輯驗證】店主真的能用嗎？",
-            content: "這篇教學的核心在於 OpenAI Operator 的『Agentic』特性。我們不再教你怎麼寫文章，而是教你如何給它『權限』。店主只需要在 App 裡搜尋並點擊『啟用螢幕讀取』，Operator 就會自動辨識 LINE 視窗裡的收件人與地址。神祕客親自模擬了在廚房手拿蔥花的場景：你只需要用大拇指點一下『允許』，AI 就幫你把這單訂單存入 Excel 了。"
+            title: "【場景模擬】店主真的能用嗎？",
+            content: "這篇教學的核心在於 OpenAI Operator 的『Agentic』特性。我們不再教你怎麼寫文章，而是教你如何給它『權限』。店主只需要在 App 裡搜尋並點擊『啟用螢幕讀取』，Operator 就會自動辨識 LINE 視窗裡的收件人與地址。在廚房手拿蔥花的忙碌場景中：你只需要用大拇指點一下『允許』，AI 就幫你把這單訂單存入 Excel 了。"
         },
         {
             title: "實體路徑：如何讓 AI 認識你的庫存表？",
@@ -64,15 +64,15 @@ export const article: NewsArticle = {
     ],
     impact_analysis: [
         {
-            target: "滿手蔥花店主",
+            target: "經營壓力",
             description: "大幅降低在尖峰時刻回覆繁瑣私訊的壓力，讓店主專注於料理品質。"
         },
         {
-            target: "顧客滿意度",
-            description: "回覆速度從『一小時』降到『一分鐘』，且回覆語氣由 AI 修煉為專業客服風格。"
+            target: "顧客體驗",
+            description: "回覆速度從『一小時』降到『一分鐘』，且回覆語氣由 AI 轉化為專業客服風格。"
         }
     ],
-    dee_insight: "我們要教店主的就是這種『單手操作』的降維力！神祕客 (Kage) 已對這篇路徑進行了 3 次模擬，確認無誤。這是 Ch.4 『生意進化』的必修課。",
+    dee_insight: "我們要教店主的就是這種『單手操作』的降維力！確保操作路徑明確無誤，是小白教學的第一準則。這是 Ch.4 『生意進化』的必修課。",
     action_prompt: {
         title: "店主今日修行：啟動你的數位夥計",
         description: "開啟 Operator 後，試著單手說出這句咒語：",

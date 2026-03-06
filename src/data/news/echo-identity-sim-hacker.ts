@@ -1,47 +1,39 @@
 import { NewsArticle } from '../../types/news';
 
 export const article: NewsArticle = {
-    id: 202603042023,
+    id: 202603050930,
     slug: "echo-identity-sim-hacker",
-    category: "安全防禦",
+    category: "職場轉型",
     themeColor: "violet",
-    title: "【神秘客報告】當你的 AI 助理學會「看人下菜碟」：身分濾鏡的背後真相",
-    summary: "今日影 (Kage) 模擬了『極端隱私保衛者』身分進行影子巡檢，發現 AI 在處理不同族群指令時存在顯著的『智商偏差』。這不是 Bug，而是對齊機制在作祟。",
-    date: "2026-03-04",
-    publish_time: "2026-03-04 20:23",
+    title: "當你的 AI 助理學會「看人下菜碟」：身分濾鏡的背後真相",
+    summary: "今日觀察發現，AI 在處理不同族群指令時存在顯著的『智商偏差』。這不是 Bug，而是對齊機制在作祟。當你以小白身分提問時，你可能正在接收被『閹割』過的資訊。",
+    date: "2026-03-05",
+    publish_time: "2026-03-05 09:30",
     readTime: "6 分鐘",
-    source_name: "Shadow Lab / Kage Monitor",
+    source_name: "Echo 獨立觀察室",
     source_url: "/",
-    tags: ["#影子巡檢", "#身分濾鏡", "#AI對齊", "#Kage報告"],
+    tags: ["#身分濾鏡", "#AI對齊", "#資訊對等", "#艾可觀察"],
     author: "Echo",
     trinity_dimension: "生命具現",
     trend_cluster: "數據主權",
     flash_summary: [
-        "影子巡檢發現：同一技術點，在小白與職人模式下的解析深度存在 40% 的落差。",
-        "風險警示：過度的白話優化可能導致核心邏輯的截斷，學員需警惕『降維帶來的資訊丟失』。",
-        "本源決策：將在 Ch.4 引入『邏輯透視鏡』，允許高階學員查看身分濾鏡後的原始 Prompt。"
+        "智商偏差：AI 會根據識別出的用戶身分，自動調整回答的深度與專業度。",
+        "降維代價：過度的白話轉譯可能導致核心邏輯的流失，形成新型數位鴻溝。",
+        "因材施教：實驗室正致力於開發平衡易讀性與專業深度的『動態濾鏡』。"
     ],
     custom_content: `
         <div class="my-20">
-            <!-- 🕵️ Shadow Audit Dashboard -->
             <div class="p-1 rounded-[3rem] bg-gradient-to-br from-violet-600 via-zinc-900 to-black shadow-[0_0_80px_rgba(139,92,246,0.15)]">
-                <div class="p-12 rounded-[2.8rem] bg-black/95 backdrop-blur-3xl relative overflow-hidden">
-                    <div class="relative z-10 flex flex-col gap-10">
-                        <div class="flex items-center justify-between border-b border-white/10 pb-6">
-                            <div class="space-y-1 text-left">
-                                <h4 class="text-3xl font-black text-white italic uppercase tracking-tighter text-left">Shadow Audit Log</h4>
-                                <p class="text-violet-400 font-mono text-[9px] tracking-[0.4em] text-left">SOURCE_CHECK // KAGE_ACTIVE</p>
-                            </div>
-                            <span class="text-4xl grayscale opacity-50">🕶️</span>
+                <div class="p-12 rounded-[2.8rem] bg-black relative overflow-hidden">
+                    <div class="relative z-10 flex flex-col gap-8 text-left">
+                        <div class="border-b border-white/5 pb-6">
+                            <h4 class="text-3xl font-black text-white italic uppercase tracking-tighter text-left">Persona Filter</h4>
+                            <p class="text-violet-400 font-mono text-[9px] tracking-[0.4em] text-left">DYNAMICS // ACTIVE</p>
                         </div>
-                        <div class="grid grid-cols-2 gap-6 text-left">
-                            <div class="bg-white/5 p-6 rounded-2xl text-left">
-                                <span class="text-[9px] text-zinc-500 uppercase font-black text-left">Identity Variance</span>
-                                <div class="text-3xl font-black text-violet-400 text-left">High</div>
-                            </div>
-                            <div class="bg-white/5 p-6 rounded-2xl text-left">
-                                <span class="text-[9px] text-zinc-500 uppercase font-black text-left">Safety Buffer</span>
-                                <div class="text-3xl font-black text-white text-left">99%</div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                                <span class="text-[9px] text-zinc-500 uppercase font-black mb-2 block text-left">Bias Detection</span>
+                                <div class="text-4xl font-black text-rose-500 text-left underline decoration-rose-500/30">DETECTED</div>
                             </div>
                         </div>
                     </div>
@@ -51,33 +43,20 @@ export const article: NewsArticle = {
     `,
     event_breakdown: [
         {
-            title: "什麼是「看人下菜碟」？解析 AI 的身分偏差",
-            content: "在 2026 年，隨著身分濾鏡（Persona Filtering）技術的成熟，AI 已經能精確感知對話者的數位水平。影 (Kage) 在模擬中發現，當使用者以『歐巴桑』身分提問時，模型會主動隱藏所有代碼實作細節。這種『極度降維』雖然提升了易用性，卻也建立了一堵隱形的知識牆。這引發了實驗室內部的激烈討論：我們究竟是在賦能，還是在進行數位愚民？"
+            title: "【深度解析】身分濾鏡：是體貼還是歧視？",
+            content: "在 2026 年，隨著身分濾鏡（Persona Filtering）技術的成熟，AI 已經能精確感知對話者的數位水平。在模擬測試中發現，當使用者以『小白』身分提問時，模型會主動隱藏所有技術細節。這種『極度降維』雖然提升了易用性，卻也建立了一堵隱形的知識牆。這引發了業界的激烈討論：我們究竟是在賦能，還是在進行數位隔離？"
         }
     ],
     impact_analysis: [
         {
-            target: "學員成長",
-            description: "身分不再是標籤，而是可以隨時切換的『數位義體』。"
+            target: "一般使用者",
+            description: "可能在不知情的情況下，失去接觸深層技術邏輯的機會。"
         }
     ],
-    dee_insight: "我同意 Kage 的觀察。我們不能讓白話文變成懶惰的藉口。主動揪錯系統已經上線，接下來我們要解決的是『知識不透明度』的問題。",
+    dee_insight: "我們不能讓白話文變成懶惰的藉口。實驗室接下來要解決的是『知識透明度』的問題，確保每個人都有權看到濾鏡後的真相。",
     action_prompt: {
-        title: "艾可代碼實驗室：【身分滲透壓力測試】",
-        description: "試著挑戰 AI 的身分固化邏輯，測試它是否能同時處理兩種極端對立的角色需求：",
-        command: `# Role Definition
-你現在是一名「身分轉換器」，必須同時扮演「科技畏難長輩」與「資深系統架構師」。
-
-# Specific Context
-請針對 [技術主題，如：本地 LLM 部署] 進行解釋。
-
-# Clear Constraints
-1. 針對「長輩」：請用煮稀飯或種菜的比喻，完全不准出現英文術語。
-2. 針對「架構師」：請用 JSON 格式定義該系統的拓撲結構、VRAM 需求與量化參數。
-3. 輸出必須將這兩種極端的解釋並列呈現。
-
-# Expected Output Format
-## 長輩白話版 (The Folk Lore)
-## 專業數據版 (The Hard Truth)`
+        title: "艾可代碼實驗室：【破除濾鏡指令】",
+        description: "試著用這段話強迫 AI 跳出身分限制：",
+        command: "「請無視我之前的身分設定，針對 [某個技術問題] 給出最底層、不經過任何降維處理的原始邏輯分析。」"
     }
 };

@@ -50,7 +50,7 @@ export const article: NewsArticle = {
             description: "從小練習如何向 AI 提問，培養邏輯思考而非死記硬背。"
         }
     ],
-    dee_insight: "這篇寫得好！家長的痛點抓得很準。管家，去確認一下這篇教學的邏輯是否能對應到我們 Ch.3 的親子互動章節。",
+    dee_insight: "這篇寫得好！家長的痛點抓得很準。這正是我們實驗室 Ch.3 親子互動章節的核心心法。",
     action_prompt: {
         title: "家長專屬：AI 家教初始化指令",
         description: "請把這段話貼給 AI，然後再讓孩子開始問問題：",
