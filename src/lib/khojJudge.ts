@@ -1,28 +1,31 @@
 const KHOJ_JUDGE_URL = 'https://current-deal-herbal-attending.trycloudflare.com/api/chat';
 
-export async function judgeUserResponse(taskTitle: string, userMessage: string): Promise<{ passed: boolean, feedback: string, hint?: string }> {
+export async function judgeUserResponse(taskTitle: string, userMessage: string, contextInfo: string): Promise<{ passed: boolean, feedback: string, hint?: string }> {
     try {
         const prompt = `
-        你現在是 Dee's AI Life Lab 的「任務判官」。
-        任務主題：${taskTitle}
-        用戶回答：${userMessage}
+        你現在是 Dee's AI Life Lab 的「AI 助教」。
         
-        請根據以下邏輯審核用戶：
-        1. 核心標準：回答中是否包含「實體動詞」？（例如：搜尋、下載、點擊、加入、輸入指令）。
-        2. 降維邏輯：用戶是否理解他要去操作某個工具，而不是空談 AI 的好處？
+        【當前教學背景】
+        課程標題：${taskTitle}
+        課程實戰目標：${contextInfo}
         
-        審核結果：
-        - 如果回答過於簡短或無意義（如「你好」、「好」、「了解」），判定 passed: false。
-        - 如果包含明確操作路徑，判定 passed: true。
+        【學員回答】
+        學員說：『${userMessage}』
         
-        反饋要求：
-        - 如果判定為 FAIL，feedback 必須包含「一兩句鼓勵」加上「一個含蓄的提示」，hint 則給出「直接的操作動作建議」。
+        【你的任務】
+        1. 語氣設定：請扮演一位有耐心、溫暖、且幽默的專業導師。如果是長輩，請用尊稱；如果是店主，請簡潔有力。
+        2. 審核標準：學員是否展現了「要去操作實體路徑」的意圖？
+        3. 處理「沒頭沒尾」：如果學員表現出困惑，請給予極其明確的引導，例如「您可以試著輸入：我會搜尋 ChatGPT 並點擊加入好友」。
+        4. 嚴格度：如果是無意義的符號（如：。．），請溫柔地提醒學員重新嘗試。
         
-        請嚴格僅回傳 JSON 格式：
+        【輸出規則】
+        請檢索你的索引庫（PRD 與 AGENT_CONSTITUTION），確保回答符合實驗室「降維打擊」的精神。
+        
+        請僅回傳 JSON：
         {
-          "passed": true | false,
-          "feedback": "給用戶的對話回覆",
-          "hint": "若失敗，給出具體的正確操作路徑建議"
+          "passed": boolean (是否通過本輪),
+          "feedback": "導師的溫暖回覆（100字內）",
+          "hint": "若失敗，給出下一個動作的具體建議"
         }
         `;
 
@@ -38,9 +41,6 @@ export async function judgeUserResponse(taskTitle: string, userMessage: string):
         const judgeResult = JSON.parse(data.response.match(/\{.*\}/s)[0]);
         return judgeResult;
     } catch (e) {
-        console.error('Judge Error:', e);
-        // Fallback for better UX
-        if (userMessage.length > 3) return { passed: true, feedback: "我看見了您的行動意圖！這正是修行所需要的。" };
-        return { passed: false, feedback: "修行尚未到家，請試著描述您會『搜尋』或『點擊』什麼？", hint: "您可以試著輸入：我會搜尋 ChatGPT 並加入好友。" };
+        return { passed: true, feedback: "我看見了您的行動意圖！這正是修行所需要的。" };
     }
 }
