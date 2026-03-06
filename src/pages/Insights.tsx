@@ -3,7 +3,8 @@ import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
     ArrowRight, Zap, Clock, Star, Info, Filter, Search, X, 
-    Map as MapIcon, ChevronDown, ChevronRight, CheckCircle2, User, Sparkles
+    Map as MapIcon, ChevronDown, ChevronRight, CheckCircle2, User, Sparkles,
+    Settings2
 } from 'lucide-react';
 import { CHAPTERS, MAIN_QUEST_ORDER, INSIGHTS_LIST } from '../data/insights';
 import SEO from '../components/ui/SEO';
@@ -126,9 +127,11 @@ const TutorialCard = ({ tutorial, idx }: any) => {
 
 const Insights = () => {
     const { persona, setPersona } = useIdentity();
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
+    const [isPersonaMenuOpen, setIsPersonaMenuOpen] = useState(false);
     
+    // 從 URL 或本地同步身分
     useEffect(() => {
         const personaFromUrl = searchParams.get('persona');
         if (personaFromUrl && PERSONAS[personaFromUrl as UserPersona]) {
@@ -183,6 +186,12 @@ const Insights = () => {
         });
     };
 
+    const handlePersonaChange = (pId: string) => {
+        setPersona(pId as UserPersona);
+        setSearchParams({ persona: pId });
+        setIsPersonaMenuOpen(false);
+    };
+
     if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse">INITIALIZING...</div>;
 
     const currentPersona = PERSONAS[persona as UserPersona] || PERSONAS.senior;
@@ -198,7 +207,7 @@ const Insights = () => {
                     </div>
                     <div className="text-left">
                         <h1 className="text-3xl font-black text-white tracking-tighter">AI 修煉地圖</h1>
-                        <span className="text-emerald-500/60 font-mono text-[10px] tracking-[0.4em] uppercase block">進化引擎：Phase 1</span>
+                        <span className="text-emerald-500/60 font-mono text-[10px] tracking-[0.4em] uppercase block">自動適配系統已啟用</span>
                     </div>
                 </div>
                 <div className="bg-black/40 p-1.5 rounded-2xl border border-white/[0.08] flex items-center shadow-inner">
@@ -207,20 +216,62 @@ const Insights = () => {
                 </div>
             </div>
 
-            {/* 身分狀態列 & 族群專屬推薦 */}
+            {/* 🚀 [方案三 & 六] 強化：教學頁面身分切換器 */}
             <div className="mb-16 space-y-8">
-                <div className="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
-                    <div className="flex items-center gap-6 text-left">
-                        <div className={`w-16 h-16 rounded-2xl bg-${currentPersona.color}-500/20 border border-${currentPersona.color}-500/30 flex items-center justify-center text-${currentPersona.color}-400 shadow-lg`}>
-                            {React.createElement(currentPersona.icon, { size: 32 })}
+                <div className="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-sm relative">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div className="flex items-center gap-6 text-left">
+                            <div className={`w-16 h-16 rounded-2xl bg-${currentPersona.color}-500/20 border border-${currentPersona.color}-500/30 flex items-center justify-center text-${currentPersona.color}-400 shadow-lg`}>
+                                {React.createElement(currentPersona.icon, { size: 32 })}
+                            </div>
+                            <div className="text-left">
+                                <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-1">當前修煉身分</span>
+                                <div className="flex items-center gap-3">
+                                    <h3 className="text-white font-black text-2xl">{currentPersona.label}</h3>
+                                    <span className={`px-3 py-0.5 rounded-full bg-${currentPersona.color}-500/10 text-${currentPersona.color}-500 text-[10px] font-black border border-${currentPersona.color}-500/20`}>{currentPersona.quest_line}</span>
+                                </div>
+                                <p className="text-zinc-500 text-xs mt-1 font-medium italic">💡 為您過濾：{currentPersona.description}</p>
+                            </div>
                         </div>
-                        <div className="text-left">
-                            <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-1">當前修煉身分</span>
-                            <h3 className="text-white font-black text-2xl">{currentPersona.label}</h3>
-                            <p className="text-zinc-500 text-xs mt-1 font-medium italic">💡 系統已為您代入：{currentPersona.description}</p>
+                        
+                        <div className="relative">
+                            <button 
+                                onClick={() => setIsPersonaMenuOpen(!isPersonaMenuOpen)}
+                                className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-xs font-black hover:bg-white/10 transition-all text-white"
+                            >
+                                <Settings2 size={14} /> 切換身分
+                            </button>
+
+                            <AnimatePresence>
+                                {isPersonaMenuOpen && (
+                                    <motion.div 
+                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        className="absolute top-full right-0 mt-4 w-72 bg-zinc-900 border border-white/10 rounded-3xl shadow-2xl z-50 overflow-hidden"
+                                    >
+                                        <div className="p-4 grid grid-cols-1 gap-2">
+                                            {Object.values(PERSONAS).map((p) => (
+                                                <button
+                                                    key={p.id}
+                                                    onClick={() => handlePersonaChange(p.id)}
+                                                    className={`flex items-center gap-4 p-4 rounded-2xl transition-all text-left group ${persona === p.id ? 'bg-white/10' : 'hover:bg-white/5'}`}
+                                                >
+                                                    <div className={`w-10 h-10 rounded-xl bg-${p.color}-500/20 flex items-center justify-center text-${p.color}-400`}>
+                                                        {React.createElement(p.icon, { size: 20 })}
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-white font-bold text-sm">{p.label}</p>
+                                                        <p className="text-[10px] text-zinc-500 truncate w-40">{p.description}</p>
+                                                    </div>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
                     </div>
-                    <button onClick={() => navigate('/')} className="px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-xs font-black hover:bg-white/10 transition-all">切換身分</button>
                 </div>
 
                 {personaTutorials.length > 0 && (
