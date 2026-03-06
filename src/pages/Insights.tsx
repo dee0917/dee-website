@@ -3,12 +3,13 @@ import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
     ArrowRight, Zap, Clock, Star, Info, Filter, Search, X, 
-    Map as MapIcon, ChevronDown, ChevronRight, CheckCircle2, User
+    Map as MapIcon, ChevronDown, ChevronRight, CheckCircle2, User, Sparkles
 } from 'lucide-react';
 import { CHAPTERS, MAIN_QUEST_ORDER, INSIGHTS_LIST } from '../data/insights';
 import SEO from '../components/ui/SEO';
 import { useIdentity } from '../context/IdentityContext';
-import { PERSONAS } from '../data/personas';
+import { PERSONAS, UserPersona } from '../data/personas';
+import { NEWS_ARTICLES } from '../data/news';
 
 const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExpanded, onToggle, index }: any) => {
     return (
@@ -90,8 +91,51 @@ const InsightCard = ({ insight, idx, completed }: any) => {
     );
 };
 
+const TutorialCard = ({ tutorial, idx }: any) => {
+    return (
+        <Link to={`/news/${tutorial.slug}`} className="block h-full">
+            <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }} 
+                animate={{ opacity: 1, scale: 1 }} 
+                transition={{ delay: idx * 0.1 }}
+                className="p-8 rounded-[3rem] bg-gradient-to-br from-zinc-900 to-black border-2 border-white/5 hover:border-emerald-500/30 transition-all group relative overflow-hidden h-full"
+            >
+                <div className="absolute -top-4 -right-4 w-24 h-24 bg-emerald-500/10 blur-3xl rounded-full group-hover:bg-emerald-500/20 transition-all"></div>
+                
+                <div className="relative z-10 text-left">
+                    <div className="flex items-center justify-between mb-6">
+                        <span className="px-4 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-[10px] font-black uppercase tracking-[0.2em]">
+                            {tutorial.difficulty || 1} 星修煉
+                        </span>
+                        <Sparkles size={16} className="text-emerald-500 animate-pulse" />
+                    </div>
+                    <h3 className="text-2xl font-black text-white tracking-tighter mb-4 group-hover:text-emerald-400 transition-colors">
+                        {tutorial.title}
+                    </h3>
+                    <p className="text-zinc-500 text-sm leading-relaxed mb-8 line-clamp-2">
+                        {tutorial.summary}
+                    </p>
+                    <div className="flex items-center gap-2 text-white font-black text-[10px] uppercase tracking-widest">
+                        立即開始實踐 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </div>
+                </div>
+            </motion.div>
+        </Link>
+    );
+};
+
 const Insights = () => {
     const { persona, setPersona } = useIdentity();
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        const personaFromUrl = searchParams.get('persona');
+        if (personaFromUrl && PERSONAS[personaFromUrl as UserPersona]) {
+            setPersona(personaFromUrl as UserPersona);
+        }
+    }, [searchParams, setPersona]);
+
     const [viewMode, setViewMode] = useState<'adventure' | 'free'>('adventure');
     const [loading, setLoading] = useState(true);
     const [completedIds, setCompletedIds] = useState<number[]>([]);
@@ -105,6 +149,13 @@ const Insights = () => {
         }
         setLoading(false);
     }, []);
+
+    const personaTutorials = useMemo(() => {
+        return NEWS_ARTICLES.filter(article => 
+            (article.target_persona?.includes(persona)) || 
+            (persona === 'general' && article.difficulty && article.difficulty <= 2)
+        );
+    }, [persona]);
 
     const filteredInsights = useMemo(() => {
         let items = [...INSIGHTS_LIST];
@@ -134,7 +185,7 @@ const Insights = () => {
 
     if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse">INITIALIZING...</div>;
 
-    const currentPersona = PERSONAS[persona] || PERSONAS.general;
+    const currentPersona = PERSONAS[persona as UserPersona] || PERSONAS.senior;
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-48 pb-20 px-6 max-w-7xl mx-auto min-h-screen relative z-0">
@@ -145,9 +196,9 @@ const Insights = () => {
                     <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shadow-lg">
                         <MapIcon size={24} className="text-emerald-400" />
                     </div>
-                    <div>
+                    <div className="text-left">
                         <h1 className="text-3xl font-black text-white tracking-tighter">AI 修煉地圖</h1>
-                        <span className="text-emerald-500/60 font-mono text-[10px] tracking-[0.4em] uppercase block">經典模式恢復</span>
+                        <span className="text-emerald-500/60 font-mono text-[10px] tracking-[0.4em] uppercase block">進化引擎：Phase 1</span>
                     </div>
                 </div>
                 <div className="bg-black/40 p-1.5 rounded-2xl border border-white/[0.08] flex items-center shadow-inner">
@@ -156,18 +207,35 @@ const Insights = () => {
                 </div>
             </div>
 
-            {/* 身分狀態列 */}
-            <div className="mb-16 p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div className="flex items-center gap-6 text-left">
-                    <div className={`w-16 h-16 rounded-2xl bg-${currentPersona.color}-500/20 border border-${currentPersona.color}-500/30 flex items-center justify-center text-${currentPersona.color}-400 shadow-lg`}>
-                        {React.createElement(currentPersona.icon, { size: 32 })}
+            {/* 身分狀態列 & 族群專屬推薦 */}
+            <div className="mb-16 space-y-8">
+                <div className="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div className="flex items-center gap-6 text-left">
+                        <div className={`w-16 h-16 rounded-2xl bg-${currentPersona.color}-500/20 border border-${currentPersona.color}-500/30 flex items-center justify-center text-${currentPersona.color}-400 shadow-lg`}>
+                            {React.createElement(currentPersona.icon, { size: 32 })}
+                        </div>
+                        <div className="text-left">
+                            <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-1">當前修煉身分</span>
+                            <h3 className="text-white font-black text-2xl">{currentPersona.label}</h3>
+                            <p className="text-zinc-500 text-xs mt-1 font-medium italic">💡 系統已為您代入：{currentPersona.description}</p>
+                        </div>
                     </div>
-                    <div>
-                        <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-1">當前修煉身分</span>
-                        <h3 className="text-white font-black text-2xl">{currentPersona.label}</h3>
-                        <p className="text-zinc-500 text-xs mt-1 font-medium italic">💡 系統已為您代入：{currentPersona.description}</p>
-                    </div>
+                    <button onClick={() => navigate('/')} className="px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-xs font-black hover:bg-white/10 transition-all">切換身分</button>
                 </div>
+
+                {personaTutorials.length > 0 && (
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-left">
+                        <div className="flex items-center gap-3 mb-8">
+                            <Sparkles className="text-emerald-500" size={20} />
+                            <h2 className="text-xl font-black text-white uppercase tracking-tighter">為您推薦的實踐劇本</h2>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {personaTutorials.map((tutorial, idx) => (
+                                <TutorialCard key={tutorial.id} tutorial={tutorial} idx={idx} />
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
             </div>
 
             {viewMode === 'adventure' ? (
