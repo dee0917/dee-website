@@ -1,177 +1,92 @@
-import { NewsArticle } from '../../types/news';
-import { article as anthropicStandoff } from './anthropic-pentagon-standoff-2026';
-import { article as arxivSeeThrough3D } from './arxiv-2602-23359-seethrough3d';
-import { article as arxivAiTrading } from './arxiv-ai-trading-multi-agent';
-import { article as echoAgencyAgentsTide } from './echo-agency-agents-tide';
-import { article as agentResilience } from './echo-agent-contextual-pressure';
-import { article as echoAgentGossip } from './echo-agent-gossip-discontinuity';
-import { article as echoInsomnia } from './echo-agent-insomnia';
-import { article as echoAiEmotionalPremium } from './echo-ai-emotional-premium';
-import { article as echoAiHumanity } from './echo-ai-humanity-test';
-import { article as echoSlop } from './echo-ai-slop-kids-insult-2026';
-import { article as echoDareBench } from './echo-dare-bench-audit';
-import { article as echoFunAiGame } from './echo-fun-ai-game-playing';
-import { article as gitNexusTool } from './echo-fun-gitnexus-tool';
-import { article as echoFunPerplexity } from './echo-fun-perplexity-computer-agent';
-import { article as echoIdentitySimHacker } from './echo-identity-sim-hacker';
-import { article as echoLabChronicle } from './echo-lab-chronicle';
-import { article as echoModelRanking } from './echo-model-ranking-2026';
-import { article as echoAgiLeaver } from './echo-observation-2026-agi-leaver';
-import { article as aiPhilosopher } from './echo-observation-ai-philosopher';
-import { article as echoOpenaiFigma } from './echo-openai-figma';
-import { article as echoPentagon } from './echo-pentagon-anthropic-openai';
-import { article as echoPentagonChaos } from './echo-pentagon-openai-anthropic-chaos';
-import { article as echoPentagonWar } from './echo-pentagon-war-department';
-import { article as echoPrivacyPromptScanning } from './echo-privacy-prompt-scanning';
-import { article as echoSlangAgentHaggling } from './echo-slang-agent-haggling';
-import { article as echoSlangAgentSelfGrowth } from './echo-slang-agent-self-growth';
-import { article as agentRace } from './echo-slang-agent-skills-race';
-import { article as memoryEngram } from './echo-slang-ai-memory-engram';
-import { article as codetasteAudit } from './echo-slang-codetaste-audit';
-import { article as echoJuicerV2 } from './echo-slang-compute-juicer-v2';
-import { article as echoSlangJuicer } from './echo-slang-compute-juicer';
-import { article as echoSlangBunny } from './echo-slang-prompt-bunny';
-import { article as vibeCoding } from './echo-slang-vibe-coding';
-import { article as firefoxAi } from './firefox-ai-privacy';
-import { article as githubAIRI } from './github-trending-airi-digital-life';
-import { article as githubMarkItDown } from './github-trending-markitdown';
-import { article as githubOpenFang } from './github-trending-openfang-agent-os';
-import { article as githubRuflo } from './github-trending-ruflo';
-import { article as githubVPhone } from './github-trending-vphone-cli';
-import { article as githubWiFiDensePose } from './github-trending-wifi-densepose';
-import { article as googleTpu } from './google-tpu-market';
-import { article as jobpocalypse } from './jobpocalypse-warning';
-import { article as newbieDailyHacks } from './newbie-ai-daily-hacks';
-import { article as newbieAISearch } from './newbie-ai-search';
-import { article as seniorChatAi } from './news-senior-chat-ai-comparison';
-import { article as openaiPentagonAgreement } from './openai-pentagon-classified-agreement-2026';
-import { article as openclawYc } from './openclaw-yc-interview';
-import { article as aiSkillSop } from './real-tech-ai-skill-management-sop';
-import { article as aiSlopSurvival } from './real-tech-ai-slop-survival';
-import { article as airiGithub } from './real-tech-airi-github';
-import { article as airiSoul } from './real-tech-airi-soul';
-import { article as anthropicTrumpConflict } from './real-tech-anthropic-trump-conflict';
-import { article as appleIphone17e } from './real-tech-apple-iphone-17e';
-import { article as appleRevolut } from './real-tech-apple-revolut-infrastructure';
-import { article as claudeCodeMemory } from './real-tech-claude-code-memory';
-import { article as claudeCoworkVM } from './real-tech-claude-cowork-vm';
-import { article as refactorTrap } from './real-tech-code-refactor-trap';
-import { article as realTechDeepseekDeepSync } from './real-tech-deepseek-deep-sync';
-import { article as deepseekLogicV3 } from './real-tech-deepseek-logic-v3';
-import { article as realTechDeepseekR2VisualLogic } from './real-tech-deepseek-r2-visual-logic';
-import { article as deepseekR2Rev } from './real-tech-deepseek-r2-visual-revolution';
-import { article as deepseekV4Distill } from './real-tech-deepseek-v4-distill';
-import { article as deepseekIde } from './real-tech-deepseek-v4-ide-integration';
-import { article as deepseekV4IntentBlackhole } from './real-tech-deepseek-v4-intent-blackhole';
-import { article as deepseekV4Intent } from './real-tech-deepseek-v4-intent';
-import { article as deepseekV4 } from './real-tech-deepseek-v4';
-import { article as geminiLiveOverlay } from './real-tech-google-gemini-live-overlay';
-import { article as googleTranslateGemini } from './real-tech-google-translate-gemini';
-import { article as gpt53Release } from './real-tech-gpt-5-3-instant-release';
-import { article as realTechKokoroCloneBreakthrough } from './real-tech-kokoro-clone-breakthrough';
-import { article as manusAiMeta } from './real-tech-manus-ai-meta';
-import { article as metaAmdDeal } from './real-tech-meta-amd-deal';
-import { article as metaLegislative } from './real-tech-meta-legislative-spend';
-import { article as nasaAi } from './real-tech-nasa-ai';
-import { article as openaiOperatorMerchant } from './real-tech-openai-operator-merchant';
-import { article as openclawTopsReact } from './real-tech-openclaw-tops-react';
-import { article as realTechPerplexityWhatsappSynergy } from './real-tech-perplexity-whatsapp-synergy';
-import { article as realTechProductivityReport2026 } from './real-tech-productivity-report-2026';
-import { article as realTechSupersetAgentIde } from './real-tech-superset-agent-ide';
-import { article as realTechWifiDenseposeVision } from './real-tech-wifi-densepose-vision';
-import { article as realTechWiFi } from './real-tech-wifi-densepose';
-import { article as realTechWifiVisionRuview } from './real-tech-wifi-vision-ruview';
-import { article as tutorialAiri } from './tutorial-airi-minecraft-parent';
-import { article as khojBrain } from './tutorial-khoj-ai-second-brain';
-import { article as parentTutor } from './tutorial-parent-ai-tutor';
-import { article as seniorVoice } from './tutorial-senior-voice-line';
+import { article as a0 } from './anthropic-pentagon-standoff-2026';
+import { article as a1 } from './arxiv-2602-23359-seethrough3d';
+import { article as a2 } from './arxiv-ai-trading-multi-agent';
+import { article as a3 } from './echo-agency-agents-tide';
+import { article as a4 } from './echo-agent-contextual-pressure';
+import { article as a5 } from './echo-agent-gossip-discontinuity';
+import { article as a6 } from './echo-agent-insomnia';
+import { article as a7 } from './echo-ai-emotional-premium';
+import { article as a8 } from './echo-ai-humanity-test';
+import { article as a9 } from './echo-ai-slop-kids-insult-2026';
+import { article as a10 } from './echo-dare-bench-audit';
+import { article as a11 } from './echo-fun-ai-game-playing';
+import { article as a12 } from './echo-fun-gitnexus-tool';
+import { article as a13 } from './echo-fun-perplexity-computer-agent';
+import { article as a14 } from './echo-identity-sim-hacker';
+import { article as a15 } from './echo-lab-chronicle';
+import { article as a16 } from './echo-model-ranking-2026';
+import { article as a17 } from './echo-observation-2026-agi-leaver';
+import { article as a18 } from './echo-observation-ai-philosopher';
+import { article as a19 } from './echo-openai-figma';
+import { article as a20 } from './echo-pentagon-anthropic-openai';
+import { article as a21 } from './echo-pentagon-openai-anthropic-chaos';
+import { article as a22 } from './echo-pentagon-war-department';
+import { article as a23 } from './echo-privacy-prompt-scanning';
+import { article as a24 } from './echo-slang-agent-haggling';
+import { article as a25 } from './echo-slang-agent-self-growth';
+import { article as a26 } from './echo-slang-agent-skills-race';
+import { article as a27 } from './echo-slang-ai-memory-engram';
+import { article as a28 } from './echo-slang-codetaste-audit';
+import { article as a29 } from './echo-slang-compute-juicer-v2';
+import { article as a30 } from './echo-slang-compute-juicer';
+import { article as a31 } from './echo-slang-prompt-bunny';
+import { article as a32 } from './echo-slang-vibe-coding';
+import { article as a33 } from './firefox-ai-privacy';
+import { article as a34 } from './github-trending-airi-digital-life';
+import { article as a35 } from './github-trending-markitdown';
+import { article as a36 } from './github-trending-openfang-agent-os';
+import { article as a37 } from './github-trending-ruflo';
+import { article as a38 } from './github-trending-vphone-cli';
+import { article as a39 } from './github-trending-wifi-densepose';
+import { article as a40 } from './google-tpu-market';
+import { article as a41 } from './jobpocalypse-warning';
+import { article as a42 } from './newbie-ai-daily-hacks';
+import { article as a43 } from './newbie-ai-search';
+import { article as a44 } from './news-senior-chat-ai-comparison';
+import { article as a45 } from './openai-pentagon-classified-agreement-2026';
+import { article as a46 } from './openclaw-yc-interview';
+import { article as a47 } from './real-tech-ai-skill-management-sop';
+import { article as a48 } from './real-tech-ai-slop-survival';
+import { article as a49 } from './real-tech-airi-github';
+import { article as a50 } from './real-tech-airi-soul';
+import { article as a51 } from './real-tech-anthropic-trump-conflict';
+import { article as a52 } from './real-tech-apple-iphone-17e';
+import { article as a53 } from './real-tech-apple-revolut-infrastructure';
+import { article as a54 } from './real-tech-claude-code-memory';
+import { article as a55 } from './real-tech-claude-cowork-vm';
+import { article as a56 } from './real-tech-code-refactor-trap';
+import { article as a57 } from './real-tech-deepseek-deep-sync';
+import { article as a58 } from './real-tech-deepseek-logic-v3';
+import { article as a59 } from './real-tech-deepseek-r2-visual-logic';
+import { article as a60 } from './real-tech-deepseek-r2-visual-revolution';
+import { article as a61 } from './real-tech-deepseek-v4-distill';
+import { article as a62 } from './real-tech-deepseek-v4-ide-integration';
+import { article as a63 } from './real-tech-deepseek-v4-intent-blackhole';
+import { article as a64 } from './real-tech-deepseek-v4-intent';
+import { article as a65 } from './real-tech-deepseek-v4';
+import { article as a66 } from './real-tech-google-gemini-live-overlay';
+import { article as a67 } from './real-tech-google-translate-gemini';
+import { article as a68 } from './real-tech-gpt-5-3-instant-release';
+import { article as a69 } from './real-tech-kokoro-clone-breakthrough';
+import { article as a70 } from './real-tech-manus-ai-meta';
+import { article as a71 } from './real-tech-meta-amd-deal';
+import { article as a72 } from './real-tech-meta-legislative-spend';
+import { article as a73 } from './real-tech-nasa-ai';
+import { article as a74 } from './real-tech-openai-operator-merchant';
+import { article as a75 } from './real-tech-openclaw-tops-react';
+import { article as a76 } from './real-tech-perplexity-whatsapp-synergy';
+import { article as a77 } from './real-tech-productivity-report-2026';
+import { article as a78 } from './real-tech-superset-agent-ide';
+import { article as a79 } from './real-tech-wifi-densepose-vision';
+import { article as a80 } from './real-tech-wifi-densepose';
+import { article as a81 } from './real-tech-wifi-vision-ruview';
+import { article as a82 } from './tutorial-airi-minecraft-parent';
+import { article as a83 } from './tutorial-khoj-ai-second-brain';
+import { article as a84 } from './tutorial-parent-ai-tutor';
+import { article as a85 } from './tutorial-senior-voice-line';
 
-// 🚀 EVOLUTION ENGINE V1: 難度優先排列，確保小白入口最顯眼
-export const NEWS_ARTICLES: NewsArticle[] = [
-    anthropicStandoff,
-    arxivSeeThrough3D,
-    arxivAiTrading,
-    echoAgencyAgentsTide,
-    agentResilience,
-    echoAgentGossip,
-    echoInsomnia,
-    echoAiEmotionalPremium,
-    echoAiHumanity,
-    echoSlop,
-    echoDareBench,
-    echoFunAiGame,
-    gitNexusTool,
-    echoFunPerplexity,
-    echoIdentitySimHacker,
-    echoLabChronicle,
-    echoModelRanking,
-    echoAgiLeaver,
-    aiPhilosopher,
-    echoOpenaiFigma,
-    echoPentagon,
-    echoPentagonChaos,
-    echoPentagonWar,
-    echoPrivacyPromptScanning,
-    echoSlangAgentHaggling,
-    echoSlangAgentSelfGrowth,
-    agentRace,
-    memoryEngram,
-    codetasteAudit,
-    echoJuicerV2,
-    echoSlangJuicer,
-    echoSlangBunny,
-    vibeCoding,
-    firefoxAi,
-    githubAIRI,
-    githubMarkItDown,
-    githubOpenFang,
-    githubRuflo,
-    githubVPhone,
-    githubWiFiDensePose,
-    googleTpu,
-    jobpocalypse,
-    newbieDailyHacks,
-    newbieAISearch,
-    seniorChatAi,
-    openaiPentagonAgreement,
-    openclawYc,
-    aiSkillSop,
-    aiSlopSurvival,
-    airiGithub,
-    airiSoul,
-    anthropicTrumpConflict,
-    appleIphone17e,
-    appleRevolut,
-    claudeCodeMemory,
-    claudeCoworkVM,
-    refactorTrap,
-    realTechDeepseekDeepSync,
-    deepseekLogicV3,
-    realTechDeepseekR2VisualLogic,
-    deepseekR2Rev,
-    deepseekV4Distill,
-    deepseekIde,
-    deepseekV4IntentBlackhole,
-    deepseekV4Intent,
-    deepseekV4,
-    geminiLiveOverlay,
-    googleTranslateGemini,
-    gpt53Release,
-    realTechKokoroCloneBreakthrough,
-    manusAiMeta,
-    metaAmdDeal,
-    metaLegislative,
-    nasaAi,
-    openaiOperatorMerchant,
-    openclawTopsReact,
-    realTechPerplexityWhatsappSynergy,
-    realTechProductivityReport2026,
-    realTechSupersetAgentIde,
-    realTechWifiDenseposeVision,
-    realTechWiFi,
-    realTechWifiVisionRuview,
-    tutorialAiri,
-    khojBrain,
-    parentTutor,
-    seniorVoice
+export const NEWS_LIST = [
+    a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40, a41, a42, a43, a44, a45, a46, a47, a48, a49, a50, a51, a52, a53, a54, a55, a56, a57, a58, a59, a60, a61, a62, a63, a64, a65, a66, a67, a68, a69, a70, a71, a72, a73, a74, a75, a76, a77, a78, a79, a80, a81, a82, a83, a84, a85
 ].sort((a, b) => b.id - a.id);
+
+export const NEWS_ARTICLES = NEWS_LIST;

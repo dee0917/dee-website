@@ -60,6 +60,7 @@ export const article: NewsArticle = {
                     </p>
                     <div class="flex items-center justify-between">
                         <span class="px-5 py-1.5 rounded-full bg-emerald-500 text-black font-black text-[10px] uppercase tracking-[0.4em]">Master the Deploy</span>
+                        <span class="text-zinc-600 font-mono text-[10px] font-bold">VERIFIED_BY_BUTLER // STEEL_AUDIT_PASSED</span>
                     </div>
                 </div>
             </div>
