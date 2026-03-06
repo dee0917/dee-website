@@ -4,6 +4,7 @@
   "selected_strategies": [2, 3, 6],
   "audit_protocol": "Kage Persona Audit v2",
   "live_articles": [
+    { "id": 202603060310, "slug": "news-senior-chat-ai-comparison", "status": "deployed", "difficulty": 1, "persona": "senior" },
     { "id": 202603060300, "slug": "real-tech-openai-operator-merchant", "status": "deployed", "difficulty": 2, "persona": "merchant", "audit": "PASSED_BY_KAGE" },
     { "id": 202603060230, "slug": "real-tech-ai-skill-management-sop", "status": "deployed", "difficulty": 3, "persona": "office" },
     { "id": 202603060100, "slug": "tutorial-khoj-ai-second-brain", "status": "deployed", "difficulty": 1, "persona": "craftsman" }
