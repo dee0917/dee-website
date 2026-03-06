@@ -4,7 +4,7 @@ import {
     ArrowLeft, ArrowRight, Copy, Check, ChevronDown, Lock, Sparkles, 
     MousePointer2, Smartphone, Gamepad2, X, Target, Send, Flame,
     Terminal, BrainCircuit, ShieldCheck, HelpCircle, AlertCircle, Lightbulb,
-    UserCheck, BookOpen
+    UserCheck, BookOpen, Star
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
@@ -30,20 +30,33 @@ const ArticleDetail = () => {
     const [article, setArticle] = useState<any | null>(null);
     const [loading, setLoading] = useState(true);
     const [progress, setProgress] = useState(0);
-    const [treasurePhase, setTreasurePhase] = useState<'locked' | 'falling' | 'impact' | 'exploding' | 'revealed'>('locked');
-    const [isPracticeMode, setIsPracticeMode] = useState(false);
-    const [copied, setCopied] = useState(false);
-    const [showAiJumpModal, setShowAiJumpModal] = useState(false);
+    const [currentStep, setCurrentStep] = useState(0);
+    const [stepsCompleted, setStepsCompleted] = useState<boolean[]>([]);
     const [badgeEarned, setBadgeEarned] = useState(false);
+    const [treasurePhase, setTreasurePhase] = useState<'locked' | 'falling' | 'impact' | 'exploding' | 'revealed'>('locked');
+    const [freeMode, setFreeMode] = useState(false);
+    const [rippleStep, setRippleStep] = useState<number | null>(null);
+    const [showAiJumpModal, setShowAiJumpModal] = useState(false);
+    const [quizAnswer, setQuizAnswer] = useState<number | null>(null);
+    const [quizSubmitted, setQuizSubmitted] = useState(false);
     
-    // 🧠 Optimized Mentor State
+    // 🎮 Practice Mode State
+    const [isPracticeMode, setIsPracticeMode] = useState(false);
     const [messages, setMessages] = useState<{role: 'ai' | 'user', text: string}[]>([]);
     const [userInput, setUserInput] = useState('');
     const [practiceStep, setPracticeStep] = useState(0);
+    const [failCount, setFailCount] = useState(0);
+    const [showHint, setShowHint] = useState(false);
     const [isJudging, setIsJudging] = useState(false);
     const [currentHint, setCurrentHint] = useState('');
     const [previousResponses, setPreviousResponses] = useState<string[]>([]);
 
+    // Refs
+    const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const treasureRef = useRef<HTMLDivElement>(null);
+    const quizRef = useRef<HTMLDivElement>(null);
+    const rewardRef = useRef<HTMLDivElement>(null);
+    const hookRef = useRef<HTMLDivElement>(null);
     const chatEndRef = useRef<HTMLDivElement>(null);
 
     const scrollToBottom = () => {
@@ -76,17 +89,27 @@ const ArticleDetail = () => {
             const finalData = localArticle ? { ...dbData, ...localArticle } : dbData;
             setArticle(finalData);
             
-            // Initializing with clearer context
             setMessages([
                 { 
                     role: 'ai', 
-                    text: `我是您的 AI 助教。本關的目標是：\n「${finalData.practice_kit?.title}」\n\n具體實作任務：${finalData.practice_kit?.description}\n\n請直接輸入您的第一個操作動作（例如：搜尋...、點擊...）。如果您感到困惑，可以隨便輸入一個字，我會給您提示！` 
+                    text: `我是您的 AI 助教。本關實踐目標：\n「${finalData.practice_kit?.title}」\n\n任務描述：${finalData.practice_kit?.description}\n\n請直接在下方輸入您的操作計畫（例如：我會搜尋...或是點擊...）。如果您感到困惑，可以隨便輸入一個字，我會給您具體的正確方向！` 
                 }
             ]);
+
+            if (finalData.steps) {
+                setStepsCompleted(new Array(finalData.steps.length).fill(false));
+            }
         } catch (e) {
             setArticle(null);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSendMessage();
         }
     };
 
@@ -100,12 +123,11 @@ const ArticleDetail = () => {
         setIsJudging(true);
         
         try {
-            // 將過往的回覆歷史傳給判官，避免重複
             const historyContext = previousResponses.slice(-3).join('|');
             const result = await judgeUserResponse(
                 article?.title || '', 
                 text, 
-                `${article?.practice_kit?.description} (已給過的建議：${historyContext})`
+                `${article?.practice_kit?.description} (歷史提示：${historyContext})`
             );
             
             setMessages(prev => [...prev, { role: 'ai', text: result.feedback }] as any);
@@ -114,12 +136,18 @@ const ArticleDetail = () => {
 
             if (result.passed) {
                 setPracticeStep(prev => prev + 1);
-                if (practiceStep >= 1) {
+                setFailCount(0);
+                setShowHint(false);
+                if (practiceStep >= 1) { 
                     triggerSuccess();
                 }
+            } else {
+                setFailCount(prev => prev + 1);
+                if (result.hint) setCurrentHint(result.hint);
+                if (failCount >= 0) setShowHint(true);
             }
-        } catch (e) {
-            setMessages(prev => [...prev, { role: 'ai', text: "判官似乎被其他學員叫走了，請再試一次。" }] as any);
+        } catch (error) {
+            setMessages(prev => [...prev, { role: 'ai', text: "連線不穩，請再試一次。" }] as any);
         } finally {
             setIsJudging(false);
         }
@@ -128,14 +156,15 @@ const ArticleDetail = () => {
     const triggerSuccess = () => {
         confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
         setTreasurePhase('revealed');
+        setTimeout(() => {
+            treasureRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
     };
 
     const handleClaimCommand = () => {
         if (article?.practice_kit?.command) {
             navigator.clipboard.writeText(article.practice_kit.command);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 3000);
-            setTimeout(() => setShowAiJumpModal(true), 500);
+            setShowAiJumpModal(true);
         }
     };
 
@@ -151,149 +180,244 @@ const ArticleDetail = () => {
         }
     };
 
-    if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse">BOOTING_MENTOR...</div>;
+    const scrollToHook = () => {
+        hookRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    const handleStepComplete = (idx: number) => {
+        const updated = [...stepsCompleted];
+        updated[idx] = true;
+        setStepsCompleted(updated);
+        setRippleStep(idx);
+        setTimeout(() => setRippleStep(null), 800);
+        
+        if (idx < (article?.steps?.length || 0) - 1) {
+            const nextIdx = idx + 1;
+            setCurrentStep(nextIdx);
+            setTimeout(() => {
+                const element = stepRefs.current[nextIdx];
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    const middle = rect.top + window.pageYOffset - (window.innerHeight / 2) + (rect.height / 2);
+                    window.scrollTo({ top: middle, behavior: 'smooth' });
+                }
+            }, 300);
+        } else {
+            setTreasurePhase('revealed');
+            setTimeout(() => {
+                treasureRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 200);
+        }
+    };
+
+    const getColorClasses = (themeColor: string) => {
+        const colors: Record<string, any> = {
+            emerald: { text: 'text-emerald-500', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', gradient: 'from-emerald-500/20 to-teal-500/10' },
+            violet: { text: 'text-violet-500', bg: 'bg-violet-500/10', border: 'border-violet-500/20', gradient: 'from-violet-500/20 to-purple-500/10' },
+            blue: { text: 'text-blue-500', bg: 'bg-blue-500/10', border: 'border-blue-500/20', gradient: 'from-blue-500/20 to-indigo-500/10' },
+            amber: { text: 'text-amber-500', bg: 'bg-amber-500/10', border: 'border-amber-500/20', gradient: 'from-amber-500/20 to-yellow-500/10' },
+            rose: { text: 'text-rose-500', bg: 'bg-rose-500/10', border: 'border-rose-500/20', gradient: 'from-rose-500/20 to-pink-500/10' },
+            teal: { text: 'text-teal-500', bg: 'bg-teal-500/10', border: 'border-teal-500/20', gradient: 'from-teal-500/20 to-cyan-500/10' },
+        };
+        return colors[themeColor] || colors.emerald;
+    };
+
+    if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse">SYNCING_DATA...</div>;
     if (!article) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-bold">404</div>;
+
+    const themeClasses = getColorClasses(article.themeColor || 'emerald');
+    const hasSteps = article.steps && article.steps.length > 0;
+    const hasQuiz = article.quiz && article.quiz.question;
+    const allStepsDone = stepsCompleted.every(s => s === true);
 
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-zinc-300">
             <SEO title={article.title} description={article.summary} path={`/insights/${article.id}`} />
             
-            <section className="pt-32 pb-10 px-6 max-w-5xl mx-auto flex flex-col items-center">
-                <Link to="/insights" className="self-start text-[10px] font-black uppercase tracking-[0.4em] text-zinc-600 hover:text-white mb-10 flex items-center gap-2">
-                    <ArrowLeft size={14} /> Back to Map
-                </Link>
+            <section className="relative min-h-[90vh] flex flex-col items-center justify-center px-6 overflow-hidden pt-32">
+                <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b ${themeClasses.gradient} opacity-20 pointer-events-none`} />
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl w-full text-center relative z-10">
+                    <Link to="/insights" className="inline-flex items-center gap-2 text-zinc-600 hover:text-white mb-10 text-[10px] font-black tracking-[0.4em]">
+                        <ArrowLeft size={14} /> 返回地圖
+                    </Link>
+                    <div className="flex items-center justify-center gap-4 mb-6">
+                        <span className={`text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest ${themeClasses.bg} ${themeClasses.text} border ${themeClasses.border}`}>{article.category}</span>
+                        <DifficultyStars level={article.difficulty_level || 1} />
+                    </div>
+                    <h1 className="text-4xl md:text-7xl font-black text-white mb-12 tracking-tight leading-tight">{article.title}</h1>
+                    
+                    <div className="flex items-center justify-center gap-4 bg-white/5 p-1.5 rounded-2xl border border-white/10 w-fit mx-auto mb-16 shadow-2xl">
+                        <button onClick={() => setIsPracticeMode(false)} className={`px-8 py-3 rounded-xl text-xs font-black transition-all ${!isPracticeMode ? 'bg-white text-black shadow-lg' : 'text-zinc-500'}`}>文章閱讀</button>
+                        <button onClick={() => setIsPracticeMode(true)} className={`px-8 py-3 rounded-xl text-xs font-black transition-all ${isPracticeMode ? 'bg-emerald-500 text-black shadow-lg' : 'text-zinc-500'} flex items-center gap-2`}>
+                            <Flame size={14} /> 互動演練
+                        </button>
+                    </div>
 
-                <h1 className="text-4xl md:text-7xl font-black text-white mb-12 tracking-tighter text-center leading-tight">
-                    {article.title}
-                </h1>
-
-                <div className="bg-white/5 p-1.5 rounded-[2rem] border border-white/10 flex items-center gap-4 mb-16 shadow-2xl">
-                    <button onClick={() => setIsPracticeMode(false)} className={`px-8 py-3 rounded-2xl text-xs font-black transition-all ${!isPracticeMode ? 'bg-white text-black shadow-xl' : 'text-zinc-500 hover:text-white'}`}>文章閱讀</button>
-                    <button onClick={() => setIsPracticeMode(true)} className={`px-8 py-3 rounded-2xl text-xs font-black transition-all ${isPracticeMode ? 'bg-emerald-500 text-black shadow-xl' : 'text-zinc-500 hover:text-white'} flex items-center gap-2`}>
-                        <Flame size={14} /> 互動演練
-                    </button>
-                </div>
-
-                <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                    <div className="lg:col-span-8">
-                        {isPracticeMode ? (
-                            <div className="bg-[#0f0f0f] border border-white/10 rounded-[3.5rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] relative">
-                                <div className="bg-zinc-900 px-10 py-6 border-b border-white/5 flex items-center justify-between">
-                                    <div className="flex items-center gap-5">
-                                        <div className="w-12 h-12 rounded-2xl bg-emerald-500 flex items-center justify-center text-black">
-                                            <UserCheck size={24} />
-                                        </div>
-                                        <div className="text-left">
-                                            <h4 className="text-white font-black text-sm uppercase tracking-widest">Dee's Lab 專屬助教</h4>
-                                            <p className="text-[10px] text-emerald-500 font-bold uppercase tracking-widest animate-pulse">Online & Analysis</p>
-                                        </div>
+                    {isPracticeMode ? (
+                        <div className="w-full max-w-2xl mx-auto bg-[#0d0d0d] border border-white/10 rounded-[3.5rem] overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.9)]">
+                            <div className="bg-zinc-900 px-10 py-6 border-b border-white/5 flex items-center justify-between">
+                                <div className="flex items-center gap-4 text-left">
+                                    <div className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center text-black shadow-lg shadow-emerald-500/20">
+                                        <BrainCircuit size={20} />
                                     </div>
-                                    <div className="flex gap-2 bg-black/40 px-4 py-2 rounded-xl border border-white/5">
-                                        {[...Array(2)].map((_, i) => (
-                                            <StarIcon key={i} size={14} className={i < practiceStep ? 'text-emerald-400' : 'text-zinc-800'} fill="currentColor" />
-                                        ))}
+                                    <div>
+                                        <span className="text-[10px] font-black text-emerald-500/60 uppercase tracking-widest block">判官審核中</span>
+                                        <h4 className="text-white font-black text-sm uppercase tracking-tighter">修行進度 ({practiceStep}/2)</h4>
                                     </div>
                                 </div>
-
-                                <div className="h-[450px] overflow-y-auto p-10 space-y-8 text-left scrollbar-hide">
-                                    {messages.map((m, i) => (
-                                        <motion.div key={i} initial={{ opacity: 0, x: m.role === 'ai' ? -10 : 10 }} animate={{ opacity: 1, x: 0 }}
-                                            className={`flex ${m.role === 'ai' ? 'justify-start' : 'justify-end'}`}
-                                        >
-                                            <div className={`max-w-[85%] p-6 rounded-[2.2rem] text-base leading-relaxed ${
-                                                m.role === 'ai' 
-                                                ? 'bg-zinc-800 text-zinc-200 rounded-tl-none border border-white/5' 
-                                                : 'bg-emerald-500 text-black font-bold rounded-tr-none'
-                                            }`}>
-                                                {m.text.split('\n').map((line, li) => <p key={li} className="mb-2 last:mb-0">{line}</p>)}
-                                            </div>
-                                        </motion.div>
+                                <div className="flex gap-1.5">
+                                    {[...Array(2)].map((_, i) => (
+                                        <div key={i} className={`w-3 h-3 rounded-full ${i < practiceStep ? 'bg-emerald-500' : 'bg-zinc-800'}`} />
                                     ))}
-                                    {isJudging && (
-                                        <div className="flex justify-start">
-                                            <div className="bg-zinc-800/50 p-5 rounded-2xl rounded-tl-none border border-white/5 flex items-center gap-4">
-                                                <div className="flex gap-1"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce" /><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce delay-75" /><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce delay-150" /></div>
-                                                <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">助教正在審核邏輯...</span>
-                                            </div>
-                                        </div>
-                                    )}
-                                    <div ref={chatEndRef} />
-                                </div>
-
-                                <div className="p-8 bg-black/60 border-t border-white/5">
-                                    <div className="relative">
-                                        <textarea 
-                                            value={userInput}
-                                            onChange={(e) => setUserInput(e.target.value)}
-                                            onKeyDown={(e) => {
-                                                if (e.key === 'Enter' && !e.shiftKey) {
-                                                    e.preventDefault();
-                                                    handleSendMessage();
-                                                }
-                                            }}
-                                            placeholder="在此輸入您的實體操作路徑（Enter 發送）..."
-                                            className="w-full bg-white/[0.03] border border-white/10 rounded-[2.2rem] p-6 pr-20 text-white focus:border-emerald-500/50 outline-none resize-none h-24 transition-all"
-                                        />
-                                        <button onClick={handleSendMessage} disabled={!userInput.trim() || isJudging}
-                                            className={`absolute bottom-4 right-4 p-4 rounded-2xl transition-all ${userInput.trim() && !isJudging ? 'bg-emerald-500 text-black shadow-lg hover:scale-105 active:scale-95' : 'bg-zinc-800 text-zinc-500 opacity-50'}`}
-                                        >
-                                            <Send size={22} />
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
-                        ) : (
-                            <div className="bg-white/[0.02] border border-white/5 rounded-[4rem] p-12 text-left relative overflow-hidden">
-                                <h2 className="text-3xl font-black text-white mb-10 flex items-center gap-4 relative z-10"><Sparkles className="text-emerald-500" /> 核心學習重點</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
-                                    {article.steps?.map((s: any, i: number) => (
-                                        <div key={i} className="p-8 rounded-3xl bg-black/40 border border-white/5 hover:border-emerald-500/30 transition-all group">
-                                            <span className="text-emerald-500 font-mono text-[10px] font-black block mb-4 tracking-[0.5em]">POINT 0{i+1}</span>
-                                            <h3 className="text-xl font-black text-white mb-2 group-hover:text-emerald-400 transition-colors">{s.title}</h3>
-                                            <p className="text-zinc-400 leading-relaxed">{s.body}</p>
+
+                            <div className="h-[400px] overflow-y-auto p-10 space-y-8 text-left scrollbar-hide">
+                                {messages.map((m, i) => (
+                                    <div key={i} className={`flex ${m.role === 'ai' ? 'justify-start' : 'justify-end'}`}>
+                                        <div className={`max-w-[85%] p-6 rounded-[2.2rem] text-base leading-relaxed ${
+                                            m.role === 'ai' ? 'bg-zinc-900 text-zinc-200 rounded-tl-none border border-white/5 shadow-inner' : 'bg-emerald-500 text-black font-bold rounded-tr-none shadow-xl'
+                                        }`}>
+                                            {m.text.split('\n').map((line, li) => <p key={li} className="mb-2 last:mb-0">{line}</p>)}
                                         </div>
-                                    ))}
+                                    </div>
+                                ))}
+                                {isJudging && (
+                                    <div className="flex justify-start">
+                                        <div className="bg-zinc-900 p-5 rounded-2xl rounded-tl-none border border-white/5 flex items-center gap-4">
+                                            <div className="flex gap-1"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce" /><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce delay-75" /><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-bounce delay-150" /></div>
+                                            <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">助教正在審核中...</span>
+                                        </div>
+                                    </div>
+                                )}
+                                <div ref={chatEndRef} />
+                            </div>
+
+                            <AnimatePresence>
+                                {showHint && (
+                                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
+                                        className="bg-amber-500/10 border-y border-amber-500/20 px-10 py-6 flex items-start gap-4 text-left"
+                                    >
+                                        <Lightbulb className="text-amber-400 mt-1 flex-shrink-0" size={18} />
+                                        <div>
+                                            <span className="text-[10px] font-black text-amber-500 uppercase tracking-widest block mb-1">助教提示</span>
+                                            <p className="text-sm text-amber-100/60 leading-relaxed italic">{currentHint || "試著描述具體的搜尋動作。"}</p>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
+                            <div className="p-8 bg-black/40 border-t border-white/5">
+                                <div className="relative group">
+                                    <textarea 
+                                        value={userInput}
+                                        onChange={(e) => setUserInput(e.target.value)}
+                                        onKeyDown={handleKeyDown}
+                                        placeholder="輸入具體操作動作（Enter 發送）..."
+                                        className="w-full bg-white/[0.03] border border-white/10 rounded-[2.2rem] p-6 pr-20 text-white focus:border-emerald-500/50 outline-none resize-none h-24 transition-all group-hover:border-white/20"
+                                    />
+                                    <button onClick={handleSendMessage} disabled={!userInput.trim() || isJudging}
+                                        className={`absolute bottom-4 right-4 p-4 rounded-2xl transition-all ${userInput.trim() && !isJudging ? 'bg-emerald-500 text-black shadow-lg hover:scale-105 active:scale-95' : 'bg-zinc-800 text-zinc-500 opacity-50'}`}
+                                    >
+                                        <Send size={22} />
+                                    </button>
                                 </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <>
+                            <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-2xl mx-auto leading-relaxed">{article.summary}</p>
+                            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={scrollToHook}
+                                className="bg-white text-black font-black py-5 px-10 rounded-2xl text-lg flex items-center gap-3 mx-auto shadow-2xl hover:bg-emerald-500 transition-colors group">
+                                <Gamepad2 size={24} /> 開始修煉 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                            </motion.button>
+                        </>
+                    )}
+                </motion.div>
+            </section>
+
+            {/* 🎯 Content Section */}
+            <section className="py-32 px-6 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    <div className="lg:col-span-8 space-y-32">
+                        <div id="pain-point" ref={hookRef}>
+                            <motion.div {...fadeUp} className="text-left mb-16">
+                                <span className="transition-label">痛點切入</span>
+                                <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tight italic">這是否是您的現狀？</h2>
+                                <p className="text-zinc-400 text-xl leading-relaxed">{article.pain_point}</p>
+                            </motion.div>
+                            <div className="grid md:grid-cols-2 gap-8 text-left">
+                                <motion.div {...fadeUp} className="bg-white/[0.02] border border-white/5 rounded-[3rem] p-10 relative overflow-hidden group">
+                                    <div className="text-white/5 text-9xl font-black absolute -right-6 -bottom-6 rotate-12 text-left">❌</div>
+                                    <p className="text-zinc-400 text-lg leading-relaxed relative z-10">{article.example?.wrong}</p>
+                                </motion.div>
+                                <motion.div {...fadeUp} transition={{ delay: 0.1 }} className="bg-emerald-500/[0.03] border border-emerald-500/20 rounded-[3rem] p-10 relative overflow-hidden group shadow-[0_0_50px_rgba(16,185,129,0.05)]">
+                                    <div className="text-emerald-500/10 text-9xl font-black absolute -right-6 -bottom-6 -rotate-12">✅</div>
+                                    <p className="text-white text-lg leading-relaxed font-bold relative z-10 text-left">{article.example?.right}</p>
+                                </motion.div>
+                            </div>
+                        </div>
+
+                        {hasSteps && (
+                            <div id="steps" className="space-y-12 text-left">
+                                <div className="text-left mb-16">
+                                    <span className="transition-label">實戰演練</span>
+                                    <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight italic">跟著路徑走</h2>
+                                </div>
+                                {article.steps.map((step: any, idx: number) => {
+                                    const isDone = stepsCompleted[idx];
+                                    const isActive = freeMode ? !isDone : idx === currentStep;
+                                    return (
+                                        <motion.div key={idx} ref={el => stepRefs.current[idx] = el}
+                                            className={`relative rounded-[3.5rem] border p-12 transition-all duration-500 overflow-hidden ${isDone ? 'bg-white/[0.01] border-emerald-500/20' : isActive ? 'bg-zinc-900 border-white/20 shadow-2xl scale-[1.01]' : 'border-white/5 opacity-10 pointer-events-none'}`}>
+                                            <div className="flex flex-col md:flex-row items-start gap-10">
+                                                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 text-2xl font-black transition-all ${isDone ? 'bg-emerald-500 text-black' : isActive ? 'bg-white text-black' : 'bg-white/5 text-zinc-700'}`}>
+                                                    {isDone ? '✓' : idx + 1}
+                                                </div>
+                                                <div className="flex-1">
+                                                    <h3 className={`text-2xl md:text-3xl font-black mb-6 tracking-tight ${isDone ? 'text-emerald-400' : 'text-white'}`}>{step.title}</h3>
+                                                    <p className="text-zinc-300 text-lg md:text-xl leading-relaxed mb-10 font-medium">{step.body}</p>
+                                                    {isActive && !isDone && (
+                                                        <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => handleStepComplete(idx)}
+                                                            className="relative py-4 px-10 rounded-2xl bg-emerald-500 text-black font-black text-lg shadow-xl flex items-center gap-3">
+                                                            我了解了 <MousePointer2 size={24} className="animate-bounce" />
+                                                        </motion.button>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    );
+                                })}
                             </div>
                         )}
                     </div>
 
                     <div className="lg:col-span-4 sticky top-40 space-y-8">
-                        <div className="bg-zinc-900 border border-white/10 rounded-[3rem] p-8 text-left shadow-2xl relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent pointer-events-none" />
-                            <h3 className="text-xl font-black text-white mb-6 flex items-center gap-3">
-                                <Target className="text-emerald-500" size={20} /> 本關修煉任務
+                        <div className="bg-zinc-900 border border-white/10 rounded-[3rem] p-10 text-left shadow-2xl relative overflow-hidden">
+                            <h3 className="text-xl font-black text-white mb-8 flex items-center gap-3">
+                                <Target className="text-emerald-500" size={24} /> 當前任務手冊
                             </h3>
-                            <div className="space-y-4 mb-8">
-                                <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/5 shadow-inner">
-                                    <p className="text-xs font-black text-emerald-500 uppercase tracking-widest mb-2">【目標操作】</p>
-                                    <p className="text-zinc-300 text-sm leading-relaxed font-bold">{article.practice_kit?.description}</p>
+                            <div className="space-y-6 mb-10">
+                                <div className="p-6 rounded-[2rem] bg-white/[0.03] border border-white/5">
+                                    <p className="text-[10px] font-black text-emerald-500 uppercase tracking-widest mb-3">正確操作方向</p>
+                                    <p className="text-zinc-200 text-base leading-relaxed font-bold italic">
+                                        「{article.practice_kit?.description}」
+                                    </p>
                                 </div>
-                                <AnimatePresence>
-                                    {currentHint && (
-                                        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                                            className="p-5 rounded-2xl bg-amber-500/10 border border-amber-500/30"
-                                        >
-                                            <p className="text-xs text-amber-200/80 leading-relaxed italic font-medium">
-                                                <Lightbulb className="inline-block mr-2 mb-1" size={12} />
-                                                判官提示：{currentHint}
-                                            </p>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
+                                <div className="p-6 rounded-[2rem] bg-white/[0.03] border border-white/5">
+                                    <p className="text-[10px] font-black text-amber-500 uppercase tracking-widest mb-3">關鍵動作詞</p>
+                                    <p className="text-zinc-500 text-xs font-mono">搜尋、開啟、下載、加入好友...</p>
+                                </div>
                             </div>
 
-                            <div className={`mt-10 pt-10 border-t border-white/10 text-center ${treasurePhase === 'revealed' ? 'opacity-100' : 'opacity-30'}`}>
-                                <div className="text-7xl mb-8">{treasurePhase === 'revealed' ? '🔓' : '🔒'}</div>
+                            <div className={`mt-10 pt-10 border-t border-white/10 text-center ${treasurePhase === 'revealed' ? 'opacity-100' : 'opacity-30'}`} ref={treasureRef}>
+                                <div className="text-8xl mb-8">{treasurePhase === 'revealed' ? '🔓' : '🔒'}</div>
                                 {treasurePhase === 'revealed' ? (
-                                    <div className="space-y-6">
-                                        <p className="text-xs text-emerald-400 font-black uppercase tracking-widest animate-pulse">任務達成！祕術已解鎖</p>
-                                        <button onClick={handleClaimCommand} className="w-full py-5 rounded-2xl bg-emerald-500 text-black font-black text-xs uppercase tracking-widest shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:scale-105 transition-all">
-                                            領取指令寶箱
-                                        </button>
-                                    </div>
+                                    <button onClick={handleClaimCommand} className="w-full py-6 rounded-[2rem] bg-emerald-500 text-black font-black text-sm uppercase tracking-widest shadow-2xl hover:scale-105 transition-all">
+                                        領取修行寶箱
+                                    </button>
                                 ) : (
-                                    <p className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest">請先通過助教邏輯審核</p>
+                                    <p className="text-xs text-zinc-600 font-black uppercase tracking-widest text-center">需通過助教邏輯判定</p>
                                 )}
                             </div>
                         </div>
@@ -303,29 +427,14 @@ const ArticleDetail = () => {
 
             <AnimatePresence>
                 {showAiJumpModal && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/95 backdrop-blur-2xl">
-                        <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-zinc-900 border border-white/10 p-10 rounded-[3.5rem] max-w-sm w-full shadow-2xl relative overflow-hidden">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-blue-500" />
-                            <button onClick={() => setShowAiJumpModal(false)} className="absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors"><X size={28} /></button>
-                            <div className="text-center mb-10">
-                                <div className="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                                    <Smartphone className="text-emerald-400" size={32} />
-                                </div>
-                                <h3 className="text-2xl font-black text-white mb-3 tracking-tight">指令已複製！</h3>
-                                <p className="text-zinc-500 text-sm font-medium">請切換至工具直接貼上</p>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center px-6 bg-black/95 backdrop-blur-3xl">
+                        <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="bg-zinc-900 border border-white/10 p-12 rounded-[4rem] max-w-sm w-full shadow-2xl text-center">
+                            <div className="w-20 h-20 bg-emerald-500/10 rounded-3xl flex items-center justify-center mx-auto mb-8">
+                                <Check className="text-emerald-400" size={40} />
                             </div>
-                            <div className="grid grid-cols-3 gap-4">
-                                {[
-                                    { name: 'GPT', logo: ChatGPTLogo, app: 'chatgpt://', web: 'https://chat.openai.com' },
-                                    { name: 'Claude', logo: ClaudeLogo, app: 'claude://', web: 'https://claude.ai' },
-                                    { name: 'Gemini', logo: GeminiLogo, app: 'googlegemini://', web: 'https://gemini.google.com' }
-                                ].map((ai, i) => (
-                                    <a key={i} href={ai.web} target="_blank" rel="noopener noreferrer" className={`flex flex-col items-center gap-3 p-4 rounded-2xl bg-white/[0.03] border border-white/5 transition-all group hover:bg-emerald-500/10 hover:border-emerald-500/30`}>
-                                        <ai.logo size={32} />
-                                        <span className="text-white font-black text-[10px] uppercase tracking-tighter">{ai.name}</span>
-                                    </a>
-                                ))}
-                            </div>
+                            <h3 className="text-2xl font-black text-white mb-2">指令已複製！</h3>
+                            <p className="text-zinc-500 mb-10 text-center">修行成功，請至工具貼上。</p>
+                            <button onClick={() => setShowAiJumpModal(false)} className="w-full py-5 rounded-2xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10">關閉</button>
                         </motion.div>
                     </motion.div>
                 )}
@@ -333,11 +442,5 @@ const ArticleDetail = () => {
         </div>
     );
 };
-
-const StarIcon = ({ size, className, fill }: any) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill={fill} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-    </svg>
-);
 
 export default ArticleDetail;
