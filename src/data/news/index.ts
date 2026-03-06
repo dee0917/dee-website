@@ -1,3 +1,4 @@
+import { article as aiSkillSop } from './real-tech-ai-skill-management-sop';
 import { article as khojBrain } from './tutorial-khoj-ai-second-brain';
 import { article as deepseekV4IntentBlackhole } from './real-tech-deepseek-v4-intent-blackhole';
 import { article as seniorVoice } from './tutorial-senior-voice-line';
@@ -73,6 +74,7 @@ import { NewsArticle } from '../../types/news';
 
 // 🚀 EVOLUTION ENGINE V1: 難度優先排列，確保小白入口最顯眼
 export const NEWS_ARTICLES: NewsArticle[] = [
+    aiSkillSop,          // 最新：AI 技能管理 SOP
     khojBrain,           // 1星難度：私有大腦教學
     deepseekV4IntentBlackhole, // 2星難度：DeepSeek-V4 自動化
     seniorVoice,         // 1星難度：長輩 LINE 教學
