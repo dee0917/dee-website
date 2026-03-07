@@ -17,3 +17,8 @@
 /bin/sh: 1: ./backup.sh: not found
 /bin/sh: 1: ./backup.sh: not found
 /bin/sh: 1: ./backup.sh: not found
+/bin/sh: 1: ./backup.sh: not found
+/bin/sh: 1: ./backup.sh: not found
+/bin/sh: 1: ./backup.sh: not found
+/bin/sh: 1: ./backup.sh: not found
+[Sat Mar  7 03:03:10 AM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260307_030307.tar.gz
