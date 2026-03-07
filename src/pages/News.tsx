@@ -1,5 +1,5 @@
 import SEO from '../components/ui/SEO';
-import React from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -7,12 +7,10 @@ import {
     X, ChevronRight, Sparkles 
 } from 'lucide-react';
 import { NEWS_ARTICLES } from '../data/news';
-import { useMemo, useState, useEffect } from 'react';
 import { PERSONAS, UserPersona } from '../data/personas';
 import { useIdentity } from '../context/IdentityContext';
 import DifficultyStars from '../components/ui/DifficultyStars';
 
-// 確保字串完全匹配
 const CAT_ALL = "全部";
 
 const CATEGORY_THEMES: Record<string, string> = {
@@ -29,6 +27,7 @@ const CATEGORY_THEMES: Record<string, string> = {
     "數位家教": 'pink',
     "生意興隆": 'amber',
     "自由人生": 'violet',
+    "數位生命": 'emerald',
     [CAT_ALL]: 'emerald'
 };
 
@@ -50,7 +49,6 @@ const News = () => {
     const activeCategory = searchParams.get('cat') || CAT_ALL;
     const [isPersonaMenuOpen, setIsPersonaMenuOpen] = useState(false);
 
-    // 同步 URL 參數
     useEffect(() => {
         const personaFromUrl = searchParams.get('persona');
         if (personaFromUrl && (PERSONAS[personaFromUrl as UserPersona] || personaFromUrl === 'general')) {
@@ -66,17 +64,12 @@ const News = () => {
 
     const filteredArticles = useMemo(() => {
         let items = [...NEWS_ARTICLES];
-        
-        // 1. 族群過濾
         if (persona && persona !== 'general') {
             items = items.filter(a => a.target_persona?.includes(persona));
         }
-
-        // 2. 分類過濾
         if (activeCategory !== CAT_ALL) {
             items = items.filter(a => a.category.trim() === activeCategory.trim());
         }
-
         return items.sort((a, b) => b.id - a.id);
     }, [activeCategory, persona]);
 
@@ -96,31 +89,38 @@ const News = () => {
     };
 
     return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-8 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-32 pb-20 px-6 max-w-7xl mx-auto min-h-screen text-left relative z-0">
             <SEO title="AI 新聞情報站" description="AI Agent 精確轉譯，助您快速掌握全球 AI 核心脈動。" path="/news" />
             
             <div className="mb-12">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
-                    <div className="flex items-center gap-5">
-                        <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shadow-lg shadow-emerald-500/5">
-                            <Zap size={24} className="text-emerald-400" />
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
+                    <div className="flex items-center gap-6">
+                        <div className="w-16 h-16 rounded-[2rem] bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shadow-2xl shadow-emerald-500/10">
+                            <Zap size={32} className="text-emerald-400" />
                         </div>
                         <div className="text-left">
-                            <h1 className="text-3xl font-black text-white tracking-tighter">AI 新聞情報站</h1>
-                            <span className="text-emerald-500/60 font-mono text-[10px] tracking-[0.4em] uppercase block">Intelligence Hub 2026</span>
+                            <h1 className="text-4xl md:text-5xl font-black text-white tracking-tighter uppercase italic">Intelligence Hub</h1>
+                            <div className="flex items-center gap-2 mt-1">
+                                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                <span className="text-emerald-500/60 font-mono text-[10px] tracking-[0.4em] uppercase">Real-time Global Monitor // 2026</span>
+                            </div>
                         </div>
                     </div>
 
-                    {/* 🚀 族群選擇器 (手動切換) */}
+                    {/* 🚀 Persona Switcher on News Page */}
                     <div className="relative">
                         <button 
                             onClick={() => setIsPersonaMenuOpen(!isPersonaMenuOpen)}
-                            className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-xs font-black hover:bg-white/10 transition-all text-white shadow-xl"
+                            className="flex items-center gap-4 px-8 py-4 rounded-[2rem] bg-zinc-900 border border-white/10 text-xs font-black hover:border-emerald-500/50 transition-all text-white shadow-2xl group"
                         >
-                            <div className={`w-6 h-6 rounded-lg bg-${currentPersona.color}-500/20 flex items-center justify-center text-${currentPersona.color}-400`}>
-                                {React.createElement(currentPersona.icon as any, { size: 14 })}
+                            <div className={`w-8 h-8 rounded-xl bg-${currentPersona.color}-500/20 flex items-center justify-center text-${currentPersona.color}-400 group-hover:scale-110 transition-transform`}>
+                                {React.createElement(currentPersona.icon as any, { size: 16 })}
                             </div>
-                            {currentPersona.label} 新聞 <Settings2 size={14} className="ml-2 opacity-50" />
+                            <div className="text-left">
+                                <p className="text-zinc-500 text-[9px] uppercase tracking-widest">Reading As</p>
+                                <p className="text-sm font-black tracking-tight">{currentPersona.label}</p>
+                            </div>
+                            <Settings2 size={16} className="ml-4 opacity-30 group-hover:opacity-100 transition-opacity" />
                         </button>
 
                         <AnimatePresence>
@@ -129,33 +129,34 @@ const News = () => {
                                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                    className="absolute top-full right-0 mt-4 w-72 bg-zinc-900 border border-white/10 rounded-3xl shadow-2xl z-50 overflow-hidden"
+                                    className="absolute top-full right-0 mt-4 w-80 bg-[#0d0d0d] border border-white/10 rounded-[2.5rem] shadow-[0_0_100px_rgba(0,0,0,0.8)] z-50 overflow-hidden backdrop-blur-2xl"
                                 >
                                     <div className="p-4 grid grid-cols-1 gap-2">
                                         <button
                                             onClick={() => handlePersonaChange('general')}
-                                            className={`flex items-center gap-4 p-4 rounded-2xl transition-all text-left group ${persona === 'general' ? 'bg-white/10' : 'hover:bg-white/5'}`}
+                                            className={`flex items-center gap-4 p-5 rounded-3xl transition-all text-left group ${persona === 'general' ? 'bg-white/5 border border-white/10' : 'hover:bg-white/5'}`}
                                         >
-                                            <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400">
-                                                <User size={20} />
+                                            <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                                                <User size={24} />
                                             </div>
                                             <div>
-                                                <p className="text-white font-bold text-sm">全球通識</p>
-                                                <p className="text-[10px] text-zinc-500">不限身分，閱讀全部新聞</p>
+                                                <p className="text-white font-black text-sm uppercase">全球通識</p>
+                                                <p className="text-[10px] text-zinc-500">不限身分，閱讀全方位 AI 情報</p>
                                             </div>
                                         </button>
+                                        <div className="h-px bg-white/5 my-2 mx-4" />
                                         {Object.values(PERSONAS).map((p) => (
                                             <button
                                                 key={p.id}
                                                 onClick={() => handlePersonaChange(p.id)}
-                                                className={`flex items-center gap-4 p-4 rounded-2xl transition-all text-left group ${persona === p.id ? 'bg-white/10' : 'hover:bg-white/5'}`}
+                                                className={`flex items-center gap-4 p-5 rounded-3xl transition-all text-left group ${persona === p.id ? 'bg-white/5 border border-white/10' : 'hover:bg-white/5'}`}
                                             >
-                                                <div className={`w-10 h-10 rounded-xl bg-${p.color}-500/20 flex items-center justify-center text-${p.color}-400`}>
-                                                    {React.createElement(p.icon as any, { size: 20 })}
+                                                <div className={`w-12 h-12 rounded-2xl bg-${p.color}-500/10 flex items-center justify-center text-${p.color}-400 group-hover:scale-110 transition-transform`}>
+                                                    {React.createElement(p.icon as any, { size: 24 })}
                                                 </div>
                                                 <div>
-                                                    <p className="text-white font-bold text-sm">{p.label}</p>
-                                                    <p className="text-[10px] text-zinc-500 truncate w-40">{p.description}</p>
+                                                    <p className="text-white font-black text-sm uppercase">{p.label}</p>
+                                                    <p className="text-[10px] text-zinc-500 truncate w-44">{p.description}</p>
                                                 </div>
                                             </button>
                                         ))}
@@ -166,9 +167,9 @@ const News = () => {
                     </div>
                 </div>
 
-                {/* 2. 分類過濾器 */}
-                <div className="flex items-center gap-3 mb-6 overflow-x-auto pb-3 scrollbar-hide text-left">
-                    <div className="flex-shrink-0 text-zinc-600 mr-1"><Filter size={18} /></div>
+                {/* Categories Filter */}
+                <div className="flex items-center gap-4 mb-16 overflow-x-auto pb-4 scrollbar-hide text-left">
+                    <div className="flex-shrink-0 text-zinc-600 mr-2"><Filter size={20} /></div>
                     {categories.map(tag => {
                         const colorName = CATEGORY_THEMES[tag] || 'emerald';
                         const isActive = activeCategory === tag;
@@ -179,9 +180,9 @@ const News = () => {
                                 if (persona) newParams.persona = persona;
                                 setSearchParams(newParams);
                             }}
-                                className={`flex-shrink-0 px-6 py-2 rounded-xl text-xs font-black transition-all border ${isActive
-                                    ? `${themeClasses} shadow-lg scale-105`
-                                    : 'bg-white/[0.03] border-white/[0.08] text-zinc-400 hover:text-white hover:bg-white/5'
+                                className={`flex-shrink-0 px-8 py-3 rounded-2xl text-xs font-black transition-all border uppercase tracking-widest ${isActive
+                                    ? `${themeClasses} shadow-2xl scale-105`
+                                    : 'bg-white/[0.02] border-white/5 text-zinc-500 hover:text-white hover:bg-white/5'
                                 }`}>
                                 {tag}
                             </button>
@@ -190,8 +191,8 @@ const News = () => {
                 </div>
             </div>
 
-            {/* 🚀 新聞網格 */}
-            <div className="grid grid-cols-1 gap-6 items-start">
+            {/* News Grid - Optimized Card Layout */}
+            <div className="grid grid-cols-1 gap-8 items-start">
                 <AnimatePresence mode="popLayout">
                     {filteredArticles.map((article, i) => (
                         <NewsCard key={article.slug} article={article} idx={i} />
@@ -200,9 +201,9 @@ const News = () => {
             </div>
 
             {filteredArticles.length === 0 && (
-                <div className="col-span-full py-32 text-center bg-white/[0.02] rounded-[3rem] border border-white/5">
-                    <p className="text-zinc-500 text-lg font-bold">目前暫無符合您身分的相關情報</p>
-                    <button onClick={() => handlePersonaChange('general')} className="mt-4 text-emerald-400 font-black text-sm uppercase tracking-widest hover:underline">返回全球通識</button>
+                <div className="col-span-full py-40 text-center bg-white/[0.01] rounded-[4rem] border border-dashed border-white/5">
+                    <p className="text-zinc-600 text-xl font-black uppercase tracking-widest">目前暫無符合條件之情報</p>
+                    <button onClick={() => handlePersonaChange('general')} className="mt-8 px-10 py-4 bg-emerald-500 text-black rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-2xl shadow-emerald-500/20">查看全部情報</button>
                 </div>
             )}
         </motion.div>
@@ -213,38 +214,46 @@ const NewsCard = ({ article, idx }: any) => {
     const navigate = useNavigate();
 
     return (
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: (idx % 5) * 0.05 }} viewport={{ once: true }}
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: (idx % 4) * 0.05 }} viewport={{ once: true }}
             onClick={() => { navigate(`/news/${article.slug}`); window.scrollTo(0, 0); }}
-            className="bg-[#0c0c0c] border border-white/[0.06] p-6 md:p-8 rounded-[2.5rem] cursor-pointer group transition-all hover:bg-zinc-900/80 hover:border-white/20 h-full flex flex-col md:flex-row gap-6 items-center text-left shadow-xl"
+            className="bg-[#0b0b0b] border border-white/5 p-8 md:p-12 rounded-[3.5rem] cursor-pointer group transition-all hover:bg-[#111] hover:border-emerald-500/30 flex flex-col md:flex-row gap-10 items-start text-left shadow-2xl relative overflow-hidden"
         >
-            <div className="flex-1 w-full text-left">
-                <div className="flex justify-between items-center mb-4 text-left">
-                    <div className="flex items-center gap-3">
-                        <span className="text-[10px] font-black px-3 py-1 rounded-lg uppercase tracking-widest text-zinc-400 bg-white/5">
+            <div className="absolute top-0 right-0 p-12 opacity-0 group-hover:opacity-5 transition-opacity duration-1000">
+                <Zap size={180} className="text-emerald-500" />
+            </div>
+
+            <div className="flex-1 w-full text-left relative z-10">
+                <div className="flex flex-wrap justify-between items-center mb-8 gap-4 text-left">
+                    <div className="flex items-center gap-4">
+                        <span className="text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-[0.2em] bg-white/5 text-zinc-400 border border-white/5 group-hover:border-emerald-500/30 group-hover:text-emerald-400 transition-colors">
                             {article.category}
                         </span>
-                        {article.author === "Echo" && <span className="text-[10px] font-bold text-indigo-500/80 uppercase tracking-tight">🕵️ Echo Dispatch</span>}
+                        {article.author === "Echo" && (
+                            <div className="flex items-center gap-2 text-indigo-400">
+                                <span className="text-[10px] font-black uppercase tracking-tighter italic">Echo Dispatch</span>
+                            </div>
+                        )}
                         {article.difficulty && (
                             <DifficultyStars level={article.difficulty} />
                         )}
                     </div>
-                    <span className="text-[11px] text-zinc-500 font-mono font-bold">{article.date}</span>
+                    <span className="text-[11px] text-zinc-600 font-mono font-bold tracking-widest">{article.publish_time || article.date} (TST)</span>
                 </div>
                 
-                <h4 className="text-2xl md:text-3xl font-black text-white mb-4 line-clamp-2 leading-tight group-hover:text-emerald-300 transition-colors text-left tracking-tight">
+                <h4 className="text-3xl md:text-5xl font-black text-white mb-6 line-clamp-2 leading-[1.1] group-hover:text-emerald-300 transition-colors text-left tracking-tighter uppercase italic">
                     {article.title}
                 </h4>
                 
-                <p className="text-zinc-400 text-base md:text-lg line-clamp-2 leading-relaxed text-left mb-8 font-medium">
+                <p className="text-zinc-500 text-lg md:text-xl line-clamp-3 leading-relaxed text-left mb-10 font-medium max-w-4xl">
                     {article.summary}
                 </p>
                 
-                <div className="mt-auto pt-6 border-t border-white/[0.05] flex items-center justify-between text-left">
-                    <div className="flex items-center gap-6">
-                        <span className="flex items-center gap-2 text-xs text-zinc-500 font-bold text-left"><Clock size={14} /> {article.readTime}</span>
+                <div className="mt-auto pt-8 border-t border-white/5 flex flex-wrap items-center justify-between gap-6 text-left">
+                    <div className="flex items-center gap-8">
+                        <span className="flex items-center gap-2 text-xs text-zinc-600 font-black uppercase tracking-widest"><Clock size={16} /> {article.readTime}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-white font-black text-xs uppercase tracking-widest group-hover:gap-4 transition-all">
-                        閱讀情報 <ArrowRight size={18} className="text-emerald-500" />
+                    <div className="flex items-center gap-4 text-white font-black text-xs uppercase tracking-[0.3em] group-hover:translate-x-2 transition-transform duration-500">
+                        Deep Dive <ArrowRight size={20} className="text-emerald-500" />
                     </div>
                 </div>
             </div>
