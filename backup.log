@@ -22,3 +22,23 @@
 /bin/sh: 1: ./backup.sh: not found
 /bin/sh: 1: ./backup.sh: not found
 [Sat Mar  7 03:03:10 AM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260307_030307.tar.gz
+[Sat Mar  7 04:00:01 AM UTC 2026] Starting backup to /root/.openclaw/workspace/backups/source_backup_20260307_040001.tar.gz...
+tar: Removing leading `/' from member names
+[Sat Mar  7 04:00:04 AM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260307_040001.tar.gz
+SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260307_040001.tar.gz
+[Sat Mar  7 05:00:01 AM UTC 2026] Starting backup to /root/.openclaw/workspace/backups/source_backup_20260307_050001.tar.gz...
+tar: Removing leading `/' from member names
+[Sat Mar  7 05:00:05 AM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260307_050001.tar.gz
+SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260307_050001.tar.gz
+[Sat Mar  7 06:00:01 AM UTC 2026] Starting backup to /root/.openclaw/workspace/backups/source_backup_20260307_060001.tar.gz...
+tar: Removing leading `/' from member names
+[Sat Mar  7 06:00:05 AM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260307_060001.tar.gz
+SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260307_060001.tar.gz
+[Sat Mar  7 07:00:01 AM UTC 2026] Starting backup to /root/.openclaw/workspace/backups/source_backup_20260307_070001.tar.gz...
+tar: Removing leading `/' from member names
+[Sat Mar  7 07:00:04 AM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260307_070001.tar.gz
+SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260307_070001.tar.gz
+[Sat Mar  7 08:00:01 AM UTC 2026] Starting backup to /root/.openclaw/workspace/backups/source_backup_20260307_080001.tar.gz...
+tar: Removing leading `/' from member names
+[Sat Mar  7 08:00:05 AM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260307_080001.tar.gz
+SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260307_080001.tar.gz
