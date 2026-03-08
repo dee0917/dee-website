@@ -13,7 +13,7 @@ echo "--- [PEACEKEEPER V8] 啟動鋼鐵門禁與品質審計 ---"
 echo "[1/4] 執行清單對齊檢查..."
 if [ -f "$MANIFEST" ]; then
     PENDING_COUNT=$(grep -c "\"status\": \"pending\"" "$MANIFEST")
-    if [ "$PENDING_COUNT" -gt 0 ]; then
+    if [[ "$PENDING_COUNT" =~ ^[0-9]+$ ]] && [ "$PENDING_COUNT" -gt 0 ]; then
         echo "❌ 發現尚未實體化的內容清單 ($PENDING_COUNT 篇)！請先完成檔案寫入。"
         exit 1
     fi
