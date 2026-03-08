@@ -24,7 +24,7 @@ export const article: NewsArticle = {
     custom_content: `
         <div class="my-24">
             <!-- 🛡️ AI Security Shield UI -->
-            <div class="p-1 rounded-[5rem] bg-gradient-to-br from-blue-500 via-zinc-900 to-black shadow-[0_0_120px_rgba(59,130,246,0.2)] relative group text-left">
+            <div class="p-1 rounded-[4rem] bg-gradient-to-br from-blue-500 via-zinc-900 to-black shadow-[0_0_120px_rgba(59,130,246,0.2)] relative group text-left">
                 <div class="p-16 rounded-[4.8rem] bg-[#050505] relative overflow-hidden">
                     <div class="relative z-10 flex flex-col gap-12">
                         <div class="flex items-center justify-between border-b border-white/5 pb-8">
