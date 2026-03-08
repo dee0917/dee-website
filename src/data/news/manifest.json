@@ -7,6 +7,8 @@
   "sleep_mode_schedule": "23:00-07:00 UTC",
   "fact_bundle_enabled": true,
   "live_articles": [
+    { "id": 202603081810, "slug": "real-tech-notebooklm-python-automation", "status": "deployed", "source": "verified_bundle" },
+    { "id": 202603081805, "slug": "real-tech-shadcn-generative-ui-accessible", "status": "deployed", "source": "verified_bundle" },
     { "id": 202603081630, "slug": "echo-observation-swarm-intelligence-mirofish", "status": "deployed", "source": "verified_bundle" },
     { "id": 202603081600, "slug": "real-tech-google-generative-ai-vertex", "status": "deployed", "source": "verified_bundle" },
     { "id": 202603082215, "slug": "real-tech-openai-skills-hub-codex", "status": "deployed", "source": "verified_bundle" },
