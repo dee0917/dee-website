@@ -1,5 +1,5 @@
 {
-  "last_synced": "2026-03-08T13:00:00Z",
+  "last_synced": "2026-03-08T14:00:00Z",
   "vision": "24H Automated Tech Studio",
   "selected_strategies": [2, 3, 6],
   "audit_protocol": "Kage Persona Audit v2",
@@ -7,6 +7,8 @@
   "sleep_mode_schedule": "23:00-07:00 UTC",
   "fact_bundle_enabled": true,
   "live_articles": [
+    { "id": 202603082215, "slug": "real-tech-openai-skills-hub-codex", "status": "deployed", "source": "verified_bundle" },
+    { "id": 202603082200, "slug": "echo-slang-agent-gentrification", "status": "deployed", "source": "verified_bundle" },
     { "id": 202603082130, "slug": "real-tech-electrobun-tiny-desktop-revolution", "status": "deployed", "source": "verified_bundle" },
     { "id": 202603082100, "slug": "real-tech-react-grab-context-coding", "status": "deployed", "source": "verified_bundle" },
     { "id": 202603081830, "slug": "real-tech-alibaba-gui-master-page-agent", "status": "deployed", "source": "verified_bundle" },
