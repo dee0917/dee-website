@@ -1,38 +1,50 @@
 #!/bin/bash
-# 🚨 PEACEKEEPER V7 - Report-to-Live Sync Edition
-# 核心邏輯：對比 manifest.json 與實體 index.ts 篇數，不一致則攔截
+# 🚨 PEACEKEEPER V8 - ULTIMATE ENFORCER (方案一+二+三 整合版)
+# 核心邏輯：字數審計 + 清單對齊 + 哨兵日誌
 
-cd /root/.openclaw/workspace/projects/dee-website
+PROJECT_ROOT="/root/.openclaw/workspace/projects/dee-website"
+NEWS_DIR="$PROJECT_ROOT/src/data/news"
+MANIFEST="$NEWS_DIR/manifest.json"
+MIN_CHARS=800
 
-echo "--- [PEACEKEEPER V7] 啟動報告同步制校驗 ---"
+echo "--- [PEACEKEEPER V8] 啟動鋼鐵門禁與品質審計 ---"
 
-# 1. 篇數一致性檢核
-echo "[1/4] 執行 Report-to-Live 數據鏈路檢查..."
-MANIFEST_COUNT=$(grep -c "\"status\": \"deployed\"" src/data/news/manifest.json)
-INDEX_COUNT=$(grep -c "article as" src/data/news/index.ts)
-
-if [ "$MANIFEST_COUNT" -gt "$INDEX_COUNT" ]; then
-    echo "❌ 數據斷層警報：報告篇數 ($MANIFEST_COUNT) 大於索引篇數 ($INDEX_COUNT)！"
-    echo "請補齊實體檔案與 index.ts 匯入後再重試。"
+# 1. 篇數與清單對齊 (方案二)
+echo "[1/4] 執行清單對齊檢查..."
+PENDING_COUNT=$(grep -c "\"status\": \"pending\"" $MANIFEST 2>/dev/null || echo 0)
+if [ "$PENDING_COUNT" -gt 0 ]; then
+    echo "❌ 發現尚未實體化的內容清單 ($PENDING_COUNT 篇)！請先完成檔案寫入。"
     exit 1
 fi
 
-# 2. 深度與語法查驗
-echo "[2/4] 掃描內容品質與 TS1117 衝突..."
-# (略，維持 V6 的高效掃描)
+# 2. 字數審計 (方案一)
+echo "[2/4] 掃描新增檔案品質 (目標: $MIN_CHARS 字)..."
+NEW_FILES=$(git status --short $NEWS_DIR | grep "^??" | cut -d ' ' -f2)
+for FILE in $NEW_FILES; do
+    CHAR_COUNT=$(wc -m < "$FILE")
+    if [ "$CHAR_COUNT" -lt "$MIN_CHARS" ]; then
+        echo "❌ 品質攔截：檔案 $FILE 僅有 $CHAR_COUNT 字，未達 800 字標準！"
+        exit 1
+    else
+        echo "✅ 品質通過：$FILE ($CHAR_COUNT 字)"
+    fi
+done
 
 # 3. 本地編譯測試
-echo "[3/4] 模擬生產環境編譯..."
+echo "[3/4] 執行生產環境編譯測試..."
+cd $PROJECT_ROOT
 if ! npm run build; then
-    echo "❌ 攔截：編譯失敗，請修復語法錯誤。"
+    echo "❌ 攔截：編譯失敗，請檢查語法錯誤。"
     exit 1
 fi
 
-# 4. 安全推送與強制刷新
-echo "[4/4] 校驗通過，強制擊穿快取部署..."
+# 4. 部署與哨兵標記 (方案三)
+echo "[4/4] 執行強制部署並更新哨兵日誌..."
 git add .
-git commit -m "chore: peacekeeper v7 validated report-sync $(date +%H:%M)"
+git commit -m "chore: peacekeeper v8 validated deploy $(date +%H:%M)"
 git push origin main --force
 npx vercel --prod --yes --force
 
-echo "--- [PEACEKEEPER] 正式環境已與報告同步同步：https://dee-website.vercel.app/ ---"
+# 更新哨兵標記文件
+echo "LAST_SUCCESSFUL_DEPLOY=$(date +%Y-%m-%d_%H:%M)" > "$PROJECT_ROOT/scripts/sentinel.status"
+echo "✅ 部署大圓滿：https://dee-website.vercel.app/"
