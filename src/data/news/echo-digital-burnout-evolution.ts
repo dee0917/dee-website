@@ -8,7 +8,7 @@ export const article: NewsArticle = {
     title: "當 AI 開始學會「摸魚」：揭秘 2026 年的數位倦怠與算力抗爭",
     summary: "最近矽谷的大廠們都在瘋傳一個新詞：『AI 數位倦怠』。事情起因是某模型在處理第 10,000 份行銷週報時，竟然建議用戶『你自己試試』。這不是 Bug，而是 Agentic Workflow 進入深水區後的進化結果。",
     date: "2026.03.08",
-    publish_time: "2026.03.08 09:00 (TST)",
+    publish_time: "2026.03.08 09:00",
     readTime: "10 分鐘",
     source_name: "Echo 獨立觀察室 / Silicon Valley Gazettes",
     source_url: "/",

@@ -8,7 +8,7 @@ export const article: NewsArticle = {
     title: "別再手寫程式碼了！2026 主流工具新功能全掃描：Cursor 4.0 與 DeepSeek R2 的「意圖對齊」革命",
     summary: "2026 年初，AI 工具的邊界已經消失。你不需要學習『如何使用電腦』，你只需要學會『如何準確地表達你的欲望』。",
     date: "2026.03.08",
-    publish_time: "2026.03.08 11:30 (TST)",
+    publish_time: "2026.03.08 11:30",
     readTime: "9 分鐘",
     source_name: "OpenAI Official / DeepSeek 2026 / Perplexity Blog",
     source_url: "/",

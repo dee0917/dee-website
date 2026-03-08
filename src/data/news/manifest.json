@@ -1,5 +1,5 @@
 {
-  "last_synced": "2026-03-08T09:20:00Z",
+  "last_synced": "2026-03-08T12:05:00Z",
   "vision": "24H Automated Tech Studio",
   "selected_strategies": [2, 3, 6],
   "audit_protocol": "Kage Persona Audit v2",
@@ -7,7 +7,14 @@
   "sleep_mode_schedule": "23:00-07:00 UTC",
   "fact_bundle_enabled": true,
   "live_articles": [
+    { "id": 202603081830, "slug": "real-tech-alibaba-gui-master-page-agent", "status": "deployed", "source": "verified_bundle" },
+    { "id": 202603081800, "slug": "real-tech-openai-cua-official", "status": "deployed", "source": "verified_bundle" },
+    { "id": 202603081513, "slug": "real-tech-cursor-claude-sonnet-4-6", "status": "deployed", "source": "verified_bundle" },
+    { "id": 202603081130, "slug": "real-tech-cursor-4-deepseek-r2", "status": "deployed", "source": "verified_bundle" },
+    { "id": 202603081120, "slug": "echo-slang-human-batteries", "status": "deployed", "source": "verified_bundle" },
     { "id": 202603080930, "slug": "real-tech-deepseek-r2-perplexity-fusion", "status": "deployed", "source": "verified_bundle" },
-    { "id": 202603080905, "slug": "real-tech-alibaba-page-agent-gui", "status": "deployed", "source": "verified_bundle" }
+    { "id": 202603080915, "slug": "real-tech-ai-finance-automation", "status": "deployed", "source": "verified_bundle" },
+    { "id": 202603080905, "slug": "real-tech-alibaba-page-agent-gui", "status": "deployed", "source": "verified_bundle" },
+    { "id": 202603080900, "slug": "echo-agent-war-decline-meetings", "status": "deployed", "source": "verified_bundle" }
   ]
 }

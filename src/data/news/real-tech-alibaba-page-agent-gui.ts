@@ -8,7 +8,7 @@ export const article: NewsArticle = {
     title: "阿里巴巴開源 Page-Agent：不用 API，AI 直接「看懂」網頁並幫你點擊",
     summary: "這項技術標誌著瀏覽器自動化進入『視覺語義時代』。阿里巴巴最新開源的 Page-Agent 讓 AI 代理人能透過自然語言直接操控任何網頁介面，甚至連沒有 API 的老舊系統也能一鍵自動化。",
     date: "2026.03.08",
-    publish_time: "2026.03.08 09:05 (TST)",
+    publish_time: "2026.03.08 09:05",
     readTime: "10 分鐘",
     source_name: "GitHub / Alibaba-OSS",
     source_url: "https://github.com/alibaba/page-agent",

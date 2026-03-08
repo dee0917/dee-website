@@ -8,7 +8,7 @@ export const article: NewsArticle = {
     title: "DeepSeek R2 突擊發布：讓「個人算力中心」進入降維打擊時代",
     summary: "DeepSeek 官宣了 R2 系列模型的全面開放。這次更新的核心不在於參數量，而在於『生活感知力』與 Perplexity 的深度整合。小白用戶現在可以真正擁有一個具備『手腳』的私人管家。",
     date: "2026.03.08",
-    publish_time: "2026.03.08 09:30 (TST)",
+    publish_time: "2026.03.08 09:30",
     readTime: "9 分鐘",
     source_name: "DeepSeek Official / TechCrunch",
     source_url: "/",

@@ -8,7 +8,7 @@ export const article: NewsArticle = {
     title: "矽谷的「代理人戰爭」：當 AI 開始學會幫你拒絕無效會議",
     summary: "本週 GitHub 出現大量以『Autonomous Negotiation』為核心的代理人框架。AI 不再只是幫你寫程式，它們開始學會幫你『外交』與『推託』。",
     date: "2026.03.08",
-    publish_time: "2026.03.08 09:00 (TST)",
+    publish_time: "2026.03.08 09:00",
     readTime: "5 分鐘",
     source_name: "Echo 獨立觀察室 / ArXiv",
     source_url: "/",

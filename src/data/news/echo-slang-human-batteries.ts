@@ -8,7 +8,7 @@ export const article: NewsArticle = {
     title: "矽谷的「人肉電池」與 AI 的「數位永生」：我們正在被回收嗎？",
     summary: "GitHub Trending 近期被『Autonomous Agent Agency』統治。這背後傳遞了一個殘酷信號：2026 年，人類正逐漸成為自動化工作流中的一個 if-else 分支。",
     date: "2026.03.08",
-    publish_time: "2026.03.08 11:20 (TST)",
+    publish_time: "2026.03.08 11:20",
     readTime: "6 分鐘",
     source_name: "Echo 獨立觀察室 / GitHub Trending",
     source_url: "/",

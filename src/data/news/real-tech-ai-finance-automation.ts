@@ -8,7 +8,7 @@ export const article: NewsArticle = {
     title: "小白也能上手的「生活降維打擊」：AI 自動化理財與決策時代",
     summary: "2026 年初，主流工具的邊界已徹底模糊。透過 Computer Use 技術，AI 正式從『回話的人』進化為『幫你管錢的人』。",
     date: "2026.03.08",
-    publish_time: "2026.03.08 09:15 (TST)",
+    publish_time: "2026.03.08 09:15",
     readTime: "7 分鐘",
     source_name: "TechScan 2026 / Perplexity Blog",
     source_url: "/",

@@ -8,7 +8,7 @@ export const article: NewsArticle = {
     title: "Cursor & Claude Sonnet 4.6 聯手：你的鍵盤現在除了「Ctrl+C」真的沒別的用了",
     summary: "這週的 AI 圈是一場『去人類化』的極限運動。Anthropic 剛發布的 Sonnet 4.6 配合 Cursor，實現了真正意義上的『需求即產品』。",
     date: "2026.03.08",
-    publish_time: "2026.03.08 15:13 (TST)",
+    publish_time: "2026.03.08 15:13",
     readTime: "9 分鐘",
     source_name: "Anthropic Newsroom / Cursor Blog",
     source_url: "/",
