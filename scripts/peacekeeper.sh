@@ -11,10 +11,12 @@ echo "--- [PEACEKEEPER V8] 啟動鋼鐵門禁與品質審計 ---"
 
 # 1. 篇數與清單對齊 (方案二)
 echo "[1/4] 執行清單對齊檢查..."
-PENDING_COUNT=$(grep -c "\"status\": \"pending\"" $MANIFEST 2>/dev/null || echo 0)
-if [ "$PENDING_COUNT" -gt 0 ]; then
-    echo "❌ 發現尚未實體化的內容清單 ($PENDING_COUNT 篇)！請先完成檔案寫入。"
-    exit 1
+if [ -f "$MANIFEST" ]; then
+    PENDING_COUNT=$(grep -c "\"status\": \"pending\"" "$MANIFEST")
+    if [ "$PENDING_COUNT" -gt 0 ]; then
+        echo "❌ 發現尚未實體化的內容清單 ($PENDING_COUNT 篇)！請先完成檔案寫入。"
+        exit 1
+    fi
 fi
 
 # 2. 字數審計 (方案一)
