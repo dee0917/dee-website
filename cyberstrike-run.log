@@ -1,0 +1,231 @@
+{"level":"info","timestamp":"2026-03-08T18:41:04.067Z","caller":"database/database.go:339","msg":"数据库表初始化完成"}
+{"level":"info","timestamp":"2026-03-08T18:41:04.067Z","caller":"security/executor.go:68","msg":"工具索引构建完成","totalTools":111,"enabledTools":105}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:207","msg":"开始注册工具","totalTools":111,"enabledTools":105}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:68","msg":"工具索引构建完成","totalTools":111,"enabledTools":105}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"amass","command":"amass","index":0}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"anew","command":"python3","index":1}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"angr","command":"python3","index":2}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"api-fuzzer","command":"python3","index":3}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"api-schema-analyzer","command":"spectral","index":4}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"arjun","command":"arjun","index":5}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"arp-scan","command":"arp-scan","index":6}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"autorecon","command":"autorecon","index":7}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"binwalk","command":"binwalk","index":8}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"bloodhound","command":"bloodhound-python","index":9}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"burpsuite","command":"burpsuite","index":10}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"cat","command":"cat","index":11}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"checkov","command":"checkov","index":12}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"checksec","command":"checksec","index":13}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"cloudmapper","command":"cloudmapper","index":15}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"create-file","command":"python3","index":16}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"cyberchef","command":"cyberchef","index":17}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"dalfox","command":"dalfox","index":18}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"delete-file","command":"rm","index":19}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"dirb","command":"dirb","index":20}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"dirsearch","command":"dirsearch","index":21}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"dnsenum","command":"dnsenum","index":22}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"dnslog","command":"python3","index":23}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"docker-bench-security","command":"docker-bench-security","index":24}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"dotdotpwn","command":"dotdotpwn","index":25}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"enum4linux-ng","command":"enum4linux-ng","index":26}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"enum4linux","command":"enum4linux","index":27}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"exec","command":"sh","index":28}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"execute-python-script","command":"/bin/bash","index":29}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"exiftool","command":"exiftool","index":30}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"falco","command":"falco","index":31}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"fcrackzip","command":"fcrackzip","index":32}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"feroxbuster","command":"feroxbuster","index":33}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"ffuf","command":"ffuf","index":34}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"fierce","command":"fierce","index":35}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"foremost","command":"foremost","index":37}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"gau","command":"gau","index":38}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"gdb-peda","command":"gdb","index":39}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"gdb","command":"gdb","index":40}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"ghidra","command":"analyzeHeadless","index":41}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"gobuster","command":"gobuster","index":42}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"graphql-scanner","command":"graphqlmap","index":43}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"hakrawler","command":"hakrawler","index":44}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"hash-identifier","command":"python3","index":45}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"hashcat","command":"hashcat","index":46}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"hashpump","command":"hashpump","index":47}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"http-framework-test","command":"python3","index":48}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"http-intruder","command":"python3","index":49}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"hydra","command":"hydra","index":50}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"impacket","command":"python3","index":51}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"install-python-package","command":"/bin/bash","index":52}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"jaeles","command":"jaeles","index":53}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"john","command":"john","index":54}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"jwt-analyzer","command":"jwt_tool","index":55}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"katana","command":"katana","index":56}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"kube-bench","command":"kube-bench","index":57}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"kube-hunter","command":"kube-hunter","index":58}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"libc-database","command":"python3","index":59}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"linpeas","command":"linpeas.sh","index":60}
+{"level":"info","timestamp":"2026-03-08T18:41:04.068Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"masscan","command":"masscan","index":61}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"metasploit","command":"python3","index":62}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"modify-file","command":"python3","index":64}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"msfvenom","command":"msfvenom","index":65}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"nbtscan","command":"nbtscan","index":66}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"netexec","command":"netexec","index":67}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"nikto","command":"nikto","index":68}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"nmap-advanced","command":"nmap","index":69}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"nmap","command":"nmap","index":70}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"nuclei","command":"nuclei","index":71}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"objdump","command":"objdump","index":72}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"one-gadget","command":"one_gadget","index":73}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"paramspider","command":"paramspider","index":75}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"pdfcrack","command":"pdfcrack","index":76}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"prowler","command":"prowler","index":77}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"pwninit","command":"pwninit","index":78}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"pwntools","command":"python3","index":79}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"qsreplace","command":"python3","index":80}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"query_execution_result","command":"internal:query_execution_result","index":81}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"radare2","command":"r2","index":82}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"responder","command":"python3","index":83}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"ropgadget","command":"ROPgadget","index":84}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"ropper","command":"ropper","index":85}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"rpcclient","command":"python3","index":86}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"rustscan","command":"rustscan","index":87}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"scout-suite","command":"scout","index":88}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"smbmap","command":"smbmap","index":89}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"sqlmap","command":"sqlmap","index":90}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"steghide","command":"steghide","index":91}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"stegsolve","command":"java","index":92}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"strings","command":"strings","index":93}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"subfinder","command":"subfinder","index":94}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"terrascan","command":"terrascan","index":95}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"trivy","command":"trivy","index":96}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"uro","command":"python3","index":97}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"volatility","command":"volatility","index":98}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"volatility3","command":"volatility3","index":99}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"wafw00f","command":"wafw00f","index":100}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"waybackurls","command":"waybackurls","index":101}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"wfuzz","command":"wfuzz","index":102}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"winpeas","command":"winPEAS.exe","index":103}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"wpscan","command":"wpscan","index":104}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"x8","command":"x8","index":105}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"xsser","command":"xsser","index":106}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"xxd","command":"xxd","index":107}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:263","msg":"注册安全工具成功","tool":"zsteg","command":"zsteg","index":110}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"security/executor.go:270","msg":"工具注册完成","registeredCount":111}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"app/app.go:1041","msg":"漏洞记录工具注册成功"}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"app/app.go:148","msg":"检查知识库配置","enabled":false}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"app/app.go:299","msg":"Skills管理器已初始化","skillsDir":"skills"}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"skills/tool.go:90","msg":"注册skills列表工具成功"}
+{"level":"info","timestamp":"2026-03-08T18:41:04.069Z","caller":"skills/tool.go:185","msg":"注册skill读取工具成功"}
+{"level":"info","timestamp":"2026-03-08T18:41:04.076Z","caller":"app/app.go:464","msg":"启动HTTP服务器","address":"0.0.0.0:8080"}
+[GIN] 2026/03/08 - 18:41:46 | 200 |    1.735372ms | 149.154.161.234 | GET      "/"
+[GIN] 2026/03/08 - 18:43:31 | 200 |     418.129µs |  210.203.60.159 | GET      "/"
+[GIN] 2026/03/08 - 18:43:31 | 200 |     886.695µs |  210.203.60.159 | GET      "/static/js/terminal.js"
+[GIN] 2026/03/08 - 18:43:31 | 200 |    1.397455ms |  210.203.60.159 | GET      "/static/css/style.css"
+[GIN] 2026/03/08 - 18:43:31 | 200 |   10.079855ms |  210.203.60.159 | GET      "/static/logo.png"
+[GIN] 2026/03/08 - 18:43:31 | 200 |    1.186467ms |  210.203.60.159 | GET      "/static/js/i18n.js"
+[GIN] 2026/03/08 - 18:43:31 | 200 |      624.89µs |  210.203.60.159 | GET      "/static/js/router.js"
+[GIN] 2026/03/08 - 18:43:32 | 200 |     562.667µs |  210.203.60.159 | GET      "/static/js/dashboard.js"
+[GIN] 2026/03/08 - 18:43:32 | 200 |     686.954µs |  210.203.60.159 | GET      "/static/js/auth.js"
+[GIN] 2026/03/08 - 18:43:32 | 200 |    1.365245ms |  210.203.60.159 | GET      "/static/js/monitor.js"
+[GIN] 2026/03/08 - 18:43:32 | 200 |    1.210522ms |  210.203.60.159 | GET      "/static/js/info-collect.js"
+[GIN] 2026/03/08 - 18:43:32 | 200 |      664.74µs |  210.203.60.159 | GET      "/static/js/skills.js"
+[GIN] 2026/03/08 - 18:43:32 | 200 |    1.650975ms |  210.203.60.159 | GET      "/static/js/chat.js"
+[GIN] 2026/03/08 - 18:43:32 | 200 |     804.601µs |  210.203.60.159 | GET      "/static/js/roles.js"
+[GIN] 2026/03/08 - 18:43:32 | 200 |     866.555µs |  210.203.60.159 | GET      "/static/js/knowledge.js"
+[GIN] 2026/03/08 - 18:43:32 | 200 |     376.338µs |  210.203.60.159 | GET      "/static/js/vulnerability.js?v=4"
+[GIN] 2026/03/08 - 18:43:32 | 200 |     539.822µs |  210.203.60.159 | GET      "/static/js/builtin-tools.js"
+[GIN] 2026/03/08 - 18:43:32 | 200 |    1.594761ms |  210.203.60.159 | GET      "/static/js/tasks.js"
+[GIN] 2026/03/08 - 18:43:32 | 200 |    1.197843ms |  210.203.60.159 | GET      "/static/js/settings.js"
+[GIN] 2026/03/08 - 18:43:32 | 200 |    1.146776ms |  210.203.60.159 | GET      "/static/i18n/zh-CN.json"
+[GIN] 2026/03/08 - 18:43:32 | 200 |    1.468361ms |  210.203.60.159 | GET      "/static/favicon.ico"
+[GIN] 2026/03/08 - 18:43:49 | 200 |     209.996µs |  210.203.60.159 | GET      "/"
+[GIN] 2026/03/08 - 18:43:49 | 200 |     414.274µs |  210.203.60.159 | GET      "/static/logo.png"
+[GIN] 2026/03/08 - 18:43:49 | 200 |     337.248µs |  210.203.60.159 | GET      "/static/css/style.css"
+[GIN] 2026/03/08 - 18:43:49 | 200 |     198.439µs |  210.203.60.159 | GET      "/static/js/roles.js"
+[GIN] 2026/03/08 - 18:43:49 | 200 |     336.176µs |  210.203.60.159 | GET      "/static/js/i18n.js"
+[GIN] 2026/03/08 - 18:43:49 | 200 |      80.662µs |  210.203.60.159 | GET      "/static/js/builtin-tools.js"
+[GIN] 2026/03/08 - 18:43:49 | 200 |     175.723µs |  210.203.60.159 | GET      "/static/js/knowledge.js"
+[GIN] 2026/03/08 - 18:43:49 | 200 |     171.518µs |  210.203.60.159 | GET      "/static/js/vulnerability.js?v=4"
+[GIN] 2026/03/08 - 18:43:49 | 200 |      57.247µs |  210.203.60.159 | GET      "/static/js/auth.js"
+[GIN] 2026/03/08 - 18:43:49 | 200 |     161.743µs |  210.203.60.159 | GET      "/static/js/chat.js"
+[GIN] 2026/03/08 - 18:43:49 | 200 |     138.267µs |  210.203.60.159 | GET      "/static/js/tasks.js"
+[GIN] 2026/03/08 - 18:43:49 | 200 |      312.77µs |  210.203.60.159 | GET      "/static/js/terminal.js"
+[GIN] 2026/03/08 - 18:43:49 | 200 |     106.429µs |  210.203.60.159 | GET      "/static/js/dashboard.js"
+[GIN] 2026/03/08 - 18:43:49 | 200 |     627.865µs |  210.203.60.159 | GET      "/static/js/skills.js"
+[GIN] 2026/03/08 - 18:43:49 | 200 |     781.406µs |  210.203.60.159 | GET      "/static/js/settings.js"
+[GIN] 2026/03/08 - 18:43:49 | 200 |     162.746µs |  210.203.60.159 | GET      "/static/js/router.js"
+[GIN] 2026/03/08 - 18:43:49 | 200 |      172.52µs |  210.203.60.159 | GET      "/static/js/info-collect.js"
+[GIN] 2026/03/08 - 18:43:49 | 200 |     249.686µs |  210.203.60.159 | GET      "/static/js/monitor.js"
+[GIN] 2026/03/08 - 18:43:51 | 200 |     188.073µs |  210.203.60.159 | GET      "/static/i18n/zh-CN.json"
+[GIN] 2026/03/08 - 18:43:52 | 200 |     488.275µs |  210.203.60.159 | GET      "/static/logo.png"
+[GIN] 2026/03/08 - 18:43:54 | 200 |     239.841µs |  210.203.60.159 | GET      "/static/favicon.ico"
+[GIN] 2026/03/08 - 18:44:22 | 200 |     790.219µs |  210.203.60.159 | POST     "/api/auth/login"
+[GIN] 2026/03/08 - 18:44:23 | 200 |     155.444µs |  210.203.60.159 | GET      "/api/external-mcp"
+[GIN] 2026/03/08 - 18:44:23 | 200 |      72.048µs |  210.203.60.159 | GET      "/api/agent-loop/tasks"
+[GIN] 2026/03/08 - 18:44:23 | 200 |     263.396µs |  210.203.60.159 | GET      "/api/conversations?limit=50"
+[GIN] 2026/03/08 - 18:44:23 | 200 |       8.613µs |  210.203.60.159 | GET      "/api/agent-loop/tasks"
+[GIN] 2026/03/08 - 18:44:23 | 200 |       4.836µs |  210.203.60.159 | GET      "/api/agent-loop/tasks"
+[GIN] 2026/03/08 - 18:44:23 | 200 |     907.226µs |  210.203.60.159 | GET      "/api/skills/stats"
+[GIN] 2026/03/08 - 18:44:23 | 200 |     102.705µs |  210.203.60.159 | GET      "/api/monitor/stats"
+[GIN] 2026/03/08 - 18:44:23 | 200 |    1.141769ms |  210.203.60.159 | GET      "/api/vulnerabilities/stats"
+[GIN] 2026/03/08 - 18:44:23 | 200 |      12.548µs |  210.203.60.159 | GET      "/api/knowledge/stats"
+[GIN] 2026/03/08 - 18:44:23 | 200 |      76.665µs |  210.203.60.159 | GET      "/api/groups"
+[GIN] 2026/03/08 - 18:44:23 | 200 |     180.041µs |  210.203.60.159 | GET      "/api/batch-tasks?limit=500&page=1"
+[GIN] 2026/03/08 - 18:44:23 | 200 |      810.03µs |  210.203.60.159 | GET      "/api/roles"
+[GIN] 2026/03/08 - 18:44:23 | 200 |     177.578µs |  210.203.60.159 | GET      "/api/groups"
+[GIN] 2026/03/08 - 18:44:23 | 200 |      505.54µs |  210.203.60.159 | GET      "/api/config/tools?page=1&page_size=100"
+[GIN] 2026/03/08 - 18:44:23 | 200 |     147.172µs |  210.203.60.159 | GET      "/api/groups"
+[GIN] 2026/03/08 - 18:44:23 | 200 |     181.243µs |  210.203.60.159 | GET      "/api/conversations?limit=100"
+[GIN] 2026/03/08 - 18:44:24 | 200 |     241.824µs |  210.203.60.159 | GET      "/api/config/tools?page=2&page_size=100"
+[GIN] 2026/03/08 - 18:44:27 | 304 |      60.912µs |  210.203.60.159 | GET      "/static/logo.png"
+[GIN] 2026/03/08 - 18:44:27 | 304 |      64.837µs |  210.203.60.159 | GET      "/static/favicon.ico"
+[GIN] 2026/03/08 - 18:44:29 | 200 |     360.192µs |  210.203.60.159 | GET      "/api-docs"
+[GIN] 2026/03/08 - 18:44:30 | 304 |      66.209µs |  210.203.60.159 | GET      "/static/css/style.css"
+[GIN] 2026/03/08 - 18:44:30 | 200 |     852.113µs |  210.203.60.159 | GET      "/static/js/api-docs.js"
+[GIN] 2026/03/08 - 18:44:30 | 200 |    1.742614ms |  210.203.60.159 | GET      "/api/openapi/spec?token=16d8eda4-3c7e-47fc-b634-d02a66a50a1f"
+[GIN] 2026/03/08 - 18:44:30 | 304 |      91.879µs |  210.203.60.159 | GET      "/static/logo.png"
+[GIN] 2026/03/08 - 18:44:33 | 200 |      27.401µs |  210.203.60.159 | GET      "/api/agent-loop/tasks"
+[GIN] 2026/03/08 - 18:44:42 | 200 |     133.852µs |  210.203.60.159 | GET      "/api/roles"
+[GIN] 2026/03/08 - 18:44:42 | 200 |      140.11µs |  210.203.60.159 | GET      "/api/roles"
+[GIN] 2026/03/08 - 18:44:42 | 200 |        98.8µs |  210.203.60.159 | GET      "/api/roles"
+[GIN] 2026/03/08 - 18:44:42 | 304 |      64.908µs |  210.203.60.159 | GET      "/static/logo.png"
+[GIN] 2026/03/08 - 18:44:42 | 200 |      88.724µs |  210.203.60.159 | GET      "/api/roles"
+[GIN] 2026/03/08 - 18:44:43 | 304 |      94.532µs |  210.203.60.159 | GET      "/static/favicon.ico"
+[GIN] 2026/03/08 - 18:44:43 | 200 |      26.862µs |  210.203.60.159 | GET      "/api/agent-loop/tasks"
+[GIN] 2026/03/08 - 18:44:49 | 200 |     390.898µs |  210.203.60.159 | GET      "/api/skills/stats"
+[GIN] 2026/03/08 - 18:44:49 | 200 |     345.981µs |  210.203.60.159 | GET      "/api/skills/stats"
+[GIN] 2026/03/08 - 18:44:49 | 304 |      62.144µs |  210.203.60.159 | GET      "/static/logo.png"
+[GIN] 2026/03/08 - 18:44:49 | 304 |      72.699µs |  210.203.60.159 | GET      "/static/favicon.ico"
+[GIN] 2026/03/08 - 18:44:49 | 200 |    5.576774ms |  210.203.60.159 | GET      "/api/skills?limit=20&offset=0"
+[GIN] 2026/03/08 - 18:44:49 | 200 |     279.891µs |  210.203.60.159 | GET      "/api/skills?limit=20&offset=0"
+[GIN] 2026/03/08 - 18:44:49 | 304 |       39.05µs |  210.203.60.159 | GET      "/static/logo.png"
+[GIN] 2026/03/08 - 18:44:50 | 304 |     100.692µs |  210.203.60.159 | GET      "/static/favicon.ico"
+[GIN] 2026/03/08 - 18:44:53 | 200 |       26.59µs |  210.203.60.159 | GET      "/api/agent-loop/tasks"
+[GIN] 2026/03/08 - 18:44:55 | 200 |      33.701µs |  210.203.60.159 | GET      "/api/knowledge/retrieval-logs?limit=100"
+[GIN] 2026/03/08 - 18:44:55 | 200 |      45.158µs |  210.203.60.159 | GET      "/api/knowledge/retrieval-logs?limit=100"
+[GIN] 2026/03/08 - 18:44:55 | 304 |      84.828µs |  210.203.60.159 | GET      "/static/logo.png"
+[GIN] 2026/03/08 - 18:44:55 | 304 |      91.578µs |  210.203.60.159 | GET      "/static/favicon.ico"
+[GIN] 2026/03/08 - 18:44:55 | 200 |       33.12µs |  210.203.60.159 | GET      "/api/knowledge/index-status"
+[GIN] 2026/03/08 - 18:44:55 | 200 |       6.339µs |  210.203.60.159 | GET      "/api/knowledge/index-status"
+[GIN] 2026/03/08 - 18:44:55 | 200 |       7.982µs |  210.203.60.159 | GET      "/api/knowledge/categories?_t=1772995587067"
+[GIN] 2026/03/08 - 18:44:55 | 200 |      16.766µs |  210.203.60.159 | GET      "/api/knowledge/categories?_t=1772995587076"
+[GIN] 2026/03/08 - 18:44:55 | 200 |      17.656µs |  210.203.60.159 | GET      "/api/knowledge/items?categoryPage=true&limit=10&offset=0&_t=1772995587076"
+[GIN] 2026/03/08 - 18:44:55 | 304 |     180.822µs |  210.203.60.159 | GET      "/static/logo.png"
+[GIN] 2026/03/08 - 18:44:55 | 200 |      29.433µs |  210.203.60.159 | GET      "/api/knowledge/items?categoryPage=true&limit=10&offset=0&_t=1772995587068"
+[GIN] 2026/03/08 - 18:44:55 | 304 |      86.241µs |  210.203.60.159 | GET      "/static/favicon.ico"
+[GIN] 2026/03/08 - 18:44:59 | 200 |      38.159µs |  210.203.60.159 | GET      "/api/external-mcp"
+[GIN] 2026/03/08 - 18:44:59 | 200 |          33µs |  210.203.60.159 | GET      "/api/external-mcp"
+[GIN] 2026/03/08 - 18:44:59 | 304 |       66.51µs |  210.203.60.159 | GET      "/static/logo.png"
+[GIN] 2026/03/08 - 18:44:59 | 200 |     250.969µs |  210.203.60.159 | GET      "/api/config/tools?page=1&page_size=20"
+[GIN] 2026/03/08 - 18:44:59 | 304 |      77.337µs |  210.203.60.159 | GET      "/static/favicon.ico"
+[GIN] 2026/03/08 - 18:44:59 | 200 |     174.062µs |  210.203.60.159 | GET      "/api/config/tools?page=1&page_size=20"
+[GIN] 2026/03/08 - 18:45:00 | 200 |     732.773µs |  210.203.60.159 | GET      "/api/config/tools?page=1&page_size=100"
+[GIN] 2026/03/08 - 18:45:00 | 200 |     395.605µs |  210.203.60.159 | GET      "/api/config/tools?page=1&page_size=100"
+[GIN] 2026/03/08 - 18:45:00 | 200 |     251.149µs |  210.203.60.159 | GET      "/api/config/tools?page=2&page_size=100"
+[GIN] 2026/03/08 - 18:45:00 | 200 |     200.933µs |  210.203.60.159 | GET      "/api/config/tools?page=2&page_size=100"
+[GIN] 2026/03/08 - 18:45:02 | 200 |     327.803µs |  210.203.60.159 | GET      "/api/monitor?page=1&page_size=20"
+[GIN] 2026/03/08 - 18:45:02 | 200 |     229.766µs |  210.203.60.159 | GET      "/api/monitor?page=1&page_size=20"
+[GIN] 2026/03/08 - 18:45:02 | 304 |      75.584µs |  210.203.60.159 | GET      "/static/logo.png"
+[GIN] 2026/03/08 - 18:45:02 | 304 |     110.226µs |  210.203.60.159 | GET      "/static/favicon.ico"
+[GIN] 2026/03/08 - 18:45:03 | 200 |      26.351µs |  210.203.60.159 | GET      "/api/agent-loop/tasks"
+[GIN] 2026/03/08 - 18:48:13 | 200 |     184.287µs |  210.203.60.159 | GET      "/api/groups"
+[GIN] 2026/03/08 - 18:48:13 | 200 |      54.112µs |  210.203.60.159 | GET      "/api/agent-loop/tasks"
+[GIN] 2026/03/08 - 18:48:13 | 200 |     121.062µs |  210.203.60.159 | GET      "/api/groups"
+[GIN] 2026/03/08 - 18:48:13 | 200 |     150.617µs |  210.203.60.159 | GET      "/api/conversations?limit=100"
