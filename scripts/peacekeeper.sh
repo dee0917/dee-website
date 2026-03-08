@@ -21,6 +21,9 @@ fi
 echo "[2/4] 掃描新增檔案品質 (目標: $MIN_CHARS 字)..."
 NEW_FILES=$(git status --short $NEWS_DIR | grep "^??" | cut -d ' ' -f2)
 for FILE in $NEW_FILES; do
+    # Skip index and manifest
+    if [[ "$FILE" == *"index.ts"* ]] || [[ "$FILE" == *"manifest.json"* ]]; then continue; fi
+    
     CHAR_COUNT=$(wc -m < "$FILE")
     if [ "$CHAR_COUNT" -lt "$MIN_CHARS" ]; then
         echo "❌ 品質攔截：檔案 $FILE 僅有 $CHAR_COUNT 字，未達 800 字標準！"
