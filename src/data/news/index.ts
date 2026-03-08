@@ -100,27 +100,29 @@ import { article as a98 } from './real-tech-manus-ai-meta';
 import { article as a99 } from './real-tech-meta-amd-deal';
 import { article as a100 } from './real-tech-meta-legislative-spend';
 import { article as a101 } from './real-tech-nasa-ai';
-import { article as a102 } from './real-tech-openai-cua-official';
-import { article as a103 } from './real-tech-openai-operator-merchant';
-import { article as a104 } from './real-tech-openai-skills-catalog-codex';
-import { article as a105 } from './real-tech-openai-skills-hub-codex';
-import { article as a106 } from './real-tech-openclaw-tops-react';
-import { article as a107 } from './real-tech-perplexity-whatsapp-synergy';
-import { article as a108 } from './real-tech-productivity-report-2026';
-import { article as a109 } from './real-tech-react-grab-context-coding';
-import { article as a110 } from './real-tech-superset-agent-ide';
-import { article as a111 } from './real-tech-whatsapp-open';
-import { article as a112 } from './real-tech-wifi-densepose-vision';
-import { article as a113 } from './real-tech-wifi-densepose';
-import { article as a114 } from './real-tech-wifi-vision-ruview';
-import { article as a115 } from './real-tech-winboat-linux-bridge';
-import { article as a116 } from './tutorial-airi-minecraft-parent';
-import { article as a117 } from './tutorial-khoj-ai-second-brain';
-import { article as a118 } from './tutorial-parent-ai-tutor';
-import { article as a119 } from './tutorial-senior-voice-line';
+import { article as a102 } from './real-tech-notebooklm-python-automation';
+import { article as a103 } from './real-tech-openai-cua-official';
+import { article as a104 } from './real-tech-openai-operator-merchant';
+import { article as a105 } from './real-tech-openai-skills-catalog-codex';
+import { article as a106 } from './real-tech-openai-skills-hub-codex';
+import { article as a107 } from './real-tech-openclaw-tops-react';
+import { article as a108 } from './real-tech-perplexity-whatsapp-synergy';
+import { article as a109 } from './real-tech-productivity-report-2026';
+import { article as a110 } from './real-tech-react-grab-context-coding';
+import { article as a111 } from './real-tech-shadcn-generative-ui-accessible';
+import { article as a112 } from './real-tech-superset-agent-ide';
+import { article as a113 } from './real-tech-whatsapp-open';
+import { article as a114 } from './real-tech-wifi-densepose-vision';
+import { article as a115 } from './real-tech-wifi-densepose';
+import { article as a116 } from './real-tech-wifi-vision-ruview';
+import { article as a117 } from './real-tech-winboat-linux-bridge';
+import { article as a118 } from './tutorial-airi-minecraft-parent';
+import { article as a119 } from './tutorial-khoj-ai-second-brain';
+import { article as a120 } from './tutorial-parent-ai-tutor';
+import { article as a121 } from './tutorial-senior-voice-line';
 
 export const NEWS_LIST = [
-    a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40, a41, a42, a43, a44, a45, a46, a47, a48, a49, a50, a51, a52, a53, a54, a55, a56, a57, a58, a59, a60, a61, a62, a63, a64, a65, a66, a67, a68, a69, a70, a71, a72, a73, a74, a75, a76, a77, a78, a79, a80, a81, a82, a83, a84, a85, a86, a87, a88, a89, a90, a91, a92, a93, a94, a95, a96, a97, a98, a99, a100, a101, a102, a103, a104, a105, a106, a107, a108, a109, a110, a111, a112, a113, a114, a115, a116, a117, a118, a119
+    a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40, a41, a42, a43, a44, a45, a46, a47, a48, a49, a50, a51, a52, a53, a54, a55, a56, a57, a58, a59, a60, a61, a62, a63, a64, a65, a66, a67, a68, a69, a70, a71, a72, a73, a74, a75, a76, a77, a78, a79, a80, a81, a82, a83, a84, a85, a86, a87, a88, a89, a90, a91, a92, a93, a94, a95, a96, a97, a98, a99, a100, a101, a102, a103, a104, a105, a106, a107, a108, a109, a110, a111, a112, a113, a114, a115, a116, a117, a118, a119, a120, a121
 ].sort((a, b) => b.id - a.id);
 
 export const NEWS_ARTICLES = NEWS_LIST;
