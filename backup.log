@@ -122,3 +122,27 @@ SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260308_030001.tar.gz
 tar: Removing leading `/' from member names
 [Sun Mar  8 07:00:05 AM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260308_070001.tar.gz
 SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260308_070001.tar.gz
+[Sun Mar  8 08:00:01 AM UTC 2026] Starting backup to /root/.openclaw/workspace/backups/source_backup_20260308_080001.tar.gz...
+tar: Removing leading `/' from member names
+[Sun Mar  8 08:00:05 AM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260308_080001.tar.gz
+SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260308_080001.tar.gz
+[Sun Mar  8 09:00:01 AM UTC 2026] Starting backup to /root/.openclaw/workspace/backups/source_backup_20260308_090001.tar.gz...
+tar: Removing leading `/' from member names
+[Sun Mar  8 09:00:04 AM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260308_090001.tar.gz
+SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260308_090001.tar.gz
+[Sun Mar  8 10:00:02 AM UTC 2026] Starting backup to /root/.openclaw/workspace/backups/source_backup_20260308_100001.tar.gz...
+tar: Removing leading `/' from member names
+[Sun Mar  8 10:00:05 AM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260308_100001.tar.gz
+SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260308_100001.tar.gz
+[Sun Mar  8 11:00:01 AM UTC 2026] Starting backup to /root/.openclaw/workspace/backups/source_backup_20260308_110001.tar.gz...
+tar: Removing leading `/' from member names
+[Sun Mar  8 11:00:05 AM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260308_110001.tar.gz
+SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260308_110001.tar.gz
+[Sun Mar  8 12:00:01 PM UTC 2026] Starting backup to /root/.openclaw/workspace/backups/source_backup_20260308_120001.tar.gz...
+tar: Removing leading `/' from member names
+[Sun Mar  8 12:00:04 PM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260308_120001.tar.gz
+SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260308_120001.tar.gz
+[Sun Mar  8 01:00:01 PM UTC 2026] Starting backup to /root/.openclaw/workspace/backups/source_backup_20260308_130001.tar.gz...
+tar: Removing leading `/' from member names
+[Sun Mar  8 01:00:05 PM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260308_130001.tar.gz
+SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260308_130001.tar.gz
