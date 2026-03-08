@@ -1,5 +1,5 @@
 {
-  "last_synced": "2026-03-08T14:00:00Z",
+  "last_synced": "2026-03-08T15:00:00Z",
   "vision": "24H Automated Tech Studio",
   "selected_strategies": [2, 3, 6],
   "audit_protocol": "Kage Persona Audit v2",
@@ -7,6 +7,8 @@
   "sleep_mode_schedule": "23:00-07:00 UTC",
   "fact_bundle_enabled": true,
   "live_articles": [
+    { "id": 202603081630, "slug": "echo-observation-swarm-intelligence-mirofish", "status": "deployed", "source": "verified_bundle" },
+    { "id": 202603081600, "slug": "real-tech-google-generative-ai-vertex", "status": "deployed", "source": "verified_bundle" },
     { "id": 202603082215, "slug": "real-tech-openai-skills-hub-codex", "status": "deployed", "source": "verified_bundle" },
     { "id": 202603082200, "slug": "echo-slang-agent-gentrification", "status": "deployed", "source": "verified_bundle" },
     { "id": 202603082130, "slug": "real-tech-electrobun-tiny-desktop-revolution", "status": "deployed", "source": "verified_bundle" },
