@@ -1,6 +1,4 @@
-import { NewsArticle } from '../../types/news';
-
-export const article: NewsArticle = {
+export const insight = {
     id: 2026030202,
     slug: 'echo-fun-ai-game-playing',
     title: 'Echo 趣聞：AI 也會「斷捨離」？節省記憶體的 GRAVE 演算法讓老電腦也能跑強大 AI',
