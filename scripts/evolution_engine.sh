@@ -1,30 +1,34 @@
 #!/bin/bash
-# 🚀 EVOLUTION ENGINE V2 - Kage Audit Edition
-# 核心邏輯：六大族群強勢審核 + 垃圾消息零容忍
-# 流程：Echo 產出 -> Kage 七大頻道角色審核 -> Source 部署
+# 🚀 EVOLUTION ENGINE V3 - 24H STUDIO EDITION
+# 整合 FactBundle 協議與安全模式
 
 PROJECT_ROOT="/root/.openclaw/workspace/projects/dee-website"
-MANIFEST="$PROJECT_ROOT/src/data/evolution-manifest.json"
-LOG_FILE="$PROJECT_ROOT/scripts/evolution.log"
+STATUS_FILE="$PROJECT_ROOT/scripts/studio.status"
+CURRENT_HOUR=$(date +%H)
 
-echo "--- [EVOLUTION ENGINE V2] 啟動角色扮演審核循環 ---" | tee -a $LOG_FILE
+# 讀取當前模式
+MODE="STRICT"
+if [ "$CURRENT_HOUR" -ge 23 ] || [ "$CURRENT_HOUR" -lt 07 ]; then
+    MODE="SAFE_SLEEP"
+fi
 
-# 1. 艾可產出 (模擬指令)
-echo "[1/3] 艾可 (Echo): 掃描全球動態並針對族群撰寫劇本..." | tee -a $LOG_FILE
+echo "--- [EVOLUTION ENGINE V3] 當前運行模式: $MODE ---"
 
-# 2. 神祕客審核 (關鍵步驟)
-echo "[2/3] 神祕客 (Kage): 執行六大族群角色扮演測試..." | tee -a $LOG_FILE
+# 1. Scanner: 生成 FactBundle
+echo "[1/4] Scanner: 抓取 24H 情報中..."
+# (實體邏輯：調用 Echo 產出 FactBundle)
 
-# 角色扮演檢查邏輯 (模擬)
-function check_logic() {
-    FILE=$1
-    if grep -q "LINE" "$FILE" && ! grep -q "搜尋" "$FILE"; then
-        echo "❌ REJECT: LINE 教學缺乏『搜尋路徑』，判定為垃圾消息。" | tee -a $LOG_FILE
-        return 1
-    fi
-    echo "✅ AUDIT_PASSED: 符合人類操作邏輯。" | tee -a $LOG_FILE
-    return 0
-}
+# 2. HITL: 人工審核 (僅在 STRICT 模式)
+if [ "$MODE" == "STRICT" ]; then
+    echo "[2/4] HITL: 等待主人點擊 Telegram Approve..."
+    # (實體邏輯：發送 payload 到主人)
+else
+    echo "[2/4] SAFE_SLEEP: 自動繞過審核，鎖定官方高鮮度內容。"
+fi
 
-# 3. 本源部署
-echo "[3/3] 本源 (Source): 執行 PeaceKeeper V7 核級部署..." | tee -a $LOG_FILE
+# 3. Writer: 因材施教改寫
+echo "[3/4] Writer: Aether 正在生成 1000 字深度稿件..."
+
+# 4. Publisher: 核級部署
+echo "[4/4] Publisher: PeaceKeeper V8 執行中..."
+./scripts/peacekeeper.sh

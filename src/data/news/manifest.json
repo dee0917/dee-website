@@ -1,12 +1,13 @@
 {
-  "last_synced": "2026-03-06T03:10:00Z",
-  "vision": "Persona-Driven Scenario Intelligence",
+  "last_synced": "2026-03-08T09:20:00Z",
+  "vision": "24H Automated Tech Studio",
   "selected_strategies": [2, 3, 6],
   "audit_protocol": "Kage Persona Audit v2",
+  "pipeline_version": "V3 (24H Studio)",
+  "sleep_mode_schedule": "23:00-07:00 UTC",
+  "fact_bundle_enabled": true,
   "live_articles": [
-    { "id": 202603060310, "slug": "news-senior-chat-ai-comparison", "status": "deployed", "difficulty": 1, "persona": "senior" },
-    { "id": 202603060300, "slug": "real-tech-openai-operator-merchant", "status": "deployed", "difficulty": 2, "persona": "merchant", "audit": "PASSED_BY_KAGE" },
-    { "id": 202603060230, "slug": "real-tech-ai-skill-management-sop", "status": "deployed", "difficulty": 3, "persona": "office" },
-    { "id": 202603060100, "slug": "tutorial-khoj-ai-second-brain", "status": "deployed", "difficulty": 1, "persona": "craftsman" }
+    { "id": 202603080930, "slug": "real-tech-deepseek-r2-perplexity-fusion", "status": "deployed", "source": "verified_bundle" },
+    { "id": 202603080905, "slug": "real-tech-alibaba-page-agent-gui", "status": "deployed", "source": "verified_bundle" }
   ]
 }
