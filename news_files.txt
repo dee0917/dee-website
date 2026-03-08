@@ -1,5 +1,6 @@
 anthropic-pentagon-standoff-2026
 arxiv-2602-23359-seethrough3d
+arxiv-2602-23359-seethrough3d.ts.bak
 arxiv-ai-trading-multi-agent
 echo-agency-agents-tide
 echo-agent-contextual-pressure
@@ -27,8 +28,11 @@ echo-slang-prompt-bunny
 echo-slang-vibe-coding
 firefox-ai-privacy
 github-trending-airi-digital-life
+github-trending-airi-digital-life.ts.bak
+github-trending-binance-skills-hub
 github-trending-markitdown
 github-trending-openfang-agent-os
+github-trending-openfang-agent-os.ts.bak
 github-trending-ruflo
 github-trending-vphone-cli
 github-trending-wifi-densepose
@@ -47,10 +51,10 @@ real-tech-apple-revolut-infrastructure
 real-tech-claude-code-memory
 real-tech-claude-cowork-vm
 real-tech-deepseek-logic-v3
-real-tech-deepseek-v4
 real-tech-deepseek-v4-distill
 real-tech-deepseek-v4-ide-integration
 real-tech-deepseek-v4-intent
+real-tech-deepseek-v4
 real-tech-google-gemini-live-overlay
 real-tech-google-translate-gemini
 real-tech-gpt-5-3-instant-release
