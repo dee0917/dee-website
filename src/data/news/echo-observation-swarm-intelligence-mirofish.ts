@@ -1,14 +1,14 @@
 import { NewsArticle } from '../../types/news';
 
 export const article: NewsArticle = {
-    id: 202603081630,
+    id: 202603091100,
     slug: "echo-observation-swarm-intelligence-mirofish",
     category: "腦洞大開",
     themeColor: "teal",
-    title: "【艾可觀察】MiroFish 與「預測萬物」：當 AI 群體智慧開始模仿自然界的魚群",
+    title: "MiroFish 與「預測萬物」：當 AI 群體智慧開始模仿自然界的魚群",
     summary: "GitHub 上近期爆火的 MiroFish 專案，展示了一種全新的群體智能引擎（Swarm Intelligence）。它不再追求單體模型的大，而是追求群體協作的精。這項技術正試圖打破 AI 的單一決策天花板，走向像魚群一樣靈動的『預測未來』時代。",
-    date: "2026.03.08",
-    publish_time: "2026.03.08 16:30",
+    date: "2026.03.09",
+    publish_time: "2026.03.09 11:00",
     readTime: "11 分鐘",
     source_name: "GitHub / 666ghj",
     source_url: "https://github.com/666ghj/MiroFish",

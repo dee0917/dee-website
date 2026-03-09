@@ -1,14 +1,14 @@
 import { NewsArticle } from '../../types/news';
 
 export const article: NewsArticle = {
-    id: 202603081600,
+    id: 202603091000,
     slug: "real-tech-google-generative-ai-vertex",
     category: "產業脈動",
     themeColor: "blue",
     title: "Google Vertex AI 全面進化：從 Sample Code 看見生成式 AI 的「平民化」未來",
     summary: "GoogleCloudPlatform 近日更新了其生成式 AI 範例庫，深度整合 Gemini 於 Vertex AI。這不只是開發者的技術補丁，更是企業將 AI 從『玩具』轉化為『工具』的實戰藍圖。本篇將拆解 Google 如何透過自動化筆記本，讓 AI 落地門檻降至歷史新低。",
-    date: "2026.03.08",
-    publish_time: "2026.03.08 16:00",
+    date: "2026.03.09",
+    publish_time: "2026.03.09 10:00",
     readTime: "9 分鐘",
     source_name: "GitHub / GoogleCloudPlatform",
     source_url: "https://github.com/GoogleCloudPlatform/generative-ai",
