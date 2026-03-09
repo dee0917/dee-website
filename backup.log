@@ -174,3 +174,7 @@ SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260308_220001.tar.gz
 tar: Removing leading `/' from member names
 [Sun Mar  8 11:00:06 PM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260308_230002.tar.gz
 SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260308_230002.tar.gz
+[Mon Mar  9 12:00:02 AM UTC 2026] Starting backup to /root/.openclaw/workspace/backups/source_backup_20260309_000001.tar.gz...
+tar: Removing leading `/' from member names
+[Mon Mar  9 12:00:10 AM UTC 2026] Backup successful: /root/.openclaw/workspace/backups/source_backup_20260309_000001.tar.gz
+SUCCESS: /root/.openclaw/workspace/backups/source_backup_20260309_000001.tar.gz
