@@ -2,7 +2,7 @@
 # 🚀 EVOLUTION ENGINE V3 - 24H STUDIO EDITION
 # 整合 FactBundle 協議與安全模式
 
-PROJECT_ROOT="/root/.openclaw/workspace/projects/dee-website"
+PROJECT_ROOT="/home/deck/.openclaw/workspace/projects/dee-website"
 STATUS_FILE="$PROJECT_ROOT/scripts/studio.status"
 CURRENT_HOUR=$(date +%H)
 

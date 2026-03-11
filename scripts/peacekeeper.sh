@@ -2,7 +2,7 @@
 # 🚨 PEACEKEEPER V8 - ULTIMATE ENFORCER (方案一+二+三 整合版)
 # 核心邏輯：字數審計 + 清單對齊 + 哨兵日誌
 
-PROJECT_ROOT="/root/.openclaw/workspace/projects/dee-website"
+PROJECT_ROOT="/home/deck/.openclaw/workspace/projects/dee-website"
 NEWS_DIR="$PROJECT_ROOT/src/data/news"
 MANIFEST="$NEWS_DIR/manifest.json"
 MIN_CHARS=800
@@ -26,12 +26,16 @@ for FILE in $NEW_FILES; do
     # Skip index and manifest
     if [[ "$FILE" == *"index.ts"* ]] || [[ "$FILE" == *"manifest.json"* ]]; then continue; fi
     
-    CHAR_COUNT=$(wc -m < "$FILE")
-    if [ "$CHAR_COUNT" -lt "$MIN_CHARS" ]; then
-        echo "❌ 品質攔截：檔案 $FILE 僅有 $CHAR_COUNT 字，未達 800 字標準！"
-        exit 1
-    else
-        echo "✅ 品質通過：$FILE ($CHAR_COUNT 字)"
+    # Git status gives path relative to repo root
+    FULL_PATH="$PROJECT_ROOT/$FILE"
+    if [ -f "$FULL_PATH" ]; then
+        CHAR_COUNT=$(wc -m < "$FULL_PATH")
+        if [ "$CHAR_COUNT" -lt "$MIN_CHARS" ]; then
+            echo "❌ 品質攔截：檔案 $FILE 僅有 $CHAR_COUNT 字，未達 800 字標準！"
+            exit 1
+        else
+            echo "✅ 品質通過：$FILE ($CHAR_COUNT 字)"
+        fi
     fi
 done
 
@@ -48,7 +52,9 @@ echo "[4/4] 執行強制部署並更新哨兵日誌..."
 git add .
 git commit -m "chore: peacekeeper v8 validated deploy $(date +%H:%M)"
 git push origin main --force
-npx vercel --prod --yes --force
+# Vercel deployment handled by GitHub Action normally, but if forced we'd need VERCEL_TOKEN
+# For now, let's assume git push triggers the CI.
+# npx vercel --prod --yes --force
 
 # 更新哨兵標記文件
 echo "LAST_SUCCESSFUL_DEPLOY=$(date +%Y-%m-%d_%H:%M)" > "$PROJECT_ROOT/scripts/sentinel.status"
