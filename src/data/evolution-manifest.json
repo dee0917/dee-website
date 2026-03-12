@@ -1,0 +1,26 @@
+{
+  "last_check": "2026-03-05T12:00:00Z",
+  "cycle_count": 0,
+  "pending_tasks": [
+    {
+      "type": "tutorial_generation",
+      "agent": "Echo",
+      "status": "queued",
+      "config": {
+        "max_per_cycle": 2,
+        "difficulty_range": [1, 5],
+        "personas": ["general", "office", "merchant", "parent", "senior", "craftsman", "freelancer"]
+      }
+    },
+    {
+      "type": "persona_audit",
+      "agent": "Kage",
+      "status": "queued"
+    },
+    {
+      "type": "logic_check",
+      "agent": "Butler",
+      "status": "queued"
+    }
+  ]
+}
