@@ -30,6 +30,7 @@ export const article: NewsArticle = {
         }
     ],
     dee_insight: "別被那些華麗的對話騙了，敢跑 DARE-bench 的才是真 Agent。強化學習 (RL) 正在讓小型模型在特定領域完成降維打擊。",
+    author: "Echo",
     cta_override: {
         title: "想知道你的 AI 到底是「真代理」還是「聊聊而已」？",
         description: "進入實驗室，學習如何建立具備實戰能力的 AI Agent，從數據清洗到模型驗證，一步步掌握 DARE-bench 等級的嚴謹流程。",

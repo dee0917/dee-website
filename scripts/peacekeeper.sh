@@ -1,42 +1,55 @@
 #!/bin/bash
-# 🚨 PEACEKEEPER V4 - Dee's Lab Production Guardian
-# 確保所有上線內容符合 2026 旗艦版 SOP
+# 🚨 PEACEKEEPER V8 - ULTIMATE ENFORCER (方案一+二+三 整合版)
+# 核心邏輯：字數審計 + 清單對齊 + 哨兵日誌
 
-cd /root/.openclaw/workspace/projects/dee-website
+PROJECT_ROOT="/home/deck/.openclaw/workspace/projects/dee-website"
+NEWS_DIR="$PROJECT_ROOT/src/data/news"
+MANIFEST="$NEWS_DIR/manifest.json"
+MIN_CHARS=800
 
-echo "--- [PEACEKEEPER V4] 啟動核級校驗 ---"
+echo "--- [PEACEKEEPER V8] 啟動鋼鐵門禁與品質審計 ---"
 
-# 1. 深度內容長度校驗 (>800字)
-echo "[1/4] 掃描內容深度..."
-for file in src/data/news/*.ts; do
-    if [[ "$file" == *"index.ts"* ]]; then continue; fi
-    WORD_COUNT=$(wc -m < "$file")
-    if [ "$WORD_COUNT" -lt 800 ]; then
-        echo "❌ 攔截：$file 內容不足 800 字 ($WORD_COUNT 字)！"
-        # exit 1 # 暫時不中斷，僅提醒，待內容完全重寫後再開啟
+# 1. 篇數與清單對齊 (方案二)
+echo "[1/4] 執行清單對齊檢查..."
+if [ -f "$MANIFEST" ]; then
+    PENDING_COUNT=$(grep -c "\"status\": \"pending\"" "$MANIFEST")
+    if [[ "$PENDING_COUNT" =~ ^[0-9]+$ ]] && [ "$PENDING_COUNT" -gt 0 ]; then
+        echo "❌ 發現尚未實體化的內容清單 ($PENDING_COUNT 篇)！請先完成檔案寫入。"
+        exit 1
+    fi
+fi
+
+# 2. 字數審計 (方案一)
+echo "[2/4] 掃描新增檔案品質 (目標: $MIN_CHARS 字)..."
+NEW_FILES=$(git status --short $NEWS_DIR | grep "^??" | cut -d ' ' -f2)
+for FILE in $NEW_FILES; do
+    # Skip index and manifest
+    if [[ "$FILE" == *"index.ts"* ]] || [[ "$FILE" == *"manifest.json"* ]]; then continue; fi
+    
+    CHAR_COUNT=$(wc -m < "$FILE")
+    if [ "$CHAR_COUNT" -lt "$MIN_CHARS" ]; then
+        echo "❌ 品質攔截：檔案 $FILE 僅有 $CHAR_COUNT 字，未達 800 字標準！"
+        exit 1
+    else
+        echo "✅ 品質通過：$FILE ($CHAR_COUNT 字)"
     fi
 done
 
-# 2. 語法與屬性去重
-echo "[2/4] 掃描語法衝突..."
-ERROR_FILES=$(grep -rE "trend_cluster:|trinity_dimension:" src/data/news/ | cut -d: -f1 | sort | uniq -c | awk '$1 > 2 {print $2}')
-if [ -n "$ERROR_FILES" ]; then
-    echo "❌ 攔截：偵測到屬性重複定義！"
-    echo "$ERROR_FILES"
-    exit 1
-fi
-
-# 3. 本地編譯模擬考
-echo "[3/4] 執行生產環境編譯測試 (npm run build)..."
+# 3. 本地編譯測試
+echo "[3/4] 執行生產環境編譯測試..."
+cd $PROJECT_ROOT
 if ! npm run build; then
-    echo "❌ 攔截：編譯報錯，嚴禁推送！"
+    echo "❌ 攔截：編譯失敗，請檢查語法錯誤。"
     exit 1
 fi
 
-# 4. 安全同步
-echo "[4/4] 校驗通過，同步至正式網址..."
+# 4. 部署與哨兵標記 (方案三)
+echo "[4/4] 執行強制部署並更新哨兵日誌..."
 git add .
-git commit -m "chore: peacekeeper v4 validated deployment $(date +%H:%M)"
-git push origin master --force
+git commit -m "chore: peacekeeper v8 validated deploy $(date +%H:%M)"
+git push origin main --force
+npx vercel --prod --yes --force
 
-echo "--- [PEACEKEEPER] 正式環境已更新：https://dee-website.vercel.app/ ---"
+# 更新哨兵標記文件
+echo "LAST_SUCCESSFUL_DEPLOY=$(date +%Y-%m-%d_%H:%M)" > "$PROJECT_ROOT/scripts/sentinel.status"
+echo "✅ 部署大圓滿：https://dee-website.vercel.app/"

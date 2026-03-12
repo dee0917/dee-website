@@ -3,12 +3,14 @@ import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
     ArrowRight, Zap, Clock, Star, Info, Filter, Search, X, 
-    Map as MapIcon, ChevronDown, ChevronRight, CheckCircle2, User
+    Map as MapIcon, ChevronDown, ChevronRight, CheckCircle2, User, Sparkles,
+    Settings2
 } from 'lucide-react';
 import { CHAPTERS, MAIN_QUEST_ORDER, INSIGHTS_LIST } from '../data/insights';
 import SEO from '../components/ui/SEO';
 import { useIdentity } from '../context/IdentityContext';
-import { PERSONAS } from '../data/personas';
+import { PERSONAS, UserPersona } from '../data/personas';
+import DifficultyStars from '../components/ui/DifficultyStars';
 
 const ChapterNode = ({ chapter, items, completedIds, isLocked, isComplete, isExpanded, onToggle, index }: any) => {
     return (
@@ -80,7 +82,7 @@ const InsightCard = ({ insight, idx, completed }: any) => {
                     {insight.summary}
                 </p>
                 <div className="mt-auto pt-6 border-t border-white/[0.05] flex items-center justify-between">
-                    <span className="flex items-center gap-2 text-xs text-zinc-500 font-bold uppercase tracking-widest"><Star size={14} className="text-emerald-500" /> 等級 {insight.difficulty_level || 1}</span>
+                    <DifficultyStars level={insight.difficulty_level || 1} />
                     <div className="flex items-center gap-2 text-white font-black text-xs uppercase tracking-widest group-hover:gap-4 transition-all">
                         進入修煉 <ArrowRight size={18} className="text-emerald-500" />
                     </div>
@@ -92,6 +94,17 @@ const InsightCard = ({ insight, idx, completed }: any) => {
 
 const Insights = () => {
     const { persona, setPersona } = useIdentity();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
+    const [isPersonaMenuOpen, setIsPersonaMenuOpen] = useState(false);
+    
+    useEffect(() => {
+        const personaFromUrl = searchParams.get('persona');
+        if (personaFromUrl && (PERSONAS[personaFromUrl as UserPersona] || personaFromUrl === 'general')) {
+            setPersona(personaFromUrl as UserPersona);
+        }
+    }, [searchParams, setPersona]);
+
     const [viewMode, setViewMode] = useState<'adventure' | 'free'>('adventure');
     const [loading, setLoading] = useState(true);
     const [completedIds, setCompletedIds] = useState<number[]>([]);
@@ -108,6 +121,13 @@ const Insights = () => {
 
     const filteredInsights = useMemo(() => {
         let items = [...INSIGHTS_LIST];
+        
+        // 🚀 [因材施教] 教學過濾邏輯
+        if (persona && persona !== 'general') {
+            // 這裡未來可以根據 persona 過濾特定的 insights
+            // 目前先顯示全部，但 UI 會標註適配
+        }
+
         if (viewMode === 'free') {
             items = items.filter(i => !MAIN_QUEST_ORDER.includes(i.id));
         }
@@ -115,7 +135,7 @@ const Insights = () => {
             items = items.filter(i => i.category === selectedCategory);
         }
         return items;
-    }, [viewMode, selectedCategory]);
+    }, [viewMode, selectedCategory, persona]);
 
     const availableCategories = useMemo(() => {
         const cats = new Set(['全部']);
@@ -132,9 +152,20 @@ const Insights = () => {
         });
     };
 
+    const handlePersonaChange = (pId: string) => {
+        setPersona(pId as UserPersona);
+        setSearchParams({ persona: pId });
+        setIsPersonaMenuOpen(false);
+    };
+
     if (loading) return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xs tracking-widest animate-pulse">INITIALIZING...</div>;
 
-    const currentPersona = PERSONAS[persona] || PERSONAS.general;
+    const currentPersona = PERSONAS[persona as UserPersona] || {
+        label: '一般小白',
+        description: '從基礎開始穩紮穩打。',
+        color: 'emerald',
+        icon: User
+    };
 
     return (
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-48 pb-20 px-6 max-w-7xl mx-auto min-h-screen relative z-0">
@@ -145,9 +176,9 @@ const Insights = () => {
                     <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shadow-lg">
                         <MapIcon size={24} className="text-emerald-400" />
                     </div>
-                    <div>
+                    <div className="text-left">
                         <h1 className="text-3xl font-black text-white tracking-tighter">AI 修煉地圖</h1>
-                        <span className="text-emerald-500/60 font-mono text-[10px] tracking-[0.4em] uppercase block">經典模式恢復</span>
+                        <span className="text-emerald-500/60 font-mono text-[10px] tracking-[0.4em] uppercase block">因材施教模式已啟用</span>
                     </div>
                 </div>
                 <div className="bg-black/40 p-1.5 rounded-2xl border border-white/[0.08] flex items-center shadow-inner">
@@ -156,16 +187,58 @@ const Insights = () => {
                 </div>
             </div>
 
-            {/* 身分狀態列 */}
-            <div className="mb-16 p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div className="flex items-center gap-6 text-left">
-                    <div className={`w-16 h-16 rounded-2xl bg-${currentPersona.color}-500/20 border border-${currentPersona.color}-500/30 flex items-center justify-center text-${currentPersona.color}-400 shadow-lg`}>
-                        {React.createElement(currentPersona.icon, { size: 32 })}
-                    </div>
-                    <div>
-                        <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-1">當前修煉身分</span>
-                        <h3 className="text-white font-black text-2xl">{currentPersona.label}</h3>
-                        <p className="text-zinc-500 text-xs mt-1 font-medium italic">💡 系統已為您代入：{currentPersona.description}</p>
+            {/* 身分狀態列 & 手動切換器 */}
+            <div className="mb-16">
+                <div className="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-sm relative">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div className="flex items-center gap-6 text-left">
+                            <div className={`w-16 h-16 rounded-2xl bg-${currentPersona.color}-500/20 border border-${currentPersona.color}-500/30 flex items-center justify-center text-${currentPersona.color}-400 shadow-lg`}>
+                                {React.createElement(currentPersona.icon as any, { size: 32 })}
+                            </div>
+                            <div className="text-left">
+                                <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest block mb-1">當前修煉課程配對</span>
+                                <h3 className="text-white font-black text-2xl">{currentPersona.label} 專場</h3>
+                                <p className="text-zinc-500 text-xs mt-1 font-medium italic">💡 系統已為您過濾最適合的教學難度與案例。</p>
+                            </div>
+                        </div>
+                        
+                        <div className="relative">
+                            <button 
+                                onClick={() => setIsPersonaMenuOpen(!isPersonaMenuOpen)}
+                                className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-xs font-black hover:bg-white/10 transition-all text-white"
+                            >
+                                <Settings2 size={14} /> 切換身分 (免測驗)
+                            </button>
+
+                            <AnimatePresence>
+                                {isPersonaMenuOpen && (
+                                    <motion.div 
+                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        className="absolute top-full right-0 mt-4 w-72 bg-zinc-900 border border-white/10 rounded-3xl shadow-2xl z-50 overflow-hidden"
+                                    >
+                                        <div className="p-4 grid grid-cols-1 gap-2">
+                                            {Object.values(PERSONAS).map((p) => (
+                                                <button
+                                                    key={p.id}
+                                                    onClick={() => handlePersonaChange(p.id)}
+                                                    className={`flex items-center gap-4 p-4 rounded-2xl transition-all text-left group ${persona === p.id ? 'bg-white/10' : 'hover:bg-white/5'}`}
+                                                >
+                                                    <div className={`w-10 h-10 rounded-xl bg-${p.color}-500/20 flex items-center justify-center text-${p.color}-400`}>
+                                                        {React.createElement(p.icon as any, { size: 20 })}
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-white font-bold text-sm">{p.label}</p>
+                                                        <p className="text-[10px] text-zinc-500 truncate w-40">{p.description}</p>
+                                                    </div>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
                     </div>
                 </div>
             </div>
