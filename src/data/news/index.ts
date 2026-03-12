@@ -147,9 +147,9 @@ import { article as seniorVoice } from './tutorial-senior-voice-line';
 
 // 🚀 EVOLUTION ENGINE V1: 難度優先排列，確保小白入口最顯眼
 export const NEWS_ARTICLES: NewsArticle[] = [
-    v202603121200RealTechNvidiaNemoclawAgentPlatform,
     v202603120700RealTechOpenaiCodexLegalCalifornia,
     v202603120900RealTechAnthropicClaudeCodeReviewUpdate,
+    v202603121200RealTechNvidiaNemoclawAgentPlatform,
     anthropicStandoff,
     arxivSeeThrough3D,
     arxivAiTrading,
